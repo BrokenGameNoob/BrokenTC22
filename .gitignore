@@ -58,9 +58,13 @@ compile_commands.json
 *-Debug/
 *-debug/
 build-*/
+build*/
 *.pro.user
 
 *.ignore
+
+#gitversion
+git_version_generated.cpp
 
 
 #deploy files
@@ -73,5 +77,7 @@ deployLog.txt
 DEPLOY_OUTPUT*/
 
 *.private
+
+DUMMY_COMMIT_WILL_NEVER_HAPPEN
 
 AutoDoc/

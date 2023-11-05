@@ -1,0 +1,14 @@
+---
+BasedOnStyle: Google
+AllowShortFunctionsOnASingleLine: Empty
+AlignAfterOpenBracket: Align
+BinPackArguments: false
+IncludeBlocks: Regroup
+ColumnLimit: 120
+IncludeCategories:
+  - Regex: "<[a-zA-Z0-9_.]*>" #system
+    Priority: 1
+  - Regex: "^<[a-zA-Z0-9_.]*/" #intern libs
+    Priority: 2
+  - Regex: ".*" #other files
+    Priority: 99

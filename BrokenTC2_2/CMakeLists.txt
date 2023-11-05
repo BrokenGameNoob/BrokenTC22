@@ -3,16 +3,86 @@ cmake_minimum_required(VERSION 3.16)
 project(BrokenTC2_2 VERSION 0.1 LANGUAGES CXX)
 
 add_compile_definitions(CMAKEMACRO_PROJECT_EXE="${CMAKE_PROJECT_NAME}")
+add_compile_definitions(CMAKEMACRO_BASE_PROJECT_DIR="${CMAKE_SOURCE_DIR}")
 
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  set(CMAKE_COMPIL_MODE_VAR 0)
+elseif (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+  set(CMAKE_COMPIL_MODE_VAR 1)
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+  set(CMAKE_COMPIL_MODE_VAR 2)
+elseif(CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
+  set(CMAKE_COMPIL_MODE_VAR 3)
+endif()
+add_compile_definitions(CMAKE_COMPIL_MODE=${CMAKE_COMPIL_MODE_VAR})
+
+
+############################
+#
+#       CMake config
+#
+############################
+
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick QuickControls2 LinguistTools)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" "${CMAKE_ROOT}/Modules")
+
+
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
+############################
+#
+#       Target creation
+#
+############################
+
+qt_add_executable(${CMAKE_PROJECT_NAME}
+    ${BTC2_SOURCES}
+    src/Form.ui
+)
+
+###############
+#   Options
+###############
+if(CMAKE_COMPIL_MODE_VAR EQUAL 0)
+    set(CUSTOM_BUILD_TRANSLATIONS OFF)
+else()
+    set(CUSTOM_BUILD_TRANSLATIONS ON)
+endif()
+
+
+############################
+#
+#       Dependencies
+#
+############################
+
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets Quick QuickControls2 LinguistTools Concurrent)
+
+Include(FetchContent)
+FetchContent_Declare(
+    spdlog
+    GIT_REPOSITORY https://github.com/gabime/spdlog.git
+    GIT_TAG "v1.12.0"
+)
+FetchContent_MakeAvailable(spdlog)
+
+set(SDL2_PATH "C:\\Libs\\x86_64-w64-mingw32\\" CACHE BOOL "" FORCE)
+set(SDL2_INCLUDE_DIR "C:\\Libs\\x86_64-w64-mingw32\\include\\" CACHE BOOL "" FORCE)
+include_directories(${SDL2_INCLUDE_DIR})
+find_package(SDL2 REQUIRED)
+
+add_subdirectory(internal_libs/GitVersion)
 
 ############################
 #
@@ -21,19 +91,76 @@ qt_standard_project_setup(REQUIRES 6.5)
 ############################
 
 ###############
+#   Resources
+###############
+set(BTC2_SOURCES_DIR assets)
+set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/${BTC2_SOURCES_DIR}/app_icon_resource.rc")
+set(BTC2_RESOURCES
+    ${APP_ICON_RESOURCE_WINDOWS}
+    ${BTC2_SOURCES_DIR}/resources.qrc
+)
+
+###############
 #   Sources
 ###############
+set(BTC2_SOURCES_DIR src)
 set(BTC2_SOURCES
-    main.cpp
+    ${BTC2_SOURCES_DIR}/main.cpp
 
-    resources/resources.qrc
+    # System
+    ${BTC2_SOURCES_DIR}/system/logs/constants.hpp
+    ${BTC2_SOURCES_DIR}/system/logs/btype.hpp
+    ${BTC2_SOURCES_DIR}/system/logs/logger.hpp
+    ${BTC2_SOURCES_DIR}/system/logs/logger_setup.hpp
+    ${BTC2_SOURCES_DIR}/system/logs/signal_handler.hpp ${BTC2_SOURCES_DIR}/system/logs/signal_handler.cpp
+
+    # Debug
+    ${BTC2_SOURCES_DIR}/debug/qstring_callback_sink.hpp
+    ${BTC2_SOURCES_DIR}/debug/qml_log.hpp ${BTC2_SOURCES_DIR}/debug/qml_log.cpp
+
+    # Utils
+    ${BTC2_SOURCES_DIR}/utils/qt_utils.hpp
+    ${BTC2_SOURCES_DIR}/utils/style.hpp
+    ${BTC2_SOURCES_DIR}/utils/macro_define.hpp
+    ${BTC2_SOURCES_DIR}/utils/time.hpp
+
+    # Services
+    ${BTC2_SOURCES_DIR}/system/services/service_manager.hpp ${BTC2_SOURCES_DIR}/system/services/service_manager.cpp
+
+    # Controls
+    ${BTC2_SOURCES_DIR}/system/controls_io/keystroke_sequencer.hpp ${BTC2_SOURCES_DIR}/system/controls_io/keystroke_sequencer.cpp
+
+    # Games
+    ${BTC2_SOURCES_DIR}/games/gear_handler_factory.hpp
+    ${BTC2_SOURCES_DIR}/games/gear_handler.hpp ${BTC2_SOURCES_DIR}/games/gear_handler.cpp
+    ${BTC2_SOURCES_DIR}/games/gear_handler_the_crew.hpp ${BTC2_SOURCES_DIR}/games/gear_handler_the_crew.cpp
+
+    ${BTC2_RESOURCES}
 )
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${BTC2_SOURCES_DIR})
 
 ###############
 #   QML Files
 ###############
+set(BTC2_QML_DIR src)
 set(BTC2_QML_FILES
-    Main.qml
+    ${BTC2_QML_DIR}/Main.qml
+    ${BTC2_QML_DIR}/SoftStatusBar.qml
+    ${BTC2_QML_DIR}/Style.qml
+
+    # Utils
+    ${BTC2_QML_DIR}/utils/QMLStyle.qml
+    ${BTC2_QML_DIR}/utils/qmldir
+
+    # Widgets
+    ${BTC2_SOURCES_DIR}/widgets/ScrollableTextArea.qml
+
+    # Tabs
+    ${BTC2_QML_DIR}/tabs/SettingsTab.qml
+
+    # Debug
+    ${BTC2_QML_DIR}/debug/DebugWindow.qml
+    ${BTC2_QML_DIR}/debug/BoundingBox.qml
 )
 
 ###############
@@ -51,9 +178,7 @@ set(BTC2_TRANSLATIONS_FILES
 #
 ############################
 
-qt_add_executable(${CMAKE_PROJECT_NAME}
-    ${BTC2_SOURCES}
-)
+target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${BTC2_SOURCES})
 
 qt_add_qml_module(${CMAKE_PROJECT_NAME}
     URI ${CMAKE_PROJECT_NAME}
@@ -61,11 +186,25 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
     QML_FILES ${BTC2_QML_FILES}
 )
 
-qt_add_translations(${CMAKE_PROJECT_NAME} TS_FILES ${BTC2_TRANSLATIONS_FILES})
-set_source_files_properties(${BTC2_TRANSLATIONS_FILES}
-    PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/translations")
-add_dependencies(${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}_lupdate)
-add_dependencies(${CMAKE_PROJECT_NAME} update_translations)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
+  spdlog::spdlog
+
+  libGitVersion::libGitVersion
+
+  Qt6::Widgets
+  Qt6::Core
+  Qt6::Quick
+  Qt6::QuickControls2
+  Qt6::Concurrent
+)
+
+if(CUSTOM_BUILD_TRANSLATIONS)
+  qt_add_translations(${CMAKE_PROJECT_NAME} TS_FILES ${BTC2_TRANSLATIONS_FILES})
+  set_source_files_properties(${BTC2_TRANSLATIONS_FILES}
+      PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/translations")
+  add_dependencies(${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}_lupdate)
+  add_dependencies(${CMAKE_PROJECT_NAME} update_translations)
+endif()
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
@@ -80,9 +219,7 @@ set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
 
 target_link_libraries(${CMAKE_PROJECT_NAME}
     PRIVATE
-    Qt6::Core
-    Qt6::Quick
-    Qt6::QuickControls2
+
 )
 
 include(GNUInstallDirs)
