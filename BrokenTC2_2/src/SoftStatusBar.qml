@@ -12,6 +12,7 @@ import btc2
 Item {
     height: 60
 
+    // Separator
     Rectangle {
         anchors {
             bottom: parent.top
@@ -29,6 +30,7 @@ Item {
         border.color: Style.kForeground
     }
 
+    // Game selection combo
     ComboBox {
         id: gameCombobox
 
@@ -76,6 +78,15 @@ Item {
         }
     }
 
+    Label {
+        anchors {
+            verticalCenter: parent.verticalCenter
+            right: gearLabel.left
+            rightMargin: Style.kStandardMargin
+        }
+
+        text: ServiceManager.gearHandler.gearModeStr
+    }
     Label {
         id: dummyLabel
     }

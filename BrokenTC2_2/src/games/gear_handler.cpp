@@ -2,7 +2,7 @@
 
 #include <QQmlEngine>
 
-#include <system/logs/logger.hpp>
+#include <Logger/logger.hpp>
 
 namespace btc2 {
 
@@ -42,7 +42,7 @@ void BaseGearHandler::SetGearMode(GearMode mode) {
   emit gearModeChanged();
 }
 void BaseGearHandler::CycleMode() {
-  if (m_mode + 1 < MAX_MODE_VALUE) {
+  if (m_mode + 1 < GearMode::kMaxEnumValue) {
     SetGearMode(static_cast<GearMode>(m_mode + 1));
   } else {
     SetGearMode(GearMode{});

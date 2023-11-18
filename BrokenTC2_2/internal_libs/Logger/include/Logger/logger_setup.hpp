@@ -1,20 +1,19 @@
 #pragma once
 
-#include <system/logs/constants.hpp>
+#include <src/constants.hpp>
 
 // include separators
 
 #include <QDebug>
 #include <QFileInfo>
 #include <QLoggingCategory>
-#include <QTextEdit>
 #include <iostream>
 
-#include <debug/qstring_callback_sink.hpp>
+#include <Logger/logger.hpp>
+#include <Logger/qstring_callback_sink.hpp>
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/rotating_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
-#include <system/logs/logger.hpp>
 
 namespace btc2 {
 

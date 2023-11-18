@@ -4,9 +4,11 @@
 #include <QQmlEngine>
 #include <git_version.hpp>
 
+#include <Logger/btype.hpp>
+#include <QSDL/game_controller.hpp>
 #include <games/gear_handler_factory.hpp>
 #include <games/gear_handler_the_crew.hpp>
-#include <system/logs/btype.hpp>
+#include <system/services/controller_handler.hpp>
 
 namespace btc2 {
 
@@ -58,8 +60,15 @@ class ServiceManager : public QObject {
     return out;
   }
 
+  /* Input related */
+
+  /* Main */
+  Q_INVOKABLE void OnMainWindowLoaded();
+
  private:
   ServiceManager();
+
+  std::unique_ptr<ControllerHandler> m_main_runner{nullptr};
 
   std::unique_ptr<BaseGearHandler> m_gear_handler{nullptr};
 };

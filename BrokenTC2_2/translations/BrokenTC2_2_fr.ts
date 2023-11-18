@@ -67,13 +67,15 @@ li.checked::marker { content: &quot;\2612&quot;; }
     </message>
     <message>
         <location line="+25"/>
+        <location/>
         <source>Gear Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Rapport inférieur</translation>
     </message>
     <message>
         <location line="+17"/>
+        <location/>
         <source>Gear Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Rapport supérieur</translation>
     </message>
     <message>
         <location line="+11"/>

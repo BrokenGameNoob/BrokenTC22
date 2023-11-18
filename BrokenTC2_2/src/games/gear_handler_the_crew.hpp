@@ -1,7 +1,7 @@
 #pragma once
 
+#include <Logger/logger.hpp>
 #include <games/gear_handler.hpp>
-#include <system/logs/logger.hpp>
 
 namespace btc2 {
 

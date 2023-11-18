@@ -2,7 +2,7 @@
 
 #include <QtConcurrent>
 
-#include <system/logs/logger.hpp>
+#include <Logger/logger.hpp>
 #include <utils/qt_utils.hpp>
 #include <utils/time.hpp>
 
@@ -18,8 +18,10 @@ void ServiceManager::Init() {
   CREGISTER_QML_SINGLETON_I(btc2, ServiceManager);
 }
 
-ServiceManager::ServiceManager() {
-  m_gear_handler = std::make_unique<GearHandlerTheCrew>(nullptr);
+ServiceManager::ServiceManager() : m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)} {}
+
+void ServiceManager::OnMainWindowLoaded() {
+  m_main_runner = std::make_unique<ControllerHandler>();
 }
 
 void ServiceManager::test() {

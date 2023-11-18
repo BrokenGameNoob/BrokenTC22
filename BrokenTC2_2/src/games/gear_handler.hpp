@@ -5,6 +5,8 @@
 #include <cstdint>
 #include <qqmlintegration.h>
 
+#include <utils/macro_define.hpp>
+
 namespace btc2 {
 
 class BaseGearHandler : public QObject {
@@ -18,7 +20,7 @@ class BaseGearHandler : public QObject {
  public:
   using GearType = int32_t;
 
-  enum GearMode : int32_t { CLUTCH_MODE, SEQ_MODE, MAX_MODE_VALUE };
+  enum GearMode : int32_t { CLUTCH_MODE, SEQ_MODE, kMaxEnumValue };
   Q_ENUM(GearMode)
 
   static void Init();
@@ -60,9 +62,9 @@ class BaseGearHandler : public QObject {
   static constexpr auto GetGearModeStr(const GearMode mode) {
     switch (mode) {
       case CLUTCH_MODE:
-        return "CLUTCH_MODE";
+        return "Clutch";
       case SEQ_MODE:
-        return "SEQ_MODE";
+        return "Classic";
       default:
         break;
     }

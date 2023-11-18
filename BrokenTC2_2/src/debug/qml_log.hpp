@@ -4,9 +4,9 @@
 #include <QQmlEngine>
 #include <iostream>
 
-#include <debug/qstring_callback_sink.hpp>
-#include <system/logs/btype.hpp>
-#include <system/logs/logger.hpp>
+#include <Logger/btype.hpp>
+#include <Logger/logger.hpp>
+#include <Logger/qstring_callback_sink.hpp>
 
 namespace btc2 {
 

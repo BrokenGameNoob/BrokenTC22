@@ -10,7 +10,7 @@
 #include <spdlog/details/null_mutex.h>
 #include <spdlog/details/synchronous_factory.h>
 #include <spdlog/sinks/base_sink.h>
-#include <spdlog/sinks/qt_sinks.h>
+// #include <spdlog/sinks/qt_sinks.h>
 
 namespace spdlog {
 
@@ -34,8 +34,8 @@ class callback_qstring_sink final : public base_sink<Mutex> {
   static_assert(kColors.size() == level::n_levels);
 
  public:
-  explicit callback_qstring_sink(const custom_qstring_callback &callback, bool use_colors = true)
-      : callback_{callback}, m_use_colors{use_colors} {}
+  explicit callback_qstring_sink(const custom_qstring_callback &callback, bool escape_for_html, bool use_colors)
+      : callback_{callback}, m_escape_for_html{escape_for_html}, m_use_colors{use_colors} {}
 
   void set_callback(const custom_qstring_callback &callback) {
     callback_ = callback;
@@ -47,6 +47,9 @@ class callback_qstring_sink final : public base_sink<Mutex> {
     base_sink<Mutex>::formatter_->format(msg, formatted);
     const string_view_t str = string_view_t(formatted.data(), formatted.size());
     QString msg_str{QString::fromUtf8(str.data(), static_cast<int>(str.size())).trimmed()};
+    if (m_escape_for_html) {
+      msg_str = msg_str.toHtmlEscaped();
+    }
     if (m_use_colors) {
       msg_str = QString{"%0<span style=\"font-weight:700;color:%1\">%2</span>%3"}.arg(
           msg_str.mid(0, msg.color_range_start),
@@ -60,6 +63,7 @@ class callback_qstring_sink final : public base_sink<Mutex> {
 
  private:
   custom_qstring_callback callback_;
+  bool m_escape_for_html;
   bool m_use_colors;
 };
 

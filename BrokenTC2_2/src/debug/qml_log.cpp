@@ -4,9 +4,9 @@
 #include <string>
 #include <string_view>
 
-#include <debug/qstring_callback_sink.hpp>
-#include <system/logs/btype.hpp>
-#include <system/logs/logger.hpp>
+#include <Logger/btype.hpp>
+#include <Logger/logger.hpp>
+#include <Logger/qstring_callback_sink.hpp>
 #include <utils/qt_utils.hpp>
 
 namespace btc2 {
@@ -16,7 +16,7 @@ QMLLogHelper::QMLLogHelper(QObject* parent) : QObject{parent} {
     SPDLOG_INFO("QMLLogHelper enabled and active");
     spdlog::custom_qstring_callback callback{[&](const QString& msg) { emit textAdded(msg); }};
     std::shared_ptr<spdlog::sinks::callback_qstring_sink_mt> sink{
-        std::make_shared<spdlog::sinks::callback_qstring_sink_mt>(callback)};
+        std::make_shared<spdlog::sinks::callback_qstring_sink_mt>(callback, true, true)};
     sink->set_pattern(kLoggerPattern);
     sink->set_level(MaxLogLevel());
     m_sink = sink;

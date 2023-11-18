@@ -6,15 +6,16 @@
 #include <QLibraryInfo>
 #include <QQmlApplicationEngine>
 #include <QTranslator>
+#include <SDL.h>
 #include <git_version.hpp>
 
+#include <Logger/btype.hpp>
+#include <Logger/logger_setup.hpp>
 #include <debug/qml_log.hpp>
-#include <system/logs/btype.hpp>
-#include <system/logs/logger_setup.hpp>
 #include <system/services/service_manager.hpp>
 #include <utils/style.hpp>
 
-int main(int argc, char *argv[]) {
+int SDL_main(int argc, char *argv[]) {
   QGuiApplication app(argc, argv);
 
   /* -- Setting up logger -- */

@@ -5,16 +5,7 @@ project(BrokenTC2_2 VERSION 0.1 LANGUAGES CXX)
 add_compile_definitions(CMAKEMACRO_PROJECT_EXE="${CMAKE_PROJECT_NAME}")
 add_compile_definitions(CMAKEMACRO_BASE_PROJECT_DIR="${CMAKE_SOURCE_DIR}")
 
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-  set(CMAKE_COMPIL_MODE_VAR 0)
-elseif (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-  set(CMAKE_COMPIL_MODE_VAR 1)
-elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-  set(CMAKE_COMPIL_MODE_VAR 2)
-elseif(CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
-  set(CMAKE_COMPIL_MODE_VAR 3)
-endif()
-add_compile_definitions(CMAKE_COMPIL_MODE=${CMAKE_COMPIL_MODE_VAR})
+
 
 
 ############################
@@ -77,12 +68,15 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(spdlog)
 
-set(SDL2_PATH "C:\\Libs\\x86_64-w64-mingw32\\" CACHE BOOL "" FORCE)
-set(SDL2_INCLUDE_DIR "C:\\Libs\\x86_64-w64-mingw32\\include\\" CACHE BOOL "" FORCE)
-include_directories(${SDL2_INCLUDE_DIR})
-find_package(SDL2 REQUIRED)
+#set(SDL2_PATH "C:\\Libs\\x86_64-w64-mingw32\\" CACHE BOOL "" FORCE)
+#set(SDL2_INCLUDE_DIR "C:\\Libs\\x86_64-w64-mingw32\\include\\" CACHE BOOL "" FORCE)
+#include_directories(${SDL2_INCLUDE_DIR})
+#find_package(SDL2 REQUIRED)
 
-add_subdirectory(internal_libs/GitVersion)
+#add_subdirectory(internal_libs/GitVersion)
+#add_subdirectory(internal_libs/Logger)
+#add_subdirectory(internal_libs/QSDL)
+add_subdirectory(internal_libs)
 
 ############################
 #
@@ -107,15 +101,8 @@ set(BTC2_SOURCES_DIR src)
 set(BTC2_SOURCES
     ${BTC2_SOURCES_DIR}/main.cpp
 
-    # System
-    ${BTC2_SOURCES_DIR}/system/logs/constants.hpp
-    ${BTC2_SOURCES_DIR}/system/logs/btype.hpp
-    ${BTC2_SOURCES_DIR}/system/logs/logger.hpp
-    ${BTC2_SOURCES_DIR}/system/logs/logger_setup.hpp
-    ${BTC2_SOURCES_DIR}/system/logs/signal_handler.hpp ${BTC2_SOURCES_DIR}/system/logs/signal_handler.cpp
-
     # Debug
-    ${BTC2_SOURCES_DIR}/debug/qstring_callback_sink.hpp
+#    ${BTC2_SOURCES_DIR}/debug/qstring_callback_sink.hpp
     ${BTC2_SOURCES_DIR}/debug/qml_log.hpp ${BTC2_SOURCES_DIR}/debug/qml_log.cpp
 
     # Utils
@@ -126,9 +113,11 @@ set(BTC2_SOURCES
 
     # Services
     ${BTC2_SOURCES_DIR}/system/services/service_manager.hpp ${BTC2_SOURCES_DIR}/system/services/service_manager.cpp
+    ${BTC2_SOURCES_DIR}/system/services/controller_handler.hpp ${BTC2_SOURCES_DIR}/system/services/controller_handler.cpp
 
     # Controls
     ${BTC2_SOURCES_DIR}/system/controls_io/keystroke_sequencer.hpp ${BTC2_SOURCES_DIR}/system/controls_io/keystroke_sequencer.cpp
+    ${BTC2_SOURCES_DIR}/system/controls_io/InputHandler.hpp ${BTC2_SOURCES_DIR}/system/controls_io/InputHandler.cpp
 
     # Games
     ${BTC2_SOURCES_DIR}/games/gear_handler_factory.hpp
@@ -190,6 +179,9 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
   spdlog::spdlog
 
   libGitVersion::libGitVersion
+  libLogger::libLogger
+  libQSDL::libQSDL
+  libWinUtils::libWinUtils
 
   Qt6::Widgets
   Qt6::Core

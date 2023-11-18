@@ -161,4 +161,8 @@ ApplicationWindow {
             visible: ServiceManager.hasDebInfo
         }
     }
+
+    Component.onCompleted: {
+        ServiceManager.OnMainWindowLoaded()
+    }
 }

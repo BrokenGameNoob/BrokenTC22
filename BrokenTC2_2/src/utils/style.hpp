@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QQmlEngine>
 
-#include <system/logs/logger.hpp>
+#include <Logger/logger.hpp>
 #include <utils/qt_utils.hpp>
 
 namespace btc2 {
