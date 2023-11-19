@@ -23,11 +23,9 @@ Item {
             rightMargin: Style.kStandardMargin / 2
         }
 
-        color: {
-            return Style.kForeground
-        }
+        color: QMLStyle.kBorderColor
         height: 1
-        border.color: Style.kForeground
+        border.color: QMLStyle.kBorderColor
     }
 
     // Game selection combo
@@ -78,7 +76,16 @@ Item {
         }
     }
 
-    Label {
+    //    Label {
+    //        anchors {
+    //            verticalCenter: parent.verticalCenter
+    //            right: gearLabel.left
+    //            rightMargin: Style.kStandardMargin
+    //        }
+
+    //        text: ServiceManager.gearHandler.gearModeStr
+    //    }
+    Button {
         anchors {
             verticalCenter: parent.verticalCenter
             right: gearLabel.left
@@ -86,6 +93,11 @@ Item {
         }
 
         text: ServiceManager.gearHandler.gearModeStr
+        onClicked: {
+            ServiceManager.gearHandler.CycleMode()
+            ServiceManager.tmp.text += ServiceManager.gearHandler.gearModeStr
+            console.warn("TMP TEST: " + ServiceManager.tmp.text)
+        }
     }
     Label {
         id: dummyLabel

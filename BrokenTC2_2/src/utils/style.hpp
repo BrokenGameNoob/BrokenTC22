@@ -21,6 +21,7 @@ class Style : public QObject {
 
   /* Graphics */
   QML_LITERAL_CONSTANT(qreal, kStandardMargin, 10.);
+  QML_LITERAL_CONSTANT(qreal, kStandardIconWidth, 25.);
 
  public:
   ~Style() = default;

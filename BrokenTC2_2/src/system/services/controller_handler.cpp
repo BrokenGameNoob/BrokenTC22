@@ -2,6 +2,8 @@
 
 #include <Logger/logger.hpp>
 #include <QSDL/sdl_event_handler.hpp>
+#include <system/services/service_manager.hpp>
+#include <utils/qt_utils.hpp>
 
 namespace btc2 {
 
@@ -19,16 +21,29 @@ ControllerHandler::ControllerHandler()
           &ControllerHandler::OnControllerUnplugged);
 
   connect(m_game_controller.get(), &GameController::buttonDown, this, &ControllerHandler::OnButtonDown);
+  connect(m_game_controller.get(), &GameController::buttonUp, this, &ControllerHandler::OnButtonUp);
 
   qsdl::SDLEventHandler::Start();
   qsdl::SDLEventHandler::RegisterController(m_game_controller.get());
 }
 
+void ControllerHandler::Init() {
+  CREGISTER_QML_UNCREATABLE_TYPE(btc2, ControllerHandler, "CppOwned");
+}
+
+QStringList ControllerHandler::GetControllerList() const {
+  return qsdl::GetPluggedJoysticks();
+}
+
 void ControllerHandler::OnControllerPluggedIn(int controller_id) {
   SPDLOG_DEBUG("Controller plugged in: <{}>", controller_id);
+  m_game_controller->ConnectController(controller_id);
+  emit controllerCountChanged();
 }
 void ControllerHandler::OnControllerUnplugged(int controller_id) {
   SPDLOG_DEBUG("Controller unplugged: <{}>", controller_id);
+  m_game_controller->DisconnectController(false);
+  emit controllerCountChanged();
 }
 
 void ControllerHandler::OnButtonDown(int button) {

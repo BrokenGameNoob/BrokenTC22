@@ -60,9 +60,11 @@ WindowsEventSingleton::~WindowsEventSingleton() {}
 void SendKeyboardEvent(int code, bool pressed) {
   auto input{GetKbInput(code, pressed)};
   SPDLOG_DEBUG("KB EVENT: {} ({}): pressed? {}", code, win::VkCodeToStr(code), pressed);
+  WindowsEventSingleton::SetInhibitEvents(true);
   if (!SendInput(1, &input, sizeof(INPUT))) {
     SPDLOG_WARN("Could not simulate input with vk_code: {} ({})", code, win::VkCodeToStr(code));
   }
+  WindowsEventSingleton::SetInhibitEvents(false);
 }
 
 }  // namespace win

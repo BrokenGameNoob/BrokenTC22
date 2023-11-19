@@ -3,6 +3,8 @@ cmake_minimum_required (VERSION 3.8)
 set(RAW_LIB_NAME QSDL)
 set(LIB_NAME lib${RAW_LIB_NAME})
 
+message("------- <${RAW_LIB_NAME}> -------")
+
 ############################
 #
 #       CMake config
@@ -28,10 +30,9 @@ set(SDL2_DIR $ENV{SDL2_DIR} CACHE PATH "Path to SDL2")
 list(APPEND CMAKE_PREFIX_PATH "${SDL2_DIR}")
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
-message("------- <SDL> -------")
+
 message("SDL2_INCLUDE_DIRS=${SDL2_INCLUDE_DIRS}")
 message("SDL2_LIBRARIES=${SDL2_LIBRARIES}")
-message("----- END <SDL> -----")
 
 
 ###############
@@ -112,3 +113,5 @@ target_compile_features(${LIB_NAME} PRIVATE cxx_auto_type)
 target_compile_options(${LIB_NAME} PRIVATE
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
     -Wall -Wextra -Wpedantic>)
+
+message("----- END <${RAW_LIB_NAME}> -----")

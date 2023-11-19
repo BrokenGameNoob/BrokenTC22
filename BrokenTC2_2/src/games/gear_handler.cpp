@@ -38,6 +38,7 @@ void BaseGearHandler::SetGearMode(GearMode mode) {
   }
   const auto kOldMode{m_mode};
   m_mode = mode;
+  SPDLOG_INFO("Mode set: {} ({})", GetGearModeStr(), GetGearMode());
   OnGearModeSet(kOldMode, m_mode);
   emit gearModeChanged();
 }

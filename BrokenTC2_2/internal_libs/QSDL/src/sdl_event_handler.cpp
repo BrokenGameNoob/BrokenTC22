@@ -62,6 +62,10 @@ void SDLEventThread::Work(std::shared_ptr<const EventHandlerSharedConfig> shared
       skipToNextIter = (SDL_WaitEventTimeout(&e, 100) == 0);
     }
 
+    //    SPDLOG_DEBUG("lowPerfMode={}", shared_config.get()->lowPerfMode());
+    //    SPDLOG_DEBUG("skipToNextIter={}", skipToNextIter);
+    //    SPDLOG_DEBUG("e.type={}", e.type);
+
     if (skipToNextIter) continue;
 
     switch (e.type) {
@@ -125,7 +129,7 @@ void SDLEventThread::Work(std::shared_ptr<const EventHandlerSharedConfig> shared
 }
 
 SDLEventHandler::SDLEventHandler() : QObject(), m_controller_list() {
-  if (!initSDL(SDL_INIT_JOYSTICK)) {
+  if (!InitSDL(SDL_INIT_JOYSTICK)) {
     SPDLOG_ERROR("Cannot initialize SDL2_Joystick:\n{}", SDL_GetError());
     throw std::runtime_error("Cannot initialize SDL2_Joystick");
   }

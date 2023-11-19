@@ -19,6 +19,7 @@
 #pragma once
 
 #include <QThread>
+#include <atomic>
 #include <windows.h>
 
 #include <WinUtils/utils.hpp>
@@ -41,11 +42,20 @@ class WindowsEventSingleton : public QObject {
   }
 
   void IEmitKeyDown(int key) {
+    if (m_inhibit_events) {
+      return;
+    }
     emit keyDown(key);
+  }
+  void ISetInhibitEvents(bool inhibit) {
+    m_inhibit_events = inhibit;
   }
 
   static void EmitKeyDown(int key) {
     I()->IEmitKeyDown(key);
+  }
+  static void SetInhibitEvents(bool inhibit) {
+    I()->ISetInhibitEvents(inhibit);
   }
 
   static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam);
@@ -55,6 +65,8 @@ class WindowsEventSingleton : public QObject {
   ~WindowsEventSingleton();
   WindowsEventSingleton(const WindowsEventSingleton&) = delete;
   WindowsEventSingleton& operator=(const WindowsEventSingleton&) = delete;
+
+  std::atomic_bool m_inhibit_events{false};
 };
 
 //--------------------------------------------------------------

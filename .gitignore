@@ -81,3 +81,5 @@ DEPLOY_OUTPUT*/
 DUMMY_COMMIT_WILL_NEVER_HAPPEN
 
 AutoDoc/
+
+vcpkg_installed/

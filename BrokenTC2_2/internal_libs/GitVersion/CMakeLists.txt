@@ -2,6 +2,8 @@ cmake_minimum_required (VERSION 3.8)
 
 set(LIB_NAME GitVersion)
 
+message("------- <${LIB_NAME}> -------")
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -68,3 +70,5 @@ if(CUSTOM_ENABLE_TESTING)
     enable_testing()
     add_subdirectory(tests)
 endif()
+
+message("----- END <${LIB_NAME}> -----")

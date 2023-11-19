@@ -53,15 +53,15 @@ class EventHandlerSharedConfig {
   bool m_shouldStop{false};
 };
 
-bool initSDL(uint64_t flags);
+bool InitSDL(uint64_t flags);
 
-inline int getPluggedJoysticksCount() {
+inline int GetPluggedJoysticksCount() {
   return SDL_NumJoysticks();
 }
 
-QStringList getPluggedJoysticks();
+QStringList GetPluggedJoysticks();
 
-inline QString getPluggedJoystick(int id) {
+inline QString GetPluggedJoystick(int id) {
   return SDL_JoystickNameForIndex(id);
 }
 
@@ -69,6 +69,6 @@ inline QString getPluggedJoystick(int id) {
  * \brief findJoystickByName search for a plugged in joystick by it's name
  * \return joystick open ID if found, -1 otherwise
  */
-int findJoystickByName(const QString name);
+int FindJoystickByName(const QString name);
 
 }  // namespace qsdl

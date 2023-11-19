@@ -3,6 +3,9 @@ cmake_minimum_required (VERSION 3.8)
 set(RAW_LIB_NAME Logger)
 set(LIB_NAME lib${RAW_LIB_NAME})
 
+message("------- <${RAW_LIB_NAME}> -------")
+
+
 ############################
 #
 #       CMake config
@@ -13,13 +16,13 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-  set(CMAKE_COMPIL_MODE_VAR 0)
+  set(CMAKE_COMPIL_MODE_VAR 0 CACHE INTERNAL "")
 elseif (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-  set(CMAKE_COMPIL_MODE_VAR 1)
+  set(CMAKE_COMPIL_MODE_VAR 1 CACHE INTERNAL "")
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-  set(CMAKE_COMPIL_MODE_VAR 2)
+  set(CMAKE_COMPIL_MODE_VAR 2 CACHE INTERNAL "")
 elseif(CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
-  set(CMAKE_COMPIL_MODE_VAR 3)
+  set(CMAKE_COMPIL_MODE_VAR 3 CACHE INTERNAL "")
 endif()
 
 
@@ -119,3 +122,5 @@ target_compile_features(${LIB_NAME} PRIVATE cxx_auto_type)
 target_compile_options(${LIB_NAME} PRIVATE
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
     -Wall -Wextra -Wpedantic>)
+
+message("----- END <${RAW_LIB_NAME}> -----")

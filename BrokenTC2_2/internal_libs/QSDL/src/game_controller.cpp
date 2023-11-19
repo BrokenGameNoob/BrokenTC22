@@ -42,13 +42,13 @@ void GameController::ConnectController(int controller_id) {
   {
     DisconnectController(false);  // disconnect it
   }
-
-  auto joystickCount{getPluggedJoysticksCount()};
+  
+  auto joystickCount{GetPluggedJoysticksCount()};
   if (controller_id >= joystickCount) {
     m_controller_id = -1;
     SPDLOG_ERROR("Invalid controller ID ({}), there is only {} devices plugged in:\n{}",
                  controller_id,
-                 getPluggedJoysticksCount(),
+                 GetPluggedJoysticksCount(),
                  SDL_GetError());
   } else {
     m_controller_id = controller_id;

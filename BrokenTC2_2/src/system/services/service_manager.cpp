@@ -18,10 +18,12 @@ void ServiceManager::Init() {
   CREGISTER_QML_SINGLETON_I(btc2, ServiceManager);
 }
 
-ServiceManager::ServiceManager() : m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)} {}
+ServiceManager::ServiceManager() : m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)} {
+  m_tmp.setText("BIDULE TRUC");
+}
 
 void ServiceManager::OnMainWindowLoaded() {
-  m_main_runner = std::make_unique<ControllerHandler>();
+  m_controller_handler = std::make_unique<ControllerHandler>();
 }
 
 void ServiceManager::test() {

@@ -5,7 +5,10 @@ project(BrokenTC2_2 VERSION 0.1 LANGUAGES CXX)
 add_compile_definitions(CMAKEMACRO_PROJECT_EXE="${CMAKE_PROJECT_NAME}")
 add_compile_definitions(CMAKEMACRO_BASE_PROJECT_DIR="${CMAKE_SOURCE_DIR}")
 
-
+set(QT_VERSION_MAJOR 6 CACHE INTERNAL "")
+get_filename_component(PARENT_DIR ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
+set(VCPKG_INSTALLED_DIR "${PARENT_DIR}/vcpkg_installed" CACHE INTERNAL "")
+message("VCPKG_INSTALLED_DIR=${VCPKG_INSTALLED_DIR}")
 
 
 ############################
@@ -42,15 +45,6 @@ qt_add_executable(${CMAKE_PROJECT_NAME}
     src/Form.ui
 )
 
-###############
-#   Options
-###############
-if(CMAKE_COMPIL_MODE_VAR EQUAL 0)
-    set(CUSTOM_BUILD_TRANSLATIONS OFF)
-else()
-    set(CUSTOM_BUILD_TRANSLATIONS ON)
-endif()
-
 
 ############################
 #
@@ -77,6 +71,21 @@ FetchContent_MakeAvailable(spdlog)
 #add_subdirectory(internal_libs/Logger)
 #add_subdirectory(internal_libs/QSDL)
 add_subdirectory(internal_libs)
+
+
+############################
+#
+#         Options
+#
+############################
+
+message("CMAKE_COMPIL_MODE_VAR=${CMAKE_COMPIL_MODE_VAR}")
+if(CMAKE_COMPIL_MODE_VAR EQUAL 0)
+    set(CUSTOM_BUILD_TRANSLATIONS OFF)
+else()
+    set(CUSTOM_BUILD_TRANSLATIONS ON)
+endif()
+
 
 ############################
 #
@@ -108,6 +117,7 @@ set(BTC2_SOURCES
     # Utils
     ${BTC2_SOURCES_DIR}/utils/qt_utils.hpp
     ${BTC2_SOURCES_DIR}/utils/style.hpp
+    ${BTC2_SOURCES_DIR}/utils/shared_constants.hpp
     ${BTC2_SOURCES_DIR}/utils/macro_define.hpp
     ${BTC2_SOURCES_DIR}/utils/time.hpp
 
@@ -135,7 +145,6 @@ set(BTC2_QML_DIR src)
 set(BTC2_QML_FILES
     ${BTC2_QML_DIR}/Main.qml
     ${BTC2_QML_DIR}/SoftStatusBar.qml
-    ${BTC2_QML_DIR}/Style.qml
 
     # Utils
     ${BTC2_QML_DIR}/utils/QMLStyle.qml
@@ -143,9 +152,11 @@ set(BTC2_QML_FILES
 
     # Widgets
     ${BTC2_SOURCES_DIR}/widgets/ScrollableTextArea.qml
+    ${BTC2_SOURCES_DIR}/widgets/LabelledIcon.qml
 
     # Tabs
     ${BTC2_QML_DIR}/tabs/SettingsTab.qml
+    ${BTC2_QML_DIR}/tabs/SoftwareControlsTab.qml
 
     # Debug
     ${BTC2_QML_DIR}/debug/DebugWindow.qml
@@ -182,6 +193,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
   libLogger::libLogger
   libQSDL::libQSDL
   libWinUtils::libWinUtils
+  libProtoMessages::libProtoMessages
 
   Qt6::Widgets
   Qt6::Core

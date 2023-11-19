@@ -13,6 +13,7 @@
 #include <Logger/logger_setup.hpp>
 #include <debug/qml_log.hpp>
 #include <system/services/service_manager.hpp>
+#include <utils/shared_constants.hpp>
 #include <utils/style.hpp>
 
 int SDL_main(int argc, char *argv[]) {
@@ -25,7 +26,9 @@ int SDL_main(int argc, char *argv[]) {
   /* -- Application setup -- */
   btc2::QMLLogHelper::Init();
   btc2::Style::Init();
+  btc2::Constants::Init();
   btc2::ServiceManager::Init();
+  btc2::ControllerHandler::Init();
 
   /* -- Debug -- */
 #ifdef PRINT_RESOURCES

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <QtQml>
+
 #define kQmlModuleName "btc2"
 
 /*! @brief Usage example: CREGISTER_QML_TYPE(btc2, QMLLogHelper);*/

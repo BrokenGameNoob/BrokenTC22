@@ -27,15 +27,7 @@ ApplicationWindow {
 
     SplitView {
         id: splitView
-
-        //        anchors {
-        //            top: bar.bottom
-        //            bottom: parent.bottom
-        //            left: parent.left
-        //            right: parent.right
-        //        }
         anchors.fill: parent
-
         orientation: Qt.Vertical
 
         Item {
@@ -48,16 +40,23 @@ ApplicationWindow {
 
                 //        currentIndex: 2
                 TabButton {
+                    id: refTabButton
                     text: qsTr("Software controls")
-                    icon.source: "qrc:/icons/icon_controller.svg"
+                    icon.source: Constants.kIconController
+                    icon.width: Style.kStandardIconWidth
+                    icon.height: Style.kStandardIconWidth
                 }
                 TabButton {
-                    text: qsTr("In game controls")
-                    icon.source: "qrc:/icons/icon_keyboard.svg"
+                    text: qsTr("Game configuration")
+                    icon.source: Constants.kIconKeyboard
+                    icon.width: refTabButton.icon.width
+                    icon.height: refTabButton.icon.height
                 }
                 TabButton {
                     text: qsTr("Settings")
-                    icon.source: "qrc:/icons/icon_settings.svg"
+                    icon.source: Constants.kIconSettings
+                    icon.width: refTabButton.icon.width
+                    icon.height: refTabButton.icon.height
                 }
             }
 
@@ -72,68 +71,8 @@ ApplicationWindow {
 
                 currentIndex: bar.currentIndex
 
-                Item {
-                    id: homeTab
+                SoftwareControlsTab {}
 
-                    Button {
-                        id: button
-                        anchors.centerIn: parent
-                        text: qsTr("Hey")
-
-                        MessageDialog {
-                            id: messagebox
-                            buttons: MessageDialog.Cancel
-                            text: "The document has been modified."
-                        }
-
-                        onClicked: {
-                            //messagebox.open()
-                            //ServiceManager.test()
-                            console.log(gearHandler.gearModeStr)
-                            gearHandler.CycleMode()
-                            console.log(gearHandler.gearModeStr)
-                        }
-                    }
-                    Button {
-                        id: buttonDown
-                        anchors {
-                            right: button.horizontalCenter
-                            top: button.bottom
-                            rightMargin: 4
-                            topMargin: 4
-                        }
-
-                        text: qsTr("Gear Down")
-
-                        onClicked: {
-                            console.log("Before: " + gearHandler.gear)
-                            gearHandler.GearDown()
-                            console.log("After: " + gearHandler.gear)
-                        }
-                    }
-                    Button {
-                        id: buttonUp
-                        anchors {
-                            left: button.horizontalCenter
-                            top: button.bottom
-                            leftMargin: 4
-                            topMargin: 4
-                        }
-
-                        text: qsTr("Gear Up")
-
-                        onClicked: {
-                            console.log("Before: " + gearHandler.gear)
-                            gearHandler.GearUp()
-                            console.log("After: " + gearHandler.gear)
-                        }
-                    }
-                    Switch {
-                        anchors.topMargin: 2
-                        anchors.top: button.bottom
-                        text: qsTr("Wi-Fi")
-                    }
-                }
                 Item {
                     id: discoverTab
                 }

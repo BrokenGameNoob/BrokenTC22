@@ -21,7 +21,7 @@
 
 namespace qsdl {
 
-bool initSDL(uint64_t flags) {
+bool InitSDL(uint64_t flags) {
   if (SDL_Init(flags) < 0) {
     SPDLOG_ERROR("Cannot init SDL: {}", SDL_GetError());
     return false;
@@ -29,8 +29,8 @@ bool initSDL(uint64_t flags) {
   return true;
 }
 
-QStringList getPluggedJoysticks() {
-  auto devicesCnt{getPluggedJoysticksCount()};
+QStringList GetPluggedJoysticks() {
+  auto devicesCnt{GetPluggedJoysticksCount()};
   QStringList out{};
   out.reserve(devicesCnt);
 
@@ -40,8 +40,8 @@ QStringList getPluggedJoysticks() {
   return out;
 }
 
-int findJoystickByName(const QString name) {
-  auto joyList{getPluggedJoysticks()};
+int FindJoystickByName(const QString name) {
+  auto joyList{GetPluggedJoysticks()};
   int i{};
   for (const auto& curName : joyList) {
     if (name == curName) return i;
