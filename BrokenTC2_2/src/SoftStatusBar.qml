@@ -95,8 +95,10 @@ Item {
         text: ServiceManager.gearHandler.gearModeStr
         onClicked: {
             ServiceManager.gearHandler.CycleMode()
-            ServiceManager.tmp.text += ServiceManager.gearHandler.gearModeStr
-            console.warn("TMP TEST: " + ServiceManager.tmp.text)
+            //            console.info(ServiceManager.tmp.actions.count)
+            //            ServiceManager.tmp.actions[0].key += 1
+            console.warn("TMP TEST: \n\t" + ServiceManager.tmp)
+            ServiceManager.test()
         }
     }
     Label {

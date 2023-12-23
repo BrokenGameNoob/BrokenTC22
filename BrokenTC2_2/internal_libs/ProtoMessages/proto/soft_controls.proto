@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package btc2;
+
+message WarningNotification {
+  string text = 1;
+}
+
+message SoftAction {
+  enum Available {
+    NONE = 0;
+
+    /* Sequential control */
+    GEAR_UP = 1;
+    GEAR_DOWN = 2;
+
+    /* Direct gears */
+    REVERSE = 3;
+    GEAR_1 = 4;
+    GEAR_2 = 5;
+    GEAR_3 = 6;
+    GEAR_4 = 7;
+    GEAR_5 = 8;
+    GEAR_6 = 9;
+    GEAR_7 = 10;
+
+    /* Software controls */
+    SWITCH_MODE = 11;
+    CYCLE_CONTROLLER = 12;
+  }
+}
+
+message SoftControlsKeys {
+  sint32 gear_up = 1;
+  sint32 gear_down = 2;
+
+  sint32 gear_reverse = 3;
+  sint32 gear_1 = 4;
+  sint32 gear_2 = 5;
+  sint32 gear_3 = 6;
+  sint32 gear_4 = 7;
+  sint32 gear_5 = 8;
+  sint32 gear_6 = 9;
+  sint32 gear_7 = 10;
+
+  sint32 switch_mode = 11;
+  sint32 cycle_controller = 12;
+}
+
+message ControllerProfile {
+  string name = 1;
+  SoftControlsKeys keys = 2;
+}
+
+message KeyboardProfile {
+  SoftControlsKeys keys = 1;
+}

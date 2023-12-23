@@ -1,7 +1,0 @@
-syntax = "proto3";
-
-package btc2;
-
-message WarningNotification {
-  string text = 1;
-}

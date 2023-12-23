@@ -11,12 +11,16 @@
 
 #include <Logger/btype.hpp>
 #include <Logger/logger_setup.hpp>
+#include <ProtoMessages/soft_controls.hpp>
 #include <debug/qml_log.hpp>
 #include <system/services/service_manager.hpp>
 #include <utils/shared_constants.hpp>
 #include <utils/style.hpp>
 
 int SDL_main(int argc, char *argv[]) {
+  /* Systematic checks */
+  btc2::RunSoftControlsCompatibilityCountCheck();
+
   QGuiApplication app(argc, argv);
 
   /* -- Setting up logger -- */

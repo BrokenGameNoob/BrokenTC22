@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package btc2;
+
+enum SupportedGames {
+  TC2 = 0;
+  TCM = 1;
+}
+
+message GameKeys {
+  sint32 gear_up = 1;
+  sint32 gear_down = 2;
+
+  sint32 clutch = 3;
+  sint32 gear_reverse = 4;
+  sint32 gear_1 = 5;
+  sint32 gear_2 = 6;
+  sint32 gear_3 = 7;
+  sint32 gear_4 = 8;
+  sint32 gear_5 = 9;
+  sint32 gear_6 = 10;
+  sint32 gear_7 = 11;
+}
+
+message GameProfile {
+  SupportedGames game = 1;
+  GameKeys keys = 2;
+}

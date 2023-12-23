@@ -3,6 +3,7 @@
 #include <QtConcurrent>
 
 #include <Logger/logger.hpp>
+#include <ProtoMessages/soft_controls.hpp>
 #include <utils/qt_utils.hpp>
 #include <utils/time.hpp>
 
@@ -19,7 +20,7 @@ void ServiceManager::Init() {
 }
 
 ServiceManager::ServiceManager() : m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)} {
-  m_tmp.setText("BIDULE TRUC");
+  //  m_tmp.actions()[0] = {};
 }
 
 void ServiceManager::OnMainWindowLoaded() {
@@ -27,19 +28,9 @@ void ServiceManager::OnMainWindowLoaded() {
 }
 
 void ServiceManager::test() {
-  SPDLOG_DEBUG("Starting concurrent");
-  const auto kBeforeStart{NowMs()};
-  std::ignore = QtConcurrent::run([&, kBeforeStart]() {
-    const auto kStarted{NowMs()};
-    PrintTimeDiff("Time before function start", kBeforeStart, kStarted);
-    int sleep_t = 1000;
-    SPDLOG_DEBUG("Sleeping for: {}ms", sleep_t);
-    const auto kStartTime{std::chrono::high_resolution_clock::now()};
-    std::this_thread::sleep_for(std::chrono::milliseconds(sleep_t));
-    //    QThread::sleep(sleep_t);
-    const auto kEndTime{std::chrono::high_resolution_clock::now()};
-    const auto kDurationMs{std::chrono::duration<double>(kEndTime - kStartTime).count() * 1000};
-    SPDLOG_INFO("Has slept for: {}ms", kDurationMs);
+  ForEach<SoftAction::Available>([&](auto val, const char* key, const QMetaEnum& e) {
+    SPDLOG_DEBUG("NAME: {}     Kb?: {}   Controller?: {}", key, IsKeyboardCompatible(val), IsControllerCompatible(val));
+    return false;
   });
 }
 

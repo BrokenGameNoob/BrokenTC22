@@ -10,7 +10,7 @@
 #include <games/gear_handler_the_crew.hpp>
 #include <system/services/controller_handler.hpp>
 
-#include "testProto.qpb.h"
+#include "soft_controls.qpb.h"
 
 namespace btc2 {
 
@@ -23,7 +23,7 @@ class ServiceManager : public QObject {
   Q_PROPERTY(QStringList availableGearHandlers READ GetAvailableGearHandlers CONSTANT FINAL);
   Q_PROPERTY(BaseGearHandler* gearHandler READ GetRawGearHandler CONSTANT FINAL);
   Q_PROPERTY(ControllerHandler* controllerHandler READ GetRawControllerHandler CONSTANT FINAL);
-  Q_PROPERTY(btc2::WarningNotification tmp MEMBER m_tmp);
+  Q_PROPERTY(btc2::ControllerProfile tmp MEMBER m_tmp);
 
  signals:
   void gearHandlerChanged();
@@ -79,7 +79,7 @@ class ServiceManager : public QObject {
 
   std::unique_ptr<BaseGearHandler> m_gear_handler{nullptr};
 
-  btc2::WarningNotification m_tmp{};
+  btc2::ControllerProfile m_tmp{};
 };
 
 }  // namespace btc2

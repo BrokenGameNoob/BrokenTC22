@@ -41,6 +41,9 @@ message("Protobuf_DIR=${Protobuf_DIR}")
 
 find_package(Protobuf CONFIG REQUIRED)
 
+message("Protobuf_INCLUDE_DIRS=${Protobuf_INCLUDE_DIRS}")
+include_directories(${Protobuf_INCLUDE_DIRS})
+
 ###############
 #   Qt
 ###############
@@ -72,7 +75,9 @@ project(${LIB_NAME})
 set(INCLUDE_DIR include/${RAW_LIB_NAME})
 set(SRC_DIR src)
 set(SOURCE_FILES
-  src/test.hpp
+  ${INCLUDE_DIR}/proto_helper.hpp
+  ${INCLUDE_DIR}/soft_controls.hpp
+  ${INCLUDE_DIR}/games.hpp
 )
 
 file(GLOB PROTO_FILES
@@ -93,6 +98,24 @@ qt_add_protobuf(internal_proto_lib
     ${PROTO_FILES}
 )
 
+get_target_property(PROTO_FILES_DIR internal_proto_lib AUTOGEN_TARGET_DEPENDS)
+message("Generated files are in: ${PROTO_FILES_DIR}")
+message("Generated files are in: ${CMAKE_CURRENT_BINARY_DIR}")
+
+#fix qt generated protobuf files includes
+include(FindPythonInterp)
+set(PYTHON_SCRIPT "${CMAKE_CURRENT_SOURCE_DIR}/fix_protobuf_include.py")
+set(FOLDER_TO_CHECK "${CMAKE_CURRENT_BINARY_DIR}")
+set(STAMP_FILE "${FOLDER_TO_CHECK}/.processed_flag")
+
+# COMMAND ${PYTHON_EXECUTABLE} ${PYTHON_SCRIPT} ${FOLDER_TO_CHECK}
+
+add_custom_target(FIX_QT_PROTO ALL
+  COMMAND ${PYTHON_EXECUTABLE} ${PYTHON_SCRIPT} ${FOLDER_TO_CHECK}
+  BYPRODUCTS ${STAMP_FILE}
+  COMMENT "Fixing qt protbuf generated files"
+)
+
 ############################
 #
 #       Targets
@@ -102,14 +125,9 @@ qt_add_protobuf(internal_proto_lib
 # We declare the project as a static library and add all the source code files to it.
 add_library(${LIB_NAME} STATIC 
   ${SOURCE_FILES}
-  # ${PROTO_SRCS}
-  # ${PROTO_HDRS}
 )
+add_dependencies(${LIB_NAME} FIX_QT_PROTO)
 
-message("-- Proto headers")
-message("${PROTO_HDRS}")
-message("-- Proto sources")
-message("${PROTO_SRCS}")
 
 #Add an alias so that library can be used inside the build tree, e.g. when testing
 add_library(${LIB_NAME}::${LIB_NAME} ALIAS ${LIB_NAME})
@@ -139,6 +157,7 @@ target_include_directories(${LIB_NAME}
     PUBLIC
         $<INSTALL_INTERFACE:include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+        ${Protobuf_INCLUDE_DIRS}
     PRIVATE
         ${SRC_DIR}
         ${SDL2_INCLUDE_DIRS}
