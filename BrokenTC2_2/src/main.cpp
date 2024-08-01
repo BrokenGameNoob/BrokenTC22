@@ -9,9 +9,9 @@
 #include <SDL.h>
 #include <git_version.hpp>
 
+#include <DataStructures/structures.hpp>
 #include <Logger/btype.hpp>
 #include <Logger/logger_setup.hpp>
-#include <ProtoMessages/soft_controls.hpp>
 #include <debug/qml_log.hpp>
 #include <system/services/service_manager.hpp>
 #include <utils/shared_constants.hpp>
@@ -19,7 +19,7 @@
 
 int SDL_main(int argc, char *argv[]) {
   /* Systematic checks */
-  btc2::RunSoftControlsCompatibilityCountCheck();
+  // btc2::RunSoftControlsCompatibilityCountCheck();
 
   QGuiApplication app(argc, argv);
 
@@ -28,6 +28,7 @@ int SDL_main(int argc, char *argv[]) {
   btc2::SetupLoggerRotating(kLogPath, 2);
 
   /* -- Application setup -- */
+
   btc2::QMLLogHelper::Init();
   btc2::Style::Init();
   btc2::Constants::Init();

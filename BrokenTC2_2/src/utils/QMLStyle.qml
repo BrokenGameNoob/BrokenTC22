@@ -10,16 +10,5 @@ Item {
     //    readonly property real kBorderWeight: Material.1
     readonly property color kBorderColor: Material.frameColor
 
-
-    /*
-    //
-    //
-    */
-    visible: false
-    enabled: false
-    Frame {
-        id: dummyControl
-        visible: false
-        enabled: false
-    }
+    readonly property real kStandardMargin: 10
 }

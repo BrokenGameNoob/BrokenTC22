@@ -97,8 +97,6 @@ Item {
             ServiceManager.gearHandler.CycleMode()
             //            console.info(ServiceManager.tmp.actions.count)
             //            ServiceManager.tmp.actions[0].key += 1
-            console.warn("TMP TEST: \n\t" + ServiceManager.tmp)
-            ServiceManager.test()
         }
     }
     Label {

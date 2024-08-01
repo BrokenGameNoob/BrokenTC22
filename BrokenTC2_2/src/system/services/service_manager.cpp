@@ -1,9 +1,11 @@
 #include "service_manager.hpp"
 
+#include <QDebug>
 #include <QtConcurrent>
 
+#include <DataStructures/structures.hpp>
 #include <Logger/logger.hpp>
-#include <ProtoMessages/soft_controls.hpp>
+#include <Utils/json_utils.hpp>
 #include <utils/qt_utils.hpp>
 #include <utils/time.hpp>
 
@@ -19,7 +21,8 @@ void ServiceManager::Init() {
   CREGISTER_QML_SINGLETON_I(btc2, ServiceManager);
 }
 
-ServiceManager::ServiceManager() : m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)} {
+ServiceManager::ServiceManager()
+    : m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)}, m_dummy{std::make_unique<Dummy>(nullptr)} {
   //  m_tmp.actions()[0] = {};
 }
 
@@ -28,10 +31,23 @@ void ServiceManager::OnMainWindowLoaded() {
 }
 
 void ServiceManager::test() {
-  ForEach<SoftAction::Available>([&](auto val, const char* key, const QMetaEnum& e) {
-    SPDLOG_DEBUG("NAME: {}     Kb?: {}   Controller?: {}", key, IsKeyboardCompatible(val), IsControllerCompatible(val));
-    return false;
-  });
+  SPDLOG_INFO("Test function called");
+
+  m_dummy->SetClutch(1);
+  m_dummy->SetGearUp(2);
+  m_dummy->SetGearDown(3);
+  m_dummy->SetName("Bidule");
+
+  SPDLOG_INFO("{}", *m_dummy);
+
+  const auto kSaved{utils::Save(ToJson(*m_dummy), "TEST.json")};
+  SPDLOG_DEBUG("Success save? {}", kSaved);
+
+  if (FillFromFile("TEST2.json", m_dummy.get())) {
+    SPDLOG_INFO("{}", *m_dummy);
+  } else {
+    SPDLOG_ERROR("Failed to read TEST2.json");
+  }
 }
 
 }  // namespace btc2

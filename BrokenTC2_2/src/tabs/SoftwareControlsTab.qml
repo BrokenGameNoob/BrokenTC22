@@ -33,6 +33,7 @@ Item {
         }
 
         Item {
+            id: leftPanelContent
             /* Left part content */
             anchors {
                 left: parent.left
@@ -40,6 +41,39 @@ Item {
                 top: leftPanelLabel.bottom
                 topMargin: Style.kStandardMargin
                 bottom: parent.bottom
+            }
+
+            ScrollView {
+                id: scroll
+                anchors.fill: parent
+                anchors.leftMargin: QMLStyle.kStandardMargin
+                anchors.rightMargin: QMLStyle.kStandardMargin
+                anchors.bottomMargin: QMLStyle.kStandardMargin
+
+                contentWidth: scroll.width
+                contentHeight: column.height
+                clip: true
+                ColumnLayout {
+                    id: column
+
+                    anchors.fill: parent
+
+                    GroupedEditor {
+                        targetElement: ServiceManager.dummy
+                        targetGroup: "global"
+                        title: qsTr("GLOBAL")
+
+                        Layout.fillWidth: true
+                    }
+
+                    GroupedEditor {
+                        targetElement: ServiceManager.dummy
+                        targetGroup: "gear"
+                        title: qsTr("GEAR")
+
+                        Layout.fillWidth: true
+                    }
+                }
             }
         }
     }

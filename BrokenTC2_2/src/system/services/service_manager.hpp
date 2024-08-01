@@ -4,13 +4,12 @@
 #include <QQmlEngine>
 #include <git_version.hpp>
 
+#include <DataStructures/structures.hpp>
 #include <Logger/btype.hpp>
 #include <QSDL/game_controller.hpp>
 #include <games/gear_handler_factory.hpp>
 #include <games/gear_handler_the_crew.hpp>
 #include <system/services/controller_handler.hpp>
-
-#include "soft_controls.qpb.h"
 
 namespace btc2 {
 
@@ -23,7 +22,7 @@ class ServiceManager : public QObject {
   Q_PROPERTY(QStringList availableGearHandlers READ GetAvailableGearHandlers CONSTANT FINAL);
   Q_PROPERTY(BaseGearHandler* gearHandler READ GetRawGearHandler CONSTANT FINAL);
   Q_PROPERTY(ControllerHandler* controllerHandler READ GetRawControllerHandler CONSTANT FINAL);
-  Q_PROPERTY(btc2::ControllerProfile tmp MEMBER m_tmp);
+  Q_PROPERTY(Dummy* dummy READ GetRawDummy CONSTANT FINAL);
 
  signals:
   void gearHandlerChanged();
@@ -69,6 +68,10 @@ class ServiceManager : public QObject {
     return m_controller_handler.get();
   }
 
+  Dummy* GetRawDummy() {
+    return m_dummy.get();
+  }
+
   /* Main */
   Q_INVOKABLE void OnMainWindowLoaded();
 
@@ -79,7 +82,7 @@ class ServiceManager : public QObject {
 
   std::unique_ptr<BaseGearHandler> m_gear_handler{nullptr};
 
-  btc2::ControllerProfile m_tmp{};
+  std::shared_ptr<btc2::Dummy> m_dummy{};
 };
 
 }  // namespace btc2

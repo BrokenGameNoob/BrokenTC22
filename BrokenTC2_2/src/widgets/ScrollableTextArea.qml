@@ -4,7 +4,7 @@ import QtQuick.Controls
 
 import btc2
 
-ScrollView{
+ScrollView {
     id: scrollTextArea
 
     readonly property alias text: logArea.text
@@ -15,18 +15,17 @@ ScrollView{
     readonly property bool vBarIsAtBottom: vBarSize + vBarPos >= 0.95
 
     /* Functions */
-
-    function setText(txt: string){
-        let getBackDown = vBarIsAtBottom;
+    function setText(txt: string) {
+        let getBackDown = vBarIsAtBottom
 
         let vBarPosOld = vBarPos
         let vBarSizeOld = vBarSize
 
         debug1.text = "vPos: " + vBarPos + "   vSize: " + vBarSize
 
-        logArea.text = txt;
-        if(getBackDown){
-            goToBottom();
+        logArea.text = txt
+        if (getBackDown) {
+            goToBottom()
             return
         }
 
@@ -35,10 +34,10 @@ ScrollView{
 
         debug2.text = "vPos: " + vBarPos + "   vSize: " + vBarSize
         debug3.text = "vPosDiff: " + vBarPosDiff + "   vSizeDiff: " + vBarSizeDiff
-        ScrollBar.vertical.position = vBarPosOld - vBarSizeDiff;
+        ScrollBar.vertical.position = vBarPosOld - vBarSizeDiff
     }
-    function append(txt: string){
-        let getBackDown = vBarIsAtBottom;
+    function append(txt: string) {
+        let getBackDown = vBarIsAtBottom
 
         let vBarPosOld = vBarPos
         let vBarSizeOld = vBarSize
@@ -46,8 +45,8 @@ ScrollView{
         debug1.text = "vPos: " + vBarPos + "   vSize: " + vBarSize
 
         logArea.append(txt)
-        if(getBackDown){
-            goToBottom();
+        if (getBackDown) {
+            goToBottom()
             return
         }
 
@@ -56,18 +55,17 @@ ScrollView{
 
         debug2.text = "vPos: " + vBarPos + "   vSize: " + vBarSize
         debug3.text = "vPosDiff: " + vBarPosDiff + "   vSizeDiff: " + vBarSizeDiff
-        ScrollBar.vertical.position = vBarPosOld - vBarSizeDiff;
+        ScrollBar.vertical.position = vBarPosOld - vBarSizeDiff
     }
 
-
-    function goToBottom(){
-        ScrollBar.vertical.position = 1-vBarSize
+    function goToBottom() {
+        ScrollBar.vertical.position = 1 - vBarSize
     }
 
     /* Layout */
     Layout.fillWidth: true
     Layout.fillHeight: true
-    Layout.columnSpan: grid.columns
+    // Layout.columnSpan: grid.columns
     /* Scrollbar config */
     ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
     ScrollBar.vertical.policy: ScrollBar.AlwaysOn

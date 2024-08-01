@@ -11,38 +11,50 @@ Rectangle {
 
     height: 100
 
-    QMLLogHelper{
+    QMLLogHelper {
         id: qmlLogHelper
-        onTextAdded: function(addedText){
-            scrollTextArea.append(addedText);
+        onTextAdded: function (addedText) {
+            scrollTextArea.append(addedText)
         }
     }
 
-    GridLayout {
-        id: grid
-
+    ColumnLayout {
         anchors.fill: parent
-
-        columns: 3
-
-        ScrollableTextArea{
+        ScrollableTextArea {
             id: scrollTextArea
         }
 
-        Text {
-            id: debug1
-            color: "white"
-            text: "DEBUG " + scrollTextArea.vBarIsAtBottom
-        }
-        Text {
-            id: debug2
-            color: "white"
-            text: "DEBUG " + scrollTextArea.vBarIsAtBottom
-        }
-        Text {
-            id: debug3
-            color: "white"
-            text: "DEBUG " + scrollTextArea.vBarIsAtBottom
+        RowLayout {
+            Text {
+                id: debug1
+                color: "white"
+                text: "DEBUG 1"
+            }
+            Text {
+                id: debug2
+                color: "white"
+                text: "DEBUG 2"
+            }
+            Text {
+                id: debug3
+                color: "white"
+                text: "DEBUG 3"
+            }
+            Button {
+                text: "TEST"
+                onClicked: {
+                    ServiceManager.test()
+                }
+
+                height: 20
+                Layout.alignment: Qt.AlignRight
+                Layout.rightMargin: 10
+            }
+            Text {
+                id: debug4
+                color: "white"
+                text: "DEBUG name=" + ServiceManager.dummy.Name
+            }
         }
     }
 }

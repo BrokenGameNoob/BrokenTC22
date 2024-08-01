@@ -34,9 +34,6 @@ Item {
             height: iconSize * 1.8
             Layout.preferredWidth: width
             Layout.preferredHeight: height
-            onWidthChanged: {
-                console.warn("Width=", width)
-            }
         }
 
         Label {

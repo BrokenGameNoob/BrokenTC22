@@ -29,7 +29,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" "${CMAKE_ROOT}/Modules")
 
-
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core)
 
 qt_standard_project_setup(REQUIRES 6.5)
@@ -42,7 +41,6 @@ qt_standard_project_setup(REQUIRES 6.5)
 
 qt_add_executable(${CMAKE_PROJECT_NAME}
     ${BTC2_SOURCES}
-    src/Form.ui
 )
 
 
@@ -148,11 +146,11 @@ set(BTC2_QML_FILES
 
     # Utils
     ${BTC2_QML_DIR}/utils/QMLStyle.qml
-    ${BTC2_QML_DIR}/utils/qmldir
 
     # Widgets
     ${BTC2_SOURCES_DIR}/widgets/ScrollableTextArea.qml
     ${BTC2_SOURCES_DIR}/widgets/LabelledIcon.qml
+    ${BTC2_SOURCES_DIR}/widgets/GroupedEditor.qml
 
     # Tabs
     ${BTC2_QML_DIR}/tabs/SettingsTab.qml
@@ -184,6 +182,8 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
     URI ${CMAKE_PROJECT_NAME}
     VERSION 1.0
     QML_FILES ${BTC2_QML_FILES}
+    RESOURCES
+        ${BTC2_QML_DIR}/utils/qmldir
 )
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
@@ -193,7 +193,8 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
   libLogger::libLogger
   libQSDL::libQSDL
   libWinUtils::libWinUtils
-  libProtoMessages::libProtoMessages
+  libDataStructures::libDataStructures
+  libUtils::libUtils
 
   Qt6::Widgets
   Qt6::Core
