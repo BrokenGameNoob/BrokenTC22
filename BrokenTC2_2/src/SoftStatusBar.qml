@@ -41,7 +41,11 @@ Item {
         editable: false
         width: 300
         height: implicitHeight * 0.7
-        model: ServiceManager.availableGearHandlers
+        model: ServiceManager.gameSelector.GetAvailableGamesNames()
+        onActivated: {
+            ServiceManager.gameSelector.SetSelectedGameFromName(
+                        gameCombobox.currentText)
+        }
     }
 
     Label {

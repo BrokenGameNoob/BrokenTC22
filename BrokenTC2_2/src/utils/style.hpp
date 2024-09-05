@@ -19,6 +19,8 @@ class Style : public QObject {
   QML_LITERAL_CONSTANT(QString, kForeground, "#F7F7F9");
   QML_LITERAL_CONSTANT(QString, kBackgroundColor, "#2B2D42");
 
+  QML_LITERAL_CONSTANT(QString, kLightGrey, "#b9bac2");
+
   /* Graphics */
   QML_LITERAL_CONSTANT(qreal, kStandardMargin, 10.);
   QML_LITERAL_CONSTANT(qreal, kStandardIconWidth, 25.);

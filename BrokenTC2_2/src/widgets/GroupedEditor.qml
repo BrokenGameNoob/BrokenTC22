@@ -2,72 +2,113 @@ import QtQuick 2.15
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import ".."
+import "../utils"
+import "../widgets"
+
 import btc2
 
 Item {
+    id: frame
     required property var targetElement
     required property string targetGroup
 
-    property alias title: mainGroupBox.title
+    property alias title: titleText.text
 
-    implicitHeight: mainGroupBox.implicitHeight
+    readonly property real implicitHeight2: {
+        col.implicitHeight + titleText.implicitHeight + Style.kStandardMargin
+    }
+    implicitHeight: implicitHeight2
 
-    GroupBox {
-        id: mainGroupBox
-        anchors.fill: parent
+    Text {
+        id: titleText
+        anchors {
+            top: parent.top
+            left: parent.left
+            leftMargin: Style.kStandardMargin * 2
+        }
+        font: QMLStyle.kFontH2
+        color: "white"
+    }
 
-        ColumnLayout {
-            id: col
-            anchors.fill: parent
+    ColumnLayout {
+        id: col
+        anchors {
+            top: titleText.bottom
+            topMargin: Style.kStandardMargin
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
 
-            Repeater {
-                model: targetElement.GetPropertiesKeysFor(targetGroup)
+        spacing: Style.kStandardMargin
 
-                delegate: Item {
-                    id: delegateItem
+        Repeater {
+            id: mainRepeater
+            model: targetElement.GetPropertiesKeysFor(targetGroup)
 
-                    Layout.fillWidth: true
+            delegate: Item {
+                id: delegateItem
 
-                    height: editorTitle.implicitHeight
+                Layout.fillWidth: true
 
-                    property string key: modelData
-                    property var value: targetElement[key]
-                    property var title: targetElement.GetTitleFor(key)
+                height: editorTitle.implicitHeight
 
-                    Text {
-                        id: editorTitle
-                        anchors {
-                            left: parent.left
-                            bottom: parent.bottom
-                            top: parent.top
-                        }
+                property string key: modelData
+                property var value: targetElement[key]
+                property var title: targetElement.GetTitleFor(key)
+                property bool isLastElement: model.index === mainRepeater.count - 1
 
-                        text: title
-                        color: Style.kForeground
+                visible: targetElement.IsKeyCompatibleWithGame(
+                             key, ServiceManager.gameSelector.selectedGame)
+
+                Text {
+                    id: editorTitle
+                    anchors {
+                        left: parent.left
+                        bottom: parent.bottom
+                        top: parent.top
                     }
 
-                    Rectangle {
-                        color: Style.kAccent
-                        opacity: 0.5
-                        anchors {
-                            verticalCenter: editorTitle.verticalCenter
-                            left: editorTitle.right
-                            right: parent.horizontalCenter
-                        }
-                        height: 1
-                    }
+                    text: title
+                    color: Style.kForeground
+                }
 
-                    Text {
-                        anchors {
-                            left: parent.horizontalCenter
-                            // right: parent.right
-                            bottom: parent.bottom
-                            top: parent.top
-                        }
-
-                        text: value
-                        color: Style.kForeground
+                Loader {
+                    id: editorLoader
+                    anchors {
+                        left: parent.horizontalCenter
+                        bottom: parent.bottom
+                        top: parent.top
                     }
+                    sourceComponent: {
+                        switch (targetElement.GetEditorTypeFor(key)) {
+                        case "TextInput":
+                            return textInputComponent
+                        case "SpinBox":
+                            return spinBoxComponent
+                        case "Button":
+                            return buttonComponent
+                        default:
+                            return null
+                        }
+                    }
+                    onLoaded: {
+                        item.value = value
+                    }
+                }
+
+                Rectangle {
+                    color: Style.kLightGrey
+                    opacity: 0.35
+                    anchors {
+                        top: parent.bottom
+                        left: parent.left
+                        right: parent.right
+                        topMargin: height / 2 + col.spacing / 2 + 1
+                    }
+                    height: 1
+                    visible: !isLastElement
                 }
             }
         }
@@ -76,15 +117,27 @@ Item {
     Component {
         id: textInputComponent
         TextInput {
-            // Define properties and behavior for TextInput
             property var value
             text: value
+            onTextChanged: value = text
         }
     }
 
     Component {
         id: spinBoxComponent
-        SpinBox { // Define properties and behavior for SpinBox
+        SpinBox {
+            property var value
+            value: value
+            onValueChanged: value = value
+        }
+    }
+
+    Component {
+        id: buttonComponent
+        Button {
+            property var value
+            text: "Button"
+            onClicked: console.log("Button clicked")
         }
     }
 }

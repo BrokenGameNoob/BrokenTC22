@@ -66,6 +66,10 @@ Item {
                         Layout.fillWidth: true
                     }
 
+                    Item {
+                        height: Style.kStandardMargin * 3
+                    }
+
                     GroupedEditor {
                         targetElement: ServiceManager.dummy
                         targetGroup: "gear"

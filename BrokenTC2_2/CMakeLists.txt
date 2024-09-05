@@ -116,7 +116,6 @@ set(BTC2_SOURCES
     ${BTC2_SOURCES_DIR}/utils/qt_utils.hpp
     ${BTC2_SOURCES_DIR}/utils/style.hpp
     ${BTC2_SOURCES_DIR}/utils/shared_constants.hpp
-    ${BTC2_SOURCES_DIR}/utils/macro_define.hpp
     ${BTC2_SOURCES_DIR}/utils/time.hpp
 
     # Services

@@ -22,7 +22,9 @@ void ServiceManager::Init() {
 }
 
 ServiceManager::ServiceManager()
-    : m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)}, m_dummy{std::make_unique<Dummy>(nullptr)} {
+    : m_game_selector{std::make_unique<GameSelector>()},
+      m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)},
+      m_dummy{std::make_unique<Dummy>(nullptr)} {
   //  m_tmp.actions()[0] = {};
 }
 
@@ -48,6 +50,8 @@ void ServiceManager::test() {
   } else {
     SPDLOG_ERROR("Failed to read TEST2.json");
   }
+
+  Games g{Game::kTheCrew2 | Game::kTheCrewMotorfist};
 }
 
 }  // namespace btc2

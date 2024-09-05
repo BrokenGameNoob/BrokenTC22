@@ -6,6 +6,7 @@
 #include <QtQml>
 #include <cstdint>
 
+#include <DataStructures/games.hpp>
 #include <Logger/logger.hpp>
 #include <Utils/json_utils.hpp>
 
@@ -13,38 +14,43 @@ namespace btc2 {
 
 constexpr auto kQmlModule{"btc2"};
 
-#define DS_ELEM_ACCESSOR_DECL(type, name, editor_group, editor_type, editor_title) \
-  bool Set##name(type val) {                                                       \
-    m_##name = std::move(val);                                                     \
-    emit dataChanged();                                                            \
-    return true;                                                                   \
-  }                                                                                \
-  const type& name() const {                                                       \
-    return m_##name;                                                               \
-  }                                                                                \
-  type& name() {                                                                   \
-    return m_##name;                                                               \
+#define DS_ELEM_ACCESSOR_DECL(type, name, editor_group, editor_type, editor_title, game_compatibility) \
+  bool Set##name(type val) {                                                                           \
+    m_##name = std::move(val);                                                                         \
+    emit dataChanged();                                                                                \
+    return true;                                                                                       \
+  }                                                                                                    \
+  const type& name() const {                                                                           \
+    return m_##name;                                                                                   \
+  }                                                                                                    \
+  type& name() {                                                                                       \
+    return m_##name;                                                                                   \
   }
 
-#define DS_STRUCT_ELEM_DECL(type, name, editor_group, editor_type, editor_title) type m_##name{};
-#define DS_PROPERTY_ELEM_DECL(type, name, editor_group, editor_type, editor_title) \
+#define DS_STRUCT_ELEM_DECL(type, name, editor_group, editor_type, editor_title, game_compatibility) type m_##name{};
+#define DS_PROPERTY_ELEM_DECL(type, name, editor_group, editor_type, editor_title, game_compatibility) \
   Q_PROPERTY(type name READ name WRITE Set##name NOTIFY dataChanged)
-#define DS_TO_JSON_ELEM_DECL(type, name, editor_group, editor_type, editor_title) obj[#name] = val.name();
-#define DS_FROM_JSON_ELEM_DECL(type, name, editor_group, editor_type, editor_title) \
+#define DS_TO_JSON_ELEM_DECL(type, name, editor_group, editor_type, editor_title, game_compatibility) \
+  obj[#name] = val.name();
+#define DS_FROM_JSON_ELEM_DECL(type, name, editor_group, editor_type, editor_title, game_compatibility) \
   out->Set##name(obj[#name].toVariant().value<type>());
-#define DS_DEBUG_STRING_ELEM_DECL(type, name, editor_group, editor_type, editor_title) \
+#define DS_DEBUG_STRING_ELEM_DECL(type, name, editor_group, editor_type, editor_title, game_compatibility) \
   out += QString{"." #name "=%0,"}.arg(this->name());
-#define DS_GET_PROPERTIES_FOR_GROUP_ELEM_DECL(type, name, editor_group, editor_type, editor_title) \
-  if (group == editor_group && editor_type != DataEditor::kNone) {                                 \
-    keys.emplace_back(#name);                                                                      \
+#define DS_GET_PROPERTIES_FOR_GROUP_ELEM_DECL(type, name, editor_group, editor_type, editor_title, game_compatibility) \
+  if (group == editor_group && editor_type != DataEditor::kNone) {                                                     \
+    keys.emplace_back(#name);                                                                                          \
   }
-#define DS_SET_FROM_KEY_ELEM_DECL(type, name, editor_group, editor_type, editor_title) \
-  if (key == #name) {                                                                  \
-    return this->Set##name(val.value<type>());                                         \
+#define DS_SET_FROM_KEY_ELEM_DECL(type, name, editor_group, editor_type, editor_title, game_compatibility) \
+  if (key == #name) {                                                                                      \
+    return this->Set##name(val.value<type>());                                                             \
   }
-#define DS_GET_TITLE_FOR_KEY_ELEM_DECL(type, name, editor_group, editor_type, editor_title) \
-  if (key == #name) {                                                                       \
-    return editor_title;                                                                    \
+#define DS_GET_TITLE_FOR_KEY_ELEM_DECL(type, name, editor_group, editor_type, editor_title, game_compatibility) \
+  if (key == #name) {                                                                                           \
+    return editor_title;                                                                                        \
+  }
+#define DS_GET_GAME_COMPATIBILITY_ELEM_DECL(type, name, editor_group, editor_type, editor_title, game_compatibility) \
+  if (key == #name) {                                                                                                \
+    return game_compatibility;                                                                                       \
   }
 
 #define DS_DECLARE_STATIC_INIT_FUNC(ClassName)                      \
@@ -66,6 +72,23 @@ constexpr auto kQmlModule{"btc2"};
   Q_INVOKABLE static QString GetTitleFor(const QString& key) {         \
     ELEMENTS_LIST(DS_GET_TITLE_FOR_KEY_ELEM_DECL);                     \
     return "???";                                                      \
+  }
+
+#define DS_DECLARE_STATIC_GET_GAME_COMPATIBILITY_FUNC(ClassName, ELEMENTS_LIST) \
+  Q_INVOKABLE static Games GetKeyGameCompatiblity(const QString& key) {         \
+    ELEMENTS_LIST(DS_GET_GAME_COMPATIBILITY_ELEM_DECL);                         \
+    return Game::kNone;                                                         \
+  }
+
+#define DS_DECLARE_STATIC_IS_GAME_COMPATIBLE_FUNC(ClassName, ELEMENTS_LIST)        \
+  Q_INVOKABLE static bool IsKeyCompatibleWithGame(const QString& key, Game game) { \
+    const bool kIsCompatible{(GetKeyGameCompatiblity(key) & game) != 0};           \
+    SPDLOG_DEBUG("IsKeyCompatibleWithGame({},{})={} ({})",                         \
+                 key.toStdString(),                                                \
+                 static_cast<int>(game),                                           \
+                 kIsCompatible,                                                    \
+                 GetKeyGameCompatiblity(key) & game);                              \
+    return kIsCompatible;                                                          \
   }
 
 #define DS_DECLARE_MEMBER_DEBUG_STRING_FUNC(ClassName, ELEMENTS_LIST) \
@@ -126,6 +149,8 @@ constexpr auto kQmlModule{"btc2"};
     DS_DECLARE_STATIC_INIT_FUNC(ClassName);                                    \
     DS_DECLARE_STATIC_GET_PROPERTIES_FOR_GROUP_FUNC(ClassName, ELEMENTS_LIST); \
     DS_DECLARE_STATIC_GET_TITLE_FOR_FUNC(ClassName, ELEMENTS_LIST);            \
+    DS_DECLARE_STATIC_GET_GAME_COMPATIBILITY_FUNC(ClassName, ELEMENTS_LIST);   \
+    DS_DECLARE_STATIC_IS_GAME_COMPATIBLE_FUNC(ClassName, ELEMENTS_LIST);       \
                                                                                \
     DS_DECLARE_MEMBER_SET_FROM_KEY_FUNC(ClassName, ELEMENTS_LIST);             \
                                                                                \
@@ -160,7 +185,7 @@ class DataEditor {
  public:
   enum EditorType {
     kNone,
-    kDisplayOnly,
+    kRawDisplay,
     kTextEdit,
   };
   Q_ENUM(EditorType)
@@ -168,11 +193,27 @@ class DataEditor {
 
 /* ELEMENTS_LIST(type, Name, editor_group_name, DataEditor::EditorType, editor_title) */
 
-#define Dummy_STRUCT_ELEMENTS_LIST(FUNC)                                               \
-  FUNC(QString, Name, "global", DataEditor::kDisplayOnly, QObject::tr("Profile name")) \
-  FUNC(int32_t, GearUp, "gear", DataEditor::kDisplayOnly, QObject::tr("Gear down"))    \
-  FUNC(int32_t, GearDown, "gear", DataEditor::kDisplayOnly, QObject::tr("Gear up"))    \
-  FUNC(int32_t, Clutch, "global", DataEditor::kNone, QObject::tr("Clutch key"))
+#define Dummy_STRUCT_ELEMENTS_LIST(FUNC)                                                            \
+  FUNC(QString,                                                                                     \
+       Name,                                                                                        \
+       "global",                                                                                    \
+       DataEditor::kRawDisplay,                                                                     \
+       QObject::tr("Profile name"),                                                                 \
+       Game::kTheCrew2 | Game::kTheCrewMotorfist)                                                   \
+  FUNC(int32_t, GearUp, "gear", DataEditor::kRawDisplay, QObject::tr("Gear down"), Game::kTheCrew2) \
+  FUNC(int32_t,                                                                                     \
+       GearDown,                                                                                    \
+       "gear",                                                                                      \
+       DataEditor::kRawDisplay,                                                                     \
+       QObject::tr("Gear up"),                                                                      \
+       Game::kTheCrew2 | Game::kTheCrewMotorfist)                                                   \
+  FUNC(int32_t,                                                                                     \
+       Clutch,                                                                                      \
+       "global",                                                                                    \
+       DataEditor::kNone,                                                                           \
+       QObject::tr("Clutch key"),                                                                   \
+       Game::kTheCrew2 | Game::kTheCrewMotorfist)                                                   \
+  FUNC(int32_t, Test, "gear", DataEditor::kRawDisplay, QObject::tr("TEST"), Game::kTheCrew2 | Game::kTheCrewMotorfist)
 
 DS_DECLARE_STRUCT(Dummy, Dummy_STRUCT_ELEMENTS_LIST);
 

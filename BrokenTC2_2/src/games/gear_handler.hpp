@@ -5,8 +5,6 @@
 #include <cstdint>
 #include <qqmlintegration.h>
 
-#include <utils/macro_define.hpp>
-
 namespace btc2 {
 
 class BaseGearHandler : public QObject {

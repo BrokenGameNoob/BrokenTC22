@@ -2,18 +2,15 @@
 
 #include <QStringList>
 
+#include <DataStructures/games.hpp>
 #include <games/gear_handler_the_crew.hpp>
-#include <utils/macro_define.hpp>
 
 namespace btc2 {
 
-DECLARE_CUSTOM_ENUM(AvailableGearHandlers, kTheCrew2, kTheCrewMotorfest);
-DECLARE_ENUM_DISPLAY_NAMES(AvailableGearHandlers, "The Crew 2", "The Crew Motorfist");
-
-inline std::unique_ptr<BaseGearHandler> MakeGearHandler(AvailableGearHandlers handler_type) {
+inline std::unique_ptr<BaseGearHandler> MakeGearHandler(Game handler_type) {
   switch (handler_type) {
-    case AvailableGearHandlers::kTheCrew2:
-    case AvailableGearHandlers::kTheCrewMotorfest:
+    case Game::kTheCrew2:
+    case Game::kTheCrewMotorfist:
       return std::make_unique<GearHandlerTheCrew>(nullptr);
       break;
     default:

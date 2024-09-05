@@ -19,9 +19,10 @@ class ServiceManager : public QObject {
 
   Q_PROPERTY(bool hasDebInfo READ HasDebInfo CONSTANT FINAL);
   Q_PROPERTY(QString versionStr READ GetVersionStr CONSTANT FINAL);
-  Q_PROPERTY(QStringList availableGearHandlers READ GetAvailableGearHandlers CONSTANT FINAL);
   Q_PROPERTY(BaseGearHandler* gearHandler READ GetRawGearHandler CONSTANT FINAL);
   Q_PROPERTY(ControllerHandler* controllerHandler READ GetRawControllerHandler CONSTANT FINAL);
+  Q_PROPERTY(GameSelector* gameSelector READ GetRawGameSelector CONSTANT FINAL);
+
   Q_PROPERTY(Dummy* dummy READ GetRawDummy CONSTANT FINAL);
 
  signals:
@@ -50,17 +51,15 @@ class ServiceManager : public QObject {
   }
 
   /* Games related */
+  auto& GetGameSelector() {
+    return m_game_selector;
+  }
+  GameSelector* GetRawGameSelector() {
+    return m_game_selector.get();
+  }
+
   BaseGearHandler* GetRawGearHandler() {
     return m_gear_handler.get();
-  }
-  QStringList GetAvailableGearHandlers() {
-    static QStringList out{};
-    if (out.empty()) {
-      std::for_each_n(GetAvailableGearHandlersNames().cbegin(),
-                      GetAvailableGearHandlersNames().size() - 1,
-                      [&](const auto& name) { out.append(name); });
-    }
-    return out;
   }
 
   /* Input related */
@@ -80,6 +79,7 @@ class ServiceManager : public QObject {
 
   std::unique_ptr<ControllerHandler> m_controller_handler{nullptr};
 
+  std::unique_ptr<GameSelector> m_game_selector{nullptr};
   std::unique_ptr<BaseGearHandler> m_gear_handler{nullptr};
 
   std::shared_ptr<btc2::Dummy> m_dummy{};
