@@ -25,11 +25,16 @@ Item {
             id: leftPanelLabel
             anchors {
                 top: parent.top
-                horizontalCenter: parent.horizontalCenter
+                topMargin: Style.kStandardMargin
+                right: parent.right
+                rightMargin: Style.kStandardMargin
             }
+            font: QMLStyle.kFontH2Bold
+            iconSize: QMLStyle.kStandardTitleIconSize
+            iconOnTheRight: true
 
             source: Constants.kIconController
-            text: qsTr("Controller commands")
+            text: qsTr("CONTROLLER")
         }
 
         Item {
@@ -39,43 +44,50 @@ Item {
                 left: parent.left
                 right: parent.right
                 top: leftPanelLabel.bottom
-                topMargin: Style.kStandardMargin
+                topMargin: Style.kStandardMargin * 2
                 bottom: parent.bottom
             }
 
             ScrollView {
                 id: scroll
                 anchors.fill: parent
-                anchors.leftMargin: QMLStyle.kStandardMargin
-                anchors.rightMargin: QMLStyle.kStandardMargin
                 anchors.bottomMargin: QMLStyle.kStandardMargin
 
                 contentWidth: scroll.width
                 contentHeight: column.height
-                clip: true
-                ColumnLayout {
-                    id: column
+                clip: false
 
+                Item {
                     anchors.fill: parent
+                    clip: false
+                    anchors.leftMargin: QMLStyle.kStandardMargin
+                    anchors.rightMargin: QMLStyle.kStandardMargin
 
-                    GroupedEditor {
-                        targetElement: ServiceManager.dummy
-                        targetGroup: "global"
-                        title: qsTr("GLOBAL")
+                    ColumnLayout {
+                        id: column
 
-                        Layout.fillWidth: true
-                    }
+                        anchors.fill: parent
+                        clip: false
 
-                    Item {
-                        height: Style.kStandardMargin * 3
-                    }
+                        GroupedEditor {
+                            targetElement: ServiceManager.dummy
+                            targetGroup: "global"
+                            title: qsTr("GLOBAL")
 
-                    GroupedEditor {
-                        targetElement: ServiceManager.dummy
-                        targetGroup: "gear"
-                        title: qsTr("GEAR")
+                            Layout.fillWidth: true
+                        }
 
-                        Layout.fillWidth: true
+                        Item {
+                            height: Style.kStandardMargin * 3
+                        }
+
+                        GroupedEditor {
+                            targetElement: ServiceManager.dummy
+                            targetGroup: "gear"
+                            title: qsTr("GEAR")
+
+                            Layout.fillWidth: true
+                        }
                     }
                 }
             }
@@ -112,20 +124,25 @@ Item {
             id: rightPanelLabel
             anchors {
                 top: parent.top
-                horizontalCenter: parent.horizontalCenter
+                topMargin: Style.kStandardMargin
+                // horizontalCenter: parent.horizontalCenter
+                left: parent.left
+                leftMargin: Style.kStandardMargin
             }
+            font: QMLStyle.kFontH2Bold
+            iconSize: QMLStyle.kStandardTitleIconSize
 
             source: Constants.kIconKeyboard
-            text: qsTr("Keyboard commands")
+            text: qsTr("KEYBOARD")
         }
 
         Item {
-            /* Left part content */
+            /* Right part content */
             anchors {
                 left: parent.left
                 right: parent.right
                 top: rightPanelLabel.bottom
-                topMargin: Style.kStandardMargin
+                topMargin: Style.kStandardMargin * 2
                 bottom: parent.bottom
             }
         }

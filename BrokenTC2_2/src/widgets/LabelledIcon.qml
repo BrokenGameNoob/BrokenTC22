@@ -10,6 +10,9 @@ import btc2
 Item {
     id: root
 
+    property bool iconOnTheRight: false
+    property real spacerWidth: Style.kStandardMargin / 2.
+
     property string color: Style.kForeground
 
     property alias source: icon.source
@@ -18,22 +21,33 @@ Item {
     property alias iconWidth: icon.width
     property alias iconHeight: icon.height
     property alias text: lbl.text
+    property alias font: lbl.font
 
     implicitWidth: rowLayout.implicitWidth
     implicitHeight: rowLayout.implicitHeight
+
+    default property alias label: lbl
 
     RowLayout {
         id: rowLayout
         spacing: 5
         anchors.centerIn: parent
 
-        IconImage {
+        layoutDirection: iconOnTheRight ? Qt.RightToLeft : Qt.LeftToRight
+
+        ColoredImage {
             id: icon
             color: root.color
-            width: iconSize * 1.8
-            height: iconSize * 1.8
+            sourceSize.width: iconSize
+            sourceSize.height: iconSize
             Layout.preferredWidth: width
             Layout.preferredHeight: height
+            Layout.alignment: Qt.AlignVCenter
+        }
+
+        Item {
+            id: spacer
+            Layout.preferredWidth: spacerWidth
         }
 
         Label {

@@ -39,7 +39,7 @@ Item {
         }
 
         editable: false
-        width: 300
+        width: 200
         height: implicitHeight * 0.7
         model: ServiceManager.gameSelector.GetAvailableGamesNames()
         onActivated: {

@@ -34,11 +34,13 @@ void ServiceManager::OnMainWindowLoaded() {
 
 void ServiceManager::test() {
   SPDLOG_INFO("Test function called");
+  SPDLOG_INFO("{}", *m_dummy);
 
   m_dummy->SetClutch(1);
   m_dummy->SetGearUp(2);
   m_dummy->SetGearDown(3);
   m_dummy->SetName("Bidule");
+  m_dummy->SetTest(0.5);
 
   SPDLOG_INFO("{}", *m_dummy);
 

@@ -12,6 +12,7 @@ Item {
     id: frame
     required property var targetElement
     required property string targetGroup
+    clip: false
 
     property alias title: titleText.text
 
@@ -27,7 +28,7 @@ Item {
             left: parent.left
             leftMargin: Style.kStandardMargin * 2
         }
-        font: QMLStyle.kFontH2
+        font: QMLStyle.kFontH3Bold
         color: "white"
     }
 
@@ -51,8 +52,7 @@ Item {
                 id: delegateItem
 
                 Layout.fillWidth: true
-
-                height: editorTitle.implicitHeight
+                height: editorLoader.height
 
                 property string key: modelData
                 property var value: targetElement[key]
@@ -66,41 +66,52 @@ Item {
                     id: editorTitle
                     anchors {
                         left: parent.left
-                        bottom: parent.bottom
-                        top: parent.top
+                        verticalCenter: parent.verticalCenter
                     }
 
                     text: title
                     color: Style.kForeground
+                    font: QMLStyle.kFontH4
                 }
 
                 Loader {
                     id: editorLoader
+
+                    property string key: delegateItem.key
+                    property var model: targetElement
+                    property var customValue: model[key]
+
+                    function setValue(value) {
+                        model[key] = value
+                    }
+
                     anchors {
+                        verticalCenter: parent.verticalCenter
+                        right: parent.right
                         left: parent.horizontalCenter
-                        bottom: parent.bottom
-                        top: parent.top
                     }
+                    // height: childrenRect.height
+                    height: (item !== null
+                             && typeof (item) !== 'undefined') ? item.height : 0
+
                     sourceComponent: {
-                        switch (targetElement.GetEditorTypeFor(key)) {
-                        case "TextInput":
-                            return textInputComponent
-                        case "SpinBox":
-                            return spinBoxComponent
-                        case "Button":
+                        let type = targetElement.GetEditorTypeFor(key)
+
+                        switch (type) {
+                        case DataEditor.RAW_DISPLAY:
+                            return textDisplayComponent
+                        case DataEditor.CONTROLLER_KEY:
                             return buttonComponent
-                        default:
-                            return null
+                        case DataEditor.SLIDER:
+                            return sliderComponent
                         }
-                    }
-                    onLoaded: {
-                        item.value = value
+                        return unknownComponent
                     }
                 }
 
                 Rectangle {
                     color: Style.kLightGrey
-                    opacity: 0.35
+                    opacity: 0.1
                     anchors {
                         top: parent.bottom
                         left: parent.left
@@ -115,29 +126,55 @@ Item {
     }
 
     Component {
-        id: textInputComponent
-        TextInput {
-            property var value
-            text: value
-            onTextChanged: value = text
+        id: unknownComponent
+        Rectangle {
+            color: "blue"
+            anchors.centerIn: parent
         }
     }
 
     Component {
-        id: spinBoxComponent
-        SpinBox {
-            property var value
-            value: value
-            onValueChanged: value = value
+        id: textDisplayComponent
+        Text {
+            text: customValue
+            font: QMLStyle.kFontH4Bold
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            color: Style.kForeground
+            anchors.centerIn: parent
+            height: implicitHeight + Style.kStandardMargin / 2
+
+            Rectangle {
+                color: "transparent"
+                border.color: Qt.darker(Style.kLightGrey, 1.5)
+                border.width: 1
+                anchors.fill: parent
+                radius: parent.height / 2
+            }
         }
     }
 
     Component {
         id: buttonComponent
         Button {
-            property var value
-            text: "Button"
-            onClicked: console.log("Button clicked")
+            text: qsTr("Button: ") + customValue
+            font: QMLStyle.kFontH4Bold
+            anchors.centerIn: parent
+            height: implicitHeight * 0.8
+        }
+    }
+
+    Component {
+        id: sliderComponent
+        Slider {
+            anchors.centerIn: parent
+            height: implicitHeight * 0.8
+            value: customValue
+            onPressedChanged: {
+                if (!pressed) {
+                    setValue(value)
+                }
+            }
         }
     }
 }

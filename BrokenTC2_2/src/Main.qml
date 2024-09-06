@@ -6,6 +6,7 @@ import QtQuick.Dialogs
 import QtQml 2.15
 import "./tabs"
 import "./debug"
+import "./utils"
 import "."
 
 import btc2
@@ -58,6 +59,18 @@ ApplicationWindow {
                     icon.width: refTabButton.icon.width
                     icon.height: refTabButton.icon.height
                 }
+            }
+
+            Rectangle {
+                id: separatorH
+                anchors {
+                    top: bar.bottom
+                    left: parent.left
+                    right: parent.right
+                }
+                color: QMLStyle.kBorderColor
+                opacity: 0.5
+                height: 1
             }
 
             StackLayout {

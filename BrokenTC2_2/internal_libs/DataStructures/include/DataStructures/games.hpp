@@ -13,6 +13,7 @@ enum class Game {
   kNone = 0b1 << 0,
   kTheCrew2 = 0b1 << 1,
   kTheCrewMotorfist = 0b1 << 2,
+  kAll = ~0,
 };
 
 Q_DECLARE_FLAGS(Games, Game)
@@ -53,7 +54,7 @@ class GameSelector : public QObject {
  private:
   static const std::map<Game, QString> kGameNames;
 
-  Game m_selected_game{Game::kNone};
+  Game m_selected_game{Game::kTheCrew2};
 };
 
 }  // namespace btc2

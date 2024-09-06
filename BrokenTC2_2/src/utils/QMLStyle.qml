@@ -11,14 +11,35 @@ Item {
     readonly property color kBorderColor: Material.frameColor
 
     readonly property real kStandardMargin: 10
+    readonly property real kStandardTitleIconSize: 35
 
     readonly property font kFontH2: ({
-                                         "pointSize": 15,
-                                         "bold": true
+                                         "pointSize": 17,
+                                         "bold": false
                                      })
 
+    readonly property font kFontH2Bold: ({
+                                             "pointSize": 17,
+                                             "bold": true
+                                         })
+
     readonly property font kFontH3: ({
-                                         "pointSize": 10,
-                                         "bold": true
+                                         "pointSize": 14,
+                                         "bold": false
                                      })
+
+    readonly property font kFontH3Bold: ({
+                                             "pointSize": 14,
+                                             "bold": true
+                                         })
+
+    readonly property font kFontH4: ({
+                                         "pointSize": 10,
+                                         "bold": false
+                                     })
+
+    readonly property font kFontH4Bold: ({
+                                             "pointSize": 10,
+                                             "bold": true
+                                         })
 }
