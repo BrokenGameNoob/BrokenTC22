@@ -3,6 +3,7 @@
 #include <QString>
 #include <QTextStream>
 
+#include <Logger/logger.hpp>
 #include <Utils/json_utils.hpp>
 
 namespace utils {

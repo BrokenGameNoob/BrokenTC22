@@ -1,14 +1,17 @@
+#include <QApplication>
 #include <QDateTime>
 #include <QDebug>
 #include <QDirIterator>
 #include <QFile>
 #include <QGuiApplication>
 #include <QLibraryInfo>
+#include <QMessageBox>
 #include <QQmlApplicationEngine>
 #include <QTranslator>
 #include <SDL.h>
 #include <git_version.hpp>
 
+#include <DataStructures/path_utils.hpp>
 #include <DataStructures/structures.hpp>
 #include <Logger/btype.hpp>
 #include <Logger/logger_setup.hpp>
@@ -17,7 +20,26 @@
 #include <utils/shared_constants.hpp>
 #include <utils/style.hpp>
 
-int SDL_main(int argc, char *argv[]) {
+bool SetupFolders() {
+  auto lambda_create_folder_if_not_exists = [](const QString& path) {
+    QDir dir{path};
+    if (dir.exists()) {
+      return true;
+    }
+    const auto kSuccess{dir.mkpath(".")};
+    if (!kSuccess) {
+      SPDLOG_ERROR("Failed to create folder: <{}>", path);
+    }
+    return kSuccess;
+  };
+
+  bool success{true};
+  success &= lambda_create_folder_if_not_exists(btc2::path::GetAppDataPath());
+  success &= lambda_create_folder_if_not_exists(btc2::path::GetControllerProfilesPath());
+  return success;
+}
+
+int SDL_main(int argc, char* argv[]) {
   /* Systematic checks */
   // btc2::RunSoftControlsCompatibilityCountCheck();
 
@@ -28,6 +50,15 @@ int SDL_main(int argc, char *argv[]) {
   btc2::SetupLoggerRotating(kLogPath, 2);
 
   /* -- Application setup -- */
+
+  if (!SetupFolders()) {
+    SPDLOG_ERROR("Failed to setup folders");
+    QApplication err_app(argc, argv);
+    QMessageBox::critical(nullptr,
+                          QObject::tr("Critical error"),
+                          QObject::tr("Failed to setup application data folders.\nExit application."));
+    return -1;
+  }
 
   btc2::QMLLogHelper::Init();
   btc2::Style::Init();

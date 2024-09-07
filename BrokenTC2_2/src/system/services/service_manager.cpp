@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QtConcurrent>
 
+#include <DataStructures/path_utils.hpp>
 #include <DataStructures/structures.hpp>
 #include <Logger/logger.hpp>
 #include <Utils/json_utils.hpp>
@@ -22,10 +23,13 @@ void ServiceManager::Init() {
 }
 
 ServiceManager::ServiceManager()
-    : m_game_selector{std::make_unique<GameSelector>()},
+    : m_settings{std::make_unique<ApplicationSettings>(path::GetApplicationSettingsPath(), nullptr)},
+      m_game_selector{std::make_unique<GameSelector>()},
       m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)},
-      m_dummy{std::make_unique<Dummy>(nullptr)} {
+      m_active_controller_profile{std::make_unique<ControllerProfile>(nullptr)} {
   //  m_tmp.actions()[0] = {};
+
+  m_active_controller_profile->SetSavePath("HEY.json");
 }
 
 void ServiceManager::OnMainWindowLoaded() {
@@ -34,26 +38,7 @@ void ServiceManager::OnMainWindowLoaded() {
 
 void ServiceManager::test() {
   SPDLOG_INFO("Test function called");
-  SPDLOG_INFO("{}", *m_dummy);
-
-  m_dummy->SetClutch(1);
-  m_dummy->SetGearUp(2);
-  m_dummy->SetGearDown(3);
-  m_dummy->SetName("Bidule");
-  m_dummy->SetTest(0.5);
-
-  SPDLOG_INFO("{}", *m_dummy);
-
-  const auto kSaved{utils::Save(ToJson(*m_dummy), "TEST.json")};
-  SPDLOG_DEBUG("Success save? {}", kSaved);
-
-  if (FillFromFile("TEST2.json", m_dummy.get())) {
-    SPDLOG_INFO("{}", *m_dummy);
-  } else {
-    SPDLOG_ERROR("Failed to read TEST2.json");
-  }
-
-  Games g{Game::kTheCrew2 | Game::kTheCrewMotorfist};
+  SPDLOG_INFO("{}", *m_active_controller_profile);
 }
 
 }  // namespace btc2

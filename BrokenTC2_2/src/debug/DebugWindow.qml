@@ -53,7 +53,7 @@ Rectangle {
             Text {
                 id: debug4
                 color: "white"
-                text: "DEBUG name=" + ServiceManager.dummy.Name
+                text: "DEBUG name=" + ServiceManager.controllerProfile.Name
             }
         }
     }

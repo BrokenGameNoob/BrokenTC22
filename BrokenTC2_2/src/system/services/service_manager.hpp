@@ -19,11 +19,12 @@ class ServiceManager : public QObject {
 
   Q_PROPERTY(bool hasDebInfo READ HasDebInfo CONSTANT FINAL);
   Q_PROPERTY(QString versionStr READ GetVersionStr CONSTANT FINAL);
+  Q_PROPERTY(ApplicationSettings* settings READ GetRawSettings CONSTANT FINAL);
   Q_PROPERTY(BaseGearHandler* gearHandler READ GetRawGearHandler CONSTANT FINAL);
   Q_PROPERTY(ControllerHandler* controllerHandler READ GetRawControllerHandler CONSTANT FINAL);
   Q_PROPERTY(GameSelector* gameSelector READ GetRawGameSelector CONSTANT FINAL);
 
-  Q_PROPERTY(Dummy* dummy READ GetRawDummy CONSTANT FINAL);
+  Q_PROPERTY(ControllerProfile* controllerProfile READ GetRawActiveControllerProfile CONSTANT FINAL);
 
  signals:
   void gearHandlerChanged();
@@ -50,6 +51,11 @@ class ServiceManager : public QObject {
     return btype::HasDebInfo();
   }
 
+  /* Global application */
+  ApplicationSettings* GetRawSettings() {
+    return m_settings.get();
+  }
+
   /* Games related */
   auto& GetGameSelector() {
     return m_game_selector;
@@ -67,8 +73,8 @@ class ServiceManager : public QObject {
     return m_controller_handler.get();
   }
 
-  Dummy* GetRawDummy() {
-    return m_dummy.get();
+  btc2::ControllerProfile* GetRawActiveControllerProfile() {
+    return m_active_controller_profile.get();
   }
 
   /* Main */
@@ -77,12 +83,14 @@ class ServiceManager : public QObject {
  private:
   ServiceManager();
 
+  std::unique_ptr<ApplicationSettings> m_settings{nullptr};
+
   std::unique_ptr<ControllerHandler> m_controller_handler{nullptr};
 
   std::unique_ptr<GameSelector> m_game_selector{nullptr};
   std::unique_ptr<BaseGearHandler> m_gear_handler{nullptr};
 
-  std::shared_ptr<btc2::Dummy> m_dummy{};
+  std::shared_ptr<btc2::ControllerProfile> m_active_controller_profile{};
 };
 
 }  // namespace btc2

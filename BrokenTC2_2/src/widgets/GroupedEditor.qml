@@ -104,6 +104,8 @@ Item {
                             return buttonComponent
                         case DataEditor.SLIDER:
                             return sliderComponent
+                        case DataEditor.SWITCH:
+                            return switchComponent
                         }
                         return unknownComponent
                     }
@@ -174,6 +176,18 @@ Item {
                 if (!pressed) {
                     setValue(value)
                 }
+            }
+        }
+    }
+
+    Component {
+        id: switchComponent
+        Switch {
+            anchors.centerIn: parent
+            height: implicitHeight * 0.8
+            checked: customValue
+            onCheckedChanged: {
+                setValue(checked)
             }
         }
     }

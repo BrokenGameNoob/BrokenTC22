@@ -31,7 +31,7 @@ Item {
             }
             font: QMLStyle.kFontH2Bold
             iconSize: QMLStyle.kStandardTitleIconSize
-            iconOnTheRight: true
+            iconOnTheRight: false
 
             source: Constants.kIconController
             text: qsTr("CONTROLLER")
@@ -70,7 +70,7 @@ Item {
                         clip: false
 
                         GroupedEditor {
-                            targetElement: ServiceManager.dummy
+                            targetElement: ServiceManager.controllerProfile
                             targetGroup: "global"
                             title: qsTr("GLOBAL")
 
@@ -82,7 +82,7 @@ Item {
                         }
 
                         GroupedEditor {
-                            targetElement: ServiceManager.dummy
+                            targetElement: ServiceManager.controllerProfile
                             targetGroup: "gear"
                             title: qsTr("GEAR")
 
@@ -131,6 +131,7 @@ Item {
             }
             font: QMLStyle.kFontH2Bold
             iconSize: QMLStyle.kStandardTitleIconSize
+            iconOnTheRight: true
 
             source: Constants.kIconKeyboard
             text: qsTr("KEYBOARD")

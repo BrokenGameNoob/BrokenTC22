@@ -154,10 +154,13 @@ def replace_in_template(input_template_path: str, output_path: str):
         lines = lines.replace(macro, str(value))
 
     try:
+        with open(output_path, 'r') as f:
+            if f.read() == lines:
+                return True
         with open(output_path, 'w') as f:
             f.write(lines)
     except Exception as e:
-        print(f"Error when opening: \"{input_template_path}\": {e}")
+        print(f"Error when opening: \"{output_path}\": {e}")
         return False
 
     return True
