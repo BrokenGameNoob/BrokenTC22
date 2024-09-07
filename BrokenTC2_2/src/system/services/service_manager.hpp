@@ -25,6 +25,7 @@ class ServiceManager : public QObject {
   Q_PROPERTY(GameSelector* gameSelector READ GetRawGameSelector CONSTANT FINAL);
 
   Q_PROPERTY(ControllerProfile* controllerProfile READ GetRawActiveControllerProfile CONSTANT FINAL);
+  Q_PROPERTY(KeyboardProfile* keyboardProfile READ GetRawActiveKeyboardProfile CONSTANT FINAL);
 
  signals:
   void gearHandlerChanged();
@@ -77,6 +78,10 @@ class ServiceManager : public QObject {
     return m_active_controller_profile.get();
   }
 
+  btc2::KeyboardProfile* GetRawActiveKeyboardProfile() {
+    return m_keyboard_profile.get();
+  }
+
   /* Main */
   Q_INVOKABLE void OnMainWindowLoaded();
 
@@ -91,6 +96,7 @@ class ServiceManager : public QObject {
   std::unique_ptr<BaseGearHandler> m_gear_handler{nullptr};
 
   std::shared_ptr<btc2::ControllerProfile> m_active_controller_profile{};
+  std::unique_ptr<KeyboardProfile> m_keyboard_profile{nullptr};
 };
 
 }  // namespace btc2

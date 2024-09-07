@@ -25,6 +25,8 @@ ControllerHandler::ControllerHandler()
 
   qsdl::SDLEventHandler::Start();
   qsdl::SDLEventHandler::RegisterController(m_game_controller.get());
+
+  connect(this, &ControllerHandler::controllerPluggedInOrOut, this, []() { SPDLOG_DEBUG("HEY, changed!"); });
 }
 
 void ControllerHandler::Init() {
@@ -32,18 +34,19 @@ void ControllerHandler::Init() {
 }
 
 QStringList ControllerHandler::GetControllerList() const {
+  SPDLOG_DEBUG("GetControllerList");
   return qsdl::GetPluggedJoysticks();
 }
 
 void ControllerHandler::OnControllerPluggedIn(int controller_id) {
   SPDLOG_DEBUG("Controller plugged in: <{}>", controller_id);
   m_game_controller->ConnectController(controller_id);
-  emit controllerCountChanged();
+  emit controllerPluggedInOrOut();
 }
 void ControllerHandler::OnControllerUnplugged(int controller_id) {
   SPDLOG_DEBUG("Controller unplugged: <{}>", controller_id);
   m_game_controller->DisconnectController(false);
-  emit controllerCountChanged();
+  emit controllerPluggedInOrOut();
 }
 
 void ControllerHandler::OnButtonDown(int button) {

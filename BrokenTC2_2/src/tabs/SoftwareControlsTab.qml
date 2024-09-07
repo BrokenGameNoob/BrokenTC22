@@ -126,8 +126,8 @@ Item {
                 top: parent.top
                 topMargin: Style.kStandardMargin
                 // horizontalCenter: parent.horizontalCenter
-                left: parent.left
-                leftMargin: Style.kStandardMargin
+                right: parent.right
+                rightMargin: Style.kStandardMargin
             }
             font: QMLStyle.kFontH2Bold
             iconSize: QMLStyle.kStandardTitleIconSize
@@ -145,6 +145,23 @@ Item {
                 top: rightPanelLabel.bottom
                 topMargin: Style.kStandardMargin * 2
                 bottom: parent.bottom
+            }
+
+            GroupedEditor {
+                anchors {
+                    top: parent.top
+                    topMargin: Style.kStandardMargin
+                    left: parent.left
+                    leftMargin: Style.kStandardMargin
+                    right: parent.right
+                    rightMargin: Style.kStandardMargin
+                }
+
+                targetElement: ServiceManager.keyboardProfile
+                targetGroup: "soft_controls"
+                title: qsTr("SOFTWARE CONTROLS")
+
+                Layout.fillWidth: true
             }
         }
     }

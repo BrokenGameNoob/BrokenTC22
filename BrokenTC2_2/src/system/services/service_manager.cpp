@@ -24,17 +24,17 @@ void ServiceManager::Init() {
 
 ServiceManager::ServiceManager()
     : m_settings{std::make_unique<ApplicationSettings>(path::GetApplicationSettingsPath(), nullptr)},
+      m_controller_handler{std::make_unique<ControllerHandler>()},
       m_game_selector{std::make_unique<GameSelector>()},
       m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)},
-      m_active_controller_profile{std::make_unique<ControllerProfile>(nullptr)} {
+      m_active_controller_profile{std::make_unique<ControllerProfile>(nullptr)},
+      m_keyboard_profile{std::make_unique<KeyboardProfile>(path::GetKeyboardProfilePath(), nullptr)} {
   //  m_tmp.actions()[0] = {};
 
-  m_active_controller_profile->SetSavePath("HEY.json");
+  m_active_controller_profile->SetSavePath("HEY.json", true);
 }
 
-void ServiceManager::OnMainWindowLoaded() {
-  m_controller_handler = std::make_unique<ControllerHandler>();
-}
+void ServiceManager::OnMainWindowLoaded() {}
 
 void ServiceManager::test() {
   SPDLOG_INFO("Test function called");

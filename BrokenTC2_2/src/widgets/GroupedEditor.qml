@@ -15,6 +15,7 @@ Item {
     clip: false
 
     property alias title: titleText.text
+    property bool alignTitleLeft: true
 
     readonly property real implicitHeight2: {
         col.implicitHeight + titleText.implicitHeight + Style.kStandardMargin
@@ -25,8 +26,10 @@ Item {
         id: titleText
         anchors {
             top: parent.top
-            left: parent.left
-            leftMargin: Style.kStandardMargin * 2
+            left: alignTitleLeft ? parent.left : undefined
+            right: alignTitleLeft ? undefined : parent.right
+            leftMargin: alignTitleLeft ? Style.kStandardMargin * 2 : 0
+            rightMargin: alignTitleLeft ? 0 : Style.kStandardMargin * 2
         }
         font: QMLStyle.kFontH3Bold
         color: "white"
@@ -101,6 +104,8 @@ Item {
                         case DataEditor.RAW_DISPLAY:
                             return textDisplayComponent
                         case DataEditor.CONTROLLER_KEY:
+                            return buttonComponent
+                        case DataEditor.KEYBOARD_KEY:
                             return buttonComponent
                         case DataEditor.SLIDER:
                             return sliderComponent
@@ -184,7 +189,7 @@ Item {
         id: switchComponent
         Switch {
             anchors.centerIn: parent
-            height: implicitHeight * 0.8
+            height: implicitHeight + Style.kStandardMargin
             checked: customValue
             onCheckedChanged: {
                 setValue(checked)

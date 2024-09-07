@@ -4,6 +4,7 @@ import subprocess
 from dataclasses import dataclass
 import re
 import sys
+import os
 
 # structs
 
@@ -154,9 +155,11 @@ def replace_in_template(input_template_path: str, output_path: str):
         lines = lines.replace(macro, str(value))
 
     try:
-        with open(output_path, 'r') as f:
-            if f.read() == lines:
-                return True
+        # check if the file already exists:
+        if os.path.exists(output_path):
+            with open(output_path, 'r') as f:
+                if f.read() == lines:
+                    return True
         with open(output_path, 'w') as f:
             f.write(lines)
     except Exception as e:

@@ -39,6 +39,11 @@ ApplicationWindow {
                 id: bar
                 width: parent.width
 
+                currentIndex: ServiceManager.settings.OpenedTab
+                onCurrentIndexChanged: {
+                    ServiceManager.settings.OpenedTab = currentIndex
+                }
+
                 //        currentIndex: 2
                 TabButton {
                     id: refTabButton

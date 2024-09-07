@@ -9,10 +9,10 @@ namespace btc2 {
 class ControllerHandler : public QObject {
   Q_OBJECT
 
-  Q_PROPERTY(QStringList controllerList READ GetControllerList NOTIFY controllerCountChanged);
+  Q_PROPERTY(QStringList controllerList READ GetControllerList NOTIFY controllerPluggedInOrOut);
 
  signals:
-  void controllerCountChanged();
+  void controllerPluggedInOrOut();
 
  public:
   /*!

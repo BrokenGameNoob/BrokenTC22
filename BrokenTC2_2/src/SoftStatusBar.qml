@@ -48,6 +48,42 @@ Item {
         }
     }
 
+    // Display the controller list when the signal controllerPluggedInOrOut is emitted by the ServiceManager.controllerHandler using a connection
+    Connections {
+        target: ServiceManager.controllerHandler
+        function onControllerPluggedInOrOut() {
+            controllerCombobox.model = ServiceManager.controllerHandler.controllerList
+            console.info("Controller count changed")
+        }
+    }
+
+    // Controller selection combo
+    ComboBox {
+        id: controllerCombobox
+
+        anchors {
+            verticalCenter: parent.verticalCenter
+            left: gameCombobox.right
+            leftMargin: Style.kStandardMargin
+        }
+
+        editable: false
+        width: 200
+        height: implicitHeight * 0.7
+        model: ServiceManager.controllerHandler.controllerList
+    }
+    Button {
+        text: "UPDATE"
+        anchors {
+            verticalCenter: parent.verticalCenter
+            left: controllerCombobox.right
+            leftMargin: Style.kStandardMargin
+        }
+        onClicked: {
+            controllerCombobox.model = ServiceManager.controllerHandler.controllerList
+        }
+    }
+
     Label {
         id: gearLabel
 
