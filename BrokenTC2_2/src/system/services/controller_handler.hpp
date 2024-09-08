@@ -12,10 +12,13 @@ class ControllerHandler : public QObject {
 
   Q_PROPERTY(QStringList controllerList READ GetControllerList NOTIFY controllerPluggedInOrOut);
   Q_PROPERTY(ControllerProfile* activeController READ QMLActiveController NOTIFY activeControllerChanged)
+  Q_PROPERTY(QList<ControllerProfile*> knownControllersProfiles READ QMLGetKnownProfiles NOTIFY
+                 knownControllersProfilesUpdated)
 
  signals:
   void controllerPluggedInOrOut();
   void activeControllerChanged();
+  void knownControllersProfilesUpdated();
 
  public:
   /*!
@@ -28,12 +31,16 @@ class ControllerHandler : public QObject {
 
   /* Global controllers info */
   QStringList GetControllerList() const;
+  QList<ControllerProfile*> QMLGetKnownProfiles() const;
 
   /* Get active controller */
   ControllerProfile* QMLActiveController() const;
   Q_INVOKABLE void SetActiveController(const QString& controller_name);
 
  public slots:
+  Q_INVOKABLE void RefreshKnownControllersFromDisk();
+  Q_INVOKABLE void SortKnownControllers();
+
   void OnControllerPluggedIn(int controller_id);
   void OnControllerUnplugged(int controller_id);
 
@@ -41,10 +48,15 @@ class ControllerHandler : public QObject {
   void OnButtonUp(int button);
 
  private:
+  void SetActiveController(std::shared_ptr<ControllerProfile> controller_profile);
+
+ private:
   std::unique_ptr<qsdl::GameController> m_game_controller{nullptr};
 
   std::shared_ptr<ControllerProfile> m_active_profile{nullptr};
   std::shared_ptr<ControllerProfile> m_old_profile{nullptr}; /* Keep it alive for QML */
+
+  std::vector<std::shared_ptr<ControllerProfile>> m_known_controller_profiles{};
 };
 
 }  // namespace btc2

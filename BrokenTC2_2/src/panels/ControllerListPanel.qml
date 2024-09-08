@@ -75,4 +75,26 @@ Item {
         opacity: 0.5
         height: 1
     }
+
+    ListView {
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: separatorH.bottom
+            topMargin: Style.kStandardMargin
+            bottom: parent.bottom
+        }
+
+        model: ServiceManager.controllerHandler.knownControllersProfiles
+
+        delegate: Text {
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            text: modelData.Name
+            font: QMLStyle.kFontH4Bold
+            color: QMLStyle.kTextColor
+        }
+    }
 }

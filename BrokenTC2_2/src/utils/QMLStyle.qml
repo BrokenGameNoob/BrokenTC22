@@ -13,6 +13,7 @@ Item {
     readonly property color kAccentColor: Material.accentColor
     readonly property color kIconColor: Material.iconColor
     readonly property color kPrimaryColor: Material.primaryColor
+    readonly property color kTextColor: Material.primaryTextColor
 
     readonly property color kButtonColor: Material.buttonColor(
                                               Material.theme,

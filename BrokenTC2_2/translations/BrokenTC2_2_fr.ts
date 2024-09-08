@@ -12,7 +12,7 @@
 <context>
     <name>GroupedEditor</name>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="+167"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="+171"/>
         <location/>
         <source>Button: </source>
         <translation></translation>
@@ -122,13 +122,13 @@ Exit application.</source>
 <context>
     <name>SoftwareControlsTab</name>
     <message>
-        <location filename="../src/tabs/SoftwareControlsTab.qml" line="+37"/>
+        <location filename="../src/tabs/SoftwareControlsTab.qml" line="+40"/>
         <location/>
         <source>CONTROLLER</source>
         <translation>CONTRÔLEUR</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+39"/>
         <location/>
         <source>GLOBAL</source>
         <translation>GÉNÉRAL</translation>
@@ -150,6 +150,14 @@ Exit application.</source>
         <location/>
         <source>SOFTWARE CONTROLS</source>
         <translation>LOGICIEL</translation>
+    </message>
+</context>
+<context>
+    <name>btc2::ControllerHandler</name>
+    <message>
+        <location filename="../src/system/services/controller_handler.cpp" line="+14"/>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

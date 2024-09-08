@@ -1,22 +1,5 @@
-#include "controller_profiles_list.hpp"
+#include <DataStructures/path_utils.hpp>
+#include <system/controls_io/controller_profiles_list.hpp>
+#include <system/services/model_registry.hpp>
 
-namespace btc2 {
-
-ControllerProfilesList::ControllerProfilesList(QObject* parent) {
-  //
-}
-
-int ControllerProfilesList::rowCount(const QModelIndex& parent) const {
-  return m_profiles.size();
-}
-int ControllerProfilesList::columnCount(const QModelIndex& parent) const {
-  //
-}
-QVariant ControllerProfilesList::data(const QModelIndex& index, int role) const {
-  //
-}
-void ControllerProfilesList::populate() {
-  //
-}
-
-}  // namespace btc2
+namespace btc2 {}  // namespace btc2
