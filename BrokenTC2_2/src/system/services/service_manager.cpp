@@ -17,8 +17,6 @@ ServiceManager::~ServiceManager() {
 }
 
 void ServiceManager::Init() {
-  SPDLOG_INFO("Init");
-
   CREGISTER_QML_SINGLETON_I(btc2, ServiceManager);
 }
 

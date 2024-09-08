@@ -121,10 +121,12 @@ set(BTC2_SOURCES
     # Services
     ${BTC2_SOURCES_DIR}/system/services/service_manager.hpp ${BTC2_SOURCES_DIR}/system/services/service_manager.cpp
     ${BTC2_SOURCES_DIR}/system/services/controller_handler.hpp ${BTC2_SOURCES_DIR}/system/services/controller_handler.cpp
+    ${BTC2_SOURCES_DIR}/system/services/model_registry.hpp ${BTC2_SOURCES_DIR}/system/services/model_registry.cpp
 
     # Controls
     ${BTC2_SOURCES_DIR}/system/controls_io/keystroke_sequencer.hpp ${BTC2_SOURCES_DIR}/system/controls_io/keystroke_sequencer.cpp
     ${BTC2_SOURCES_DIR}/system/controls_io/InputHandler.hpp ${BTC2_SOURCES_DIR}/system/controls_io/InputHandler.cpp
+    ${BTC2_SOURCES_DIR}/system/controls_io/controller_profiles_list.hpp ${BTC2_SOURCES_DIR}/system/controls_io/controller_profiles_list.cpp
 
     # Games
     ${BTC2_SOURCES_DIR}/games/gear_handler_factory.hpp

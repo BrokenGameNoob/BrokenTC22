@@ -10,7 +10,7 @@ QString GetControllerProfilesPath() {
   return QString("%0/%1").arg(GetAppDataPath(), path::subpaths::kControllerProfiles);
 }
 QString GetControllerProfilePath(const QString& profile_name) {
-  return QString("%0/%1").arg(GetControllerProfilesPath(), profile_name);
+  return QString("%0/%1.json").arg(GetControllerProfilesPath(), profile_name);
 }
 
 QString GetKeyboardProfilePath() {

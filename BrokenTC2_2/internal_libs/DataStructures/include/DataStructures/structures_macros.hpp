@@ -84,6 +84,7 @@ constexpr auto kControllerButton{-1};
 #define DS_DECLARE_STATIC_INIT_FUNC(ClassName)                          \
   static void Init() {                                                  \
     qmlRegisterType<btc2::ClassName>(kBtc2QmlModule, 1, 0, #ClassName); \
+    qRegisterMetaType<btc2::ClassName>("btc2::" #ClassName);            \
   }
 
 #define DS_DECLARE_STATIC_GET_PROPERTIES_FOR_GROUP_FUNC(ClassName, ELEMENTS_LIST) \

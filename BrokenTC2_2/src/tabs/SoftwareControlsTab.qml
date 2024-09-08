@@ -12,6 +12,9 @@ import "../widgets"
 import btc2
 
 Item {
+    id: root
+    property var activeController: ServiceManager.controllerHandler.activeController
+
     /* Left part */
     Item {
         anchors {
@@ -70,7 +73,8 @@ Item {
                         clip: false
 
                         GroupedEditor {
-                            targetElement: ServiceManager.controllerProfile
+                            targetElement: root.activeController
+
                             targetGroup: "global"
                             title: qsTr("GLOBAL")
 
@@ -82,7 +86,7 @@ Item {
                         }
 
                         GroupedEditor {
-                            targetElement: ServiceManager.controllerProfile
+                            targetElement: root.activeController
                             targetGroup: "gear"
                             title: qsTr("GEAR")
 

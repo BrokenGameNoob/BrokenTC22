@@ -41,6 +41,7 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
 
 // TODO: Add default value
 #define ControllerProfile_STRUCT_ELEMENTS_LIST(FUNC)                                                               \
+  FUNC(int32_t, PriorityIndex, -1, "global", DataEditor::RAW_DISPLAY, "DEBUG prio index", Game::kAll, true)        \
   FUNC(QString, Name, "Unknown", "global", DataEditor::RAW_DISPLAY, QObject::tr("Profile name"), Game::kAll, true) \
   FUNC(double, DeadZone, 0.5, "global", DataEditor::SLIDER, QObject::tr("Axis deadzone"), Game::kAll, true)        \
   FUNC(int32_t,                                                                                                    \

@@ -151,6 +151,10 @@ Item {
             anchors.centerIn: parent
             height: implicitHeight + Style.kStandardMargin / 2
 
+            elide: Text.ElideRight
+            leftPadding: QMLStyle.kStandardMargin
+            rightPadding: QMLStyle.kStandardMargin
+
             Rectangle {
                 color: "transparent"
                 border.color: Qt.darker(Style.kLightGrey, 1.5)

@@ -69,6 +69,10 @@ Item {
         width: 200
         height: implicitHeight * 0.7
         model: ServiceManager.controllerHandler.controllerList
+
+        onActivated: {
+            ServiceManager.controllerHandler.SetActiveController(currentText)
+        }
     }
     RoundButton {
         id: controllerListEditButton
