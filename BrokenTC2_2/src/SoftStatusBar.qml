@@ -5,12 +5,19 @@ import QtQuick.Controls
 import "./tabs"
 import "./debug"
 import "./utils"
+import "./widgets"
 import "."
 
 import btc2
 
 Item {
+    id: root
     height: 60
+
+    readonly property bool activateControllerListPanel: controllerListEditButton.checked
+    function deactivateControllerListPanel() {
+        controllerListEditButton.checked = false
+    }
 
     // Separator
     Rectangle {
@@ -48,15 +55,6 @@ Item {
         }
     }
 
-    // Display the controller list when the signal controllerPluggedInOrOut is emitted by the ServiceManager.controllerHandler using a connection
-    Connections {
-        target: ServiceManager.controllerHandler
-        function onControllerPluggedInOrOut() {
-            controllerCombobox.model = ServiceManager.controllerHandler.controllerList
-            console.info("Controller count changed")
-        }
-    }
-
     // Controller selection combo
     ComboBox {
         id: controllerCombobox
@@ -72,15 +70,26 @@ Item {
         height: implicitHeight * 0.7
         model: ServiceManager.controllerHandler.controllerList
     }
-    Button {
-        text: "UPDATE"
+    RoundButton {
+        id: controllerListEditButton
         anchors {
             verticalCenter: parent.verticalCenter
             left: controllerCombobox.right
             leftMargin: Style.kStandardMargin
         }
-        onClicked: {
-            controllerCombobox.model = ServiceManager.controllerHandler.controllerList
+        checkable: true
+        checked: true
+
+        contentItem: Item {
+            width: QMLStyle.kStandardTitleIconSize * 0.8
+            height: QMLStyle.kStandardTitleIconSize * 0.8
+            ColoredImage {
+                id: controllerListIcon
+                source: Constants.kIconControllerList
+                sourceSize.width: parent.width
+                sourceSize.height: parent.height
+                color: parent.parent.checked ? QMLStyle.kAccentColor : QMLStyle.kIconColor
+            }
         }
     }
 

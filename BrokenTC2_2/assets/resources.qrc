@@ -1,10 +1,10 @@
 <RCC>
     <qresource prefix="/">
         <file>qtquickcontrols2.conf</file>
-
-        <!--Icons-->
         <file>icons/icon_controller.svg</file>
         <file>icons/icon_keyboard.svg</file>
         <file>icons/icon_settings.svg</file>
+        <file>icons/icon_controller_list.svg</file>
+        <file>icons/icon_back_arrow.svg</file>
     </qresource>
 </RCC>

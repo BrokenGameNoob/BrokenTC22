@@ -17,6 +17,9 @@ class Constants : public QObject {
   QML_LITERAL_CONSTANT(QString, kIconController, "qrc:/icons/icon_controller.svg");
   QML_LITERAL_CONSTANT(QString, kIconKeyboard, "qrc:/icons/icon_keyboard.svg");
   QML_LITERAL_CONSTANT(QString, kIconSettings, "qrc:/icons/icon_settings.svg");
+  QML_LITERAL_CONSTANT(QString, kIconControllerList, "qrc:/icons/icon_controller_list.svg");
+
+  QML_LITERAL_CONSTANT(QString, kIconBackArrow, "qrc:/icons/icon_back_arrow.svg");
 
  public:
   ~Constants() = default;

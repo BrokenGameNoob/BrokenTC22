@@ -2,6 +2,14 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
+    <name>ControllerListPanel</name>
+    <message>
+        <location filename="../src/panels/ControllerListPanel.qml" line="+50"/>
+        <source>Controllers list</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GroupedEditor</name>
     <message>
         <location filename="../src/widgets/GroupedEditor.qml" line="+167"/>
@@ -17,8 +25,6 @@
         <translation type="vanished">Accueil</translation>
     </message>
     <message>
-        <location filename="../src/Main.qml" line="+50"/>
-        <location/>
         <source>Software controls</source>
         <translation>Commandes BTC2</translation>
     </message>
@@ -35,20 +41,16 @@
         <translation type="vanished">Activités</translation>
     </message>
     <message>
-        <location line="-26"/>
+        <location filename="../src/Main.qml" line="+25"/>
         <location/>
         <source>BrokenTC2</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+32"/>
-        <location/>
         <source>Game configuration</source>
         <translation>Configuration du jeu</translation>
     </message>
     <message>
-        <location line="+6"/>
-        <location/>
         <source>Settings</source>
         <translation>Paramètres</translation>
     </message>
@@ -71,6 +73,27 @@
     <message>
         <source>Hello World</source>
         <translation type="obsolete">onjour le monde !</translation>
+    </message>
+</context>
+<context>
+    <name>MainPanel</name>
+    <message>
+        <location filename="../src/panels/MainPanel.qml" line="+27"/>
+        <location/>
+        <source>Software controls</source>
+        <translation type="unfinished">Commandes BTC2</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location/>
+        <source>Game configuration</source>
+        <translation type="unfinished">Configuration du jeu</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location/>
+        <source>Settings</source>
+        <translation type="unfinished">Paramètres</translation>
     </message>
 </context>
 <context>

@@ -156,6 +156,10 @@ set(BTC2_QML_FILES
     ${BTC2_QML_DIR}/tabs/SettingsTab.qml
     ${BTC2_QML_DIR}/tabs/SoftwareControlsTab.qml
 
+    # Panels
+    ${BTC2_QML_DIR}/panels/MainPanel.qml
+    ${BTC2_QML_DIR}/panels/ControllerListPanel.qml
+
     # Debug
     ${BTC2_QML_DIR}/debug/DebugWindow.qml
     ${BTC2_QML_DIR}/debug/BoundingBox.qml

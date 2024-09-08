@@ -7,6 +7,7 @@ import QtQml 2.15
 import "./tabs"
 import "./debug"
 import "./utils"
+import "./panels"
 import "."
 
 import btc2
@@ -26,76 +27,61 @@ ApplicationWindow {
     height: baseHeight
     visible: true
 
+    minimumHeight: 200 + (300 * ServiceManager.hasDebInfo)
+    minimumWidth: 700
+
     SplitView {
         id: splitView
         anchors.fill: parent
         orientation: Qt.Vertical
 
         Item {
+            id: panels
             SplitView.minimumHeight: 0.1 * root.baseHeight
             SplitView.preferredHeight: 0.6 * root.baseHeight
 
-            TabBar {
-                id: bar
-                width: parent.width
+            readonly property bool mainPanelFullDisplay: !statusBar.activateControllerListPanel
+            readonly property bool otherPanelsStillVisile: controllerListPanel.visible
 
-                currentIndex: ServiceManager.settings.OpenedTab
-                onCurrentIndexChanged: {
-                    ServiceManager.settings.OpenedTab = currentIndex
+            MainPanel {
+                id: mainPanel
+                width: panels.mainPanelFullDisplay ? parent.width : 0
+                visible: width > 0
+                clip: true
+
+                Behavior on width {
+                    enabled: !panels.mainPanelFullDisplay
+                             || panels.otherPanelsStillVisile
+                    NumberAnimation {
+                        easing {
+                            type: Easing.InOutQuad
+                            amplitude: 1.0
+                            period: 0.2
+                        }
+                    }
                 }
 
-                //        currentIndex: 2
-                TabButton {
-                    id: refTabButton
-                    text: qsTr("Software controls")
-                    icon.source: Constants.kIconController
-                    icon.width: Style.kStandardIconWidth
-                    icon.height: Style.kStandardIconWidth
-                }
-                TabButton {
-                    text: qsTr("Game configuration")
-                    icon.source: Constants.kIconKeyboard
-                    icon.width: refTabButton.icon.width
-                    icon.height: refTabButton.icon.height
-                }
-                TabButton {
-                    text: qsTr("Settings")
-                    icon.source: Constants.kIconSettings
-                    icon.width: refTabButton.icon.width
-                    icon.height: refTabButton.icon.height
-                }
-            }
-
-            Rectangle {
-                id: separatorH
                 anchors {
-                    top: bar.bottom
+                    top: parent.top
                     left: parent.left
-                    right: parent.right
-                }
-                color: QMLStyle.kBorderColor
-                opacity: 0.5
-                height: 1
-            }
-
-            StackLayout {
-                id: mainContent
-                anchors {
-                    top: bar.bottom
                     bottom: statusBar.top
-                    left: parent.left
+                }
+            }
+
+            ControllerListPanel {
+                id: controllerListPanel
+                width: statusBar.activateControllerListPanel ? parent.width - mainPanel.width : 0
+                visible: width > 0
+
+                onLeaveControllerListPanel: {
+                    statusBar.deactivateControllerListPanel()
+                }
+
+                anchors {
+                    top: parent.top
                     right: parent.right
+                    bottom: statusBar.top
                 }
-
-                currentIndex: bar.currentIndex
-
-                SoftwareControlsTab {}
-
-                Item {
-                    id: discoverTab
-                }
-
-                SettingsTab {}
             }
 
             SoftStatusBar {
