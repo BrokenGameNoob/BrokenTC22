@@ -17,6 +17,7 @@ class ModelRegistry : public QObject {
   }
   static void Init();
 
+  static std::shared_ptr<ControllerProfile> GetControllerProfileFromPath(const QString& path);
   static std::shared_ptr<ControllerProfile> GetControllerProfile(const QString& controller_name);
 
  private:
