@@ -125,8 +125,6 @@ set(BTC2_SOURCES
 
     # Controls
     ${BTC2_SOURCES_DIR}/system/controls_io/keystroke_sequencer.hpp ${BTC2_SOURCES_DIR}/system/controls_io/keystroke_sequencer.cpp
-    ${BTC2_SOURCES_DIR}/system/controls_io/InputHandler.hpp ${BTC2_SOURCES_DIR}/system/controls_io/InputHandler.cpp
-    ${BTC2_SOURCES_DIR}/system/controls_io/controller_profiles_list.hpp ${BTC2_SOURCES_DIR}/system/controls_io/controller_profiles_list.cpp
 
     # Games
     ${BTC2_SOURCES_DIR}/games/gear_handler_factory.hpp
