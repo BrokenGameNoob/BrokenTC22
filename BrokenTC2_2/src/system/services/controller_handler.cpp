@@ -90,6 +90,32 @@ void ControllerHandler::SortKnownControllers() {
   emit knownControllersProfilesUpdated();
 }
 
+void ControllerHandler::ReorderFromList(QList<ControllerProfile*> new_profile_list) {
+  std::vector<std::shared_ptr<ControllerProfile>> new_known_controller_profiles{};
+  std::vector<std::shared_ptr<ControllerProfile>> not_found_profiles{};
+
+  for (const auto& profile : new_profile_list) {
+    auto found_profile{std::find_if(m_known_controller_profiles.begin(),
+                                    m_known_controller_profiles.end(),
+                                    [profile](const auto& known_profile) { return known_profile.get() == profile; })};
+    if (found_profile == m_known_controller_profiles.end()) {
+      SPDLOG_ERROR("Profile from new order from QList: <{}> not found in current known profiles", profile->Name());
+      continue;
+    }
+    new_known_controller_profiles.emplace_back(*found_profile);
+  }
+
+  for (const auto& nf : not_found_profiles) {
+    new_known_controller_profiles.emplace_back(nf);
+  }
+
+  for (size_t i{}; i < new_known_controller_profiles.size(); ++i) {
+    new_known_controller_profiles[i]->SetPriorityIndex(i);
+  }
+  m_known_controller_profiles = new_known_controller_profiles;
+  SortKnownControllers();
+}
+
 void ControllerHandler::OnControllerPluggedIn(int controller_id) {
   SPDLOG_DEBUG("Controller plugged in: <{}>", controller_id);
   auto plugged_in_profile{ModelRegistry::GetControllerProfile(SDL_JoystickNameForIndex(controller_id))};

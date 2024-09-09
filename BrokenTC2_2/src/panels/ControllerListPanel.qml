@@ -84,6 +84,9 @@ Item {
         MouseArea {
             id: dragArea
 
+            required property int index
+            required property var modelData
+
             property bool held: false
 
             anchors {
@@ -96,7 +99,16 @@ Item {
             drag.axis: Drag.YAxis
 
             onPressAndHold: held = true
-            onReleased: held = false
+            onReleased: {
+                held = false
+
+                var tmp = new Array(visualModel.model.length)
+                for (var i = 0; i < tmp.length; i++) {
+                    tmp[i] = listView.itemAtIndex(i).modelData
+                }
+
+                ServiceManager.controllerHandler.ReorderFromList(tmp)
+            }
 
             Rectangle {
                 id: content
@@ -172,10 +184,11 @@ Item {
         id: visualModel
 
         model: ServiceManager.controllerHandler.knownControllersProfiles
+
         delegate: dragDelegate
     }
-
     ListView {
+        id: listView
         anchors {
             left: parent.left
             right: parent.right
@@ -188,4 +201,6 @@ Item {
 
         cacheBuffer: 10
     }
+
+    property var displayIndexes: new Array(0)
 }

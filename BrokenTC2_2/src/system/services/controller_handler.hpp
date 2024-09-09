@@ -40,6 +40,7 @@ class ControllerHandler : public QObject {
  public slots:
   Q_INVOKABLE void RefreshKnownControllersFromDisk();
   Q_INVOKABLE void SortKnownControllers();
+  Q_INVOKABLE void ReorderFromList(QList<ControllerProfile*> new_profile_list);
 
   void OnControllerPluggedIn(int controller_id);
   void OnControllerUnplugged(int controller_id);
