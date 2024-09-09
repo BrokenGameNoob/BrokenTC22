@@ -98,7 +98,7 @@ Item {
             drag.target: held ? content : undefined
             drag.axis: Drag.YAxis
 
-            onPressAndHold: held = true
+            onPressed: held = true
             onReleased: {
                 held = false
 
