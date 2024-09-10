@@ -4,8 +4,8 @@
 <context>
     <name>ControllerListPanel</name>
     <message>
-        <location filename="../src/panels/ControllerListPanel.qml" line="+50"/>
-        <source>Controllers list</source>
+        <location filename="../src/panels/ControllerListPanel.qml" line="+52"/>
+        <source>Known controllers list</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -150,14 +150,6 @@ Exit application.</source>
         <location/>
         <source>SOFTWARE CONTROLS</source>
         <translation>LOGICIEL</translation>
-    </message>
-</context>
-<context>
-    <name>btc2::ControllerHandler</name>
-    <message>
-        <location filename="../src/system/services/controller_handler.cpp" line="+14"/>
-        <source>Default</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

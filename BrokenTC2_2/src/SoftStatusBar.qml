@@ -49,9 +49,26 @@ Item {
         width: 200
         height: implicitHeight * 0.7
         model: ServiceManager.gameSelector.GetAvailableGamesNames()
+        onModelChanged: {
+            refreshFromSettings()
+        }
+
         onActivated: {
             ServiceManager.gameSelector.SetSelectedGameFromName(
                         gameCombobox.currentText)
+            ServiceManager.settings.SelectedGameName = gameCombobox.currentText
+        }
+        readonly property string settingsSelectedGame: ServiceManager.settings.SelectedGameName
+        onSettingsSelectedGameChanged: {
+            refreshFromSettings()
+        }
+
+        function refreshFromSettings() {
+            gameCombobox.currentIndex = gameCombobox.find(settingsSelectedGame)
+        }
+
+        Component.onCompleted: {
+            refreshFromSettings()
         }
     }
 
@@ -70,6 +87,16 @@ Item {
         height: implicitHeight * 0.7
         model: ServiceManager.controllerHandler.controllerList
 
+        readonly property var activeController: ServiceManager.controllerHandler.activeController
+        onActiveControllerChanged: {
+            controllerCombobox.currentIndex = controllerCombobox.find(
+                        activeController.Name)
+        }
+        onModelChanged: {
+            controllerCombobox.currentIndex = controllerCombobox.find(
+                        activeController.Name)
+        }
+
         onActivated: {
             ServiceManager.controllerHandler.SetActiveController(currentText)
         }
@@ -82,7 +109,7 @@ Item {
             leftMargin: Style.kStandardMargin
         }
         checkable: true
-        checked: true
+        checked: false
 
         contentItem: Item {
             width: QMLStyle.kStandardTitleIconSize * 0.8

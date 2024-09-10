@@ -16,10 +16,22 @@ Item {
     readonly property color kTextColor: Material.primaryTextColor
 
     readonly property color kButtonColor: Material.buttonColor(
-                                              Material.theme,
-                                              Material.backgroundColor,
-                                              Material.accentColor, true,
-                                              false, false, false)
+                                              Material.theme /* Theme */
+                                              ,
+                                              Material.backgroundColor /* Background color */
+                                              ,
+                                              Material.accentColor /* Accent color */
+                                              , true /* enabled */
+                                              , false /* flat */
+                                              , false /* highlighted */
+                                              , false /* checked */
+                                              )
+
+    function buttonColor(enabled, highlighted, checked, flat = false) {
+        return Material.buttonColor(Material.theme, Material.backgroundColor,
+                                    Material.accentColor, enabled, flat,
+                                    highlighted, checked)
+    }
 
     readonly property real kStandardMargin: 10
     readonly property real kStandardTitleIconSize: 35

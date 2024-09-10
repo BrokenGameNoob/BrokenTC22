@@ -49,7 +49,7 @@ Item {
 
     TabButton {
         id: titleButton
-        text: qsTr("Controllers list")
+        text: qsTr("Known controllers list")
         icon.source: Constants.kIconControllerList
         icon.width: Style.kStandardIconWidth
         icon.height: Style.kStandardIconWidth
@@ -88,18 +88,33 @@ Item {
             required property var modelData
 
             property bool held: false
+            property bool customHovered: (mouseX > 0
+                                          && mouseX < grabIcon.x + grabIcon.width
+                                          && mouseY > 0
+                                          && mouseY < grabIcon.y + grabIcon.height
+                                          && containsMouse) || held
+            hoverEnabled: true
 
             anchors {
                 left: parent?.left
                 right: parent?.right
+                leftMargin: -2
+                rightMargin: -2
             }
             height: content.height
 
             drag.target: held ? content : undefined
             drag.axis: Drag.YAxis
 
-            onPressed: held = true
+            onPressed: {
+                if (customHovered) {
+                    held = true
+                }
+            }
             onReleased: {
+                if (!held) {
+                    return
+                }
                 held = false
 
                 var tmp = new Array(visualModel.model.length)
@@ -118,19 +133,24 @@ Item {
                     verticalCenter: parent.verticalCenter
                 }
                 width: dragArea.width
-                height: column.implicitHeight + 4
+                height: row.implicitHeight + QMLStyle.kStandardMargin * 2
 
                 border.width: 1
-                border.color: "lightsteelblue"
-
-                color: dragArea.held ? "lightsteelblue" : "white"
-                Behavior on color {
+                border.color: dragArea.customHovered ? QMLStyle.kAccentColor : QMLStyle.kBorderColor
+                Behavior on border.color {
                     ColorAnimation {
                         duration: 100
                     }
                 }
 
-                radius: 2
+                color: QMLStyle.buttonColor(dragArea.enabled,
+                                            dragArea.customHovered,
+                                            dragArea.held, true)
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 100
+                    }
+                }
 
                 Drag.active: dragArea.held
                 Drag.source: dragArea
@@ -153,15 +173,79 @@ Item {
                     }
                 }
 
-                Column {
-                    id: column
+                Row {
+                    id: row
                     anchors {
                         fill: parent
-                        margins: 2
+                        leftMargin: 2
+                        rightMargin: 2
+                    }
+                    Text {
+                        id: indexLabel
+                        visible: index > 0
+                        font: QMLStyle.kFontH3Bold
+                        text: index
+                        width: indexLabelMetrics.width + QMLStyle.kStandardMargin * 2
+                        anchors.verticalCenter: parent.verticalCenter
+                        elide: Text.ElideRight
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        color: QMLStyle.kTextColor
+                        opacity: 0.3
+                        TextMetrics {
+                            id: indexLabelMetrics
+                            font: indexLabel.font
+                            text: indexLabel.text
+                        }
+                    }
+                    ColoredImage {
+                        visible: index === 0
+                        source: Constants.kIconFavorite
+                        sourceSize.width: indexLabel.width * 0.8
+                        sourceSize.height: indexLabel.height * 0.8
+                        fillMode: Image.PreserveAspectFit
+                        width: indexLabel.width
+                        color: QMLStyle.kIconColor
+                        anchors.verticalCenter: parent.verticalCenter
+                        opacity: indexLabel.opacity
                     }
 
+                    Rectangle {
+                        color: QMLStyle.kAccentColor
+                        opacity: 0.5
+                        width: 1
+                        height: grabIcon.height
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                    ColoredImage {
+                        id: grabIcon
+                        source: Constants.kIconMoveRowVertical
+                        sourceSize.width: Style.kStandardIconWidth
+                        sourceSize.height: Style.kStandardIconWidth
+                        fillMode: Image.PreserveAspectFit
+                        width: Style.kStandardIconWidth + QMLStyle.kStandardMargin
+                        color: QMLStyle.kIconColor
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                    Rectangle {
+                        color: QMLStyle.kBorderColor
+                        opacity: 0.5
+                        width: 1
+                        height: grabIcon.height
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                    Item {
+                        width: QMLStyle.kStandardMargin
+                        height: 1
+                    }
                     Text {
-                        text: qsTr('Name: ') + modelData.Name
+                        font: QMLStyle.kFontH3
+                        text: modelData.Name
+                        anchors.verticalCenter: parent.verticalCenter
+                        elide: Text.ElideRight
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        color: QMLStyle.kTextColor
                     }
                 }
             }
@@ -198,6 +282,7 @@ Item {
         }
 
         model: visualModel
+        clip: true
 
         cacheBuffer: 10
     }

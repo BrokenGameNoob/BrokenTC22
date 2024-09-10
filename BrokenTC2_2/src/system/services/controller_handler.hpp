@@ -21,6 +21,7 @@ class ControllerHandler : public QObject {
   void knownControllersProfilesUpdated();
 
  public:
+  static constexpr auto kDefaultControllerProfileName{"-"};
   /*!
    * @brief MainRunner constructor should be ran after all the QML initialization.
    * Allowing for notifition publication
@@ -49,7 +50,10 @@ class ControllerHandler : public QObject {
   void OnButtonUp(int button);
 
  private:
+  int ControllerIdForName(const QString& controller_name) const;
+  void SetActiveController(int controller_id);
   void SetActiveController(std::shared_ptr<ControllerProfile> controller_profile);
+  void AutoSetActivePrefferedController();
 
  private:
   std::unique_ptr<qsdl::GameController> m_game_controller{nullptr};

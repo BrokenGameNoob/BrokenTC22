@@ -6,13 +6,15 @@
 #include <system/services/model_registry.hpp>
 #include <system/services/service_manager.hpp>
 #include <utils/qt_utils.hpp>
+#include <utils/shared_constants.hpp>
 
 namespace btc2 {
 
 ControllerHandler::ControllerHandler()
     : QObject{nullptr},
       m_game_controller{std::make_unique<qsdl::GameController>(-1, nullptr)},
-      m_active_profile{ModelRegistry::GetControllerProfile(tr("Default"))} {
+      m_active_profile{ModelRegistry::GetControllerProfile(kDefaultControllerProfileName)} {
+  m_active_profile->SetPriorityIndex(std::numeric_limits<int>::max());
   using qsdl::GameController;
   using qsdl::SDLEventHandler;
   connect(SDLEventHandler::Instance(),
@@ -55,18 +57,47 @@ ControllerProfile* ControllerHandler::QMLActiveController() const {
   return m_active_profile.get();
 }
 
+int ControllerHandler::ControllerIdForName(const QString& controller_name) const {
+  return qsdl::FindJoystickByName(controller_name);
+}
+
 void ControllerHandler::SetActiveController(const QString& controller_name) {
   SetActiveController(ModelRegistry::GetControllerProfile(controller_name));
 }
 
+void ControllerHandler::SetActiveController(int controller_id) {
+  SetActiveController(SDL_JoystickNameForIndex(controller_id));
+  m_game_controller->ConnectController(controller_id);
+}
+
 void ControllerHandler::SetActiveController(std::shared_ptr<ControllerProfile> controller_profile) {
+  SPDLOG_DEBUG("Setting PROFILE ACTIVE={}", controller_profile->Name());
   if (m_active_profile && controller_profile->Name() == m_active_profile->Name()) {
     return;
   }
   m_old_profile = m_active_profile;
   m_active_profile = std::move(controller_profile);
 
+  auto id = ControllerIdForName(m_active_profile->Name());
+  m_game_controller->ConnectController(id);
+
   emit activeControllerChanged();
+}
+
+void ControllerHandler::AutoSetActivePrefferedController() {
+  const auto kControllerList{GetControllerList()};
+  if (kControllerList.empty()) {
+    SetActiveController(kDefaultControllerProfileName);
+    return;
+  }
+  /* else */
+  for (const auto& controller : m_known_controller_profiles) {
+    if (kControllerList.contains(controller->Name())) {
+      SetActiveController(controller);
+      return;
+    }
+  }
+  SetActiveController(kDefaultControllerProfileName);
 }
 
 void ControllerHandler::RefreshKnownControllersFromDisk() {
@@ -75,8 +106,12 @@ void ControllerHandler::RefreshKnownControllersFromDisk() {
 
   m_known_controller_profiles.clear();
   for (const auto& controller_profile_path : kControllerProfilesList) {
-    m_known_controller_profiles.emplace_back(
-        ModelRegistry::GetControllerProfileFromPath(kControllerProfilesDir.absoluteFilePath(controller_profile_path)));
+    auto profile{
+        ModelRegistry::GetControllerProfileFromPath(kControllerProfilesDir.absoluteFilePath(controller_profile_path))};
+    if (profile->Name() == kDefaultControllerProfileName) {
+      continue;
+    }
+    m_known_controller_profiles.emplace_back(std::move(profile));
   }
   SortKnownControllers();
 }
@@ -131,13 +166,15 @@ void ControllerHandler::OnControllerPluggedIn(int controller_id) {
     SortKnownControllers();
   }
 
-  m_game_controller->ConnectController(controller_id);
-
   emit controllerPluggedInOrOut();
 }
 void ControllerHandler::OnControllerUnplugged(int controller_id) {
   SPDLOG_DEBUG("Controller unplugged: <{}>", controller_id);
-  m_game_controller->DisconnectController(false);
+  if (m_game_controller->Id() == controller_id) {
+    m_game_controller->DisconnectController(false);
+
+    AutoSetActivePrefferedController();
+  }
   emit controllerPluggedInOrOut();
 }
 
