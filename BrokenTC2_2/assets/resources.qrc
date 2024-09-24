@@ -8,5 +8,6 @@
         <file>icons/icon_back_arrow.svg</file>
         <file>icons/icon_move_row_vertical.svg</file>
         <file>icons/icon_favorite.svg</file>
+        <file>icons/icon_delete.svg</file>
     </qresource>
 </RCC>

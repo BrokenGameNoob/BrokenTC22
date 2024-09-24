@@ -27,6 +27,8 @@ Item {
                                               , false /* checked */
                                               )
 
+    readonly property color kErrorRed: kPrimaryColor
+
     function buttonColor(enabled, highlighted, checked, flat = false) {
         return Material.buttonColor(Material.theme, Material.backgroundColor,
                                     Material.accentColor, enabled, flat,

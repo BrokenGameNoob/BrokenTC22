@@ -51,7 +51,11 @@ constexpr auto kControllerButton{-1};
   obj[#name] = val.name();
 #define DS_FROM_JSON_ELEM_DECL(                                                                                \
     type, name, default_value, editor_group, editor_type, editor_title, game_compatibility, display_condition) \
-  out->Set##name(obj[#name].toVariant().value<type>());
+  if (obj.find(#name) == obj.constEnd()) {                                                                     \
+    out->Set##name(default_value);                                                                             \
+  } else {                                                                                                     \
+    out->Set##name(obj[#name].toVariant().value<type>());                                                      \
+  }
 #define DS_DEBUG_STRING_ELEM_DECL(                                                                             \
     type, name, default_value, editor_group, editor_type, editor_title, game_compatibility, display_condition) \
   out += QString{"." #name "=%0,"}.arg(this->name());
@@ -276,6 +280,7 @@ class DataEditor {
     KEYBOARD_KEY,
     SLIDER,
     SWITCH,
+    SEPARATOR,
   };
   Q_ENUM(EditorType)
 

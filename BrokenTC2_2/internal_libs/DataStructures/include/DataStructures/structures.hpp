@@ -45,14 +45,6 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
   FUNC(int32_t, PriorityIndex, -1, "global", DataEditor::NO_EDITOR, "", Game::kAll, true)                          \
   FUNC(QString, Name, "Unknown", "global", DataEditor::RAW_DISPLAY, QObject::tr("Profile name"), Game::kAll, true) \
   FUNC(double, DeadZone, 0.5, "global", DataEditor::SLIDER, QObject::tr("Axis deadzone"), Game::kAll, true)        \
-  FUNC(int32_t,                                                                                                    \
-       Clutch,                                                                                                     \
-       def::kControllerButton,                                                                                     \
-       "global",                                                                                                   \
-       DataEditor::CONTROLLER_KEY,                                                                                 \
-       QObject::tr("Clutch key"),                                                                                  \
-       Game::kAll,                                                                                                 \
-       true)                                                                                                       \
   FUNC(bool,                                                                                                       \
        SkipNeutral,                                                                                                \
        def::kControllerButton,                                                                                     \
@@ -65,7 +57,7 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
        GearUp,                                                                                                     \
        def::kControllerButton,                                                                                     \
        "gear",                                                                                                     \
-       DataEditor::RAW_DISPLAY,                                                                                    \
+       DataEditor::CONTROLLER_KEY,                                                                                 \
        QObject::tr("Gear down"),                                                                                   \
        Game::kAll,                                                                                                 \
        true)                                                                                                       \
@@ -73,8 +65,72 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
        GearDown,                                                                                                   \
        def::kControllerButton,                                                                                     \
        "gear",                                                                                                     \
-       DataEditor::RAW_DISPLAY,                                                                                    \
+       DataEditor::CONTROLLER_KEY,                                                                                 \
        QObject::tr("Gear up"),                                                                                     \
+       Game::kAll,                                                                                                 \
+       true)                                                                                                       \
+  FUNC(int32_t,                                                                                                    \
+       GearReverse,                                                                                                \
+       def::kControllerButton,                                                                                     \
+       "gear",                                                                                                     \
+       DataEditor::CONTROLLER_KEY,                                                                                 \
+       QObject::tr("Gear R"),                                                                                      \
+       Game::kAll,                                                                                                 \
+       true)                                                                                                       \
+  FUNC(int32_t,                                                                                                    \
+       Gear1,                                                                                                      \
+       def::kControllerButton,                                                                                     \
+       "gear",                                                                                                     \
+       DataEditor::CONTROLLER_KEY,                                                                                 \
+       QObject::tr("Gear 1"),                                                                                      \
+       Game::kAll,                                                                                                 \
+       true)                                                                                                       \
+  FUNC(int32_t,                                                                                                    \
+       Gear2,                                                                                                      \
+       def::kControllerButton,                                                                                     \
+       "gear",                                                                                                     \
+       DataEditor::CONTROLLER_KEY,                                                                                 \
+       QObject::tr("Gear 2"),                                                                                      \
+       Game::kAll,                                                                                                 \
+       true)                                                                                                       \
+  FUNC(int32_t,                                                                                                    \
+       Gear3,                                                                                                      \
+       def::kControllerButton,                                                                                     \
+       "gear",                                                                                                     \
+       DataEditor::CONTROLLER_KEY,                                                                                 \
+       QObject::tr("Gear 3"),                                                                                      \
+       Game::kAll,                                                                                                 \
+       true)                                                                                                       \
+  FUNC(int32_t,                                                                                                    \
+       Gear4,                                                                                                      \
+       def::kControllerButton,                                                                                     \
+       "gear",                                                                                                     \
+       DataEditor::CONTROLLER_KEY,                                                                                 \
+       QObject::tr("Gear 4"),                                                                                      \
+       Game::kAll,                                                                                                 \
+       true)                                                                                                       \
+  FUNC(int32_t,                                                                                                    \
+       Gear5,                                                                                                      \
+       def::kControllerButton,                                                                                     \
+       "gear",                                                                                                     \
+       DataEditor::CONTROLLER_KEY,                                                                                 \
+       QObject::tr("Gear 5"),                                                                                      \
+       Game::kAll,                                                                                                 \
+       true)                                                                                                       \
+  FUNC(int32_t,                                                                                                    \
+       Gear6,                                                                                                      \
+       def::kControllerButton,                                                                                     \
+       "gear",                                                                                                     \
+       DataEditor::CONTROLLER_KEY,                                                                                 \
+       QObject::tr("Gear 6"),                                                                                      \
+       Game::kAll,                                                                                                 \
+       true)                                                                                                       \
+  FUNC(int32_t,                                                                                                    \
+       Gear7,                                                                                                      \
+       def::kControllerButton,                                                                                     \
+       "gear",                                                                                                     \
+       DataEditor::CONTROLLER_KEY,                                                                                 \
+       QObject::tr("Gear 7"),                                                                                      \
        Game::kAll,                                                                                                 \
        true)
 

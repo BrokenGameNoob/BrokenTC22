@@ -15,10 +15,17 @@ class ControllerHandler : public QObject {
   Q_PROPERTY(QList<ControllerProfile*> knownControllersProfiles READ QMLGetKnownProfiles NOTIFY
                  knownControllersProfilesUpdated)
 
+  Q_PROPERTY(bool isInEnterKeybindMode READ GetIsInEnterKeybindMode NOTIFY enterKeybindModeChanged)
+
  signals:
   void controllerPluggedInOrOut();
   void activeControllerChanged();
   void knownControllersProfilesUpdated();
+
+  void enterKeybindModeChanged();
+
+  void buttonDown(int button);
+  void buttonUp(int button);
 
  public:
   static constexpr auto kDefaultControllerProfileName{"-"};
@@ -49,6 +56,10 @@ class ControllerHandler : public QObject {
   void OnButtonDown(int button);
   void OnButtonUp(int button);
 
+  Q_INVOKABLE void EnterKeybindMode();
+  Q_INVOKABLE void LeaveKeybindMode();
+  bool GetIsInEnterKeybindMode() const;
+
  private:
   int ControllerIdForName(const QString& controller_name) const;
   void SetActiveController(int controller_id);
@@ -62,6 +73,8 @@ class ControllerHandler : public QObject {
   std::shared_ptr<ControllerProfile> m_old_profile{nullptr}; /* Keep it alive for QML */
 
   std::vector<std::shared_ptr<ControllerProfile>> m_known_controller_profiles{};
+
+  bool m_is_in_enter_keybind_mode{false};
 };
 
 }  // namespace btc2

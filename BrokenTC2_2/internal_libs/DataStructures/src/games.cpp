@@ -1,5 +1,7 @@
 #include "DataStructures/games.hpp"
 
+#include <QJsonObject>
+
 #include <Logger/logger.hpp>
 
 namespace btc2 {

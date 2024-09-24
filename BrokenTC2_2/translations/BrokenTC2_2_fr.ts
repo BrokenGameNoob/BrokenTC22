@@ -12,10 +12,30 @@
 <context>
     <name>GroupedEditor</name>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="+171"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="+240"/>
         <location/>
         <source>Button: </source>
         <translation></translation>
+    </message>
+    <message>
+        <location line="+103"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-160"/>
+        <source>NOT SET</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+194"/>
+        <source>Delete binding</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Waiting for controller input</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -128,19 +148,19 @@ Exit application.</source>
         <translation>CONTRÔLEUR</translation>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+32"/>
         <location/>
         <source>GLOBAL</source>
         <translation>GÉNÉRAL</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+11"/>
         <location/>
         <source>GEAR</source>
         <translation>VITESSES</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+48"/>
         <location/>
         <source>KEYBOARD</source>
         <translation>CLAVIER</translation>

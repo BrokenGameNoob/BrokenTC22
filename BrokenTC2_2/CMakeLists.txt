@@ -151,6 +151,8 @@ set(BTC2_QML_FILES
     ${BTC2_SOURCES_DIR}/widgets/LabelledIcon.qml
     ${BTC2_SOURCES_DIR}/widgets/GroupedEditor.qml
     ${BTC2_SOURCES_DIR}/widgets/ColoredImage.qml
+    ${BTC2_SOURCES_DIR}/widgets/ThemedPopup.qml
+    ${BTC2_SOURCES_DIR}/widgets/LoadingIcon.qml
 
     # Tabs
     ${BTC2_QML_DIR}/tabs/SettingsTab.qml

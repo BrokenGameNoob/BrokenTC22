@@ -20,6 +20,7 @@ class Constants : public QObject {
   QML_LITERAL_CONSTANT(QString, kIconControllerList, "qrc:/icons/icon_controller_list.svg");
   QML_LITERAL_CONSTANT(QString, kIconMoveRowVertical, "qrc:/icons/icon_move_row_vertical.svg");
   QML_LITERAL_CONSTANT(QString, kIconFavorite, "qrc:/icons/icon_favorite.svg");
+  QML_LITERAL_CONSTANT(QString, kIconDelete, "qrc:/icons/icon_delete.svg");
 
   QML_LITERAL_CONSTANT(QString, kIconBackArrow, "qrc:/icons/icon_back_arrow.svg");
 

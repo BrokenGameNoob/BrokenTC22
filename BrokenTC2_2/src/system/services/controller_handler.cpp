@@ -179,10 +179,32 @@ void ControllerHandler::OnControllerUnplugged(int controller_id) {
 }
 
 void ControllerHandler::OnButtonDown(int button) {
-  SPDLOG_DEBUG("Button down from <{}>: <{}>", m_game_controller->Id(), button);
+  emit buttonDown(button);
+
+  if (GetIsInEnterKeybindMode()) {
+    return;
+  }
 }
 void ControllerHandler::OnButtonUp(int button) {
-  SPDLOG_DEBUG("Button up from <{}>: <{}>", m_game_controller->Id(), button);
+  emit buttonUp(button);
+
+  if (GetIsInEnterKeybindMode()) {
+    return;
+  }
+}
+
+void ControllerHandler::EnterKeybindMode() {
+  m_is_in_enter_keybind_mode = true;
+  emit enterKeybindModeChanged();
+}
+
+void ControllerHandler::LeaveKeybindMode() {
+  m_is_in_enter_keybind_mode = false;
+  emit enterKeybindModeChanged();
+}
+
+bool ControllerHandler::GetIsInEnterKeybindMode() const {
+  return m_is_in_enter_keybind_mode;
 }
 
 }  // namespace btc2

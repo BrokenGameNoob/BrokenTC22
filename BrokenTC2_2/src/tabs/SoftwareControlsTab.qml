@@ -52,46 +52,36 @@ Item {
             }
 
             ScrollView {
-                id: scroll
+                id: scrollView
                 anchors.fill: parent
-                anchors.bottomMargin: QMLStyle.kStandardMargin
 
-                contentWidth: scroll.width
-                contentHeight: column.height
-                clip: false
+                ColumnLayout {
+                    id: column
+                    anchors {
+                        top: parent.top
+                        bottom: parent.bottom
+                        left: parent.left
+                        leftMargin: Style.kStandardMargin * 2
+                        right: parent.right
+                        rightMargin: Style.kStandardMargin * 2
+                    }
 
-                Item {
-                    anchors.fill: parent
-                    clip: false
-                    anchors.leftMargin: QMLStyle.kStandardMargin
-                    anchors.rightMargin: QMLStyle.kStandardMargin
+                    GroupedEditor {
+                        targetElement: root.activeController
+                        targetGroup: "global"
+                        title: qsTr("GLOBAL")
+                        Layout.fillWidth: true
+                    }
 
-                    ColumnLayout {
-                        id: column
+                    Item {
+                        height: Style.kStandardMargin * 3
+                    }
 
-                        anchors.fill: parent
-                        clip: false
-
-                        GroupedEditor {
-                            targetElement: root.activeController
-
-                            targetGroup: "global"
-                            title: qsTr("GLOBAL")
-
-                            Layout.fillWidth: true
-                        }
-
-                        Item {
-                            height: Style.kStandardMargin * 3
-                        }
-
-                        GroupedEditor {
-                            targetElement: root.activeController
-                            targetGroup: "gear"
-                            title: qsTr("GEAR")
-
-                            Layout.fillWidth: true
-                        }
+                    GroupedEditor {
+                        targetElement: root.activeController
+                        targetGroup: "gear"
+                        title: qsTr("GEAR")
+                        Layout.fillWidth: true
                     }
                 }
             }

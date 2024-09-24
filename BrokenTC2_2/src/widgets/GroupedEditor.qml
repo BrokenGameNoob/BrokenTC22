@@ -12,10 +12,11 @@ Item {
     id: frame
     required property var targetElement
     required property string targetGroup
-    clip: false
+    readonly property real componentHeight: 35
 
     property alias title: titleText.text
     property bool alignTitleLeft: true
+    clip: false
 
     readonly property real implicitHeight2: {
         col.implicitHeight + titleText.implicitHeight + Style.kStandardMargin
@@ -45,7 +46,7 @@ Item {
             bottom: parent.bottom
         }
 
-        spacing: Style.kStandardMargin
+        spacing: 0
 
         Repeater {
             id: mainRepeater
@@ -104,9 +105,9 @@ Item {
                         case DataEditor.RAW_DISPLAY:
                             return textDisplayComponent
                         case DataEditor.CONTROLLER_KEY:
-                            return buttonComponent
+                            return controllerInputComponent
                         case DataEditor.KEYBOARD_KEY:
-                            return buttonComponent
+                            return keyboardInputComponent
                         case DataEditor.SLIDER:
                             return sliderComponent
                         case DataEditor.SWITCH:
@@ -123,7 +124,7 @@ Item {
                         top: parent.bottom
                         left: parent.left
                         right: parent.right
-                        topMargin: height / 2 + col.spacing / 2 + 1
+                        topMargin: height / 2 + col.spacing / 2
                     }
                     height: 1
                     visible: !isLastElement
@@ -135,21 +136,24 @@ Item {
     Component {
         id: unknownComponent
         Rectangle {
+            id: unknownComponentChild
             color: "blue"
             anchors.centerIn: parent
+            height: componentHeight
         }
     }
 
     Component {
         id: textDisplayComponent
         Text {
+            id: textDisplayComponentChild
             text: customValue
             font: QMLStyle.kFontH4Bold
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             color: Style.kForeground
             anchors.centerIn: parent
-            height: implicitHeight + Style.kStandardMargin / 2
+            height: componentHeight
 
             elide: Text.ElideRight
             leftPadding: QMLStyle.kStandardMargin
@@ -159,27 +163,93 @@ Item {
                 color: "transparent"
                 border.color: Qt.darker(Style.kLightGrey, 1.5)
                 border.width: 1
-                anchors.fill: parent
+
+                height: parent.implicitHeight + QMLStyle.kStandardMargin
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                }
+
                 radius: parent.height / 2
             }
         }
     }
 
     Component {
-        id: buttonComponent
+        id: controllerInputComponent
+        Button {
+            id: controllerButton
+            text: customValue < 0 ? qsTr("NOT SET") : customValue
+            font: QMLStyle.kFontH4Bold
+            anchors.centerIn: parent
+            height: componentHeight
+
+            property bool isButtonDown: false
+
+            onClicked: {
+                controllerBindingPopup.openForButton(this)
+            }
+
+            function setFromPopup(button) {
+                setValue(button)
+            }
+
+            TextMetrics {
+                id: controllerTextMetrics
+                font: controllerButton.font
+                text: controllerButton.text
+            }
+
+            Rectangle {
+                height: controllerButton.height / 3
+                width: height
+                radius: height / 2
+                color: QMLStyle.kPrimaryColor
+                visible: controllerButton.isButtonDown
+
+                anchors {
+                    verticalCenter: controllerButton.verticalCenter
+                    right: controllerButton.right
+                    rightMargin: QMLStyle.kStandardMargin
+                }
+            }
+
+            Connections {
+                target: ServiceManager.controllerHandler
+                function onButtonDown(button) {
+                    if (button !== customValue || isButtonDown) {
+                        return
+                    }
+                    isButtonDown = true
+                }
+                function onButtonUp(button) {
+                    if (button !== customValue || !isButtonDown) {
+                        return
+                    }
+                    isButtonDown = false
+                    setValue(button)
+                }
+            }
+        }
+    }
+
+    Component {
+        id: keyboardInputComponent
         Button {
             text: qsTr("Button: ") + customValue
             font: QMLStyle.kFontH4Bold
             anchors.centerIn: parent
-            height: implicitHeight * 0.8
+            height: componentHeight
         }
     }
 
     Component {
         id: sliderComponent
         Slider {
+            id: sliderComponentChild
             anchors.centerIn: parent
-            height: implicitHeight * 0.8
+            height: componentHeight
             value: customValue
             onPressedChanged: {
                 if (!pressed) {
@@ -191,12 +261,157 @@ Item {
 
     Component {
         id: switchComponent
-        Switch {
-            anchors.centerIn: parent
-            height: implicitHeight + Style.kStandardMargin
-            checked: customValue
-            onCheckedChanged: {
-                setValue(checked)
+        Rectangle {
+            width: parent.width
+            height: componentHeight
+            color: "transparent"
+
+            readonly property real wantedHeight: componentHeight * 0.7
+
+            Switch {
+                id: control
+                anchors.centerIn: parent
+                checked: customValue
+                onCheckedChanged: {
+                    setValue(checked)
+                }
+                scale: wantedHeight / height
+            }
+        }
+    }
+
+    ThemedPopup {
+        id: controllerBindingPopup
+        width: Math.min(Overlay.overlay.width / 2., 600)
+        height: Math.min(Overlay.overlay.height / 2., 300)
+        anchors.centerIn: Overlay.overlay
+        modal: true
+
+        borderColor: QMLStyle.kAccentColor
+        borderWidth: 1
+
+        property var linkedButton: null
+
+        function openForButton(button) {
+            linkedButton = button
+            controllerBindingPopup.open()
+        }
+
+        Item {
+            Connections {
+                enabled: ServiceManager.controllerHandler.isInEnterKeybindMode
+                         && controllerBindingPopup.visible
+                target: ServiceManager.controllerHandler
+                function onButtonDown(button) {
+                    console.log("GOT BUTTON: " + button)
+                    if (controllerBindingPopup.linkedButton !== null) {
+                        controllerBindingPopup.linkedButton.setFromPopup(button)
+                    }
+                    controllerBindingPopup.close()
+                }
+            }
+
+            anchors.fill: parent
+
+            RoundButton {
+                id: cancelControllerBindingPopup
+                anchors {
+                    left: parent.left
+                    leftMargin: Style.kStandardMargin
+                    top: parent.top
+                    topMargin: Style.kStandardMargin
+                }
+
+                height: QMLStyle.kStandardTitleIconSize * 1.2
+                width: height
+
+                contentItem: Item {
+                    width: parent.width * 0.8
+                    height: parent.height * 0.8
+                    ColoredImage {
+                        source: Constants.kIconBackArrow
+                        sourceSize.width: parent.width
+                        sourceSize.height: parent.height
+                        color: QMLStyle.kIconColor
+                    }
+                }
+
+                onClicked: {
+                    controllerBindingPopup.close()
+                }
+
+                ToolTip.text: qsTr("Cancel")
+                ToolTip.visible: hovered
+                ToolTip.delay: 1000
+            }
+
+            RoundButton {
+                anchors {
+                    left: parent.left
+                    leftMargin: Style.kStandardMargin
+                    bottom: parent.bottom
+                    bottomMargin: Style.kStandardMargin
+                }
+
+                height: cancelControllerBindingPopup.height
+                width: height
+
+                contentItem: Item {
+                    width: parent.width * 0.8
+                    height: parent.height * 0.8
+                    ColoredImage {
+                        source: Constants.kIconDelete
+                        sourceSize.width: parent.width
+                        sourceSize.height: parent.height
+                        color: QMLStyle.kErrorRed
+                    }
+                }
+
+                onClicked: {
+                    controllerBindingPopup.close()
+                    if (controllerBindingPopup.linkedButton !== null) {
+                        controllerBindingPopup.linkedButton.setFromPopup(-1)
+                    }
+                }
+
+                ToolTip.text: qsTr("Delete binding")
+                ToolTip.visible: hovered
+                ToolTip.delay: 1000
+            }
+
+            LoadingIcon {
+                id: loadingIcon
+                backgroundColor: QMLStyle.kAccentColor
+                foregroundColor: QMLStyle.kPrimaryColor
+                width: QMLStyle.kStandardTitleIconSize
+                height: width
+                anchors {
+                    top: parent.verticalCenter
+                    topMargin: QMLStyle.kStandardMargin / 2
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Text {
+                text: qsTr("Waiting for controller input")
+                font: QMLStyle.kFontH3
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                color: Style.kForeground
+                anchors {
+                    bottom: parent.verticalCenter
+                    bottomMargin: QMLStyle.kStandardMargin / 2
+                    left: parent.left
+                    right: parent.right
+                }
+            }
+        }
+
+        onVisibleChanged: {
+            if (visible) {
+                ServiceManager.controllerHandler.EnterKeybindMode()
+            } else {
+                ServiceManager.controllerHandler.LeaveKeybindMode()
             }
         }
     }
