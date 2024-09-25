@@ -10,6 +10,8 @@
 #include <utils/qt_utils.hpp>
 #include <utils/time.hpp>
 
+#include "QSDL/sdl_event_handler.hpp"
+
 namespace btc2 {
 
 ServiceManager::~ServiceManager() {
@@ -25,18 +27,22 @@ ServiceManager::ServiceManager()
       m_controller_handler{std::make_unique<ControllerHandler>()},
       m_game_selector{std::make_unique<GameSelector>()},
       m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)},
-      m_active_controller_profile{std::make_unique<ControllerProfile>(nullptr)},
       m_keyboard_profile{std::make_unique<KeyboardProfile>(path::GetKeyboardProfilePath(), nullptr)} {
   //  m_tmp.actions()[0] = {};
-
-  m_active_controller_profile->SetSavePath("HEY.json", true);
 }
 
 void ServiceManager::OnMainWindowLoaded() {}
 
+void ServiceManager::UpdateSDLAxisThreshold(double threshold) {
+  m_sdl_axis_threshold = threshold;
+  const auto kActualThreshold =
+      static_cast<int16_t>(static_cast<double>(std::numeric_limits<int16_t>::max()) * threshold);
+  qsdl::SDLEventHandler::SetJoyAxisThreshold(kActualThreshold);
+  emit sdlAxisThresholdModified();
+}
+
 void ServiceManager::test() {
   SPDLOG_INFO("Test function called");
-  SPDLOG_INFO("{}", *m_active_controller_profile);
 }
 
 }  // namespace btc2

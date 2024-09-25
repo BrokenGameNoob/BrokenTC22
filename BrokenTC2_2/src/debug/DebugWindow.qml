@@ -50,11 +50,6 @@ Rectangle {
                 Layout.alignment: Qt.AlignRight
                 Layout.rightMargin: 10
             }
-            Text {
-                id: debug4
-                color: "white"
-                text: "DEBUG name=" + ServiceManager.controllerProfile.Name
-            }
         }
     }
 }

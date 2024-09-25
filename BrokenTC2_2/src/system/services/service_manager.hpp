@@ -24,11 +24,14 @@ class ServiceManager : public QObject {
   Q_PROPERTY(ControllerHandler* controllerHandler READ GetRawControllerHandler CONSTANT FINAL);
   Q_PROPERTY(GameSelector* gameSelector READ GetRawGameSelector CONSTANT FINAL);
 
-  Q_PROPERTY(ControllerProfile* controllerProfile READ GetRawActiveControllerProfile CONSTANT FINAL);
   Q_PROPERTY(KeyboardProfile* keyboardProfile READ GetRawActiveKeyboardProfile CONSTANT FINAL);
+
+  Q_PROPERTY(double sdlAxisThreshold READ GetSDLAxisThreshold WRITE UpdateSDLAxisThreshold NOTIFY
+                 sdlAxisThresholdModified FINAL)
 
  signals:
   void gearHandlerChanged();
+  void sdlAxisThresholdModified();
 
  public:
   ~ServiceManager();
@@ -74,12 +77,13 @@ class ServiceManager : public QObject {
     return m_controller_handler.get();
   }
 
-  btc2::ControllerProfile* GetRawActiveControllerProfile() {
-    return m_active_controller_profile.get();
-  }
-
   btc2::KeyboardProfile* GetRawActiveKeyboardProfile() {
     return m_keyboard_profile.get();
+  }
+
+  Q_INVOKABLE void UpdateSDLAxisThreshold(double threshold);
+  double GetSDLAxisThreshold() const {
+    return m_sdl_axis_threshold;
   }
 
   /* Main */
@@ -95,8 +99,9 @@ class ServiceManager : public QObject {
   std::unique_ptr<GameSelector> m_game_selector{nullptr};
   std::unique_ptr<BaseGearHandler> m_gear_handler{nullptr};
 
-  std::shared_ptr<btc2::ControllerProfile> m_active_controller_profile{};
   std::unique_ptr<KeyboardProfile> m_keyboard_profile{nullptr};
+
+  double m_sdl_axis_threshold{0.5};
 };
 
 }  // namespace btc2

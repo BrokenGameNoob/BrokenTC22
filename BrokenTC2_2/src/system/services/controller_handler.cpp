@@ -76,10 +76,19 @@ void ControllerHandler::SetActiveController(std::shared_ptr<ControllerProfile> c
     return;
   }
   m_old_profile = m_active_profile;
+  disconnect(m_old_profile.get(), nullptr, this, nullptr);
   m_active_profile = std::move(controller_profile);
 
   auto id = ControllerIdForName(m_active_profile->Name());
   m_game_controller->ConnectController(id);
+
+  std::weak_ptr active_profile_weak{m_active_profile};
+  connect(m_active_profile.get(), &ControllerProfile::dataChanged, this, [active_profile_weak]() {
+    if (auto active_profile = active_profile_weak.lock()) {
+      ServiceManager::I().UpdateSDLAxisThreshold(active_profile->DeadZone());
+    }
+  });
+  ServiceManager::I().UpdateSDLAxisThreshold(m_active_profile->DeadZone());
 
   emit activeControllerChanged();
 }
