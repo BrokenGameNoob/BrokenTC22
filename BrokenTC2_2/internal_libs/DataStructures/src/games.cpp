@@ -33,4 +33,12 @@ Game GameSelector::GetGameFromName(const QString& name) {
   return Game::kNone;
 }
 
+QString GameSelector::GetGameName(Game game) {
+  if (kGameNames.find(game) == kGameNames.end()) {
+    SPDLOG_ERROR("Game not found: <{}>", static_cast<int>(game));
+    return kGameNames.at(Game::kNone);
+  }
+  return kGameNames.at(game);
+}
+
 }  // namespace btc2

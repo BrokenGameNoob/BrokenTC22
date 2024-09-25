@@ -7,6 +7,7 @@
 #include <DataStructures/structures.hpp>
 #include <Logger/logger.hpp>
 #include <Utils/json_utils.hpp>
+#include <games/gear_handler_factory.hpp>
 #include <utils/qt_utils.hpp>
 #include <utils/time.hpp>
 
@@ -24,11 +25,21 @@ void ServiceManager::Init() {
 
 ServiceManager::ServiceManager()
     : m_settings{std::make_unique<ApplicationSettings>(path::GetApplicationSettingsPath(), nullptr)},
+      m_game_profiles_handler{std::make_unique<GameProfilesHandler>()},
       m_controller_handler{std::make_unique<ControllerHandler>()},
+      m_keyboard_handler{std::make_unique<KeyboardHandler>()},
       m_game_selector{std::make_unique<GameSelector>()},
-      m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)},
-      m_keyboard_profile{std::make_unique<KeyboardProfile>(path::GetKeyboardProfilePath(), nullptr)} {
-  //  m_tmp.actions()[0] = {};
+      m_gear_handler{} {
+  connect(m_game_selector.get(), &GameSelector::gameChanged, this, [this]() {
+    m_game_profiles_handler->SetCurrentGame(m_game_selector->GetSelectedGame());
+  });
+
+  connect(m_game_selector.get(), &GameSelector::gameChanged, this, [this]() {
+    m_gear_handler = MakeGearHandler(m_game_selector->GetSelectedGame());
+    emit gearHandlerChanged();
+  });
+
+  // emit m_game_selector->gameChanged();
 }
 
 void ServiceManager::OnMainWindowLoaded() {}

@@ -195,12 +195,6 @@ Item {
                 setValue(button)
             }
 
-            TextMetrics {
-                id: controllerTextMetrics
-                font: controllerButton.font
-                text: controllerButton.text
-            }
-
             Rectangle {
                 height: controllerButton.height / 3
                 width: height
@@ -237,10 +231,55 @@ Item {
     Component {
         id: keyboardInputComponent
         Button {
-            text: qsTr("Button: ") + customValue
+            id: keyboardButton
+            readonly property string keyNameFromFunction: ServiceManager.keyboardHandler.GetKeyName(
+                                                              customValue)
+
+            text: customValue < 0 ? qsTr("NOT SET") : (keyNameFromFunction ? keyNameFromFunction : "<?-" + customValue + "-?>")
             font: QMLStyle.kFontH4Bold
             anchors.centerIn: parent
             height: componentHeight
+
+            property bool isButtonDown: false
+
+            onClicked: {
+                keyboardBindingPopup.openForButton(this)
+            }
+
+            function setFromPopup(button) {
+                setValue(button)
+            }
+
+            Rectangle {
+                height: keyboardButton.height / 3
+                width: height
+                radius: height / 2
+                color: QMLStyle.kPrimaryColor
+                visible: keyboardButton.isButtonDown
+
+                anchors {
+                    verticalCenter: keyboardButton.verticalCenter
+                    right: keyboardButton.right
+                    rightMargin: QMLStyle.kStandardMargin
+                }
+            }
+
+            Connections {
+                target: ServiceManager.keyboardHandler
+                function onKeyDown(key) {
+                    if (key !== customValue || isButtonDown) {
+                        return
+                    }
+                    isButtonDown = true
+                }
+                function onKeyUp(key) {
+                    if (key !== customValue || !isButtonDown) {
+                        return
+                    }
+                    isButtonDown = false
+                    setValue(key)
+                }
+            }
         }
     }
 
@@ -312,6 +351,19 @@ Item {
             }
 
             anchors.fill: parent
+
+            ColoredImage {
+                source: Constants.kIconController
+                anchors {
+                    top: parent.top
+                    topMargin: Style.kStandardMargin
+                    right: parent.right
+                    rightMargin: Style.kStandardMargin
+                }
+                sourceSize.width: QMLStyle.kStandardTitleIconSize
+                sourceSize.height: QMLStyle.kStandardTitleIconSize
+                color: QMLStyle.kTextColor
+            }
 
             RoundButton {
                 id: cancelControllerBindingPopup
@@ -412,6 +464,154 @@ Item {
                 ServiceManager.controllerHandler.EnterKeybindMode()
             } else {
                 ServiceManager.controllerHandler.LeaveKeybindMode()
+            }
+        }
+    }
+
+    ThemedPopup {
+        id: keyboardBindingPopup
+        width: Math.min(Overlay.overlay.width / 2., 600)
+        height: Math.min(Overlay.overlay.height / 2., 300)
+        anchors.centerIn: Overlay.overlay
+        modal: true
+
+        borderColor: QMLStyle.kAccentColor
+        borderWidth: 1
+
+        property var linkedButton: null
+
+        function openForButton(button) {
+            linkedButton = button
+            keyboardBindingPopup.open()
+        }
+
+        Item {
+            Connections {
+                enabled: keyboardBindingPopup.visible
+                         && ServiceManager.keyboardHandler.isInEnterKeybindMode
+                // enabled: true
+                target: ServiceManager.keyboardHandler
+                function onKeyDown(key) {
+                    if (keyboardBindingPopup.linkedButton !== null) {
+                        keyboardBindingPopup.linkedButton.setFromPopup(key)
+                    }
+                    keyboardBindingPopup.close()
+                }
+            }
+
+            anchors.fill: parent
+
+            ColoredImage {
+                source: Constants.kIconKeyboard
+                anchors {
+                    top: parent.top
+                    topMargin: Style.kStandardMargin
+                    right: parent.right
+                    rightMargin: Style.kStandardMargin
+                }
+                sourceSize.width: QMLStyle.kStandardTitleIconSize
+                sourceSize.height: QMLStyle.kStandardTitleIconSize
+                color: QMLStyle.kTextColor
+            }
+
+            RoundButton {
+                id: cancelkeyboardBindingPopup
+                anchors {
+                    left: parent.left
+                    leftMargin: Style.kStandardMargin
+                    top: parent.top
+                    topMargin: Style.kStandardMargin
+                }
+
+                height: QMLStyle.kStandardTitleIconSize * 1.2
+                width: height
+
+                contentItem: Item {
+                    width: parent.width * 0.8
+                    height: parent.height * 0.8
+                    ColoredImage {
+                        source: Constants.kIconBackArrow
+                        sourceSize.width: parent.width
+                        sourceSize.height: parent.height
+                        color: QMLStyle.kIconColor
+                    }
+                }
+
+                onClicked: {
+                    keyboardBindingPopup.close()
+                }
+
+                ToolTip.text: qsTr("Cancel")
+                ToolTip.visible: hovered
+                ToolTip.delay: 1000
+            }
+
+            RoundButton {
+                anchors {
+                    left: parent.left
+                    leftMargin: Style.kStandardMargin
+                    bottom: parent.bottom
+                    bottomMargin: Style.kStandardMargin
+                }
+
+                height: cancelkeyboardBindingPopup.height
+                width: height
+
+                contentItem: Item {
+                    width: parent.width * 0.8
+                    height: parent.height * 0.8
+                    ColoredImage {
+                        source: Constants.kIconDelete
+                        sourceSize.width: parent.width
+                        sourceSize.height: parent.height
+                        color: QMLStyle.kErrorRed
+                    }
+                }
+
+                onClicked: {
+                    keyboardBindingPopup.close()
+                    if (keyboardBindingPopup.linkedButton !== null) {
+                        keyboardBindingPopup.linkedButton.setFromPopup(-1)
+                    }
+                }
+
+                ToolTip.text: qsTr("Delete binding")
+                ToolTip.visible: hovered
+                ToolTip.delay: 1000
+            }
+
+            LoadingIcon {
+                backgroundColor: QMLStyle.kAccentColor
+                foregroundColor: QMLStyle.kPrimaryColor
+                width: QMLStyle.kStandardTitleIconSize
+                height: width
+                anchors {
+                    top: parent.verticalCenter
+                    topMargin: QMLStyle.kStandardMargin / 2
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Text {
+                text: qsTr("Waiting for keyboard input")
+                font: QMLStyle.kFontH3
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                color: Style.kForeground
+                anchors {
+                    bottom: parent.verticalCenter
+                    bottomMargin: QMLStyle.kStandardMargin / 2
+                    left: parent.left
+                    right: parent.right
+                }
+            }
+        }
+
+        onVisibleChanged: {
+            if (visible) {
+                ServiceManager.keyboardHandler.EnterKeybindMode()
+            } else {
+                ServiceManager.keyboardHandler.LeaveKeybindMode()
             }
         }
     }

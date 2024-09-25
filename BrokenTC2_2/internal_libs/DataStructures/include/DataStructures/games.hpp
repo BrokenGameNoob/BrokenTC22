@@ -46,6 +46,7 @@ class GameSelector : public QObject {
 
   Q_INVOKABLE static QStringList GetAvailableGamesNames();
   Q_INVOKABLE static Game GetGameFromName(const QString& name);
+  Q_INVOKABLE static QString GetGameName(Game game);
 
   QString GetSelectedGameName() const {
     return kGameNames.at(m_selected_game);

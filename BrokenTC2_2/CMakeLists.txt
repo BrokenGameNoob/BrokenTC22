@@ -121,13 +121,15 @@ set(BTC2_SOURCES
     # Services
     ${BTC2_SOURCES_DIR}/system/services/service_manager.hpp ${BTC2_SOURCES_DIR}/system/services/service_manager.cpp
     ${BTC2_SOURCES_DIR}/system/services/controller_handler.hpp ${BTC2_SOURCES_DIR}/system/services/controller_handler.cpp
+    ${BTC2_SOURCES_DIR}/system/services/keyboard_handler.hpp ${BTC2_SOURCES_DIR}/system/services/keyboard_handler.cpp
     ${BTC2_SOURCES_DIR}/system/services/model_registry.hpp ${BTC2_SOURCES_DIR}/system/services/model_registry.cpp
+    ${BTC2_SOURCES_DIR}/system/services/game_profiles_handler.hpp ${BTC2_SOURCES_DIR}/system/services/game_profiles_handler.cpp
 
     # Controls
     ${BTC2_SOURCES_DIR}/system/controls_io/keystroke_sequencer.hpp ${BTC2_SOURCES_DIR}/system/controls_io/keystroke_sequencer.cpp
 
     # Games
-    ${BTC2_SOURCES_DIR}/games/gear_handler_factory.hpp
+    ${BTC2_SOURCES_DIR}/games/gear_handler_factory.hpp ${BTC2_SOURCES_DIR}/games/gear_handler_factory.cpp
     ${BTC2_SOURCES_DIR}/games/gear_handler.hpp ${BTC2_SOURCES_DIR}/games/gear_handler.cpp
     ${BTC2_SOURCES_DIR}/games/gear_handler_the_crew.hpp ${BTC2_SOURCES_DIR}/games/gear_handler_the_crew.cpp
 
@@ -157,6 +159,7 @@ set(BTC2_QML_FILES
     # Tabs
     ${BTC2_QML_DIR}/tabs/SettingsTab.qml
     ${BTC2_QML_DIR}/tabs/SoftwareControlsTab.qml
+    ${BTC2_QML_DIR}/tabs/GameProfileTab.qml
 
     # Panels
     ${BTC2_QML_DIR}/panels/MainPanel.qml

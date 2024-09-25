@@ -48,12 +48,48 @@ void GearHandlerTheCrew::GearDown() {
   }
 }
 
+std::optional<int32_t> GearHandlerTheCrew::GetVkCodeForGear(GearType gear) {
+  switch (gear) {
+    case -1:
+      return m_game_profile->GearReverse();
+    case 0:
+      return {};
+    case 1:
+      return m_game_profile->Gear1();
+    case 2:
+      return m_game_profile->Gear2();
+    case 3:
+      return m_game_profile->Gear3();
+    case 4:
+      return m_game_profile->Gear4();
+    case 5:
+      return m_game_profile->Gear5();
+    case 6:
+      return m_game_profile->Gear6();
+    case 7:
+      return m_game_profile->Gear7();
+  }
+  return {};
+}
+
 void GearHandlerTheCrew::OnGearSet(GearType old_gear, GearType gear) {
   if (GetGearMode() == SEQ_MODE) {
     /* Incompatible type. We should not do enything here */
     SPDLOG_WARN("Incompatible gear mode ({}) to call this function. Not doing anything.", GetGearModeStr());
     return;
   }
+
+  const auto kGearKeyOpt{GetVkCodeForGear(gear)};
+  if (!kGearKeyOpt) {
+    return;
+  }
+
+  io::KeySequence ks{{m_game_profile->Clutch(), true},
+                     {kGearKeyOpt.value(), true},
+                     {15},
+                     {kGearKeyOpt.value(), false},
+                     {m_game_profile->Clutch(), false}};
+  io::AsynchronousKeySeq(ks);
 }
 void GearHandlerTheCrew::OnGearModeSet(GearMode old_mode, GearMode mode) {
   //

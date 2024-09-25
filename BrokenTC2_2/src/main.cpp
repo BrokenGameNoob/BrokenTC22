@@ -36,6 +36,7 @@ bool SetupFolders() {
   bool success{true};
   success &= lambda_create_folder_if_not_exists(btc2::path::GetAppDataPath());
   success &= lambda_create_folder_if_not_exists(btc2::path::GetControllerProfilesPath());
+  success &= lambda_create_folder_if_not_exists(btc2::path::GetGamesProfilesPath());
   return success;
 }
 
@@ -65,6 +66,8 @@ int SDL_main(int argc, char* argv[]) {
   btc2::Constants::Init();
   btc2::ServiceManager::Init();
   btc2::ControllerHandler::Init();
+  btc2::KeyboardHandler::Init();
+  btc2::GameProfilesHandler::Init();
 
   /* -- Debug -- */
 #ifdef PRINT_RESOURCES

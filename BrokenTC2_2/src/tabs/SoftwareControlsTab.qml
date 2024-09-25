@@ -141,21 +141,28 @@ Item {
                 bottom: parent.bottom
             }
 
-            GroupedEditor {
-                anchors {
-                    top: parent.top
-                    topMargin: Style.kStandardMargin
-                    left: parent.left
-                    leftMargin: Style.kStandardMargin
-                    right: parent.right
-                    rightMargin: Style.kStandardMargin
+            ScrollView {
+                id: scrollViewRight
+                anchors.fill: parent
+
+                ColumnLayout {
+                    id: columnRight
+                    anchors {
+                        top: parent.top
+                        bottom: parent.bottom
+                        left: parent.left
+                        leftMargin: Style.kStandardMargin * 2
+                        right: parent.right
+                        rightMargin: Style.kStandardMargin * 2
+                    }
+
+                    GroupedEditor {
+                        targetElement: ServiceManager.keyboardHandler.profile
+                        targetGroup: "soft_controls"
+                        title: qsTr("SOFTWARE CONTROLS")
+                        Layout.fillWidth: true
+                    }
                 }
-
-                targetElement: ServiceManager.keyboardProfile
-                targetGroup: "soft_controls"
-                title: qsTr("SOFTWARE CONTROLS")
-
-                Layout.fillWidth: true
             }
         }
     }

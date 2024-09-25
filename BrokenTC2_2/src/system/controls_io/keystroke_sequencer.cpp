@@ -11,27 +11,13 @@ namespace btc2::io {
 void AsynchronousKeySeq(const KeySequence& seq) {
   const auto kBeforeStart{NowMs()};
   std::ignore = QtConcurrent::run([seq, kBeforeStart]() {
-    const auto kStarted{NowMs()};
-    PrintTimeDiff("Time before function start", kBeforeStart, kStarted);
-    const auto kStartTime{std::chrono::high_resolution_clock::now()};
-
     for (const auto& e : seq) {
       switch (e.GetKind()) {
         case KeySequenceElementKind::Key: {
-          auto kBefDelay{NowMs()};
-
-          SPDLOG_INFO("Key {} pressed? {}", e.GetKey(), e.GetKeyPressed());
           win::SendKeyboardEvent(e.GetKey(), e.GetKeyPressed());
-
-          auto kAfterDelay{NowMs()};
-          SPDLOG_WARN("Key action time of {}ms", DiffMs(kBefDelay, kAfterDelay));
         } break;
         case KeySequenceElementKind::Delay: {
-          auto kBefDelay{NowMs()};
-          //          std::this_thread::sleep_for(std::chrono::milliseconds(e.GetDelayMs()));
           QThread::msleep(e.GetDelayMs());
-          auto kAfterDelay{NowMs()};
-          SPDLOG_TRACE("Delay of {}ms (actual {}ms)", e.GetDelayMs(), DiffMs(kBefDelay, kAfterDelay));
         } break;
         default:
           SPDLOG_WARN("Unknown key sequence element type");

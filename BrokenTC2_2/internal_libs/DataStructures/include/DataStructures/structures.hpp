@@ -58,7 +58,7 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
        def::kControllerButton,                                                                                     \
        "gear",                                                                                                     \
        DataEditor::CONTROLLER_KEY,                                                                                 \
-       QObject::tr("Gear down"),                                                                                   \
+       QObject::tr("Gear up"),                                                                                     \
        Game::kAll,                                                                                                 \
        true)                                                                                                       \
   FUNC(int32_t,                                                                                                    \
@@ -66,7 +66,7 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
        def::kControllerButton,                                                                                     \
        "gear",                                                                                                     \
        DataEditor::CONTROLLER_KEY,                                                                                 \
-       QObject::tr("Gear up"),                                                                                     \
+       QObject::tr("Gear down"),                                                                                   \
        Game::kAll,                                                                                                 \
        true)                                                                                                       \
   FUNC(int32_t,                                                                                                    \
@@ -135,5 +135,99 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
        true)
 
 DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);
+
+/* -- Game config tabs -- */
+
+#define GameProfileTheCrew_STRUCT_ELEMENTS_LIST(FUNC) \
+  FUNC(int32_t,                                       \
+       GearUp,                                        \
+       def::kControllerButton,                        \
+       "gear_seq",                                    \
+       DataEditor::KEYBOARD_KEY,                      \
+       QObject::tr("Gear down"),                      \
+       Game::kAll,                                    \
+       true)                                          \
+  FUNC(int32_t,                                       \
+       GearDown,                                      \
+       def::kControllerButton,                        \
+       "gear_seq",                                    \
+       DataEditor::KEYBOARD_KEY,                      \
+       QObject::tr("Gear up"),                        \
+       Game::kAll,                                    \
+       true)                                          \
+  FUNC(int32_t,                                       \
+       Clutch,                                        \
+       def::kControllerButton,                        \
+       "gear",                                        \
+       DataEditor::KEYBOARD_KEY,                      \
+       QObject::tr("Clutch"),                         \
+       Game::kAll,                                    \
+       true)                                          \
+  FUNC(int32_t,                                       \
+       GearReverse,                                   \
+       def::kControllerButton,                        \
+       "gear",                                        \
+       DataEditor::KEYBOARD_KEY,                      \
+       QObject::tr("Gear R"),                         \
+       Game::kAll,                                    \
+       true)                                          \
+  FUNC(int32_t,                                       \
+       Gear1,                                         \
+       def::kControllerButton,                        \
+       "gear",                                        \
+       DataEditor::KEYBOARD_KEY,                      \
+       QObject::tr("Gear 1"),                         \
+       Game::kAll,                                    \
+       true)                                          \
+  FUNC(int32_t,                                       \
+       Gear2,                                         \
+       def::kControllerButton,                        \
+       "gear",                                        \
+       DataEditor::KEYBOARD_KEY,                      \
+       QObject::tr("Gear 2"),                         \
+       Game::kAll,                                    \
+       true)                                          \
+  FUNC(int32_t,                                       \
+       Gear3,                                         \
+       def::kControllerButton,                        \
+       "gear",                                        \
+       DataEditor::KEYBOARD_KEY,                      \
+       QObject::tr("Gear 3"),                         \
+       Game::kAll,                                    \
+       true)                                          \
+  FUNC(int32_t,                                       \
+       Gear4,                                         \
+       def::kControllerButton,                        \
+       "gear",                                        \
+       DataEditor::KEYBOARD_KEY,                      \
+       QObject::tr("Gear 4"),                         \
+       Game::kAll,                                    \
+       true)                                          \
+  FUNC(int32_t,                                       \
+       Gear5,                                         \
+       def::kControllerButton,                        \
+       "gear",                                        \
+       DataEditor::KEYBOARD_KEY,                      \
+       QObject::tr("Gear 5"),                         \
+       Game::kAll,                                    \
+       true)                                          \
+  FUNC(int32_t,                                       \
+       Gear6,                                         \
+       def::kControllerButton,                        \
+       "gear",                                        \
+       DataEditor::KEYBOARD_KEY,                      \
+       QObject::tr("Gear 6"),                         \
+       Game::kAll,                                    \
+       true)                                          \
+  FUNC(int32_t,                                       \
+       Gear7,                                         \
+       def::kControllerButton,                        \
+       "gear",                                        \
+       DataEditor::KEYBOARD_KEY,                      \
+       QObject::tr("Gear 7"),                         \
+       Game::kAll,                                    \
+       true)
+
+DS_DECLARE_STRUCT(GameProfileTheCrew, GameProfileTheCrew_STRUCT_ELEMENTS_LIST);
 
 }  // namespace btc2

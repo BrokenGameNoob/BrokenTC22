@@ -187,21 +187,6 @@ void ControllerHandler::OnControllerUnplugged(int controller_id) {
   emit controllerPluggedInOrOut();
 }
 
-void ControllerHandler::OnButtonDown(int button) {
-  emit buttonDown(button);
-
-  if (GetIsInEnterKeybindMode()) {
-    return;
-  }
-}
-void ControllerHandler::OnButtonUp(int button) {
-  emit buttonUp(button);
-
-  if (GetIsInEnterKeybindMode()) {
-    return;
-  }
-}
-
 void ControllerHandler::EnterKeybindMode() {
   m_is_in_enter_keybind_mode = true;
   emit enterKeybindModeChanged();
@@ -214,6 +199,32 @@ void ControllerHandler::LeaveKeybindMode() {
 
 bool ControllerHandler::GetIsInEnterKeybindMode() const {
   return m_is_in_enter_keybind_mode;
+}
+
+void ControllerHandler::OnButtonDown(int button) {
+  emit buttonDown(button);
+
+  if (GetIsInEnterKeybindMode()) {
+    return;
+  }
+
+  if (!m_active_profile) {
+    SPDLOG_ERROR("Active profile not set");
+    return;
+  }
+
+  if (button == m_active_profile->GearUp()) {
+    ServiceManager::GetGearHandler().GearUp();
+  } else if (button == m_active_profile->GearDown()) {
+    ServiceManager::GetGearHandler().GearDown();
+  }
+}
+void ControllerHandler::OnButtonUp(int button) {
+  emit buttonUp(button);
+
+  if (GetIsInEnterKeybindMode()) {
+    return;
+  }
 }
 
 }  // namespace btc2
