@@ -10,7 +10,6 @@ import "../utils"
 import "../widgets"
 import ".."
 import "."
-pragma ComponentBehavior
 
 import btc2
 
