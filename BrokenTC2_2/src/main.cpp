@@ -8,7 +8,7 @@
 #include <QMessageBox>
 #include <QQmlApplicationEngine>
 #include <QTranslator>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <git_version.hpp>
 
 #include <DataStructures/path_utils.hpp>
