@@ -12,7 +12,7 @@
 <context>
     <name>EasySetupPanel</name>
     <message>
-        <location filename="../src/panels/EasySetupPanel.qml" line="+60"/>
+        <location filename="../src/panels/EasySetupPanel.qml" line="+54"/>
         <source>Easy setup</source>
         <translation type="unfinished"></translation>
     </message>
@@ -123,7 +123,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="+59"/>
+        <location filename="../src/main.cpp" line="+60"/>
         <source>Critical error</source>
         <translation>Erreur fatale</translation>
     </message>

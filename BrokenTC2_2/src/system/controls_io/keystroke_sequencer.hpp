@@ -54,4 +54,21 @@ using KeySequence = std::vector<KeySequenceElement<KeyboardKeyType>>;
 
 void AsynchronousKeySeq(const KeySequence& seq);
 
+class KeySequencerThread {
+ public:
+  ~KeySequencerThread();
+
+  static auto& I(){
+    static KeySequencerThread thread{};
+    return thread;
+  }
+
+  void Run();
+  static void Stop();
+  void Loop();
+
+ private:
+  std::atomic_bool m_continue{true};
+};
+
 }  // namespace btc2::io

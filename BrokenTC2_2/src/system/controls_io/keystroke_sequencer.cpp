@@ -46,4 +46,23 @@ void AsynchronousKeySeq(const KeySequence& seq) {
   });
 }
 
+KeySequencerThread::~KeySequencerThread(){
+  SPDLOG_DEBUG("Destroyed KeySequencerThread");
+}
+
+void KeySequencerThread::Run(){
+  while(m_continue){
+    Loop();
+  }
+}
+
+void KeySequencerThread::Stop(){
+  I().m_continue = false;
+}
+
+void KeySequencerThread::Loop(){
+  std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+  SPDLOG_DEBUG("HEY");
+}
+
 }  // namespace btc2::io
