@@ -9,5 +9,7 @@
         <file>icons/icon_move_row_vertical.svg</file>
         <file>icons/icon_favorite.svg</file>
         <file>icons/icon_delete.svg</file>
+        <file>icons/icon_ubinope.svg</file>
+        <file>icons/icon_setup.svg</file>
     </qresource>
 </RCC>

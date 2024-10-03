@@ -41,7 +41,9 @@ ApplicationWindow {
             SplitView.preferredHeight: 0.6 * root.baseHeight
 
             readonly property bool mainPanelFullDisplay: !statusBar.activateControllerListPanel
+                                                         && !statusBar.activateEasySetupPanel
             readonly property bool otherPanelsStillVisile: controllerListPanel.visible
+                                                           || easySetupPanel.visible
 
             MainPanel {
                 id: mainPanel
@@ -75,6 +77,22 @@ ApplicationWindow {
 
                 onLeaveControllerListPanel: {
                     statusBar.deactivateControllerListPanel()
+                }
+
+                anchors {
+                    top: parent.top
+                    right: parent.right
+                    bottom: statusBar.top
+                }
+            }
+
+            EasySetupPanel {
+                id: easySetupPanel
+                width: statusBar.activateEasySetupPanel ? parent.width - mainPanel.width : 0
+                visible: width > 0
+
+                onLeaveEasySetupPanel: {
+                    statusBar.deactivateEasySetupPanel()
                 }
 
                 anchors {

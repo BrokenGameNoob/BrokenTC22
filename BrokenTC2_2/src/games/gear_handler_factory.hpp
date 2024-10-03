@@ -7,10 +7,10 @@
 
 namespace btc2 {
 
-inline std::unique_ptr<BaseGearHandler> MakeGearHandler(Game handler_type) {
+inline std::unique_ptr<BaseGearHandler> MakeGearHandler(Games handler_type) {
   switch (handler_type) {
-    case Game::kTheCrew2:
-    case Game::kTheCrewMotorfist:
+    case Game::THE_CREW_2:
+    case Game::THE_CREW_MOTORFIST:
       return std::make_unique<GearHandlerTheCrew>(nullptr);
       break;
     default:

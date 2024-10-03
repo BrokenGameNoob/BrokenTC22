@@ -19,6 +19,11 @@ Item {
         controllerListEditButton.checked = false
     }
 
+    readonly property bool activateEasySetupPanel: easySetupButton.checked
+    function deactivateEasySetupPanel() {
+        easySetupButton.checked = false
+    }
+
     // Separator
     Rectangle {
         anchors {
@@ -117,6 +122,26 @@ Item {
             ColoredImage {
                 id: controllerListIcon
                 source: Constants.kIconControllerList
+                sourceSize.width: parent.width
+                sourceSize.height: parent.height
+                color: parent.parent.checked ? QMLStyle.kAccentColor : QMLStyle.kIconColor
+            }
+        }
+    }
+    RoundButton {
+        id: easySetupButton
+        anchors {
+            verticalCenter: parent.verticalCenter
+            left: controllerListEditButton.right
+            leftMargin: Style.kStandardMargin
+        }
+        checkable: true
+        checked: false
+        contentItem: Item {
+            width: QMLStyle.kStandardTitleIconSize * 0.8
+            height: QMLStyle.kStandardTitleIconSize * 0.8
+            ColoredImage {
+                source: Constants.kIconSetup
                 sourceSize.width: parent.width
                 sourceSize.height: parent.height
                 color: parent.parent.checked ? QMLStyle.kAccentColor : QMLStyle.kIconColor
