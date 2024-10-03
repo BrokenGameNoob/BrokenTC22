@@ -109,11 +109,11 @@ constexpr auto kControllerButton{-1};
 #define DS_DECLARE_STATIC_GET_GAME_COMPATIBILITY_FUNC(ClassName, ELEMENTS_LIST) \
   Q_INVOKABLE static Games GetKeyGameCompatiblity(const QString& key) {         \
     ELEMENTS_LIST(DS_GET_GAME_COMPATIBILITY_ELEM_DECL);                         \
-    return Game::kNone;                                                         \
+    return Game::NONE;                                                         \
   }
 
 #define DS_DECLARE_STATIC_IS_GAME_COMPATIBLE_FUNC(ClassName, ELEMENTS_LIST)        \
-  Q_INVOKABLE static bool IsKeyCompatibleWithGame(const QString& key, Game game) { \
+  Q_INVOKABLE static bool IsKeyCompatibleWithGame(const QString& key, Games game) { \
     const bool kIsCompatible{(GetKeyGameCompatiblity(key) & game) != 0};           \
     return kIsCompatible;                                                          \
   }

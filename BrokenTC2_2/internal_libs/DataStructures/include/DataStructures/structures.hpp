@@ -19,10 +19,10 @@ class DummyForceAutoMocProcess0 : public QObject {
        "overlay",                                                                         \
        DataEditor::SWITCH,                                                                \
        QObject::tr("Enable overlay"),                                                     \
-       Game::kAll,                                                                        \
+       Game::ALL,                                                                        \
        true)                                                                              \
-  FUNC(int32_t, OpenedTab, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::kNone, false) \
-  FUNC(QString, SelectedGameName, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::kNone, false)
+  FUNC(int32_t, OpenedTab, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::NONE, false) \
+  FUNC(QString, SelectedGameName, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::NONE, false)
 
 DS_DECLARE_STRUCT(ApplicationSettings, ApplicationSettings_STRUCT_ELEMENTS_LIST);
 
@@ -35,23 +35,23 @@ DS_DECLARE_STRUCT(ApplicationSettings, ApplicationSettings_STRUCT_ELEMENTS_LIST)
        "soft_controls",                            \
        DataEditor::KEYBOARD_KEY,                   \
        QObject::tr("Switch gear mode"),            \
-       Game::kAll,                                 \
+       Game::ALL,                                 \
        true)
 
 DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
 
 // TODO: Add default value
 #define ControllerProfile_STRUCT_ELEMENTS_LIST(FUNC)                                                               \
-  FUNC(int32_t, PriorityIndex, -1, "global", DataEditor::NO_EDITOR, "", Game::kAll, true)                          \
-  FUNC(QString, Name, "Unknown", "global", DataEditor::RAW_DISPLAY, QObject::tr("Profile name"), Game::kAll, true) \
-  FUNC(double, DeadZone, 0.5, "global", DataEditor::SLIDER, QObject::tr("Axis deadzone"), Game::kAll, true)        \
+  FUNC(int32_t, PriorityIndex, -1, "global", DataEditor::NO_EDITOR, "", Game::ALL, true)                          \
+  FUNC(QString, Name, "Unknown", "global", DataEditor::RAW_DISPLAY, QObject::tr("Profile name"), Game::ALL, true) \
+  FUNC(double, DeadZone, 0.5, "global", DataEditor::SLIDER, QObject::tr("Axis deadzone"), Game::ALL, true)        \
   FUNC(bool,                                                                                                       \
        SkipNeutral,                                                                                                \
        def::kControllerButton,                                                                                     \
        "global",                                                                                                   \
        DataEditor::SWITCH,                                                                                         \
        QObject::tr("Skip neutral"),                                                                                \
-       Game::kAll,                                                                                                 \
+       Game::ALL,                                                                                                 \
        true)                                                                                                       \
   FUNC(int32_t,                                                                                                    \
        GearUp,                                                                                                     \
@@ -59,7 +59,7 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                                                                                     \
        DataEditor::CONTROLLER_KEY,                                                                                 \
        QObject::tr("Gear down"),                                                                                   \
-       Game::kAll,                                                                                                 \
+       Game::ALL,                                                                                                 \
        true)                                                                                                       \
   FUNC(int32_t,                                                                                                    \
        GearDown,                                                                                                   \
@@ -67,7 +67,7 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                                                                                     \
        DataEditor::CONTROLLER_KEY,                                                                                 \
        QObject::tr("Gear up"),                                                                                     \
-       Game::kAll,                                                                                                 \
+       Game::ALL,                                                                                                 \
        true)                                                                                                       \
   FUNC(int32_t,                                                                                                    \
        GearReverse,                                                                                                \
@@ -75,7 +75,7 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                                                                                     \
        DataEditor::CONTROLLER_KEY,                                                                                 \
        QObject::tr("Gear R"),                                                                                      \
-       Game::kAll,                                                                                                 \
+       Game::ALL,                                                                                                 \
        true)                                                                                                       \
   FUNC(int32_t,                                                                                                    \
        Gear1,                                                                                                      \
@@ -83,7 +83,7 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                                                                                     \
        DataEditor::CONTROLLER_KEY,                                                                                 \
        QObject::tr("Gear 1"),                                                                                      \
-       Game::kAll,                                                                                                 \
+       Game::ALL,                                                                                                 \
        true)                                                                                                       \
   FUNC(int32_t,                                                                                                    \
        Gear2,                                                                                                      \
@@ -91,7 +91,7 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                                                                                     \
        DataEditor::CONTROLLER_KEY,                                                                                 \
        QObject::tr("Gear 2"),                                                                                      \
-       Game::kAll,                                                                                                 \
+       Game::ALL,                                                                                                 \
        true)                                                                                                       \
   FUNC(int32_t,                                                                                                    \
        Gear3,                                                                                                      \
@@ -99,7 +99,7 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                                                                                     \
        DataEditor::CONTROLLER_KEY,                                                                                 \
        QObject::tr("Gear 3"),                                                                                      \
-       Game::kAll,                                                                                                 \
+       Game::ALL,                                                                                                 \
        true)                                                                                                       \
   FUNC(int32_t,                                                                                                    \
        Gear4,                                                                                                      \
@@ -107,7 +107,7 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                                                                                     \
        DataEditor::CONTROLLER_KEY,                                                                                 \
        QObject::tr("Gear 4"),                                                                                      \
-       Game::kAll,                                                                                                 \
+       Game::ALL,                                                                                                 \
        true)                                                                                                       \
   FUNC(int32_t,                                                                                                    \
        Gear5,                                                                                                      \
@@ -115,7 +115,7 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                                                                                     \
        DataEditor::CONTROLLER_KEY,                                                                                 \
        QObject::tr("Gear 5"),                                                                                      \
-       Game::kAll,                                                                                                 \
+       Game::ALL,                                                                                                 \
        true)                                                                                                       \
   FUNC(int32_t,                                                                                                    \
        Gear6,                                                                                                      \
@@ -123,7 +123,7 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                                                                                     \
        DataEditor::CONTROLLER_KEY,                                                                                 \
        QObject::tr("Gear 6"),                                                                                      \
-       Game::kAll,                                                                                                 \
+       Game::ALL,                                                                                                 \
        true)                                                                                                       \
   FUNC(int32_t,                                                                                                    \
        Gear7,                                                                                                      \
@@ -131,7 +131,7 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                                                                                     \
        DataEditor::CONTROLLER_KEY,                                                                                 \
        QObject::tr("Gear 7"),                                                                                      \
-       Game::kAll,                                                                                                 \
+       Game::ALL,                                                                                                 \
        true)
 
 DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);

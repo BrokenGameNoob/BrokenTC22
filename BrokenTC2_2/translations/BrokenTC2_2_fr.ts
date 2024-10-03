@@ -4,8 +4,16 @@
 <context>
     <name>ControllerListPanel</name>
     <message>
-        <location filename="../src/panels/ControllerListPanel.qml" line="+52"/>
+        <location filename="../src/panels/ControllerListPanel.qml" line="+51"/>
         <source>Known controllers list</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EasySetupPanel</name>
+    <message>
+        <location filename="../src/panels/EasySetupPanel.qml" line="+60"/>
+        <source>Easy setup</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -46,7 +54,7 @@
     </message>
     <message>
         <source>Software controls</source>
-        <translation>Commandes BTC2</translation>
+        <translation type="vanished">Commandes BTC2</translation>
     </message>
     <message>
         <source>Discover</source>
@@ -54,7 +62,7 @@
     </message>
     <message>
         <source>In game controls</source>
-        <translation>Contrôles du jeu</translation>
+        <translation type="vanished">Contrôles du jeu</translation>
     </message>
     <message>
         <source>Activity</source>
@@ -68,27 +76,23 @@
     </message>
     <message>
         <source>Game configuration</source>
-        <translation>Configuration du jeu</translation>
+        <translation type="vanished">Configuration du jeu</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Paramètres</translation>
+        <translation type="vanished">Paramètres</translation>
     </message>
     <message>
         <source>Hey</source>
-        <translation>Salut</translation>
+        <translation type="vanished">Salut</translation>
     </message>
     <message>
         <source>Gear Down</source>
-        <translation>Rapport inférieur</translation>
+        <translation type="vanished">Rapport inférieur</translation>
     </message>
     <message>
         <source>Gear Up</source>
-        <translation>Rapport supérieur</translation>
-    </message>
-    <message>
-        <source>Wi-Fi</source>
-        <translation></translation>
+        <translation type="vanished">Rapport supérieur</translation>
     </message>
     <message>
         <source>Hello World</source>
@@ -119,7 +123,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="+58"/>
+        <location filename="../src/main.cpp" line="+59"/>
         <source>Critical error</source>
         <translation>Erreur fatale</translation>
     </message>

@@ -130,6 +130,7 @@ set(BTC2_SOURCES
     ${BTC2_SOURCES_DIR}/games/gear_handler_factory.hpp
     ${BTC2_SOURCES_DIR}/games/gear_handler.hpp ${BTC2_SOURCES_DIR}/games/gear_handler.cpp
     ${BTC2_SOURCES_DIR}/games/gear_handler_the_crew.hpp ${BTC2_SOURCES_DIR}/games/gear_handler_the_crew.cpp
+    ${BTC2_SOURCES_DIR}/games/easy_setup_interface.hpp ${BTC2_SOURCES_DIR}/games/easy_setup_interface.cpp
 
     ${BTC2_RESOURCES}
 )
@@ -161,6 +162,7 @@ set(BTC2_QML_FILES
     # Panels
     ${BTC2_QML_DIR}/panels/MainPanel.qml
     ${BTC2_QML_DIR}/panels/ControllerListPanel.qml
+    ${BTC2_QML_DIR}/panels/EasySetupPanel.qml
 
     # Debug
     ${BTC2_QML_DIR}/debug/DebugWindow.qml

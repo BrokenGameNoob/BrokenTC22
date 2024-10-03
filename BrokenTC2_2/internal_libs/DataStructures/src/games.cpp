@@ -3,11 +3,12 @@
 #include <QJsonObject>
 
 #include <Logger/logger.hpp>
+#include "qqml.h"
 
 namespace btc2 {
 
-const std::map<Game, QString> GameSelector::kGameNames{
-    {Game::kNone, "Unkown"}, {Game::kTheCrew2, "The Crew 2"}, {Game::kTheCrewMotorfist, "The Crew Motorfist"}};
+const std::map<Games, QString> GameSelector::kGameNames{
+                                                        {Game::NONE, "Unkown"}, {Game::THE_CREW_2, "The Crew 2"}, {Game::THE_CREW_MOTORFIST, "The Crew Motorfist"}};
 
 GameSelector::GameSelector(QObject* parent) : QObject{parent} {
   //
@@ -16,7 +17,7 @@ GameSelector::GameSelector(QObject* parent) : QObject{parent} {
 QStringList GameSelector::GetAvailableGamesNames() {
   QStringList out{};
   for (const auto& [game, name] : kGameNames) {
-    if (game == Game::kNone) {
+    if (game == Game::NONE) {
       continue;
     }
     out.append(name);
@@ -24,13 +25,13 @@ QStringList GameSelector::GetAvailableGamesNames() {
   return out;
 }
 
-Game GameSelector::GetGameFromName(const QString& name) {
+Games GameSelector::GetGameFromName(const QString& name) {
   for (const auto& [game, game_name] : GameSelector::kGameNames) {
     if (game_name == name) {
       return game;
     }
   }
-  return Game::kNone;
+  return Game::NONE;
 }
 
 }  // namespace btc2
