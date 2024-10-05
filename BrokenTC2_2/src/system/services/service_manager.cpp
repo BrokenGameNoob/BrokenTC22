@@ -11,6 +11,9 @@
 #include <utils/time.hpp>
 
 #include "QSDL/sdl_event_handler.hpp"
+#include "system/controls_io/keystroke_sequencer.hpp"
+
+#include <windows.h>
 
 namespace btc2 {
 
@@ -43,6 +46,16 @@ void ServiceManager::UpdateSDLAxisThreshold(double threshold) {
 
 void ServiceManager::test() {
   SPDLOG_INFO("Test function called");
+  io::KeySequence ks{{1000},
+                     {VK_NUMPAD1, true},
+                     {50},
+                     {VK_NUMPAD1, false},
+                     {500},
+                     {VK_NUMPAD3, true},
+                     {50},
+                     {VK_NUMPAD3, false}
+                    };
+  io::AsynchronousKeySeqThread(ks);
 }
 
 }  // namespace btc2
