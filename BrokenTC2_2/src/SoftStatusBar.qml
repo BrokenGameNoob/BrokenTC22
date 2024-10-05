@@ -147,6 +147,9 @@ Item {
                 color: parent.parent.checked ? QMLStyle.kAccentColor : QMLStyle.kIconColor
             }
         }
+        onClicked: {
+            ServiceManager.test()
+        }
     }
 
     Label {
