@@ -30,8 +30,24 @@ ServiceManager::ServiceManager()
       m_controller_handler{std::make_unique<ControllerHandler>()},
       m_game_selector{std::make_unique<GameSelector>()},
       m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)},
-      m_keyboard_profile{std::make_unique<KeyboardProfile>(path::GetKeyboardProfilePath(), nullptr)} {
+      m_keyboard_profile{std::make_unique<KeyboardProfile>(path::GetKeyboardProfilePath(), nullptr)},
+      m_window_change_hook{win::HookForFocusedWindowChanged(ServiceManager::OnWindowChangeHook)} {
   //  m_tmp.actions()[0] = {};
+}
+
+void CALLBACK ServiceManager::OnWindowChangeHook(HWINEVENTHOOK hook, DWORD event, HWND hwnd, LONG idObject,
+                                                 LONG idChild, DWORD dwEventThread, DWORD dwmsEventTime) {
+  if (event == EVENT_SYSTEM_FOREGROUND) {
+    char windowTitle[256];
+    GetWindowTextA(hwnd, windowTitle, sizeof(windowTitle));
+    std::string title(windowTitle);
+    ServiceManager::I().OnFocusedWindowChanged(QString{windowTitle});
+  }
+}
+void ServiceManager::OnFocusedWindowChanged(const QString& title) {
+  SPDLOG_DEBUG("Focused window changed to: <{}>", title);
+  m_focused_window_title = title;
+  emit focusedWindowTitleChanged();
 }
 
 void ServiceManager::OnMainWindowLoaded() {}

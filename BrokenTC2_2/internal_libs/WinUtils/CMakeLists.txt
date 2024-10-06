@@ -57,6 +57,7 @@ set(SRC_DIR src)
 set(SOURCE_FILES
   ${INCLUDE_DIR}/event_handler.hpp ${SRC_DIR}/event_handler.cpp
   ${INCLUDE_DIR}/utils.hpp ${SRC_DIR}/utils.cpp
+  ${INCLUDE_DIR}/window_change_hook.hpp
 )
 
 
