@@ -5,12 +5,14 @@ Item {
     required property var globalArea
     required property bool editModeEnabled
     required property bool targetComponentHovered
+    required property bool targetComponentBeingDragged
 
     readonly property real hideDelayMs: 1500
     readonly property bool shouldBeVisible: editModeEnabled
                                             && (targetComponentHovered
                                                 || hideDelay.running
                                                 || mouseIsOnMenu)
+                                            && !targetComponentBeingDragged
 
     default property alias actualContent: content.children
     property alias content: content.children

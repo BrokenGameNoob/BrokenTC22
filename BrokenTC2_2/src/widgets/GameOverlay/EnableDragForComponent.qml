@@ -7,6 +7,7 @@ Item {
     required property real maxScale
 
     property alias containsMouse: dragArea.containsMouse
+    property alias beingDragged: dragArea.drag.active
 
     MouseArea {
         id: dragArea

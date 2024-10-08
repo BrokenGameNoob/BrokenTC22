@@ -71,7 +71,7 @@ Window {
             height: 100
             color: editModeEnabled ? QMLStyle.kBackgroundColor : "transparent"
             anchors.fill: parent
-            opacity: 0.8
+            opacity: 0.9
         }
 
         Label {
@@ -171,6 +171,7 @@ Window {
             globalArea: globalArea
             editModeEnabled: btc2Overlay.editModeEnabled
             targetComponentHovered: dragGearLabel.containsMouse
+            targetComponentBeingDragged: dragGearLabel.beingDragged
 
             anchors {
                 verticalCenter: gearLabel.verticalCenter
@@ -192,6 +193,30 @@ Window {
 
                     onValueChanged: {
                         gearLabel.scale = value
+                    }
+
+                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                }
+
+                Column {
+                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                    Button {
+                        text: qsTr("Background color 0")
+                    }
+                    Button {
+                        text: qsTr("Background color 1")
+                    }
+                    Button {
+                        text: qsTr("Background color 2")
+                    }
+                    Button {
+                        text: qsTr("Text color 0")
+                    }
+                    Button {
+                        text: qsTr("Text color 1")
+                    }
+                    Button {
+                        text: qsTr("Text color 2")
                     }
                 }
             }

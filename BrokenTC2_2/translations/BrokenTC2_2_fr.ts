@@ -34,6 +34,36 @@
         <source>Reset to default</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location line="+109"/>
+        <source>Background color 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Background color 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Background color 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Text color 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Text color 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Text color 2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GroupedEditor</name>
