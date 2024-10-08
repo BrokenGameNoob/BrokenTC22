@@ -6,7 +6,7 @@ import QtQuick.Controls.Material
 import QtQuick.Controls.Material.impl
 
 Item {
-    readonly property real kRadius: Material.roundedScale
+    readonly property real kRadius: 7. //Material.roundedScale
     //    readonly property real kBorderWeight: Material.1
     readonly property color kBorderColor: Material.frameColor
     readonly property color kBackgroundColor: Material.backgroundColor
@@ -37,6 +37,11 @@ Item {
 
     readonly property real kStandardMargin: 10
     readonly property real kStandardTitleIconSize: 35
+
+    readonly property font kFontGearHandler: ({
+                                                  "pointSize": 56,
+                                                  "bold": true
+                                              })
 
     readonly property font kFontH2: ({
                                          "pointSize": 17,

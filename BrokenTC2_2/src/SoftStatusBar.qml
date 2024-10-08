@@ -24,6 +24,8 @@ Item {
         easySetupButton.checked = false
     }
 
+    property alias overlayButtonChecked: overlayButton.checked
+
     // Separator
     Rectangle {
         anchors {
@@ -149,6 +151,26 @@ Item {
         }
         onClicked: {
             ServiceManager.test()
+        }
+    }
+    RoundButton {
+        id: overlayButton
+        anchors {
+            verticalCenter: parent.verticalCenter
+            left: easySetupButton.right
+            leftMargin: Style.kStandardMargin
+        }
+        checkable: true
+        checked: false
+        contentItem: Item {
+            width: QMLStyle.kStandardTitleIconSize * 0.8
+            height: QMLStyle.kStandardTitleIconSize * 0.8
+            ColoredImage {
+                source: Constants.kIconOverlay
+                sourceSize.width: parent.width
+                sourceSize.height: parent.height
+                color: parent.parent.checked ? QMLStyle.kAccentColor : QMLStyle.kIconColor
+            }
         }
     }
 

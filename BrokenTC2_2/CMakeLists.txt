@@ -154,6 +154,10 @@ set(BTC2_QML_FILES
     ${BTC2_SOURCES_DIR}/widgets/ColoredImage.qml
     ${BTC2_SOURCES_DIR}/widgets/ThemedPopup.qml
     ${BTC2_SOURCES_DIR}/widgets/LoadingIcon.qml
+    ${BTC2_SOURCES_DIR}/widgets/GameOverlay/GameOverlay.qml
+    ${BTC2_SOURCES_DIR}/widgets/GameOverlay/EnableDragForComponent.qml
+    ${BTC2_SOURCES_DIR}/widgets/GameOverlay/GameOverlayEditMenuArea.qml
+    ${BTC2_SOURCES_DIR}/widgets/GameOverlay/GameOverlayEditMenu.qml
 
     # Tabs
     ${BTC2_QML_DIR}/tabs/SettingsTab.qml

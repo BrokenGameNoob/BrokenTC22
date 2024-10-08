@@ -1,10 +1,10 @@
-import QtQuick 2.15
+import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
 import ".."
-import "../utils"
-import "../widgets"
+import "../../utils"
+import "../../widgets"
 
 import btc2
 
@@ -25,7 +25,7 @@ Window {
     property bool editModeEnabled: false
     property bool allowClose: false
 
-    readonly property real minScale: 0.2
+    readonly property real minScale: 0.3
     readonly property real maxScale: 2.5
 
     onClosing: function (event) {
@@ -57,6 +57,14 @@ Window {
 
     Item {
         anchors.fill: parent
+
+        MouseArea {
+            id: globalArea
+            anchors.fill: parent
+            hoverEnabled: true
+            preventStealing: false
+            propagateComposedEvents: true
+        }
 
         Rectangle {
             width: 100
@@ -156,13 +164,27 @@ Window {
                 target: parent
                 minScale: btc2Overlay.minScale
                 maxScale: btc2Overlay.maxScale
+                onContainsMouseChanged: {
+                    if (dragGearLabel.containsMouse) {
+                        gearIndicatorEditArea.switchOn()
+                    }
+                }
             }
         }
+
+        GameOverlayEditMenuArea {
+            id: gearIndicatorEditArea
+            anchors.fill: gearIndicatorEditRow
+
+            enableDragComponent: dragGearLabel
+            globalArea: globalArea
+        }
+
         Row {
             id: gearIndicatorEditRow
             visible: editModeEnabled && Layout.preferredHeight > 0
-            Layout.preferredHeight: dragGearLabel.containsMouse
-                                    || gearIndicatorEditArea.hasMouseIn ? implicitHeight : 0
+            Layout.preferredHeight: gearIndicatorEditArea.shouldDisplayMenu ? implicitHeight : 0
+            enabled: true
 
             Behavior on Layout.preferredHeight {
                 NumberAnimation {
@@ -187,32 +209,6 @@ Window {
                     gearLabel.scale = value
                 }
             }
-        }
-        MouseArea {
-            id: gearIndicatorEditArea
-            anchors.fill: gearIndicatorEditRow
-            hoverEnabled: true
-            acceptedButtons: Qt.NoButton
-            preventStealing: false
-            onClicked: mouse => {
-                           mouse.accepted = false
-                       }
-            propagateComposedEvents: true
-            property bool hasMouseIn: mouseX > 0 && mouseY > 0 && mouseX < width
-                                      && mouseY < height
-            onMouseXChanged: {
-                console.log("mouseX: " + mouseX + " mouseY: " + mouseY
-                            + " width: " + width + " height: " + height)
-            }
-            onEntered: {
-                gearIndicatorEditArea.hasMouseIn = true
-            }
-            onExited: {
-                gearIndicatorEditArea.hasMouseIn = false
-            }
-            onPositionChanged: mouse => {
-                                   mouse.accepted = false
-                               }
         }
     }
 }

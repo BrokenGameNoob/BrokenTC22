@@ -15,6 +15,8 @@ import btc2
 ApplicationWindow {
     id: root
 
+    property var overlayWindow: null
+
     //    Material.theme: Material.Dark
     readonly property real baseRatioToStandard: 0.5
     readonly property int baseWidth: 1920 * baseRatioToStandard
@@ -109,6 +111,10 @@ ApplicationWindow {
                     left: parent.left
                     right: parent.right
                 }
+
+                onOverlayButtonCheckedChanged: {
+                    overlayWindow.editModeEnabled = overlayButtonChecked
+                }
             }
         }
 
@@ -125,5 +131,32 @@ ApplicationWindow {
 
     Component.onCompleted: {
         ServiceManager.OnMainWindowLoaded()
+
+        // Instantiate and show the overlay window
+        var overlayComponent = Qt.createComponent(
+                    "widgets/GameOverlay/GameOverlay.qml")
+        if (overlayComponent.status === Component.Ready) {
+            overlayWindow = overlayComponent.createObject(null)
+            if (overlayWindow === null) {
+                console.error("Error creating overlay window")
+            }
+        } else {
+            console.error("Error loading overlay window component",
+                          overlayComponent.errorString())
+        }
+    }
+
+    Connections {
+        target: overlayWindow
+        function onLeaveEditMode() {
+            statusBar.overlayButtonChecked = false
+        }
+    }
+
+    onClosing: {
+        if (overlayWindow !== null) {
+            overlayWindow.allowClose = true
+            overlayWindow.close()
+        }
     }
 }

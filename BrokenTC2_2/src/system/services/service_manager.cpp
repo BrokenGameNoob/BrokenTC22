@@ -2,6 +2,7 @@
 
 #include <QDebug>
 #include <QtConcurrent>
+#include <windows.h>
 
 #include <DataStructures/path_utils.hpp>
 #include <DataStructures/structures.hpp>
@@ -12,8 +13,6 @@
 
 #include "QSDL/sdl_event_handler.hpp"
 #include "system/controls_io/keystroke_sequencer.hpp"
-
-#include <windows.h>
 
 namespace btc2 {
 
@@ -50,6 +49,10 @@ void ServiceManager::OnFocusedWindowChanged(const QString& title) {
   emit focusedWindowTitleChanged();
 }
 
+Game::Types ServiceManager::GetFocusedWindowGame() const {
+  return GetFocusedGameFromWindowTitle(m_focused_window_title);
+}
+
 void ServiceManager::OnMainWindowLoaded() {}
 
 void ServiceManager::UpdateSDLAxisThreshold(double threshold) {
@@ -62,15 +65,8 @@ void ServiceManager::UpdateSDLAxisThreshold(double threshold) {
 
 void ServiceManager::test() {
   SPDLOG_INFO("Test function called");
-  io::KeySequence ks{{1000},
-                     {VK_NUMPAD1, true},
-                     {50},
-                     {VK_NUMPAD1, false},
-                     {500},
-                     {VK_NUMPAD3, true},
-                     {50},
-                     {VK_NUMPAD3, false}
-                    };
+  io::KeySequence ks{
+      {1000}, {VK_NUMPAD1, true}, {50}, {VK_NUMPAD1, false}, {500}, {VK_NUMPAD3, true}, {50}, {VK_NUMPAD3, false}};
   io::AsynchronousKeySeqThread(ks);
 }
 
