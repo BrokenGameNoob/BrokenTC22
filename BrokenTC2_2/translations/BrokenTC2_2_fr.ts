@@ -20,7 +20,7 @@
 <context>
     <name>GameOverlay</name>
     <message>
-        <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="+82"/>
+        <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="+85"/>
         <source>Place your elements where you want (drag &amp; drop)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -35,33 +35,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+109"/>
-        <source>Background color 0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Background color 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Background color 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Text color 0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Text color 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Text color 2</source>
+        <location line="+177"/>
+        <source>Gear indicator</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
