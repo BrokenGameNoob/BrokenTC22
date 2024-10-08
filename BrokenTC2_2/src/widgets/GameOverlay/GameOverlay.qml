@@ -25,7 +25,7 @@ Window {
     property bool editModeEnabled: false
     property bool allowClose: false
 
-    readonly property real minScale: 0.3
+    readonly property real minScale: 0.6
     readonly property real maxScale: 2.5
 
     onClosing: function (event) {
@@ -164,33 +164,13 @@ Window {
                 target: parent
                 minScale: btc2Overlay.minScale
                 maxScale: btc2Overlay.maxScale
-                onContainsMouseChanged: {
-                    if (dragGearLabel.containsMouse) {
-                        gearIndicatorEditArea.switchOn()
-                    }
-                }
             }
         }
 
-        GameOverlayEditMenuArea {
-            id: gearIndicatorEditArea
-            anchors.fill: gearIndicatorEditRow
-
-            enableDragComponent: dragGearLabel
+        GameOverlayEditMenu {
             globalArea: globalArea
-        }
-
-        Row {
-            id: gearIndicatorEditRow
-            visible: editModeEnabled && Layout.preferredHeight > 0
-            Layout.preferredHeight: gearIndicatorEditArea.shouldDisplayMenu ? implicitHeight : 0
-            enabled: true
-
-            Behavior on Layout.preferredHeight {
-                NumberAnimation {
-                    duration: 100
-                }
-            }
+            editModeEnabled: btc2Overlay.editModeEnabled
+            targetComponentHovered: dragGearLabel.containsMouse
 
             anchors {
                 verticalCenter: gearLabel.verticalCenter
@@ -198,15 +178,21 @@ Window {
                 leftMargin: Style.kStandardMargin
             }
 
-            Slider {
-                from: btc2Overlay.minScale
-                to: btc2Overlay.maxScale
-                value: gearLabel.scale
-                orientation: Qt.Vertical
-                height: gearLabel.height * 1.5
+            Row {
+                id: gearIndicatorEditRow
+                height: true ? implicitHeight : 0
+                enabled: true
 
-                onValueChanged: {
-                    gearLabel.scale = value
+                Slider {
+                    from: btc2Overlay.minScale
+                    to: btc2Overlay.maxScale
+                    value: gearLabel.scale
+                    orientation: Qt.Vertical
+                    height: gearLabel.height * 1.5
+
+                    onValueChanged: {
+                        gearLabel.scale = value
+                    }
                 }
             }
         }
