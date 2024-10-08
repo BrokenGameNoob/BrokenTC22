@@ -2,6 +2,8 @@ import QtQuick 2.15
 
 Item {
     id: root
+    signal dropped
+
     required property var target
     required property real minScale
     required property real maxScale
@@ -15,6 +17,7 @@ Item {
         drag.target: root.target
         hoverEnabled: true
         cursorShape: Qt.OpenHandCursor
+        onReleased: root.dropped()
     }
 
     WheelHandler {

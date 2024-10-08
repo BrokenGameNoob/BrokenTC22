@@ -19,5 +19,8 @@ QString GetKeyboardProfilePath() {
 QString GetApplicationSettingsPath() {
   return QString("%0/%1").arg(GetAppDataPath(), path::subpaths::kApplicationSettingsFile);
 }
+QString GetOverlaySettingsPath() {
+  return QString("%0/%1").arg(GetAppDataPath(), path::subpaths::kOverlaySettingsFile);
+}
 
 }  // namespace btc2::path

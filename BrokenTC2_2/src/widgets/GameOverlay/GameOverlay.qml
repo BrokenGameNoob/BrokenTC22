@@ -9,8 +9,8 @@ import "../../widgets"
 import btc2
 
 Window {
-    id: btc2Overlay
-    visible: true
+    id: root
+    visible: ServiceManager.settings.OverlayEnabled
     x: 0
     y: 0
     width: Screen.width
@@ -28,6 +28,8 @@ Window {
     readonly property real minScale: 0.6
     readonly property real maxScale: 2.5
 
+    property var overlayModel: ServiceManager.gameOverlay
+
     onClosing: function (event) {
         if (!allowClose) {
             event.accepted = false // Prevent the window from closing
@@ -37,7 +39,7 @@ Window {
     }
     onEditModeEnabledChanged: {
         if (editModeEnabled) {
-            btc2Overlay.requestActivate()
+            root.requestActivate()
         }
     }
 
@@ -56,6 +58,7 @@ Window {
     }
 
     Item {
+        id: content
         anchors.fill: parent
 
         MouseArea {
@@ -99,6 +102,9 @@ Window {
                 topMargin: QMLStyle.kStandardMargin
                 horizontalCenter: editModeLabel.horizontalCenter
             }
+            onClicked: {
+                content.resetGearLabel()
+            }
         }
         RoundButton {
             id: leaveEditButton
@@ -126,14 +132,23 @@ Window {
             }
         }
 
+        function resetGearLabel() {
+            overlayModel.GearX = 0
+            overlayModel.GearY = 0
+            overlayModel.GearScaling = 1
+        }
+
         Label {
             id: gearLabel
 
             readonly property real defaultX: QMLStyle.kStandardMargin
             readonly property real defaultY: parent.height - QMLStyle.kStandardMargin - height
 
-            x: defaultX
-            y: defaultY
+            readonly property real implicitX: overlayModel.GearX
+            readonly property real implicitY: overlayModel.GearY
+
+            x: implicitX === 0 ? defaultX : implicitX
+            y: implicitY === 0 ? defaultY : implicitY
 
             FontMetrics {
                 id: fm
@@ -147,6 +162,7 @@ Window {
             topPadding: Style.kStandardMargin / 2 - (0.12 * font.pixelSize)
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
+            visible: overlayModel.GearEnabled || editModeEnabled
 
             text: ServiceManager.gearHandler.gearStr
 
@@ -162,14 +178,30 @@ Window {
                 id: dragGearLabel
                 anchors.fill: parent
                 target: parent
-                minScale: btc2Overlay.minScale
-                maxScale: btc2Overlay.maxScale
+                minScale: root.minScale
+                maxScale: root.maxScale
+                onDropped: {
+                    overlayModel.GearX = gearLabel.x
+                    overlayModel.GearY = gearLabel.y
+                }
+            }
+
+            property bool inhibitScaleUpdate: false
+            Binding {
+                target: gearLabel
+                property: "scale"
+                value: overlayModel.GearScaling
+            }
+            onScaleChanged: {
+                inhibitScaleUpdate = true
+                overlayModel.GearScaling = scale
+                inhibitScaleUpdate = false
             }
         }
 
         GameOverlayEditMenu {
             globalArea: globalArea
-            editModeEnabled: btc2Overlay.editModeEnabled
+            editModeEnabled: root.editModeEnabled
             targetComponentHovered: dragGearLabel.containsMouse
             targetComponentBeingDragged: dragGearLabel.beingDragged
 
@@ -184,39 +216,66 @@ Window {
                 height: true ? implicitHeight : 0
                 enabled: true
 
-                Slider {
-                    from: btc2Overlay.minScale
-                    to: btc2Overlay.maxScale
-                    value: gearLabel.scale
-                    orientation: Qt.Vertical
-                    height: gearLabel.height * 1.5
+                ColumnLayout {
+                    id: gearEditorColumnLeft
+                    readonly property real maxHeight: gearLabel.height * 1.5
+                    height: gearEditorColumnLeft.maxHeight
+                    spacing: 0
+                    Slider {
+                        id: gearScaleSlider
+                        from: root.minScale
+                        to: root.maxScale
+                        value: gearLabel.scale
+                        orientation: Qt.Vertical
 
-                    onValueChanged: {
-                        gearLabel.scale = value
+                        onValueChanged: {
+                            gearLabel.scale = value
+                        }
+
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.preferredHeight: gearEditorColumnLeft.maxHeight
+                                                - resetGearButton.height
                     }
-
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                    RoundButton {
+                        id: resetGearButton
+                        contentItem: Item {
+                            width: QMLStyle.kStandardTitleIconSize * 0.8
+                            height: QMLStyle.kStandardTitleIconSize * 0.8
+                            ColoredImage {
+                                source: Constants.kIconBackArrow
+                                sourceSize.width: parent.width
+                                sourceSize.height: parent.height
+                                color: parent.parent.checked ? QMLStyle.kAccentColor : QMLStyle.kIconColor
+                            }
+                        }
+                        Layout.alignment: Qt.AlignHCenter
+                    }
                 }
 
-                Column {
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                    Button {
-                        text: qsTr("Background color 0")
+                ScrollView {
+                    id: gearScrollView
+                    width: 200
+                    height: gearEditorColumnLeft.height
+                    background: Rectangle {
+                        color: QMLStyle.kBackgroundColor
+                        anchors.fill: parent
+                        radius: QMLStyle.kRadius
+                        border.color: QMLStyle.kBorderColor
+                        border.width: 1
                     }
-                    Button {
-                        text: qsTr("Background color 1")
-                    }
-                    Button {
-                        text: qsTr("Background color 2")
-                    }
-                    Button {
-                        text: qsTr("Text color 0")
-                    }
-                    Button {
-                        text: qsTr("Text color 1")
-                    }
-                    Button {
-                        text: qsTr("Text color 2")
+
+                    ColumnLayout {
+                        id: gearEditorColumn
+                        anchors.fill: parent
+                        anchors.margins: Style.kStandardMargin
+
+                        GroupedEditor {
+                            targetElement: root.overlayModel
+                            targetGroup: "gear"
+                            title: qsTr("Gear indicator")
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                        }
                     }
                 }
             }

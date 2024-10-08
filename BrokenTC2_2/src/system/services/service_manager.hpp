@@ -22,6 +22,7 @@ class ServiceManager : public QObject {
   Q_PROPERTY(QString versionStr READ GetVersionStr CONSTANT FINAL);
   Q_PROPERTY(ApplicationSettings* settings READ GetRawSettings CONSTANT FINAL);
   Q_PROPERTY(BaseGearHandler* gearHandler READ GetRawGearHandler CONSTANT FINAL);
+  Q_PROPERTY(GameOverlay* gameOverlay READ GetRawGameOverlay CONSTANT FINAL);
   Q_PROPERTY(ControllerHandler* controllerHandler READ GetRawControllerHandler CONSTANT FINAL);
   Q_PROPERTY(GameSelector* gameSelector READ GetRawGameSelector CONSTANT FINAL);
 
@@ -77,6 +78,10 @@ class ServiceManager : public QObject {
     return m_gear_handler.get();
   }
 
+  GameOverlay* GetRawGameOverlay() {
+    return m_game_overlay.get();
+  }
+
   /* Input related */
   ControllerHandler* GetRawControllerHandler() {
     return m_controller_handler.get();
@@ -112,6 +117,7 @@ class ServiceManager : public QObject {
 
   std::unique_ptr<GameSelector> m_game_selector{nullptr};
   std::unique_ptr<BaseGearHandler> m_gear_handler{nullptr};
+  std::unique_ptr<GameOverlay> m_game_overlay{nullptr};
 
   std::unique_ptr<KeyboardProfile> m_keyboard_profile{nullptr};
 
