@@ -18,6 +18,24 @@
     </message>
 </context>
 <context>
+    <name>GameOverlay</name>
+    <message>
+        <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="+82"/>
+        <source>Place your elements where you want (drag &amp; drop)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Press ESC to leave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Reset to default</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GroupedEditor</name>
     <message>
         <location filename="../src/widgets/GroupedEditor.qml" line="+240"/>
@@ -69,7 +87,7 @@
         <translation type="vanished">Activités</translation>
     </message>
     <message>
-        <location filename="../src/Main.qml" line="+25"/>
+        <location filename="../src/Main.qml" line="+27"/>
         <location/>
         <source>BrokenTC2</source>
         <translation></translation>

@@ -31,7 +31,7 @@ class ServiceManager : public QObject {
                  sdlAxisThresholdModified FINAL)
 
   Q_PROPERTY(QString focusedWindowTitle READ GetFocusedWindowTitle NOTIFY focusedWindowTitleChanged FINAL)
-  // Q_PROPERTY(Game:: name READ name WRITE setName NOTIFY nameChanged FINAL)
+  Q_PROPERTY(Game::Types focusedGame READ GetFocusedWindowGame NOTIFY focusedWindowTitleChanged FINAL)
 
  signals:
   void gearHandlerChanged();
@@ -98,6 +98,7 @@ class ServiceManager : public QObject {
   QString GetFocusedWindowTitle() const {
     return m_focused_window_title;
   }
+  Game::Types GetFocusedWindowGame() const;
 
   /* Main */
   Q_INVOKABLE void OnMainWindowLoaded();
