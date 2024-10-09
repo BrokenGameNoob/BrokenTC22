@@ -4,7 +4,6 @@ import QtQuick.Layouts
 
 import ".."
 import "../../utils"
-// import "../../utils/utils.js" as Utils
 import "../../widgets"
 
 import btc2
@@ -39,17 +38,25 @@ Item {
     width: content.width
     visible: shouldBeVisible
 
-    anchors {
-        verticalCenter: targetComponent.verticalCenter
-        leftMargin: QMLStyle.kStandardMargin
-    }
+    // anchors {
+    //     // verticalCenter: targetComponent.verticalCenter
+    //     leftMargin: QMLStyle.kStandardMargin
+    // }
     readonly property real implicitXRight: targetComponent.x + targetComponent.width
                                            + QMLStyle.kStandardMargin
     readonly property real implicitXLeft: targetComponent.x - width - QMLStyle.kStandardMargin
-    x: (targetComponent.x + targetComponent.width + width
-        + QMLStyle.kStandardMargin) > parent.width ? implicitXLeft : implicitXRight
+    readonly property bool isOnLeft: (targetComponent.x + targetComponent.width + width
+                                      + QMLStyle.kStandardMargin) > parent.width
+    x: isOnLeft ? implicitXLeft : implicitXRight
+
+    readonly property real implicitY: targetComponent.y + targetComponent.height / 2 - height / 2
+    y: clamp(implicitY, 0, parent.height - height)
 
     property bool mouseIsOnMenu: false
+
+    function clamp(value, minValue, maxValue) {
+        return Math.min(Math.max(value, minValue), maxValue)
+    }
 
     onTargetComponentHoveredChanged: {
         hideDelay.start()
@@ -70,6 +77,7 @@ Item {
             id: gearIndicatorEditRow
             height: true ? implicitHeight : 0
             enabled: true
+            LayoutMirroring.enabled: isOnLeft
 
             ColumnLayout {
                 id: gearEditorColumnLeft
