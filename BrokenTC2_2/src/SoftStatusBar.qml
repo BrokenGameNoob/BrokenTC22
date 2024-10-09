@@ -225,8 +225,10 @@ Item {
         text: ServiceManager.gearHandler.gearModeStr
         onClicked: {
             ServiceManager.gearHandler.CycleMode()
+
             //            console.info(ServiceManager.tmp.actions.count)
             //            ServiceManager.tmp.actions[0].key += 1
+            ServiceManager.PublishOverlayNotification("HEY", 1000)
         }
     }
     Label {

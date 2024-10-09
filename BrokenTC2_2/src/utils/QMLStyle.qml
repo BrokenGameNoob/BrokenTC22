@@ -28,6 +28,8 @@ Item {
                                               )
 
     readonly property color kErrorRed: "#ff1f1f"
+    readonly property color kCancelColor: kErrorRed
+    readonly property color kOkColor: "#35ff1f"
 
     function buttonColor(enabled, highlighted, checked, flat = false) {
         return Material.buttonColor(Material.theme, Material.backgroundColor,

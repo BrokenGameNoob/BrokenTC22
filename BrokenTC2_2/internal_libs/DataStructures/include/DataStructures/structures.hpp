@@ -130,11 +130,15 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
 
 DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);
 
-#define GameOverlay_STRUCT_ELEMENTS_LIST(FUNC)                                                     \
-  FUNC(double, GearX, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                 \
-  FUNC(double, GearY, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                 \
-  FUNC(double, GearScaling, 1., "", DataEditor::NO_EDITOR, QObject::tr("Enable"), Game::ALL, true) \
-  FUNC(bool, GearEnabled, DS_DEFAULT, "gear", DataEditor::SWITCH, QObject::tr("Enable"), Game::ALL, true)
+#define GameOverlay_STRUCT_ELEMENTS_LIST(FUNC)                                                            \
+  FUNC(double, GearX, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                        \
+  FUNC(double, GearY, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                        \
+  FUNC(double, GearScaling, 1., "", DataEditor::NO_EDITOR, QObject::tr("Enable"), Game::ALL, true)        \
+  FUNC(bool, GearEnabled, DS_DEFAULT, "gear", DataEditor::SWITCH, QObject::tr("Enable"), Game::ALL, true) \
+  FUNC(double, NotifX, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                       \
+  FUNC(double, NotifY, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                       \
+  FUNC(double, NotifScaling, 1., "", DataEditor::NO_EDITOR, QObject::tr("Enable"), Game::ALL, true)       \
+  FUNC(bool, NotifEnabled, DS_DEFAULT, "notif", DataEditor::SWITCH, QObject::tr("Enable"), Game::ALL, true)
 
 DS_DECLARE_STRUCT(GameOverlay, GameOverlay_STRUCT_ELEMENTS_LIST);
 
