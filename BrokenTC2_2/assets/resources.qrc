@@ -12,5 +12,8 @@
         <file>icons/icon_ubinope.svg</file>
         <file>icons/icon_setup.svg</file>
         <file>icons/icon_overlay.svg</file>
+        <file>icons/icon_reset.svg</file>
+        <file>icons/icon_cancel.svg</file>
+        <file>icons/icon_ok.svg</file>
     </qresource>
 </RCC>

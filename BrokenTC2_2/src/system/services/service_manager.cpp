@@ -33,6 +33,11 @@ ServiceManager::ServiceManager()
       m_keyboard_profile{std::make_unique<KeyboardProfile>(path::GetKeyboardProfilePath(), nullptr)},
       m_window_change_hook{win::HookForFocusedWindowChanged(ServiceManager::OnWindowChangeHook)} {
   //  m_tmp.actions()[0] = {};
+
+  connect(&m_overlay_notification_timer, &QTimer::timeout, this, [this]() {
+    m_overlay_notification_text.clear();
+    emit overlayNotificationUpdated();
+  });
 }
 
 void CALLBACK ServiceManager::OnWindowChangeHook(HWINEVENTHOOK hook, DWORD event, HWND hwnd, LONG idObject,
@@ -55,6 +60,14 @@ Game::Types ServiceManager::GetFocusedWindowGame() const {
 }
 
 void ServiceManager::OnMainWindowLoaded() {}
+
+void ServiceManager::PublishOverlayNotification(const QString& text, int duration_ms) {
+  m_overlay_notification_text = text;
+  m_overlay_notification_timer.stop();
+  m_overlay_notification_timer.setInterval(duration_ms);
+  m_overlay_notification_timer.start();
+  emit overlayNotificationUpdated();
+}
 
 void ServiceManager::UpdateSDLAxisThreshold(double threshold) {
   m_sdl_axis_threshold = threshold;

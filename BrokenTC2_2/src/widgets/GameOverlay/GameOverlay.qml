@@ -103,7 +103,7 @@ Window {
                 horizontalCenter: editModeLabel.horizontalCenter
             }
             onClicked: {
-                content.resetGearLabel()
+                confirmationPopup.openForAll()
             }
         }
         RoundButton {
@@ -132,6 +132,11 @@ Window {
             }
         }
 
+        function resetAll() {
+            resetGearLabel()
+            resetNotifLabel()
+        }
+
         function resetGearLabel() {
             overlayModel.GearX = 0
             overlayModel.GearY = 0
@@ -150,10 +155,6 @@ Window {
             x: implicitX === 0 ? defaultX : implicitX
             y: implicitY === 0 ? defaultY : implicitY
 
-            FontMetrics {
-                id: fm
-                font: gearLabel.font
-            }
             font.pointSize: 50
             font.bold: true
 
@@ -167,9 +168,7 @@ Window {
             text: ServiceManager.gearHandler.gearStr
 
             background: Rectangle {
-                id: gearFrame
                 color: "black"
-                // border.color: QMLStyle.kBorderColor
                 radius: width > height ? height / 2 : width / 2
                 opacity: 0.3
             }
@@ -202,83 +201,143 @@ Window {
         GameOverlayEditMenu {
             globalArea: globalArea
             editModeEnabled: root.editModeEnabled
-            targetComponentHovered: dragGearLabel.containsMouse
-            targetComponentBeingDragged: dragGearLabel.beingDragged
+            targetEnableDragForComponent: dragGearLabel
+            targetComponent: gearLabel
+            minScale: root.minScale
+            maxScale: root.maxScale
 
-            anchors {
-                verticalCenter: gearLabel.verticalCenter
-                left: gearLabel.right
-                leftMargin: Style.kStandardMargin
+            GroupedEditor {
+                id: gearEditor
+                targetElement: root.overlayModel
+                targetGroup: "gear"
+                title: qsTr("Gear indicator")
+                Layout.fillWidth: true
+                Layout.fillHeight: true
             }
 
-            Row {
-                id: gearIndicatorEditRow
-                height: true ? implicitHeight : 0
-                enabled: true
+            onResetWanted: {
+                confirmationPopup.openForElement(gearEditor.title,
+                                                 content.resetGearLabel)
+            }
+        }
 
-                ColumnLayout {
-                    id: gearEditorColumnLeft
-                    readonly property real maxHeight: gearLabel.height * 1.5
-                    height: gearEditorColumnLeft.maxHeight
-                    spacing: 0
-                    Slider {
-                        id: gearScaleSlider
-                        from: root.minScale
-                        to: root.maxScale
-                        value: gearLabel.scale
-                        orientation: Qt.Vertical
+        function resetNotifLabel() {
+            overlayModel.NotifX = 0
+            overlayModel.NotifY = 0
+            overlayModel.NotifScaling = 1
+        }
 
-                        onValueChanged: {
-                            gearLabel.scale = value
-                        }
+        Label {
+            id: notifLabel
 
-                        Layout.alignment: Qt.AlignHCenter
-                        Layout.preferredHeight: gearEditorColumnLeft.maxHeight
-                                                - resetGearButton.height
-                    }
-                    RoundButton {
-                        id: resetGearButton
-                        contentItem: Item {
-                            width: QMLStyle.kStandardTitleIconSize * 0.8
-                            height: QMLStyle.kStandardTitleIconSize * 0.8
-                            ColoredImage {
-                                source: Constants.kIconBackArrow
-                                sourceSize.width: parent.width
-                                sourceSize.height: parent.height
-                                color: parent.parent.checked ? QMLStyle.kAccentColor : QMLStyle.kIconColor
-                            }
-                        }
-                        Layout.alignment: Qt.AlignHCenter
-                    }
+            readonly property real defaultX: QMLStyle.kStandardMargin
+            readonly property real defaultY: parent.height / 2. - height / 2.
+
+            readonly property real implicitX: overlayModel.NotifX
+            readonly property real implicitY: overlayModel.NotifY
+
+            x: implicitX === 0 ? defaultX : implicitX
+            y: implicitY === 0 ? defaultY : implicitY
+
+            font.pointSize: 30
+            font.bold: false
+
+            height: implicitHeight
+
+            width: implicitWidth + QMLStyle.kStandardMargin
+            padding: Style.kStandardMargin
+            topPadding: Style.kStandardMargin / 2
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+
+            readonly property bool shouldBeVisible: ServiceManager.overlayNotificationText.length > 0
+            visible: (overlayModel.NotifEnabled && shouldBeVisible)
+                     || editModeEnabled
+
+            text: editModeEnabled ? qsTr("Notification text") : ServiceManager.overlayNotificationText
+
+            background: Item {
+                Rectangle {
+                    anchors.fill: parent
+                    color: "black"
+                    radius: width > height ? height / 2 : width / 2
+                    opacity: 0.3
                 }
 
-                ScrollView {
-                    id: gearScrollView
-                    width: 200
-                    height: gearEditorColumnLeft.height
-                    background: Rectangle {
-                        color: QMLStyle.kBackgroundColor
-                        anchors.fill: parent
-                        radius: QMLStyle.kRadius
-                        border.color: QMLStyle.kBorderColor
-                        border.width: 1
-                    }
-
-                    ColumnLayout {
-                        id: gearEditorColumn
-                        anchors.fill: parent
-                        anchors.margins: Style.kStandardMargin
-
-                        GroupedEditor {
-                            targetElement: root.overlayModel
-                            targetGroup: "gear"
-                            title: qsTr("Gear indicator")
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                        }
+                Rectangle {
+                    visible: editModeEnabled
+                    color: QMLStyle.kAccentColor
+                    width: 3
+                    opacity: 1.
+                    anchors {
+                        horizontalCenter: parent.left
+                        top: parent.top
+                        topMargin: -QMLStyle.kStandardMargin / 2.
+                        bottom: parent.bottom
+                        bottomMargin: -QMLStyle.kStandardMargin / 2.
                     }
                 }
             }
+
+            EnableDragForComponent {
+                id: dragNotifLabel
+                anchors.fill: parent
+                target: parent
+                minScale: root.minScale
+                maxScale: root.maxScale
+                onDropped: {
+                    overlayModel.NotifX = notifLabel.x
+                    overlayModel.NotifY = notifLabel.y
+                }
+            }
+
+            property bool inhibitScaleUpdate: false
+            Binding {
+                target: notifLabel
+                property: "scale"
+                value: overlayModel.NotifScaling
+            }
+            onScaleChanged: {
+                inhibitScaleUpdate = true
+                overlayModel.NotifScaling = scale
+                inhibitScaleUpdate = false
+            }
+        }
+
+        GameOverlayEditMenu {
+            globalArea: globalArea
+            editModeEnabled: root.editModeEnabled
+            targetEnableDragForComponent: dragNotifLabel
+            targetComponent: notifLabel
+            minScale: root.minScale
+            maxScale: root.maxScale
+
+            GroupedEditor {
+                id: notifEditor
+                targetElement: root.overlayModel
+                targetGroup: "notif"
+                title: qsTr("Notifications")
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+
+            onResetWanted: {
+                confirmationPopup.openForElement(notifEditor.title,
+                                                 content.resetNotifLabel)
+            }
+        }
+    }
+
+    ConfirmationDialog {
+        id: confirmationPopup
+        function openForElement(elementTitle, callback) {
+            text = qsTr("Are you sure you want to reset") + " " + elementTitle + qsTr(
+                        "?")
+            confirmationPopup.confirm(callback)
+        }
+        function openForAll() {
+            text = qsTr("Are you sure you want to reset all elements?")
+            confirmationPopup.confirm(content.resetAll)
         }
     }
 }

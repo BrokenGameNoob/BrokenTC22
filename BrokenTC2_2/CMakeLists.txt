@@ -146,6 +146,7 @@ set(BTC2_QML_FILES
 
     # Utils
     ${BTC2_QML_DIR}/utils/QMLStyle.qml
+    ${BTC2_QML_DIR}/utils/Utils.js
 
     # Widgets
     ${BTC2_SOURCES_DIR}/widgets/ScrollableTextArea.qml
@@ -154,6 +155,7 @@ set(BTC2_QML_FILES
     ${BTC2_SOURCES_DIR}/widgets/ColoredImage.qml
     ${BTC2_SOURCES_DIR}/widgets/ThemedPopup.qml
     ${BTC2_SOURCES_DIR}/widgets/LoadingIcon.qml
+    ${BTC2_SOURCES_DIR}/widgets/ConfirmationDialog.qml
     ${BTC2_SOURCES_DIR}/widgets/GameOverlay/GameOverlay.qml
     ${BTC2_SOURCES_DIR}/widgets/GameOverlay/EnableDragForComponent.qml
     ${BTC2_SOURCES_DIR}/widgets/GameOverlay/GameOverlayEditMenu.qml
