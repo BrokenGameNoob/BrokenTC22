@@ -19,6 +19,13 @@ Item {
         controllerListEditButton.checked = false
     }
 
+    readonly property bool activateEasySetupPanel: easySetupButton.checked
+    function deactivateEasySetupPanel() {
+        easySetupButton.checked = false
+    }
+
+    property alias overlayButtonChecked: overlayButton.checked
+
     // Separator
     Rectangle {
         anchors {
@@ -123,6 +130,49 @@ Item {
             }
         }
     }
+    RoundButton {
+        id: easySetupButton
+        anchors {
+            verticalCenter: parent.verticalCenter
+            left: controllerListEditButton.right
+            leftMargin: Style.kStandardMargin
+        }
+        checkable: true
+        checked: false
+        contentItem: Item {
+            width: QMLStyle.kStandardTitleIconSize * 0.8
+            height: QMLStyle.kStandardTitleIconSize * 0.8
+            ColoredImage {
+                source: Constants.kIconSetup
+                sourceSize.width: parent.width
+                sourceSize.height: parent.height
+                color: parent.parent.checked ? QMLStyle.kAccentColor : QMLStyle.kIconColor
+            }
+        }
+        onClicked: {
+            ServiceManager.test()
+        }
+    }
+    RoundButton {
+        id: overlayButton
+        anchors {
+            verticalCenter: parent.verticalCenter
+            left: easySetupButton.right
+            leftMargin: Style.kStandardMargin
+        }
+        checkable: true
+        checked: false
+        contentItem: Item {
+            width: QMLStyle.kStandardTitleIconSize * 0.8
+            height: QMLStyle.kStandardTitleIconSize * 0.8
+            ColoredImage {
+                source: Constants.kIconOverlay
+                sourceSize.width: parent.width
+                sourceSize.height: parent.height
+                color: parent.parent.checked ? QMLStyle.kAccentColor : QMLStyle.kIconColor
+            }
+        }
+    }
 
     Label {
         id: gearLabel
@@ -175,8 +225,10 @@ Item {
         text: ServiceManager.gearHandler.gearModeStr
         onClicked: {
             ServiceManager.gearHandler.CycleMode()
+
             //            console.info(ServiceManager.tmp.actions.count)
             //            ServiceManager.tmp.actions[0].key += 1
+            ServiceManager.PublishOverlayNotification("HEY", 1000)
         }
     }
     Label {

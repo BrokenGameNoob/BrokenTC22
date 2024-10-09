@@ -19,6 +19,8 @@
 #include <system/services/service_manager.hpp>
 #include <utils/shared_constants.hpp>
 #include <utils/style.hpp>
+#include <games/easy_setup_interface.hpp>
+#include <system/controls_io/keystroke_sequencer.hpp>
 
 bool SetupFolders() {
   auto lambda_create_folder_if_not_exists = [](const QString& path) {
@@ -65,6 +67,8 @@ int SDL_main(int argc, char* argv[]) {
   btc2::Constants::Init();
   btc2::ServiceManager::Init();
   btc2::ControllerHandler::Init();
+  CREGISTER_QML_UNCREATABLE_TYPE(btc2,Game,"Enum class");
+  qmlRegisterUncreatableType<Bidule>("btc2", 1, 0, "Bidule", "Enum class");
 
   /* -- Debug -- */
 #ifdef PRINT_RESOURCES
@@ -104,7 +108,12 @@ int SDL_main(int argc, char* argv[]) {
   SPDLOG_INFO("\tProgram build configuration: {}", btype::BuildTypeStr());
 
   /* Actual exec */
+  std::thread key_sequencer_thread{&btc2::io::KeySequencerThread::Run, &btc2::io::KeySequencerThread::I()};
+
   const auto kRVal{app.exec()};
   btc2::StopLogger();
+  btc2::io::KeySequencerThread::Stop();
+  key_sequencer_thread.join();
+  SPDLOG_INFO("Leaving app.");
   return kRVal;
 }
