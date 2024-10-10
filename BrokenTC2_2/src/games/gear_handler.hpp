@@ -8,8 +8,8 @@
 class Bidule : public QObject {
   Q_OBJECT
  public:
-  Bidule():QObject{}{}
-  enum Types{
+  Bidule() : QObject{} {}
+  enum Types {
     NONE = 1,
     THE_CREW_2 = 2,
     MOTORFIST = 4,
@@ -27,6 +27,7 @@ class BaseGearHandler : public QObject {
   Q_PROPERTY(QString gearStr READ GetGearStr NOTIFY gearChanged FINAL)
   Q_PROPERTY(GearMode gearMode READ GetGearMode WRITE SetGearMode NOTIFY gearModeChanged FINAL)
   Q_PROPERTY(QString gearModeStr READ GetGearModeStr NOTIFY gearModeChanged FINAL)
+  Q_PROPERTY(QString gearModeIconSource READ GetGearModeIconSource NOTIFY gearModeChanged FINAL)
 
  public:
   using GearType = int32_t;
@@ -52,6 +53,7 @@ class BaseGearHandler : public QObject {
 
   Q_INVOKABLE QString GetGearModeStr();
   Q_INVOKABLE QString GetGearStr();
+  Q_INVOKABLE QString GetGearModeIconSource();
 
   /* To reimplement */
 

@@ -26,7 +26,7 @@ Item {
     implicitWidth: rowLayout.implicitWidth
     implicitHeight: rowLayout.implicitHeight
 
-    default property alias label: lbl
+    property alias label: lbl
 
     RowLayout {
         id: rowLayout
@@ -45,11 +45,10 @@ Item {
             Layout.alignment: Qt.AlignVCenter
         }
 
-        Item {
-            id: spacer
-            Layout.preferredWidth: spacerWidth
-        }
-
+        // Item {
+        //     id: spacer
+        //     Layout.preferredWidth: spacerWidth
+        // }
         Label {
             id: lbl
             //            color: root.color

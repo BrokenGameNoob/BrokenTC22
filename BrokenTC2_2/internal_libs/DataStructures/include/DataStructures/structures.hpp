@@ -216,15 +216,20 @@ DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);
   FUNC(int32_t, Gear7, def::kControllerButton, "gear", DataEditor::KEYBOARD_KEY, QObject::tr("Gear 7"), Game::ALL, true)
 
 DS_DECLARE_STRUCT(GameProfileTheCrew, GameProfileTheCrew_STRUCT_ELEMENTS_LIST);
-#define GameOverlay_STRUCT_ELEMENTS_LIST(FUNC)                                                            \
-  FUNC(double, GearX, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                        \
-  FUNC(double, GearY, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                        \
-  FUNC(double, GearScaling, 1., "", DataEditor::NO_EDITOR, QObject::tr("Enable"), Game::ALL, true)        \
-  FUNC(bool, GearEnabled, DS_DEFAULT, "gear", DataEditor::SWITCH, QObject::tr("Enable"), Game::ALL, true) \
-  FUNC(double, NotifX, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                       \
-  FUNC(double, NotifY, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                       \
-  FUNC(double, NotifScaling, 1., "", DataEditor::NO_EDITOR, QObject::tr("Enable"), Game::ALL, true)       \
-  FUNC(bool, NotifEnabled, DS_DEFAULT, "notif", DataEditor::SWITCH, QObject::tr("Enable"), Game::ALL, true)
+
+#define GameOverlay_STRUCT_ELEMENTS_LIST(FUNC)                                                              \
+  FUNC(double, GearX, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                          \
+  FUNC(double, GearY, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                          \
+  FUNC(double, GearScaling, 1., "", DataEditor::NO_EDITOR, QObject::tr("Enable"), Game::ALL, true)          \
+  FUNC(bool, GearEnabled, true, "gear", DataEditor::SWITCH, QObject::tr("Enable"), Game::ALL, true)         \
+  FUNC(double, NotifX, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                         \
+  FUNC(double, NotifY, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                         \
+  FUNC(double, NotifScaling, 1., "", DataEditor::NO_EDITOR, QObject::tr("Enable"), Game::ALL, true)         \
+  FUNC(bool, NotifEnabled, true, "notif", DataEditor::SWITCH, QObject::tr("Enable"), Game::ALL, true)       \
+  FUNC(double, ModeIndicatorX, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                 \
+  FUNC(double, ModeIndicatorY, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                 \
+  FUNC(double, ModeIndicatorScaling, 1., "", DataEditor::NO_EDITOR, QObject::tr("Enable"), Game::ALL, true) \
+  FUNC(bool, ModeIndicatorEnabled, true, "mode", DataEditor::SWITCH, QObject::tr("Enable"), Game::ALL, true)
 
 DS_DECLARE_STRUCT(GameOverlay, GameOverlay_STRUCT_ELEMENTS_LIST);
 
