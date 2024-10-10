@@ -53,18 +53,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+115"/>
+        <location line="+116"/>
         <source>Gear indicator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+51"/>
         <source>Notification text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+62"/>
         <source>Notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+121"/>
+        <source>Clutch mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

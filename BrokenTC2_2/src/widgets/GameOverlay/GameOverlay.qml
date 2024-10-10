@@ -135,6 +135,7 @@ Window {
         function resetAll() {
             resetGearLabel()
             resetNotifLabel()
+            resetClutchModeLabel()
         }
 
         function resetGearLabel() {
@@ -243,16 +244,23 @@ Window {
             font.bold: false
 
             height: implicitHeight
+            width: shouldBeVisible
+                   || editModeEnabled ? implicitWidth + QMLStyle.kStandardMargin : 0
 
-            width: implicitWidth + QMLStyle.kStandardMargin
+            Behavior on width {
+                SmoothedAnimation {
+                    duration: 150
+                }
+            }
+
             padding: Style.kStandardMargin
             topPadding: Style.kStandardMargin / 2
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
+            clip: true
 
             readonly property bool shouldBeVisible: ServiceManager.overlayNotificationText.length > 0
-            visible: (overlayModel.NotifEnabled && shouldBeVisible)
-                     || editModeEnabled
+            visible: (overlayModel.NotifEnabled && width > 0) || editModeEnabled
 
             text: editModeEnabled ? qsTr("Notification text") : ServiceManager.overlayNotificationText
 
@@ -324,6 +332,127 @@ Window {
             onResetWanted: {
                 confirmationPopup.openForElement(notifEditor.title,
                                                  content.resetNotifLabel)
+            }
+        }
+
+        function resetClutchModeLabel() {
+            overlayModel.ModeIndicatorX = 0
+            overlayModel.ModeIndicatorY = 0
+            overlayModel.ModeIndicatorScaling = 1
+        }
+
+        Item {
+            id: clutchModeLabel
+
+            readonly property real defaultX: QMLStyle.kStandardMargin + 200 //TODO:Adjust
+            readonly property real defaultY: parent.height - QMLStyle.kStandardMargin - height
+
+            readonly property real implicitX: overlayModel.ModeIndicatorX
+            readonly property real implicitY: overlayModel.ModeIndicatorY
+
+            x: implicitX === 0 ? defaultX : implicitX
+            y: implicitY === 0 ? defaultY : implicitY
+
+            visible: overlayModel.ModeIndicatorEnabled || editModeEnabled
+
+            width: clutchModeLabelContent.width + QMLStyle.kStandardMargin
+            height: clutchModeLabelContent.height + QMLStyle.kStandardMargin
+
+            Rectangle {
+                anchors.fill: parent
+                color: "black"
+                radius: width > height ? height / 2 : width / 2
+                opacity: 0.3
+            }
+
+            Row {
+                id: clutchModeLabelContent
+                anchors.centerIn: parent
+                spacing: 0
+                ColoredImage {
+                    sourceSize.width: (gearLabel.height - QMLStyle.kStandardMargin) * scale
+                    sourceSize.height: (gearLabel.height - QMLStyle.kStandardMargin) * scale
+                    source: ServiceManager.gearHandler.gearModeIconSource
+                    color: "white"
+                }
+                Text {
+                    id: clutchModeText
+                    readonly property string implicitText: ServiceManager.gearHandler.gearModeStr.toUpperCase()
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: implicitText
+                    color: "white"
+                    font: QMLStyle.kFontH2Bold
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+
+                    width: text.length > 0 ? implicitWidth : 0
+
+                    Behavior on width {
+                        SmoothedAnimation {
+                            duration: 150
+                        }
+                    }
+
+                    onImplicitTextChanged: {
+                        clutchModeText.text = implicitText
+                        resetClutchModeTextTimer.start()
+                    }
+                    Timer {
+                        id: resetClutchModeTextTimer
+                        interval: 1500
+                        running: false
+                        repeat: false
+                        onTriggered: {
+                            clutchModeText.text = ""
+                        }
+                    }
+                }
+            }
+
+            EnableDragForComponent {
+                id: dragClutchModeLabel
+                anchors.fill: parent
+                target: parent
+                minScale: root.minScale
+                maxScale: root.maxScale
+                onDropped: {
+                    overlayModel.ModeIndicatorX = clutchModeLabel.x
+                    overlayModel.ModeIndicatorY = clutchModeLabel.y
+                }
+            }
+
+            property bool inhibitScaleUpdate: false
+            Binding {
+                target: clutchModeLabel
+                property: "scale"
+                value: overlayModel.ModeIndicatorScaling
+            }
+            onScaleChanged: {
+                inhibitScaleUpdate = true
+                overlayModel.ModeIndicatorScaling = scale
+                inhibitScaleUpdate = false
+            }
+        }
+        GameOverlayEditMenu {
+            globalArea: globalArea
+            editModeEnabled: root.editModeEnabled
+            targetEnableDragForComponent: dragClutchModeLabel
+            targetComponent: clutchModeLabel
+            minScale: root.minScale
+            maxScale: root.maxScale
+
+            GroupedEditor {
+                id: clutchModeEditor
+                targetElement: root.overlayModel
+                targetGroup: "mode"
+                title: qsTr("Clutch mode")
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+
+            onResetWanted: {
+                confirmationPopup.openForElement(clutchModeEditor.title,
+                                                 content.resetClutchModeLabel)
             }
         }
     }

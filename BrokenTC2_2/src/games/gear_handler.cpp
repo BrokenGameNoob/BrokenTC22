@@ -3,6 +3,7 @@
 #include <QQmlEngine>
 
 #include <Logger/logger.hpp>
+#include <utils/shared_constants.hpp>
 
 namespace btc2 {
 
@@ -56,6 +57,20 @@ QString BaseGearHandler::GetGearModeStr() {
 
 QString BaseGearHandler::GetGearStr() {
   return GearToString(GetGear());
+}
+
+QString BaseGearHandler::GetGearModeIconSource() {
+  switch (GetGearMode()) {
+    case GearMode::CLUTCH_MODE:
+      return Constants::kIconFast;
+      break;
+    case GearMode::SEQ_MODE:
+      return Constants::kIconSlow;
+    default:
+      SPDLOG_ERROR("Failed to find an icon for gear mode: {}", GetGearModeStr());
+      break;
+  }
+  return Constants::kIconCancel;
 }
 
 QString GearToString(BaseGearHandler::GearType gear) {
