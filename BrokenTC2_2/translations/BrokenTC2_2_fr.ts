@@ -84,31 +84,50 @@
     </message>
 </context>
 <context>
+    <name>GameProfileTab</name>
+    <message>
+        <location filename="../src/tabs/GameProfileTab.qml" line="+33"/>
+        <source>GENERAL CONTROLS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>GROUND VEHICLE</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GroupedEditor</name>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="+240"/>
-        <location/>
         <source>Button: </source>
         <translation></translation>
     </message>
     <message>
-        <location line="+103"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="+395"/>
+        <location line="+149"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-160"/>
+        <location line="-361"/>
+        <location line="+55"/>
         <source>NOT SET</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+194"/>
+        <location line="+191"/>
+        <location line="+149"/>
         <source>Delete binding</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="-130"/>
         <source>Waiting for controller input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+148"/>
+        <source>Waiting for keyboard input</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -189,7 +208,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="+60"/>
+        <location filename="../src/main.cpp" line="+62"/>
         <source>Critical error</source>
         <translation>Erreur fatale</translation>
     </message>
@@ -236,7 +255,7 @@ Exit application.</source>
         <translation>CLAVIER</translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="+31"/>
         <location/>
         <source>SOFTWARE CONTROLS</source>
         <translation>LOGICIEL</translation>

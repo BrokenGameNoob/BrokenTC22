@@ -2,9 +2,9 @@
 
 //
 
+#include <QObject>
 #include <bitset>
 #include <filesystem>
-#include <iostream>
 #include <optional>
 #include <psapi.h>
 #include <tchar.h>
@@ -273,6 +273,137 @@ unsigned int ScancodeFromVirtualKey(unsigned int virtualkey, unsigned int alias)
 }
 
 QString VkCodeToStr(int32_t keyCode) {
+  switch (keyCode) {
+    case VK_LBUTTON:
+      return QObject::tr("Left Mouse Button");
+    case VK_RBUTTON:
+      return QObject::tr("Right Mouse Button");
+    case VK_CANCEL:
+      return QObject::tr("Control-break Processing");
+    case VK_MBUTTON:
+      return QObject::tr("Middle Mouse Button");
+    case VK_XBUTTON1:
+      return QObject::tr("X1 Mouse Button");
+    case VK_XBUTTON2:
+      return QObject::tr("X2 Mouse Button");
+    case VK_BACK:
+      return QObject::tr("Backspace");
+    case VK_TAB:
+      return QObject::tr("Tab");
+    case VK_CLEAR:
+      return QObject::tr("Clear");
+    case VK_RETURN:
+      return QObject::tr("Enter");
+    case VK_SHIFT:
+      return QObject::tr("Shift");
+    case VK_CONTROL:
+      return QObject::tr("Control");
+    case VK_MENU:
+      return QObject::tr("Alt");
+    case VK_PAUSE:
+      return QObject::tr("Pause");
+    case VK_CAPITAL:
+      return QObject::tr("Caps Lock");
+    case VK_ESCAPE:
+      return QObject::tr("Escape");
+    case VK_SPACE:
+      return QObject::tr("Space");
+    case VK_PRIOR:
+      return QObject::tr("Page Up");
+    case VK_NEXT:
+      return QObject::tr("Page Down");
+    case VK_END:
+      return QObject::tr("End");
+    case VK_HOME:
+      return QObject::tr("Home");
+    case VK_LEFT:
+      return QObject::tr("Left Arrow");
+    case VK_UP:
+      return QObject::tr("Up Arrow");
+    case VK_RIGHT:
+      return QObject::tr("Right Arrow");
+    case VK_DOWN:
+      return QObject::tr("Down Arrow");
+    case VK_SELECT:
+      return QObject::tr("Select");
+    case VK_PRINT:
+      return QObject::tr("Print");
+    case VK_EXECUTE:
+      return QObject::tr("Execute");
+    case VK_SNAPSHOT:
+      return QObject::tr("Print Screen");
+    case VK_INSERT:
+      return QObject::tr("Insert");
+    case VK_DELETE:
+      return QObject::tr("Delete");
+    case VK_HELP:
+      return QObject::tr("Help");
+    case VK_LWIN:
+      return QObject::tr("Left Windows");
+    case VK_RWIN:
+      return QObject::tr("Right Windows");
+    case VK_APPS:
+      return QObject::tr("Applications");
+    case VK_SLEEP:
+      return QObject::tr("Sleep");
+    case VK_NUMPAD0:
+      return QObject::tr("Numpad 0");
+    case VK_NUMPAD1:
+      return QObject::tr("Numpad 1");
+    case VK_NUMPAD2:
+      return QObject::tr("Numpad 2");
+    case VK_NUMPAD3:
+      return QObject::tr("Numpad 3");
+    case VK_NUMPAD4:
+      return QObject::tr("Numpad 4");
+    case VK_NUMPAD5:
+      return QObject::tr("Numpad 5");
+    case VK_NUMPAD6:
+      return QObject::tr("Numpad 6");
+    case VK_NUMPAD7:
+      return QObject::tr("Numpad 7");
+    case VK_NUMPAD8:
+      return QObject::tr("Numpad 8");
+    case VK_NUMPAD9:
+      return QObject::tr("Numpad 9");
+    case VK_MULTIPLY:
+      return QObject::tr("Multiply");
+    case VK_ADD:
+      return QObject::tr("Add");
+    case VK_SEPARATOR:
+      return QObject::tr("Separator");
+    case VK_SUBTRACT:
+      return QObject::tr("Subtract");
+    case VK_DECIMAL:
+      return QObject::tr("Decimal");
+    case VK_DIVIDE:
+      return QObject::tr("Divide");
+    case VK_F1:
+      return QObject::tr("F1");
+    case VK_F2:
+      return QObject::tr("F2");
+    case VK_F3:
+      return QObject::tr("F3");
+    case VK_F4:
+      return QObject::tr("F4");
+    case VK_F5:
+      return QObject::tr("F5");
+    case VK_F6:
+      return QObject::tr("F6");
+    case VK_F7:
+      return QObject::tr("F7");
+    case VK_F8:
+      return QObject::tr("F8");
+    case VK_F9:
+      return QObject::tr("F9");
+    case VK_F10:
+      return QObject::tr("F10");
+    case VK_F11:
+      return QObject::tr("F11");
+    case VK_F12:
+      return QObject::tr("F12");
+  }
+
   static bool firstCall{true};
   static bool canProceed{false};
 
@@ -312,6 +443,7 @@ QString VkCodeToStr(int32_t keyCode) {
     }
     return out;
   }
+
   return QString{buffer[0]};
 }
 

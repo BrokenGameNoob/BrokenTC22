@@ -3,9 +3,9 @@
 #include <cstdint>
 #include <queue>
 #include <vector>
-#include <Utils/moving_average.hpp>
 
 #include <Logger/logger.hpp>
+#include <Utils/moving_average.hpp>
 
 namespace btc2::io {
 
@@ -14,7 +14,7 @@ using DelayMsType = int32_t;
 
 class KeySequenceElementKind {
  public:
-  enum Kind {None = 0, Key = 1, Delay = 2 };
+  enum Kind { None = 0, Key = 1, Delay = 2 };
 };
 
 template <typename T>
@@ -52,7 +52,7 @@ class KeySequenceElement {
   DelayMsType m_delay_ms{};
 };
 
-struct KeySequence{
+struct KeySequence {
  public:
   KeySequence(std::initializer_list<KeySequenceElement<KeyboardKeyType>> seq) : m_seq{seq} {}
 
@@ -60,15 +60,15 @@ struct KeySequence{
     std::vector<KeySequenceElement<KeyboardKeyType>> vec{};
     vec.reserve(m_seq.size());
     auto tmp{m_seq};
-    while(!tmp.empty()){
+    while (!tmp.empty()) {
       vec.push_back(tmp.front());
       tmp.pop();
     }
     return vec;
   }
 
-  KeySequenceElement<KeyboardKeyType> Pop(){
-    if(m_seq.empty()){
+  KeySequenceElement<KeyboardKeyType> Pop() {
+    if (m_seq.empty()) {
       return {0}; /* Return a null delay if the queue is empty. Definitely not meant to be used that way */
     }
     auto e{m_seq.front()};
@@ -80,7 +80,7 @@ struct KeySequence{
     return m_seq.empty();
   }
 
-  void AddKey(KeySequenceElement<KeyboardKeyType> e){
+  void AddKey(KeySequenceElement<KeyboardKeyType> e) {
     m_seq.push(std::move(e));
   }
 
@@ -88,14 +88,14 @@ struct KeySequence{
   std::queue<KeySequenceElement<KeyboardKeyType>> m_seq{};
 };
 
-void AsynchronousKeySeq(const KeySequence& seq);
+void AsynchronousKeySeqOld(const KeySequence& seq);
 void AsynchronousKeySeqThread(const KeySequence& seq);
 
 class KeySequencerThread {
  public:
   ~KeySequencerThread();
 
-  static auto& I(){
+  static auto& I() {
     static KeySequencerThread thread{};
     return thread;
   }
@@ -106,7 +106,7 @@ class KeySequencerThread {
 
   void SetSequence(const KeySequence& seq);
 
-  bool IsASequenceRunning(){
+  bool IsASequenceRunning() {
     std::scoped_lock lock{m_mutex};
     return !m_seq.Empty();
   }
@@ -114,7 +114,7 @@ class KeySequencerThread {
  private:
   KeySequencerThread() = default;
   using TimePoint = std::chrono::high_resolution_clock::time_point;
-  static TimePoint Now(){
+  static TimePoint Now() {
     return std::chrono::high_resolution_clock::now();
   }
 

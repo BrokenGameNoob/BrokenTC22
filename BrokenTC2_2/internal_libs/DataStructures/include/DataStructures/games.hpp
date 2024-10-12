@@ -50,7 +50,7 @@ class GameSelector : public QObject {
     emit gameChanged();
   }
   Q_INVOKABLE void SetSelectedGameFromName(const QString& name) {
-    m_selected_game = static_cast<Game::Types>(GetGameFromName(name).toInt());
+    m_selected_game = GetGameFromName(name);
     emit gameChanged();
   }
 
@@ -59,7 +59,8 @@ class GameSelector : public QObject {
   }
 
   Q_INVOKABLE static QStringList GetAvailableGamesNames();
-  Q_INVOKABLE static Games GetGameFromName(const QString& name);
+  Q_INVOKABLE static Game::Types GetGameFromName(const QString& name);
+  Q_INVOKABLE static QString GetGameName(Game::Types game);
 
   QString GetSelectedGameName() const {
     return kGameNames.at(m_selected_game);

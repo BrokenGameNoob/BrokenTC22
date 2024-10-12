@@ -68,9 +68,7 @@ Item {
 
         SoftwareControlsTab {}
 
-        Item {
-            id: discoverTab
-        }
+        GameProfileTab {}
 
         SettingsTab {}
     }

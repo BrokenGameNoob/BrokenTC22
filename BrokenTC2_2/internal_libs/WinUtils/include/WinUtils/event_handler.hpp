@@ -31,6 +31,7 @@ class WindowsEventSingleton : public QObject {
 
  signals:
   void keyDown(int key);
+  void keyUp(int key);
 
  public:
   static WindowsEventSingleton* Instance() {
@@ -47,12 +48,21 @@ class WindowsEventSingleton : public QObject {
     }
     emit keyDown(key);
   }
+  void IEmitKeyUp(int key) {
+    if (m_inhibit_events) {
+      return;
+    }
+    emit keyUp(key);
+  }
   void ISetInhibitEvents(bool inhibit) {
     m_inhibit_events = inhibit;
   }
 
   static void EmitKeyDown(int key) {
     I()->IEmitKeyDown(key);
+  }
+  static void EmitKeyUp(int key) {
+    I()->IEmitKeyUp(key);
   }
   static void SetInhibitEvents(bool inhibit) {
     I()->ISetInhibitEvents(inhibit);
