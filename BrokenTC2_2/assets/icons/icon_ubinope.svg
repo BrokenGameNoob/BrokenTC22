@@ -8,6 +8,9 @@
    sodipodi:docname="icon_ubinope.svg"
    inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
    xml:space="preserve"
+   inkscape:export-filename="icon_ubinope.png"
+   inkscape:export-xdpi="1025.9664"
+   inkscape:export-ydpi="1025.9664"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +32,8 @@
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer2" /><g
+     inkscape:current-layer="layer2"
+     inkscape:export-bgcolor="#ffffff00" /><g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Logo"><path

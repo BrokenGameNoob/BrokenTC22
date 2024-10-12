@@ -8,17 +8,20 @@
 #include <QMessageBox>
 #include <QQmlApplicationEngine>
 #include <QTranslator>
-#include <SDL.h>
 #include <git_version.hpp>
 
 #include <DataStructures/path_utils.hpp>
 #include <DataStructures/structures.hpp>
 #include <Logger/btype.hpp>
 #include <Logger/logger_setup.hpp>
+#include <SDL2/SDL.h>
 #include <debug/qml_log.hpp>
+#include <games/easy_setup_interface.hpp>
+#include <system/controls_io/keystroke_sequencer.hpp>
 #include <system/services/service_manager.hpp>
 #include <utils/shared_constants.hpp>
 #include <utils/style.hpp>
+
 
 bool SetupFolders() {
   auto lambda_create_folder_if_not_exists = [](const QString& path) {
@@ -68,6 +71,8 @@ int SDL_main(int argc, char* argv[]) {
   btc2::ControllerHandler::Init();
   btc2::KeyboardHandler::Init();
   btc2::GameProfilesHandler::Init();
+  CREGISTER_QML_UNCREATABLE_TYPE(btc2, Game, "Enum class");
+  qmlRegisterUncreatableType<Bidule>("btc2", 1, 0, "Bidule", "Enum class");
 
   /* -- Debug -- */
 #ifdef PRINT_RESOURCES
@@ -107,7 +112,12 @@ int SDL_main(int argc, char* argv[]) {
   SPDLOG_INFO("\tProgram build configuration: {}", btype::BuildTypeStr());
 
   /* Actual exec */
+  std::thread key_sequencer_thread{&btc2::io::KeySequencerThread::Run, &btc2::io::KeySequencerThread::I()};
+
   const auto kRVal{app.exec()};
   btc2::StopLogger();
+  btc2::io::KeySequencerThread::Stop();
+  key_sequencer_thread.join();
+  SPDLOG_INFO("Leaving app.");
   return kRVal;
 }

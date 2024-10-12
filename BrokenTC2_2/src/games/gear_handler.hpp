@@ -5,6 +5,19 @@
 #include <cstdint>
 #include <qqmlintegration.h>
 
+class Bidule : public QObject {
+  Q_OBJECT
+ public:
+  Bidule():QObject{}{}
+  enum Types{
+    NONE = 1,
+    THE_CREW_2 = 2,
+    MOTORFIST = 4,
+    ALL = 8,
+  };
+  Q_ENUM(Types)
+};
+
 namespace btc2 {
 
 class BaseGearHandler : public QObject {

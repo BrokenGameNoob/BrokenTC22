@@ -19,7 +19,7 @@
 
 #include <QObject>
 #include <QVector>
-#include <SDL_joystick.h>
+#include <SDL2/SDL_joystick.h>
 
 namespace qsdl {
 
