@@ -11,15 +11,15 @@ void GameProfilesHandler::Init() {
 
 GameProfilesHandler::GameProfilesHandler()
     : QObject{nullptr},
-      m_the_crew2_profile{std::make_shared<GameProfileTheCrew>(path::GetGameProfilePath(Game::kTheCrew2), nullptr)},
+      m_the_crew2_profile{std::make_shared<GameProfileTheCrew>(path::GetGameProfilePath(Game::THE_CREW_2), nullptr)},
       m_the_crew_motorfist_profile{
-          std::make_shared<GameProfileTheCrew>(path::GetGameProfilePath(Game::kTheCrewMotorfist), nullptr)} {}
+          std::make_shared<GameProfileTheCrew>(path::GetGameProfilePath(Game::THE_CREW_MOTORFIST), nullptr)} {}
 
 QVariant GameProfilesHandler::GetQMLGameProfile() const {
   switch (m_current_game) {
-    case Game::kTheCrew2:
+    case Game::THE_CREW_2:
       return QVariant::fromValue(m_the_crew2_profile.get());
-    case Game::kTheCrewMotorfist:
+    case Game::THE_CREW_MOTORFIST:
       return QVariant::fromValue(m_the_crew_motorfist_profile.get());
     default:
       SPDLOG_ERROR("Game profile not found for game: <{}>\nDefaulting to BT2", static_cast<int>(m_current_game));

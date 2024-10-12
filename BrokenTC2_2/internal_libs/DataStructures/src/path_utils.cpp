@@ -16,7 +16,7 @@ QString GetControllerProfilePath(const QString& profile_name) {
 QString GetGamesProfilesPath() {
   return QString("%0/%1").arg(GetAppDataPath(), path::subpaths::kGamesProfiles);
 }
-QString GetGameProfilePath(Game game) {
+QString GetGameProfilePath(Game::Types game) {
   return QString("%0/%1.json").arg(GetGamesProfilesPath(), GameSelector::GetGameName(game));
 }
 

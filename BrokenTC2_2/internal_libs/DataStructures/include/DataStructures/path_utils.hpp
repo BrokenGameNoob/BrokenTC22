@@ -20,7 +20,7 @@ QString GetControllerProfilesPath();
 QString GetControllerProfilePath(const QString& profile_name);
 
 QString GetGamesProfilesPath();
-QString GetGameProfilePath(Game game);
+QString GetGameProfilePath(Game::Types game);
 
 QString GetKeyboardProfilePath();
 QString GetApplicationSettingsPath();

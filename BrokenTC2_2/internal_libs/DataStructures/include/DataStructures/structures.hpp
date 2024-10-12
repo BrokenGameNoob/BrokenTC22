@@ -139,7 +139,7 @@ DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);
        "gear_seq",                                    \
        DataEditor::KEYBOARD_KEY,                      \
        QObject::tr("Gear down"),                      \
-       Game::kAll,                                    \
+       Game::ALL,                                     \
        true)                                          \
   FUNC(int32_t,                                       \
        GearDown,                                      \
@@ -147,7 +147,7 @@ DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);
        "gear_seq",                                    \
        DataEditor::KEYBOARD_KEY,                      \
        QObject::tr("Gear up"),                        \
-       Game::kAll,                                    \
+       Game::ALL,                                     \
        true)                                          \
   FUNC(int32_t,                                       \
        Clutch,                                        \
@@ -155,7 +155,7 @@ DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                        \
        DataEditor::KEYBOARD_KEY,                      \
        QObject::tr("Clutch"),                         \
-       Game::kAll,                                    \
+       Game::ALL,                                     \
        true)                                          \
   FUNC(int32_t,                                       \
        GearReverse,                                   \
@@ -163,7 +163,7 @@ DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                        \
        DataEditor::KEYBOARD_KEY,                      \
        QObject::tr("Gear R"),                         \
-       Game::kAll,                                    \
+       Game::ALL,                                     \
        true)                                          \
   FUNC(int32_t,                                       \
        Gear1,                                         \
@@ -171,7 +171,7 @@ DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                        \
        DataEditor::KEYBOARD_KEY,                      \
        QObject::tr("Gear 1"),                         \
-       Game::kAll,                                    \
+       Game::ALL,                                     \
        true)                                          \
   FUNC(int32_t,                                       \
        Gear2,                                         \
@@ -179,7 +179,7 @@ DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                        \
        DataEditor::KEYBOARD_KEY,                      \
        QObject::tr("Gear 2"),                         \
-       Game::kAll,                                    \
+       Game::ALL,                                     \
        true)                                          \
   FUNC(int32_t,                                       \
        Gear3,                                         \
@@ -187,7 +187,7 @@ DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                        \
        DataEditor::KEYBOARD_KEY,                      \
        QObject::tr("Gear 3"),                         \
-       Game::kAll,                                    \
+       Game::ALL,                                     \
        true)                                          \
   FUNC(int32_t,                                       \
        Gear4,                                         \
@@ -195,7 +195,7 @@ DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                        \
        DataEditor::KEYBOARD_KEY,                      \
        QObject::tr("Gear 4"),                         \
-       Game::kAll,                                    \
+       Game::ALL,                                     \
        true)                                          \
   FUNC(int32_t,                                       \
        Gear5,                                         \
@@ -203,7 +203,7 @@ DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                        \
        DataEditor::KEYBOARD_KEY,                      \
        QObject::tr("Gear 5"),                         \
-       Game::kAll,                                    \
+       Game::ALL,                                     \
        true)                                          \
   FUNC(int32_t,                                       \
        Gear6,                                         \
@@ -211,16 +211,9 @@ DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                        \
        DataEditor::KEYBOARD_KEY,                      \
        QObject::tr("Gear 6"),                         \
-       Game::kAll,                                    \
+       Game::ALL,                                     \
        true)                                          \
-  FUNC(int32_t,                                       \
-       Gear7,                                         \
-       def::kControllerButton,                        \
-       "gear",                                        \
-       DataEditor::KEYBOARD_KEY,                      \
-       QObject::tr("Gear 7"),                         \
-       Game::kAll,                                    \
-       true)
+  FUNC(int32_t, Gear7, def::kControllerButton, "gear", DataEditor::KEYBOARD_KEY, QObject::tr("Gear 7"), Game::ALL, true)
 
 DS_DECLARE_STRUCT(GameProfileTheCrew, GameProfileTheCrew_STRUCT_ELEMENTS_LIST);
 #define GameOverlay_STRUCT_ELEMENTS_LIST(FUNC)                                                            \

@@ -30,7 +30,7 @@ class GameProfilesHandler : public QObject {
     return m_the_crew_motorfist_profile;
   }
 
-  void SetCurrentGame(Game game) {
+  void SetCurrentGame(Game::Types game) {
     m_current_game = game;
     emit currentGameChanged();
   }
@@ -39,7 +39,7 @@ class GameProfilesHandler : public QObject {
   std::shared_ptr<GameProfileTheCrew> m_the_crew2_profile{nullptr};
   std::shared_ptr<GameProfileTheCrew> m_the_crew_motorfist_profile{nullptr};
 
-  Game m_current_game{Game::kNone};
+  Game::Types m_current_game{Game::NONE};
 };
 
 }  // namespace btc2

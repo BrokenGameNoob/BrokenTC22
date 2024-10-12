@@ -7,6 +7,6 @@
 
 namespace btc2 {
 
-std::unique_ptr<BaseGearHandler> MakeGearHandler(Game handler_type);
+std::unique_ptr<BaseGearHandler> MakeGearHandler(Game::Types handler_type);
 
 }  // namespace btc2
