@@ -8,19 +8,20 @@
 #include <QMessageBox>
 #include <QQmlApplicationEngine>
 #include <QTranslator>
-#include <SDL2/SDL.h>
 #include <git_version.hpp>
 
 #include <DataStructures/path_utils.hpp>
 #include <DataStructures/structures.hpp>
 #include <Logger/btype.hpp>
 #include <Logger/logger_setup.hpp>
+#include <SDL2/SDL.h>
 #include <debug/qml_log.hpp>
+#include <games/easy_setup_interface.hpp>
+#include <system/controls_io/keystroke_sequencer.hpp>
 #include <system/services/service_manager.hpp>
 #include <utils/shared_constants.hpp>
 #include <utils/style.hpp>
-#include <games/easy_setup_interface.hpp>
-#include <system/controls_io/keystroke_sequencer.hpp>
+
 
 bool SetupFolders() {
   auto lambda_create_folder_if_not_exists = [](const QString& path) {
@@ -38,6 +39,7 @@ bool SetupFolders() {
   bool success{true};
   success &= lambda_create_folder_if_not_exists(btc2::path::GetAppDataPath());
   success &= lambda_create_folder_if_not_exists(btc2::path::GetControllerProfilesPath());
+  success &= lambda_create_folder_if_not_exists(btc2::path::GetGamesProfilesPath());
   return success;
 }
 
@@ -67,7 +69,9 @@ int SDL_main(int argc, char* argv[]) {
   btc2::Constants::Init();
   btc2::ServiceManager::Init();
   btc2::ControllerHandler::Init();
-  CREGISTER_QML_UNCREATABLE_TYPE(btc2,Game,"Enum class");
+  btc2::KeyboardHandler::Init();
+  btc2::GameProfilesHandler::Init();
+  CREGISTER_QML_UNCREATABLE_TYPE(btc2, Game, "Enum class");
   qmlRegisterUncreatableType<Bidule>("btc2", 1, 0, "Bidule", "Enum class");
 
   /* -- Debug -- */

@@ -35,13 +35,21 @@ QStringList GameSelector::GetAvailableGamesNames() {
   return out;
 }
 
-Games GameSelector::GetGameFromName(const QString& name) {
+Game::Types GameSelector::GetGameFromName(const QString& name) {
   for (const auto& [game, game_name] : GameSelector::kGameNames) {
     if (game_name == name) {
-      return game;
+      return static_cast<Game::Types>(game.toInt());
     }
   }
   return Game::NONE;
+}
+
+QString GameSelector::GetGameName(Game::Types game) {
+  if (kGameNames.find(game) == kGameNames.end()) {
+    SPDLOG_ERROR("Game not found: <{}>", static_cast<int>(game));
+    return kGameNames.at(Game::NONE);
+  }
+  return kGameNames.at(game);
 }
 
 }  // namespace btc2

@@ -38,11 +38,15 @@ LRESULT CALLBACK WindowsEventSingleton::LowLevelKeyboardProc(int nCode, WPARAM w
     auto vkCode = p->vkCode;
     switch (wParam) {
       case WM_KEYDOWN:
-      case WM_SYSKEYDOWN:
         EmitKeyDown(vkCode);
         break;
+      case WM_SYSKEYDOWN:
+        break;
       case WM_KEYUP:
+        EmitKeyUp(vkCode);
+        break;
       case WM_SYSKEYUP:
+        break;
       default:
         break;
     }
@@ -59,7 +63,6 @@ WindowsEventSingleton::~WindowsEventSingleton() {}
 
 void SendKeyboardEvent(int code, bool pressed) {
   auto input{GetKbInput(code, pressed)};
-  SPDLOG_DEBUG("KB EVENT: {} ({}): pressed? {}", code, win::VkCodeToStr(code), pressed);
   WindowsEventSingleton::SetInhibitEvents(true);
   if (!SendInput(1, &input, sizeof(INPUT))) {
     SPDLOG_WARN("Could not simulate input with vk_code: {} ({})", code, win::VkCodeToStr(code));

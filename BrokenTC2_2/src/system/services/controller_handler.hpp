@@ -45,6 +45,8 @@ class ControllerHandler : public QObject {
   ControllerProfile* QMLActiveController() const;
   Q_INVOKABLE void SetActiveController(const QString& controller_name);
 
+  bool GetIsInEnterKeybindMode() const;
+
  public slots:
   Q_INVOKABLE void RefreshKnownControllersFromDisk();
   Q_INVOKABLE void SortKnownControllers();
@@ -58,7 +60,6 @@ class ControllerHandler : public QObject {
 
   Q_INVOKABLE void EnterKeybindMode();
   Q_INVOKABLE void LeaveKeybindMode();
-  bool GetIsInEnterKeybindMode() const;
 
  private:
   int ControllerIdForName(const QString& controller_name) const;

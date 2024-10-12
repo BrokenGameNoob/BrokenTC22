@@ -11,6 +11,8 @@
 #include <games/gear_handler_factory.hpp>
 #include <games/gear_handler_the_crew.hpp>
 #include <system/services/controller_handler.hpp>
+#include <system/services/game_profiles_handler.hpp>
+#include <system/services/keyboard_handler.hpp>
 
 namespace btc2 {
 
@@ -21,9 +23,11 @@ class ServiceManager : public QObject {
   Q_PROPERTY(bool hasDebInfo READ HasDebInfo CONSTANT FINAL);
   Q_PROPERTY(QString versionStr READ GetVersionStr CONSTANT FINAL);
   Q_PROPERTY(ApplicationSettings* settings READ GetRawSettings CONSTANT FINAL);
-  Q_PROPERTY(BaseGearHandler* gearHandler READ GetRawGearHandler CONSTANT FINAL);
+  Q_PROPERTY(BaseGearHandler* gearHandler READ GetRawGearHandler NOTIFY gearHandlerChanged FINAL);
   Q_PROPERTY(ControllerHandler* controllerHandler READ GetRawControllerHandler CONSTANT FINAL);
+  Q_PROPERTY(KeyboardHandler* keyboardHandler READ GetRawKeyboardHandler CONSTANT FINAL);
   Q_PROPERTY(GameSelector* gameSelector READ GetRawGameSelector CONSTANT FINAL);
+  Q_PROPERTY(GameProfilesHandler* gameProfilesHandler READ GetRawGameProfilesHandler CONSTANT FINAL);
 
   Q_PROPERTY(GameOverlay* gameOverlay READ GetRawGameOverlay CONSTANT FINAL);
   Q_PROPERTY(QString overlayNotificationText MEMBER m_overlay_notification_text NOTIFY overlayNotificationUpdated)
@@ -77,8 +81,18 @@ class ServiceManager : public QObject {
     return m_game_selector.get();
   }
 
+  static BaseGearHandler& GetGearHandler() {
+    return *(I().m_gear_handler);
+  }
   BaseGearHandler* GetRawGearHandler() {
     return m_gear_handler.get();
+  }
+
+  static GameProfilesHandler& GetGameProfilesHandler() {
+    return *(I().m_game_profiles_handler);
+  }
+  GameProfilesHandler* GetRawGameProfilesHandler() {
+    return m_game_profiles_handler.get();
   }
 
   GameOverlay* GetRawGameOverlay() {
@@ -90,6 +104,9 @@ class ServiceManager : public QObject {
   /* Input related */
   ControllerHandler* GetRawControllerHandler() {
     return m_controller_handler.get();
+  }
+  KeyboardHandler* GetRawKeyboardHandler() {
+    return m_keyboard_handler.get();
   }
 
   btc2::KeyboardProfile* GetRawActiveKeyboardProfile() {
@@ -118,7 +135,10 @@ class ServiceManager : public QObject {
 
   std::unique_ptr<ApplicationSettings> m_settings{nullptr};
 
+  std::unique_ptr<GameProfilesHandler> m_game_profiles_handler{nullptr};
+
   std::unique_ptr<ControllerHandler> m_controller_handler{nullptr};
+  std::unique_ptr<KeyboardHandler> m_keyboard_handler{nullptr};
 
   std::unique_ptr<GameSelector> m_game_selector{nullptr};
   std::unique_ptr<BaseGearHandler> m_gear_handler{nullptr};
