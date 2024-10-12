@@ -32,7 +32,7 @@ ServiceManager::ServiceManager()
       m_keyboard_handler{std::make_unique<KeyboardHandler>()},
       m_game_selector{std::make_unique<GameSelector>()},
       m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)},
-      m_game_overlay{std::make_unique<GameOverlay>(path::GetOverlaySettingsPath(), nullptr)},
+      m_game_overlay{std::make_unique<GameOverlayData>(path::GetOverlaySettingsPath(), nullptr)},
       m_keyboard_profile{std::make_unique<KeyboardProfile>(path::GetKeyboardProfilePath(), nullptr)},
       m_window_change_hook{win::HookForFocusedWindowChanged(ServiceManager::OnWindowChangeHook)} {
   connect(m_game_selector.get(), &GameSelector::gameChanged, this, [this]() {

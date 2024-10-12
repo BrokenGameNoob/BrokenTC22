@@ -161,6 +161,9 @@ set(BTC2_QML_FILES
     ${BTC2_SOURCES_DIR}/widgets/GameOverlay/GameOverlay.qml
     ${BTC2_SOURCES_DIR}/widgets/GameOverlay/EnableDragForComponent.qml
     ${BTC2_SOURCES_DIR}/widgets/GameOverlay/GameOverlayEditMenu.qml
+    ${BTC2_SOURCES_DIR}/widgets/ColorPicker.qml
+    ${BTC2_SOURCES_DIR}/widgets/ButtonOk.qml
+    ${BTC2_SOURCES_DIR}/widgets/ButtonCancel.qml
 
     # Tabs
     ${BTC2_QML_DIR}/tabs/SettingsTab.qml

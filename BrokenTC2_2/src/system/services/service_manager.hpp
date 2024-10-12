@@ -29,7 +29,7 @@ class ServiceManager : public QObject {
   Q_PROPERTY(GameSelector* gameSelector READ GetRawGameSelector CONSTANT FINAL);
   Q_PROPERTY(GameProfilesHandler* gameProfilesHandler READ GetRawGameProfilesHandler CONSTANT FINAL);
 
-  Q_PROPERTY(GameOverlay* gameOverlay READ GetRawGameOverlay CONSTANT FINAL);
+  Q_PROPERTY(GameOverlayData* gameOverlay READ GetRawGameOverlay CONSTANT FINAL);
   Q_PROPERTY(QString overlayNotificationText MEMBER m_overlay_notification_text NOTIFY overlayNotificationUpdated)
 
   Q_PROPERTY(KeyboardProfile* keyboardProfile READ GetRawActiveKeyboardProfile CONSTANT FINAL);
@@ -95,7 +95,7 @@ class ServiceManager : public QObject {
     return m_game_profiles_handler.get();
   }
 
-  GameOverlay* GetRawGameOverlay() {
+  GameOverlayData* GetRawGameOverlay() {
     return m_game_overlay.get();
   }
 
@@ -142,7 +142,7 @@ class ServiceManager : public QObject {
 
   std::unique_ptr<GameSelector> m_game_selector{nullptr};
   std::unique_ptr<BaseGearHandler> m_gear_handler{nullptr};
-  std::unique_ptr<GameOverlay> m_game_overlay{nullptr};
+  std::unique_ptr<GameOverlayData> m_game_overlay{nullptr};
   QString m_overlay_notification_text{};
   QTimer m_overlay_notification_timer{};
 

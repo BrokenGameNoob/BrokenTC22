@@ -12,8 +12,8 @@ Popup {
     id: frame
 
     property color backgroundColor: QMLStyle.kBackgroundColor
-    property color borderColor: QMLStyle.kBackgroundColor
-    property real borderWidth: 0
+    property color borderColor: QMLStyle.kAccentColor
+    property real borderWidth: 1
     property color dimmedColor: Qt.darker(QMLStyle.kBackgroundColor, 1.2)
     property real dimmedColorOpacity: 0.9
 

@@ -21,9 +21,13 @@
 #include <system/services/service_manager.hpp>
 #include <utils/shared_constants.hpp>
 #include <utils/style.hpp>
+<<<<<<< HEAD
 
+    == == ==
+    =
+>>>>>>> b753e0e (Added color customization on overlay)
 
-bool SetupFolders() {
+        bool SetupFolders() {
   auto lambda_create_folder_if_not_exists = [](const QString& path) {
     QDir dir{path};
     if (dir.exists()) {
@@ -72,7 +76,7 @@ int SDL_main(int argc, char* argv[]) {
   btc2::KeyboardHandler::Init();
   btc2::GameProfilesHandler::Init();
   CREGISTER_QML_UNCREATABLE_TYPE(btc2, Game, "Enum class");
-  qmlRegisterUncreatableType<Bidule>("btc2", 1, 0, "Bidule", "Enum class");
+  CREGISTER_QML_UNCREATABLE_TYPE(btc2, GearHandlerMode, "Enum class");
 
   /* -- Debug -- */
 #ifdef PRINT_RESOURCES
