@@ -8,7 +8,7 @@
 namespace btc2 {
 
 using GearType = BaseGearHandler::GearType;
-using GearMode = BaseGearHandler::GearMode;
+using GearMode = GearHandlerMode::Type;
 
 void BaseGearHandler::Init() {
   SPDLOG_INFO("Init");
@@ -30,10 +30,10 @@ void BaseGearHandler::SetGear(GearType gear) {
   emit gearChanged();
 }
 
-GearMode BaseGearHandler::GetGearMode() const {
+GearHandlerMode::Type BaseGearHandler::GetGearMode() const {
   return m_mode;
 }
-void BaseGearHandler::SetGearMode(GearMode mode) {
+void BaseGearHandler::SetGearMode(GearHandlerMode::Type mode) {
   if (mode == m_mode) {
     return;
   }
@@ -44,7 +44,7 @@ void BaseGearHandler::SetGearMode(GearMode mode) {
   emit gearModeChanged();
 }
 void BaseGearHandler::CycleMode() {
-  if (m_mode + 1 < GearMode::kMaxEnumValue) {
+  if (m_mode + 1 < GearMode::MAX_MODE_ENUM_VALUE) {
     SetGearMode(static_cast<GearMode>(m_mode + 1));
   } else {
     SetGearMode(GearMode{});

@@ -2,6 +2,35 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
+    <name>ButtonCancel</name>
+    <message>
+        <location filename="../src/widgets/ButtonCancel.qml" line="+12"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ButtonOk</name>
+    <message>
+        <location filename="../src/widgets/ButtonOk.qml" line="+12"/>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ColorPicker</name>
+    <message>
+        <location filename="../src/widgets/ColorPicker.qml" line="+231"/>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ConfirmationDialog</name>
     <message>
         <location filename="../src/widgets/ConfirmationDialog.qml" line="+18"/>
@@ -53,12 +82,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+116"/>
+        <location line="+110"/>
         <source>Gear indicator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+51"/>
+        <location line="+46"/>
         <source>Notification text</source>
         <translation type="unfinished"></translation>
     </message>
@@ -68,12 +97,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+121"/>
+        <location line="+117"/>
         <source>Clutch mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+16"/>
         <source>Are you sure you want to reset</source>
         <translation type="unfinished"></translation>
     </message>
@@ -104,6 +133,7 @@
 <context>
     <name>GroupedEditor</name>
     <message>
+        <location filename="../src/widgets/GroupedEditor.qml" line="+248"/>
         <source>Button: </source>
         <translation></translation>
     </message>

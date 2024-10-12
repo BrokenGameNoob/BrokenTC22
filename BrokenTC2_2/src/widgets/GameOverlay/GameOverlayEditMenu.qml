@@ -38,10 +38,6 @@ Item {
     width: content.width
     visible: shouldBeVisible
 
-    // anchors {
-    //     // verticalCenter: targetComponent.verticalCenter
-    //     leftMargin: QMLStyle.kStandardMargin
-    // }
     readonly property real implicitXRight: targetComponent.x + targetComponent.width
                                            + QMLStyle.kStandardMargin
     readonly property real implicitXLeft: targetComponent.x - width - QMLStyle.kStandardMargin
@@ -114,29 +110,71 @@ Item {
                     }
                     Layout.alignment: Qt.AlignHCenter
                     onClicked: {
-                        console.error("DO ME")
-                        //ask confirmation to the user before committing
                         resetWanted()
                     }
                 }
             }
 
-            ScrollView {
-                id: gearScrollView
-                width: 200
+            Item {
+                width: 250
                 height: gearEditorColumnLeft.height
-                background: Rectangle {
-                    color: QMLStyle.kBackgroundColor
+                ScrollView {
+                    id: gearScrollView
                     anchors.fill: parent
-                    radius: QMLStyle.kRadius
-                    border.color: QMLStyle.kBorderColor
-                    border.width: 1
+                    background: Rectangle {
+                        color: QMLStyle.kBackgroundColor
+                        anchors.fill: parent
+                        radius: QMLStyle.kRadius
+                        border.color: QMLStyle.kBorderColor
+                        border.width: 1
+                    }
+
+                    contentHeight: gearEditorColumn.implicitHeight + QMLStyle.kStandardMargin
+
+                    ColumnLayout {
+                        id: gearEditorColumn
+                        anchors.fill: parent
+                        anchors.margins: Style.kStandardMargin
+                        anchors.rightMargin: gearScrollView.verticalScrollWidth
+                                             + QMLStyle.kStandardMargin
+                    }
+
+                    readonly property real verticalScrollWidth: gearScrollView.ScrollBar.vertical.width
+                    readonly property real verticalScrollMax: gearScrollView.ScrollBar.vertical.size
+
+                    readonly property bool isScrolledDown: gearScrollView.ScrollBar.vertical.position + gearScrollView.ScrollBar.vertical.size == 1
+                    readonly property bool isScrolledUp: gearScrollView.ScrollBar.vertical.position
+                                                         === 0
+
+                    ScrollBar.vertical.policy: ScrollBar.AsNeeded
                 }
 
-                ColumnLayout {
-                    id: gearEditorColumn
-                    anchors.fill: parent
-                    anchors.margins: Style.kStandardMargin
+                ColoredImage {
+                    source: Constants.kIconBackArrow
+                    rotation: -90
+                    color: QMLStyle.kIconColor
+                    sourceSize.width: gearScrollView.verticalScrollWidth * 0.6
+                    anchors {
+                        horizontalCenter: gearScrollView.right
+                        horizontalCenterOffset: -gearScrollView.verticalScrollWidth / 2.
+                        bottom: gearScrollView.bottom
+                        bottomMargin: QMLStyle.kStandardMargin / 2.
+                    }
+                    visible: !gearScrollView.isScrolledDown
+                }
+
+                ColoredImage {
+                    source: Constants.kIconBackArrow
+                    rotation: 90
+                    color: QMLStyle.kIconColor
+                    sourceSize.width: gearScrollView.verticalScrollWidth * 0.6
+                    anchors {
+                        horizontalCenter: gearScrollView.right
+                        horizontalCenterOffset: -gearScrollView.verticalScrollWidth / 2.
+                        top: gearScrollView.top
+                        topMargin: QMLStyle.kStandardMargin / 2.
+                    }
+                    visible: !gearScrollView.isScrolledUp
                 }
             }
         }

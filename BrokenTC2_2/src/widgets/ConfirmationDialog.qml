@@ -87,12 +87,9 @@ ThemedPopup {
             Item {
                 Layout.fillWidth: true
             }
-            Button {
+
+            ButtonOk {
                 text: confirmationPopup.yesButtonText
-
-                icon.source: Constants.kIconOk
-                icon.color: QMLStyle.kOkColor
-
                 onClicked: {
                     if (confirmationPopup.callback) {
                         confirmationPopup.callback()
@@ -100,14 +97,14 @@ ThemedPopup {
                     confirmationPopup.close()
                 }
             }
+
             Item {
                 Layout.preferredWidth: QMLStyle.kStandardMargin
             }
-            Button {
+
+            ButtonCancel {
                 text: confirmationPopup.cancelButtonText
 
-                icon.source: Constants.kIconCancel
-                icon.color: QMLStyle.kCancelColor
                 onClicked: {
                     confirmationPopup.close()
                 }

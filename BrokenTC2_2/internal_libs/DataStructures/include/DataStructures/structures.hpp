@@ -217,20 +217,48 @@ DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);
 
 DS_DECLARE_STRUCT(GameProfileTheCrew, GameProfileTheCrew_STRUCT_ELEMENTS_LIST);
 
-#define GameOverlay_STRUCT_ELEMENTS_LIST(FUNC)                                                              \
-  FUNC(double, GearX, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                          \
-  FUNC(double, GearY, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                          \
-  FUNC(double, GearScaling, 1., "", DataEditor::NO_EDITOR, QObject::tr("Enable"), Game::ALL, true)          \
-  FUNC(bool, GearEnabled, true, "gear", DataEditor::SWITCH, QObject::tr("Enable"), Game::ALL, true)         \
-  FUNC(double, NotifX, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                         \
-  FUNC(double, NotifY, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                         \
-  FUNC(double, NotifScaling, 1., "", DataEditor::NO_EDITOR, QObject::tr("Enable"), Game::ALL, true)         \
-  FUNC(bool, NotifEnabled, true, "notif", DataEditor::SWITCH, QObject::tr("Enable"), Game::ALL, true)       \
-  FUNC(double, ModeIndicatorX, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                 \
-  FUNC(double, ModeIndicatorY, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::ALL, false)                 \
-  FUNC(double, ModeIndicatorScaling, 1., "", DataEditor::NO_EDITOR, QObject::tr("Enable"), Game::ALL, true) \
-  FUNC(bool, ModeIndicatorEnabled, true, "mode", DataEditor::SWITCH, QObject::tr("Enable"), Game::ALL, true)
+constexpr auto kDefaultOverlayBackgroundColor{"#50000000"};
 
-DS_DECLARE_STRUCT(GameOverlay, GameOverlay_STRUCT_ELEMENTS_LIST);
+#define GameOverlay_STRUCT_ELEMENTS_LIST(FUNC)                                                                         \
+  FUNC(double, GearX, DS_DEFAULT, "gear", DataEditor::NO_EDITOR, "", Game::NONE, false)                                \
+  FUNC(double, GearY, DS_DEFAULT, "gear", DataEditor::NO_EDITOR, "", Game::NONE, false)                                \
+  FUNC(double, GearScaling, 1., "gear", DataEditor::NO_EDITOR, "", Game::NONE, false)                                  \
+  FUNC(bool, GearEnabled, true, "gear", DataEditor::SWITCH, QObject::tr("Enable"), Game::ALL, true)                    \
+  FUNC(double, NotifX, DS_DEFAULT, "notif", DataEditor::NO_EDITOR, "", Game::NONE, false)                              \
+  FUNC(double, NotifY, DS_DEFAULT, "notif", DataEditor::NO_EDITOR, "", Game::NONE, false)                              \
+  FUNC(double, NotifScaling, 1., "notif", DataEditor::NO_EDITOR, "", Game::NONE, false)                                \
+  FUNC(QString,                                                                                                        \
+       NotifBackgroundColor,                                                                                           \
+       kDefaultOverlayBackgroundColor,                                                                                 \
+       "notif",                                                                                                        \
+       DataEditor::COLOR,                                                                                              \
+       QObject::tr("Background"),                                                                                      \
+       Game::ALL,                                                                                                      \
+       true)                                                                                                           \
+  FUNC(bool, NotifEnabled, true, "notif", DataEditor::SWITCH, QObject::tr("Enable"), Game::ALL, true)                  \
+  FUNC(double, ModeIndicatorX, DS_DEFAULT, "mode", DataEditor::NO_EDITOR, "", Game::NONE, false)                       \
+  FUNC(double, ModeIndicatorY, DS_DEFAULT, "mode", DataEditor::NO_EDITOR, "", Game::NONE, false)                       \
+  FUNC(double, ModeIndicatorScaling, 1., "mode", DataEditor::NO_EDITOR, "", Game::NONE, false)                         \
+  FUNC(bool, ModeIndicatorEnabled, true, "mode", DataEditor::SWITCH, QObject::tr("Enable"), Game::ALL, true)           \
+  FUNC(                                                                                                                \
+      QString, ClutchColor, "#FFFFFFFF", "mode,gear", DataEditor::COLOR, QObject::tr("Clutch color"), Game::ALL, true) \
+  FUNC(QString,                                                                                                        \
+       NoClutchColor,                                                                                                  \
+       "#FFFF0000",                                                                                                    \
+       "mode,gear",                                                                                                    \
+       DataEditor::COLOR,                                                                                              \
+       QObject::tr("No clutch color"),                                                                                 \
+       Game::ALL,                                                                                                      \
+       true)                                                                                                           \
+  FUNC(QString,                                                                                                        \
+       GearBackgroundColor,                                                                                            \
+       kDefaultOverlayBackgroundColor,                                                                                 \
+       "mode,gear",                                                                                                    \
+       DataEditor::COLOR,                                                                                              \
+       QObject::tr("Background"),                                                                                      \
+       Game::ALL,                                                                                                      \
+       true)
+
+DS_DECLARE_STRUCT(GameOverlayData, GameOverlay_STRUCT_ELEMENTS_LIST);
 
 }  // namespace btc2

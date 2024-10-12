@@ -133,15 +133,9 @@ Window {
         }
 
         function resetAll() {
-            resetGearLabel()
-            resetNotifLabel()
-            resetClutchModeLabel()
-        }
-
-        function resetGearLabel() {
-            overlayModel.GearX = 0
-            overlayModel.GearY = 0
-            overlayModel.GearScaling = 1
+            gearEditor.resetAllFieldsForGroupTitle()
+            notifEditor.resetAllFieldsForGroupTitle()
+            clutchModeEditor.resetAllFieldsForGroupTitle()
         }
 
         Label {
@@ -169,9 +163,9 @@ Window {
             text: ServiceManager.gearHandler.gearStr
 
             background: Rectangle {
-                color: "black"
+                color: overlayModel.GearBackgroundColor
                 radius: width > height ? height / 2 : width / 2
-                opacity: 0.3
+                opacity: 1
             }
 
             EnableDragForComponent {
@@ -217,15 +211,10 @@ Window {
             }
 
             onResetWanted: {
-                confirmationPopup.openForElement(gearEditor.title,
-                                                 content.resetGearLabel)
+                confirmationPopup.openForElement(
+                            gearEditor.title,
+                            gearEditor.resetAllFieldsForGroupTitle)
             }
-        }
-
-        function resetNotifLabel() {
-            overlayModel.NotifX = 0
-            overlayModel.NotifY = 0
-            overlayModel.NotifScaling = 1
         }
 
         Label {
@@ -267,9 +256,9 @@ Window {
             background: Item {
                 Rectangle {
                     anchors.fill: parent
-                    color: "black"
+                    color: overlayModel.NotifBackgroundColor
                     radius: width > height ? height / 2 : width / 2
-                    opacity: 0.3
+                    opacity: 1.
                 }
 
                 Rectangle {
@@ -330,15 +319,10 @@ Window {
             }
 
             onResetWanted: {
-                confirmationPopup.openForElement(notifEditor.title,
-                                                 content.resetNotifLabel)
+                confirmationPopup.openForElement(
+                            notifEditor.title,
+                            notifEditor.resetAllFieldsForGroupTitle)
             }
-        }
-
-        function resetClutchModeLabel() {
-            overlayModel.ModeIndicatorX = 0
-            overlayModel.ModeIndicatorY = 0
-            overlayModel.ModeIndicatorScaling = 1
         }
 
         Item {
@@ -360,9 +344,9 @@ Window {
 
             Rectangle {
                 anchors.fill: parent
-                color: "black"
+                color: overlayModel.GearBackgroundColor
                 radius: width > height ? height / 2 : width / 2
-                opacity: 0.3
+                opacity: 1
             }
 
             Row {
@@ -373,7 +357,8 @@ Window {
                     sourceSize.width: (gearLabel.height - QMLStyle.kStandardMargin) * scale
                     sourceSize.height: (gearLabel.height - QMLStyle.kStandardMargin) * scale
                     source: ServiceManager.gearHandler.gearModeIconSource
-                    color: "white"
+                    color: ServiceManager.gearHandler.gearMode
+                           === GearHandlerMode.CLUTCH_MODE ? overlayModel.ClutchColor : overlayModel.NoClutchColor
                 }
                 Text {
                     id: clutchModeText
@@ -451,8 +436,9 @@ Window {
             }
 
             onResetWanted: {
-                confirmationPopup.openForElement(clutchModeEditor.title,
-                                                 content.resetClutchModeLabel)
+                confirmationPopup.openForElement(
+                            clutchModeEditor.title,
+                            clutchModeEditor.resetAllFieldsForGroupTitle)
             }
         }
     }

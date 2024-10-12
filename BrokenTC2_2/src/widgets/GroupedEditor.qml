@@ -12,16 +12,22 @@ Item {
     id: frame
     required property var targetElement
     required property string targetGroup
-    readonly property real componentHeight: 35
 
     property alias title: titleText.text
     property bool alignTitleLeft: true
     clip: false
 
+    readonly property real componentHeight: 35
+
     readonly property real implicitHeight2: {
         col.implicitHeight + titleText.implicitHeight + Style.kStandardMargin
     }
     implicitHeight: implicitHeight2
+
+    /* WARNING: this will reset all the fields for the current group key. Not only the visible ones */
+    function resetAllFieldsForGroupTitle() {
+        targetElement.Reset(targetGroup)
+    }
 
     Text {
         id: titleText
@@ -112,6 +118,8 @@ Item {
                             return sliderComponent
                         case DataEditor.SWITCH:
                             return switchComponent
+                        case DataEditor.COLOR:
+                            return colorComponent
                         }
                         return unknownComponent
                     }
@@ -317,6 +325,35 @@ Item {
                 scale: wantedHeight / height
             }
         }
+    }
+
+    Component {
+        id: colorComponent
+        Button {
+            height: componentHeight
+            contentItem: Rectangle {
+                color: customValue
+                width: parent.width * 0.9
+                height: parent.height * 0.9
+                anchors.centerIn: parent
+                radius: height / 2.
+            }
+
+            onClicked: {
+                colorPickPopup.selectColor(customValue, this.onColorSelected)
+            }
+
+            function onColorSelected(color) {
+                setValue(color)
+            }
+        }
+    }
+
+    ColorPicker {
+        id: colorPickPopup
+
+        // title: qsTr("Select color")
+        // parentWindow: frame.parentWindow
     }
 
     ThemedPopup {
