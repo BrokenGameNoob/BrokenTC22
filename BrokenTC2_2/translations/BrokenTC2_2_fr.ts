@@ -2,6 +2,24 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
+    <name>ConfirmationDialog</name>
+    <message>
+        <location filename="../src/widgets/ConfirmationDialog.qml" line="+18"/>
+        <source>Confirmation needed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ControllerListPanel</name>
     <message>
         <location filename="../src/panels/ControllerListPanel.qml" line="+51"/>
@@ -19,6 +37,58 @@
     <message>
         <location line="+11"/>
         <source>GROUND VEHICLE</source>
+    <name>EasySetupPanel</name>
+    <message>
+        <location filename="../src/panels/EasySetupPanel.qml" line="+54"/>
+        <source>Easy setup</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GameOverlay</name>
+    <message>
+        <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="+85"/>
+        <source>Place your elements where you want (drag &amp; drop)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Press ESC to leave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Reset to default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+115"/>
+        <source>Gear indicator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+44"/>
+        <source>Notification text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+62"/>
+        <source>Notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Are you sure you want to reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Are you sure you want to reset all elements?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -65,7 +135,7 @@
     </message>
     <message>
         <source>Software controls</source>
-        <translation>Commandes BTC2</translation>
+        <translation type="vanished">Commandes BTC2</translation>
     </message>
     <message>
         <source>Discover</source>
@@ -73,41 +143,37 @@
     </message>
     <message>
         <source>In game controls</source>
-        <translation>Contrôles du jeu</translation>
+        <translation type="vanished">Contrôles du jeu</translation>
     </message>
     <message>
         <source>Activity</source>
         <translation type="vanished">Activités</translation>
     </message>
     <message>
-        <location filename="../src/Main.qml" line="+25"/>
+        <location filename="../src/Main.qml" line="+27"/>
         <location/>
         <source>BrokenTC2</source>
         <translation></translation>
     </message>
     <message>
         <source>Game configuration</source>
-        <translation>Configuration du jeu</translation>
+        <translation type="vanished">Configuration du jeu</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Paramètres</translation>
+        <translation type="vanished">Paramètres</translation>
     </message>
     <message>
         <source>Hey</source>
-        <translation>Salut</translation>
+        <translation type="vanished">Salut</translation>
     </message>
     <message>
         <source>Gear Down</source>
-        <translation>Rapport inférieur</translation>
+        <translation type="vanished">Rapport inférieur</translation>
     </message>
     <message>
         <source>Gear Up</source>
-        <translation>Rapport supérieur</translation>
-    </message>
-    <message>
-        <source>Wi-Fi</source>
-        <translation></translation>
+        <translation type="vanished">Rapport supérieur</translation>
     </message>
     <message>
         <source>Hello World</source>
@@ -139,6 +205,7 @@
     <name>QObject</name>
     <message>
         <location filename="../src/main.cpp" line="+59"/>
+        <location filename="../src/main.cpp" line="+60"/>
         <source>Critical error</source>
         <translation>Erreur fatale</translation>
     </message>

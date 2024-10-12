@@ -14,7 +14,7 @@ message("------- <${RAW_LIB_NAME}> -------")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" "${CMAKE_ROOT}/Modules")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" "${CMAKE_ROOT}/Modules")
 
 
 ############################
@@ -27,12 +27,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #   SDL
 ###############
 set(SDL2_DIR $ENV{SDL2_DIR} CACHE PATH "Path to SDL2")
+message("SDL_DIR(env)=$ENV{SDL2_DIR}")
+message("SDL_DIR=${SDL2_DIR}")
 list(APPEND CMAKE_PREFIX_PATH "${SDL2_DIR}")
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
 
 message("SDL2_INCLUDE_DIRS=${SDL2_INCLUDE_DIRS}")
 message("SDL2_LIBRARIES=${SDL2_LIBRARIES}")
+message("SDL2 found=${SDL2_FOUND}")
+message("SDL2main found=${SDL2MAIN_FOUND}")
 
 
 ###############
@@ -96,7 +100,7 @@ target_link_libraries(${LIB_NAME}
     PUBLIC
     libLogger::libLogger
     "${SDL2_LIBRARIES}"
-    SDL2::SDL2
+    SDL2::Core
 )
 
 #Set target properties

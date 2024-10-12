@@ -21,6 +21,12 @@ class Constants : public QObject {
   QML_LITERAL_CONSTANT(QString, kIconMoveRowVertical, "qrc:/icons/icon_move_row_vertical.svg");
   QML_LITERAL_CONSTANT(QString, kIconFavorite, "qrc:/icons/icon_favorite.svg");
   QML_LITERAL_CONSTANT(QString, kIconDelete, "qrc:/icons/icon_delete.svg");
+  QML_LITERAL_CONSTANT(QString, kIconUbiNope, "qrc:/icons/icon_ubinope.svg");
+  QML_LITERAL_CONSTANT(QString, kIconSetup, "qrc:/icons/icon_setup.svg");
+  QML_LITERAL_CONSTANT(QString, kIconOverlay, "qrc:/icons/icon_overlay.svg");
+  QML_LITERAL_CONSTANT(QString, kIconReset, "qrc:/icons/icon_reset.svg");
+  QML_LITERAL_CONSTANT(QString, kIconOk, "qrc:/icons/icon_ok.svg");
+  QML_LITERAL_CONSTANT(QString, kIconCancel, "qrc:/icons/icon_cancel.svg");
 
   QML_LITERAL_CONSTANT(QString, kIconBackArrow, "qrc:/icons/icon_back_arrow.svg");
 

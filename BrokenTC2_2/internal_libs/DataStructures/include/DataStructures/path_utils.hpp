@@ -11,6 +11,7 @@ constexpr auto kGamesProfiles{"GamesProfiles"};
 
 constexpr auto kKeyboardProfileFile{"keyboard_profile.json"};
 constexpr auto kApplicationSettingsFile{"application_settings.json"};
+constexpr auto kOverlaySettingsFile{"overlay_settings.json"};
 }  // namespace subpaths
 
 QString GetAppDataPath();
@@ -23,5 +24,6 @@ QString GetGameProfilePath(Game game);
 
 QString GetKeyboardProfilePath();
 QString GetApplicationSettingsPath();
+QString GetOverlaySettingsPath();
 
 }  // namespace btc2::path
