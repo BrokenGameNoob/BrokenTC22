@@ -4,7 +4,7 @@
 <context>
     <name>ControllerListPanel</name>
     <message>
-        <location filename="../src/panels/ControllerListPanel.qml" line="+52"/>
+        <location filename="../src/panels/ControllerListPanel.qml" line="+51"/>
         <source>Known controllers list</source>
         <translation type="unfinished"></translation>
     </message>
