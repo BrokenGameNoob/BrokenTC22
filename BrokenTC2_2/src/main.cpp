@@ -21,13 +21,8 @@
 #include <system/services/service_manager.hpp>
 #include <utils/shared_constants.hpp>
 #include <utils/style.hpp>
-<<<<<<< HEAD
 
-    == == ==
-    =
->>>>>>> b753e0e (Added color customization on overlay)
-
-        bool SetupFolders() {
+bool SetupFolders() {
   auto lambda_create_folder_if_not_exists = [](const QString& path) {
     QDir dir{path};
     if (dir.exists()) {

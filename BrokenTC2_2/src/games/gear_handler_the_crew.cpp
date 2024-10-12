@@ -18,7 +18,7 @@ void GearHandlerTheCrew::GearUp() {
   const auto kGearMode{GetGearMode()};
   if (kGearMode == GearMode::CLUTCH_MODE) {
     SetGear(GetGear() + 1);
-  } else if (kGearMode == SEQ_MODE) {
+  } else if (kGearMode == GearMode::SEQ_MODE) {
     // io::KeySequence ks{{2000},
     //                    {160, true},
     //                    {2000},

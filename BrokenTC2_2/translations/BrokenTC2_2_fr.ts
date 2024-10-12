@@ -133,24 +133,23 @@
 <context>
     <name>GroupedEditor</name>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="+248"/>
         <source>Button: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="+395"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="+432"/>
         <location line="+149"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-361"/>
+        <location line="-390"/>
         <location line="+55"/>
         <source>NOT SET</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+191"/>
+        <location line="+220"/>
         <location line="+149"/>
         <source>Delete binding</source>
         <translation type="unfinished"></translation>
@@ -243,7 +242,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="+62"/>
+        <location filename="../src/main.cpp" line="+61"/>
         <source>Critical error</source>
         <translation>Erreur fatale</translation>
     </message>
