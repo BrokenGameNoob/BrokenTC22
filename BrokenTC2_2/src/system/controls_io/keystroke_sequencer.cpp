@@ -72,7 +72,7 @@ void KeySequencerThread::Loop() {
     }
 
     const auto kDiffFromDelayStartMs{DiffMs(m_delay_start, Now())};
-    SPDLOG_DEBUG("[KEYSEQ] Current delay {}ms", kDiffFromDelayStartMs);
+    // SPDLOG_DEBUG("[KEYSEQ] Current delay {}ms", kDiffFromDelayStartMs);
     if (kDiffFromDelayStartMs < m_current_element->GetDelayMs()) {
       const auto kToSkip{static_cast<int>((m_current_element->GetDelayMs() - kDiffFromDelayStartMs) / 3.)};
       if (kToSkip) {

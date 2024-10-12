@@ -17,7 +17,8 @@ GearType GearHandlerTheCrew::GetMaxGear() const {
 void GearHandlerTheCrew::GearUp() {
   const auto kGearMode{GetGearMode()};
   if (kGearMode == GearMode::CLUTCH_MODE) {
-    SetGear(GetGear() + 1);
+    const auto kNextGear{GetGear() + 1};
+    SetGear(kNextGear ? kNextGear : kNextGear + 1);
   } else if (kGearMode == GearMode::SEQ_MODE) {
     // io::KeySequence ks{{2000},
     //                    {160, true},
@@ -40,7 +41,8 @@ void GearHandlerTheCrew::GearUp() {
 void GearHandlerTheCrew::GearDown() {
   const auto kGearMode{GetGearMode()};
   if (kGearMode == GearMode::CLUTCH_MODE) {
-    SetGear(GetGear() - 1);
+    const auto kNextGear{GetGear() - 1};
+    SetGear(kNextGear ? kNextGear : kNextGear - 1);
   } else if (kGearMode == GearMode::SEQ_MODE) {
     SPDLOG_ERROR("Not done yet");
   } else {
