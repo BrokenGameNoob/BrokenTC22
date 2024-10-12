@@ -19,20 +19,20 @@ void GearHandlerTheCrew::GearUp() {
   if (kGearMode == CLUTCH_MODE) {
     SetGear(GetGear() + 1);
   } else if (kGearMode == SEQ_MODE) {
-    io::KeySequence ks{{2000},
-                       {160, true},
-                       {2000},
-                       {88, true},
-                       {10},
-                       {88, false},
-                       {20},
-                       {160, false},
-                       {88, true},
-                       {10},
-                       {88, false},
-                       {20},
-                       {160, true}};
-    io::AsynchronousKeySeq(ks);
+    // io::KeySequence ks{{2000},
+    //                    {160, true},
+    //                    {2000},
+    //                    {88, true},
+    //                    {10},
+    //                    {88, false},
+    //                    {20},
+    //                    {160, false},
+    //                    {88, true},
+    //                    {10},
+    //                    {88, false},
+    //                    {20},
+    //                    {160, true}};
+    // io::AsynchronousKeySeqOld(ks);
   } else {
     SPDLOG_ERROR("Unknown gear mode");
   }
@@ -86,10 +86,10 @@ void GearHandlerTheCrew::OnGearSet(GearType old_gear, GearType gear) {
 
   io::KeySequence ks{{m_game_profile->Clutch(), true},
                      {kGearKeyOpt.value(), true},
-                     {15},
+                     {17},
                      {kGearKeyOpt.value(), false},
                      {m_game_profile->Clutch(), false}};
-  io::AsynchronousKeySeq(ks);
+  io::AsynchronousKeySeqThread(ks);
 }
 void GearHandlerTheCrew::OnGearModeSet(GearMode old_mode, GearMode mode) {
   //

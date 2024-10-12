@@ -31,7 +31,10 @@ ServiceManager::ServiceManager()
       m_controller_handler{std::make_unique<ControllerHandler>()},
       m_keyboard_handler{std::make_unique<KeyboardHandler>()},
       m_game_selector{std::make_unique<GameSelector>()},
-      m_gear_handler{} {
+      m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)},
+      m_game_overlay{std::make_unique<GameOverlay>(path::GetOverlaySettingsPath(), nullptr)},
+      m_keyboard_profile{std::make_unique<KeyboardProfile>(path::GetKeyboardProfilePath(), nullptr)},
+      m_window_change_hook{win::HookForFocusedWindowChanged(ServiceManager::OnWindowChangeHook)} {
   connect(m_game_selector.get(), &GameSelector::gameChanged, this, [this]() {
     m_game_profiles_handler->SetCurrentGame(m_game_selector->GetSelectedGame());
   });
@@ -41,66 +44,54 @@ ServiceManager::ServiceManager()
     emit gearHandlerChanged();
   });
 
-  // emit m_game_selector->gameChanged();
-  m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)},
-      m_game_overlay{std::make_unique<GameOverlay>(path::GetOverlaySettingsPath(), nullptr)},
-      m_keyboard_profile{std::make_unique<KeyboardProfile>(path::GetKeyboardProfilePath(), nullptr)},
-      m_window_change_hook{win::HookForFocusedWindowChanged(ServiceManager::OnWindowChangeHook)} {
-    //  m_tmp.actions()[0] = {};
-
-    connect(&m_overlay_notification_timer, &QTimer::timeout, this, [this]() {
-      m_overlay_notification_text.clear();
-      emit overlayNotificationUpdated();
-    });
-  }
-
-  void CALLBACK ServiceManager::OnWindowChangeHook(HWINEVENTHOOK hook,
-                                                   DWORD event,
-                                                   HWND hwnd,
-                                                   LONG idObject,
-                                                   LONG idChild,
-                                                   DWORD dwEventThread,
-                                                   DWORD dwmsEventTime) {
-    if (event == EVENT_SYSTEM_FOREGROUND) {
-      char windowTitle[256];
-      GetWindowTextA(hwnd, windowTitle, sizeof(windowTitle));
-      std::string title(windowTitle);
-      ServiceManager::I().OnFocusedWindowChanged(QString{windowTitle});
-    }
-  }
-  void ServiceManager::OnFocusedWindowChanged(const QString& title) {
-    SPDLOG_DEBUG("Focused window changed to: <{}>", title);
-    m_focused_window_title = title;
-    emit focusedWindowTitleChanged();
-  }
-
-  Game::Types ServiceManager::GetFocusedWindowGame() const {
-    return GetFocusedGameFromWindowTitle(m_focused_window_title);
-  }
-
-  void ServiceManager::OnMainWindowLoaded() {}
-
-  void ServiceManager::PublishOverlayNotification(const QString& text, int duration_ms) {
-    m_overlay_notification_text = text;
-    m_overlay_notification_timer.stop();
-    m_overlay_notification_timer.setInterval(duration_ms);
-    m_overlay_notification_timer.start();
+  connect(&m_overlay_notification_timer, &QTimer::timeout, this, [this]() {
+    m_overlay_notification_text.clear();
     emit overlayNotificationUpdated();
-  }
+  });
+}
 
-  void ServiceManager::UpdateSDLAxisThreshold(double threshold) {
-    m_sdl_axis_threshold = threshold;
-    const auto kActualThreshold =
-        static_cast<int16_t>(static_cast<double>(std::numeric_limits<int16_t>::max()) * threshold);
-    qsdl::SDLEventHandler::SetJoyAxisThreshold(kActualThreshold);
-    emit sdlAxisThresholdModified();
+void CALLBACK ServiceManager::OnWindowChangeHook(HWINEVENTHOOK hook, DWORD event, HWND hwnd, LONG idObject,
+                                                 LONG idChild, DWORD dwEventThread, DWORD dwmsEventTime) {
+  if (event == EVENT_SYSTEM_FOREGROUND) {
+    char windowTitle[256];
+    GetWindowTextA(hwnd, windowTitle, sizeof(windowTitle));
+    std::string title(windowTitle);
+    ServiceManager::I().OnFocusedWindowChanged(QString{windowTitle});
   }
+}
+void ServiceManager::OnFocusedWindowChanged(const QString& title) {
+  SPDLOG_DEBUG("Focused window changed to: <{}>", title);
+  m_focused_window_title = title;
+  emit focusedWindowTitleChanged();
+}
 
-  void ServiceManager::test() {
-    SPDLOG_INFO("Test function called");
-    io::KeySequence ks{
-        {1000}, {VK_NUMPAD1, true}, {50}, {VK_NUMPAD1, false}, {500}, {VK_NUMPAD3, true}, {50}, {VK_NUMPAD3, false}};
-    io::AsynchronousKeySeqThread(ks);
-  }
+Game::Types ServiceManager::GetFocusedWindowGame() const {
+  return GetFocusedGameFromWindowTitle(m_focused_window_title);
+}
+
+void ServiceManager::OnMainWindowLoaded() {}
+
+void ServiceManager::PublishOverlayNotification(const QString& text, int duration_ms) {
+  m_overlay_notification_text = text;
+  m_overlay_notification_timer.stop();
+  m_overlay_notification_timer.setInterval(duration_ms);
+  m_overlay_notification_timer.start();
+  emit overlayNotificationUpdated();
+}
+
+void ServiceManager::UpdateSDLAxisThreshold(double threshold) {
+  m_sdl_axis_threshold = threshold;
+  const auto kActualThreshold =
+      static_cast<int16_t>(static_cast<double>(std::numeric_limits<int16_t>::max()) * threshold);
+  qsdl::SDLEventHandler::SetJoyAxisThreshold(kActualThreshold);
+  emit sdlAxisThresholdModified();
+}
+
+void ServiceManager::test() {
+  SPDLOG_INFO("Test function called");
+  io::KeySequence ks{
+      {1000}, {VK_NUMPAD1, true}, {50}, {VK_NUMPAD1, false}, {500}, {VK_NUMPAD3, true}, {50}, {VK_NUMPAD3, false}};
+  io::AsynchronousKeySeqThread(ks);
+}
 
 }  // namespace btc2

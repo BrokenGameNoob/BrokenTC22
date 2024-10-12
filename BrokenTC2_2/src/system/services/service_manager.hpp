@@ -109,6 +109,10 @@ class ServiceManager : public QObject {
     return m_keyboard_handler.get();
   }
 
+  btc2::KeyboardProfile* GetRawActiveKeyboardProfile() {
+    return m_keyboard_profile.get();
+  }
+
   Q_INVOKABLE void UpdateSDLAxisThreshold(double threshold);
   double GetSDLAxisThreshold() const {
     return m_sdl_axis_threshold;

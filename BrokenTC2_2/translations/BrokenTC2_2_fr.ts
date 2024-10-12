@@ -28,15 +28,6 @@
     </message>
 </context>
 <context>
-    <name>GameProfileTab</name>
-    <message>
-        <location filename="../src/tabs/GameProfileTab.qml" line="+33"/>
-        <source>GENERAL CONTROLS</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>GROUND VEHICLE</source>
     <name>EasySetupPanel</name>
     <message>
         <location filename="../src/panels/EasySetupPanel.qml" line="+54"/>
@@ -89,6 +80,19 @@
     <message>
         <location line="+5"/>
         <source>Are you sure you want to reset all elements?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GameProfileTab</name>
+    <message>
+        <location filename="../src/tabs/GameProfileTab.qml" line="+33"/>
+        <source>GENERAL CONTROLS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>GROUND VEHICLE</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -204,8 +208,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="+59"/>
-        <location filename="../src/main.cpp" line="+60"/>
+        <location filename="../src/main.cpp" line="+62"/>
         <source>Critical error</source>
         <translation>Erreur fatale</translation>
     </message>
