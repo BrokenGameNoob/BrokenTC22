@@ -63,18 +63,32 @@ Item {
         onActivated: {
             ServiceManager.gameSelector.SetSelectedGameFromName(
                         gameCombobox.currentText)
-            ServiceManager.settings.SelectedGameName = gameCombobox.currentText
+            if (!gameCombobox.refreshingFromSettings) {
+                ServiceManager.settings.SelectedGameName = gameCombobox.currentText
+            }
         }
         readonly property string settingsSelectedGame: ServiceManager.settings.SelectedGameName
+        property bool refreshingFromSettings: false
         onSettingsSelectedGameChanged: {
+            if (gameCombobox.refreshingFromSettings || !Component.completed())
+                return
             refreshFromSettings()
         }
 
         function refreshFromSettings() {
+            gameCombobox.refreshingFromSettings = true
             gameCombobox.currentIndex = gameCombobox.find(settingsSelectedGame)
+            if (gameCombobox.currentIndex == -1) {
+                gameCombobox.currentIndex = 0
+            }
+
+            gameCombobox.onActivated(gameCombobox.currentIndex)
+            gameCombobox.refreshingFromSettings = false
         }
 
         Component.onCompleted: {
+            if (gameCombobox.refreshingFromSettings)
+                return
             refreshFromSettings()
         }
     }

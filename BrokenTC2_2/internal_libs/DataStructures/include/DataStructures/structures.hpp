@@ -50,7 +50,7 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
   FUNC(int32_t,                                                                                                   \
        GearUp,                                                                                                    \
        def::kControllerButton,                                                                                    \
-       "gear",                                                                                                    \
+       "sequential_gear",                                                                                         \
        DataEditor::CONTROLLER_KEY,                                                                                \
        QObject::tr("Gear down"),                                                                                  \
        Game::ALL,                                                                                                 \
@@ -58,7 +58,7 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
   FUNC(int32_t,                                                                                                   \
        GearDown,                                                                                                  \
        def::kControllerButton,                                                                                    \
-       "gear",                                                                                                    \
+       "sequential_gear",                                                                                         \
        DataEditor::CONTROLLER_KEY,                                                                                \
        QObject::tr("Gear up"),                                                                                    \
        Game::ALL,                                                                                                 \
@@ -125,6 +125,14 @@ DS_DECLARE_STRUCT(KeyboardProfile, KeyboardProfile_STRUCT_ELEMENTS_LIST);
        "gear",                                                                                                    \
        DataEditor::CONTROLLER_KEY,                                                                                \
        QObject::tr("Gear 7"),                                                                                     \
+       Game::ALL,                                                                                                 \
+       true)                                                                                                      \
+  FUNC(int32_t,                                                                                                   \
+       SwitchGearMode,                                                                                            \
+       def::kControllerButton,                                                                                    \
+       "soft_controls",                                                                                           \
+       DataEditor::CONTROLLER_KEY,                                                                                \
+       QObject::tr("Switch gear mode"),                                                                           \
        Game::ALL,                                                                                                 \
        true)
 

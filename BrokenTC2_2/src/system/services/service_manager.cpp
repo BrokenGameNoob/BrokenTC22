@@ -38,6 +38,9 @@ ServiceManager::ServiceManager()
   connect(m_game_selector.get(), &GameSelector::gameChanged, this, [this]() {
     m_game_profiles_handler->SetCurrentGame(m_game_selector->GetSelectedGame());
   });
+  connect(this, &ServiceManager::focusedWindowTitleChanged, this, [this]() {
+    m_game_selector->OnFocusedWindowChanged(GetFocusedWindowGame());
+  });
 
   connect(m_game_selector.get(), &GameSelector::gameChanged, this, [this]() {
     m_gear_handler = MakeGearHandler(m_game_selector->GetSelectedGame());

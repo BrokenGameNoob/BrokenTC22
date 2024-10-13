@@ -217,6 +217,24 @@ void ControllerHandler::OnButtonDown(int button) {
     ServiceManager::GetGearHandler().GearUp();
   } else if (button == m_active_profile->GearDown()) {
     ServiceManager::GetGearHandler().GearDown();
+  } else if (button == m_active_profile->SwitchGearMode()) {
+    ServiceManager::GetGearHandler().CycleMode();
+  } else if (button == m_active_profile->GearReverse()) {
+    ServiceManager::GetGearHandler().SetGear(-1);
+  } else if (button == m_active_profile->Gear1()) {
+    ServiceManager::GetGearHandler().SetGear(1);
+  } else if (button == m_active_profile->Gear2()) {
+    ServiceManager::GetGearHandler().SetGear(2);
+  } else if (button == m_active_profile->Gear3()) {
+    ServiceManager::GetGearHandler().SetGear(3);
+  } else if (button == m_active_profile->Gear4()) {
+    ServiceManager::GetGearHandler().SetGear(4);
+  } else if (button == m_active_profile->Gear5()) {
+    ServiceManager::GetGearHandler().SetGear(5);
+  } else if (button == m_active_profile->Gear6()) {
+    ServiceManager::GetGearHandler().SetGear(6);
+  } else if (button == m_active_profile->Gear7()) {
+    ServiceManager::GetGearHandler().SetGear(7);
   }
 }
 void ControllerHandler::OnButtonUp(int button) {
