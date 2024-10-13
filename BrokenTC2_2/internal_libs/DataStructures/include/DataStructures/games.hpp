@@ -66,10 +66,14 @@ class GameSelector : public QObject {
     return kGameNames.at(m_selected_game);
   }
 
+ public slots:
+  void OnFocusedWindowChanged(Game::Types game);
+
  private:
   static const std::map<Games, QString> kGameNames;
 
   Game::Types m_selected_game{Game::THE_CREW_2};
+  bool m_auto_selection{true};
 };
 
 }  // namespace btc2

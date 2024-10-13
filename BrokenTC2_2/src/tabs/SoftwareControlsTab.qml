@@ -79,8 +79,30 @@ Item {
 
                     GroupedEditor {
                         targetElement: root.activeController
+                        targetGroup: "soft_controls"
+                        title: qsTr("SOFTWARE CONTROLS")
+                        Layout.fillWidth: true
+                    }
+
+                    Item {
+                        height: Style.kStandardMargin * 3
+                    }
+
+                    GroupedEditor {
+                        targetElement: root.activeController
+                        targetGroup: "sequential_gear"
+                        title: qsTr("SEQSUENTIAL GEAR")
+                        Layout.fillWidth: true
+                    }
+
+                    Item {
+                        height: Style.kStandardMargin * 3
+                    }
+
+                    GroupedEditor {
+                        targetElement: root.activeController
                         targetGroup: "gear"
-                        title: qsTr("GEAR")
+                        title: qsTr("DIRECT GEAR")
                         Layout.fillWidth: true
                     }
                 }

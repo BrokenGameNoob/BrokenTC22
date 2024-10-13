@@ -277,8 +277,16 @@ Exit application.</source>
         <translation>GÉNÉRAL</translation>
     </message>
     <message>
+        <location line="+22"/>
+        <source>SEQSUENTIAL GEAR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location line="+11"/>
-        <location/>
+        <source>DIRECT GEAR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>GEAR</source>
         <translation>VITESSES</translation>
     </message>
@@ -289,7 +297,8 @@ Exit application.</source>
         <translation>CLAVIER</translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="-70"/>
+        <location line="+101"/>
         <location/>
         <source>SOFTWARE CONTROLS</source>
         <translation>LOGICIEL</translation>

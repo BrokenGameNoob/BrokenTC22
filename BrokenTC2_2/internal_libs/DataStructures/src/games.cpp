@@ -8,13 +8,14 @@
 
 namespace btc2 {
 
-const std::map<Games, QString> GameSelector::kGameNames{
-    {Game::NONE, "Unkown"}, {Game::THE_CREW_2, "The Crew 2"}, {Game::THE_CREW_MOTORFIST, "The Crew Motorfist"}};
+const std::map<Games, QString> GameSelector::kGameNames{{Game::NONE, QObject::tr("Unkown")},
+                                                        {Game::THE_CREW_2, "The Crew 2"},
+                                                        {Game::THE_CREW_MOTORFIST, "The Crew Motorfist"}};
 
 Game::Types GetFocusedGameFromWindowTitle(const QString& title) {
-  if (title.contains("The Crew 2", Qt::CaseInsensitive)) {
+  if (title.contains("TheCrew2", Qt::CaseInsensitive)) {
     return Game::THE_CREW_2;
-  } else if (title.contains("The Crew Motorfest", Qt::CaseInsensitive)) {
+  } else if (title.contains("TheCrewMotorfest", Qt::CaseInsensitive)) {
     return Game::THE_CREW_MOTORFIST;
   }
   return Game::NONE;
@@ -50,6 +51,17 @@ QString GameSelector::GetGameName(Game::Types game) {
     return kGameNames.at(Game::NONE);
   }
   return kGameNames.at(game);
+}
+
+void GameSelector::OnFocusedWindowChanged(Game::Types game) {
+  if (!m_auto_selection) {
+    return;
+  }
+  if (game == Game::NONE || game == Game::ALL) {
+    return;
+  }
+
+  SetSelectedGame(game);
 }
 
 }  // namespace btc2
