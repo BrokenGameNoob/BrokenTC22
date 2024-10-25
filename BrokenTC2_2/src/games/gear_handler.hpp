@@ -26,6 +26,7 @@ class BaseGearHandler : public QObject {
   Q_PROPERTY(GearHandlerMode::Type gearMode READ GetGearMode WRITE SetGearMode NOTIFY gearModeChanged FINAL)
   Q_PROPERTY(QString gearModeStr READ GetGearModeStr NOTIFY gearModeChanged FINAL)
   Q_PROPERTY(QString gearModeIconSource READ GetGearModeIconSource NOTIFY gearModeChanged FINAL)
+  Q_PROPERTY(bool isActive READ IsActive NOTIFY activeChanged FINAL)
 
  public:
   using GearType = int32_t;
@@ -35,9 +36,12 @@ class BaseGearHandler : public QObject {
  signals:
   void gearChanged();
   void gearModeChanged();
+  void activeChanged();
 
  public:
-  BaseGearHandler(QObject* parent) : QObject{parent} {}
+  BaseGearHandler(QObject* parent) : QObject{parent} {
+    connect(this, &BaseGearHandler::activeChanged, this, &BaseGearHandler::gearModeChanged);
+  };
 
   GearType GetGear() const;
   void SetGear(GearType gear);
@@ -50,21 +54,34 @@ class BaseGearHandler : public QObject {
   Q_INVOKABLE QString GetGearStr();
   Q_INVOKABLE QString GetGearModeIconSource();
 
+  Q_INVOKABLE void GearUp();
+  Q_INVOKABLE void GearDown();
+
+  bool IsActive() const;
+  void SetUserEnabled(bool enabled);
+  bool IsUserEnabled() const;
+  void SetSoftEnabled(bool enabled);
+  bool IsSoftEnabled() const;
+
   /* To reimplement */
 
   Q_INVOKABLE virtual GearType GetMinGear() const = 0;
   Q_INVOKABLE virtual GearType GetMaxGear() const = 0;
-
-  Q_INVOKABLE virtual void GearUp() = 0;
-  Q_INVOKABLE virtual void GearDown() = 0;
+  Q_INVOKABLE virtual GearType GetMaxGearClutch() const = 0;
 
  protected:
   virtual void OnGearSet(GearType old_gear, GearType gear) {}
   virtual void OnGearModeSet(GearHandlerMode::Type old_mode, GearHandlerMode::Type mode) {}
 
+  virtual void InternalGearUp() = 0;
+  virtual void InternalGearDown() = 0;
+
  private:
   GearType m_gear{};
   GearHandlerMode::Type m_mode{};
+
+  bool m_user_enabled{true};
+  bool m_soft_enabled{true};
 
  private:
   static constexpr auto GetGearModeStr(const GearHandlerMode::Type mode) {

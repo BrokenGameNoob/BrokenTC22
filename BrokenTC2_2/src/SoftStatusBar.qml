@@ -49,47 +49,19 @@ Item {
         anchors {
             verticalCenter: parent.verticalCenter
             left: parent.left
-            leftMargin: Style.kStandardMargin
+            leftMargin: visible ? Style.kStandardMargin : 0
         }
+
+        visible: false
 
         editable: false
-        width: 200
+        width: visible ? 200 : 0
         height: implicitHeight * 0.7
-        model: ServiceManager.gameSelector.GetAvailableGamesNames()
-        onModelChanged: {
-            refreshFromSettings()
-        }
+        model: ServiceManager.gameSelector.GameSelectionModel()
 
         onActivated: {
-            ServiceManager.gameSelector.SetSelectedGameFromName(
-                        gameCombobox.currentText)
-            if (!gameCombobox.refreshingFromSettings) {
-                ServiceManager.settings.SelectedGameName = gameCombobox.currentText
-            }
-        }
-        readonly property string settingsSelectedGame: ServiceManager.settings.SelectedGameName
-        property bool refreshingFromSettings: false
-        onSettingsSelectedGameChanged: {
-            if (gameCombobox.refreshingFromSettings || !Component.completed())
-                return
-            refreshFromSettings()
-        }
-
-        function refreshFromSettings() {
-            gameCombobox.refreshingFromSettings = true
-            gameCombobox.currentIndex = gameCombobox.find(settingsSelectedGame)
-            if (gameCombobox.currentIndex == -1) {
-                gameCombobox.currentIndex = 0
-            }
-
-            gameCombobox.onActivated(gameCombobox.currentIndex)
-            gameCombobox.refreshingFromSettings = false
-        }
-
-        Component.onCompleted: {
-            if (gameCombobox.refreshingFromSettings)
-                return
-            refreshFromSettings()
+            ServiceManager.gameSelector.SetSelectionModelSelectedGame(
+                        currentText)
         }
     }
 
@@ -124,6 +96,7 @@ Item {
     }
     RoundButton {
         id: controllerListEditButton
+        enabled: !easySetupButton.checked
         anchors {
             verticalCenter: parent.verticalCenter
             left: controllerCombobox.right
@@ -146,6 +119,7 @@ Item {
     }
     RoundButton {
         id: easySetupButton
+        enabled: !controllerListEditButton.checked
         anchors {
             verticalCenter: parent.verticalCenter
             left: controllerListEditButton.right
@@ -162,9 +136,6 @@ Item {
                 sourceSize.height: parent.height
                 color: parent.parent.checked ? QMLStyle.kAccentColor : QMLStyle.kIconColor
             }
-        }
-        onClicked: {
-            ServiceManager.test()
         }
     }
     RoundButton {

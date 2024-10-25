@@ -37,13 +37,16 @@ ServiceManager::ServiceManager()
       m_window_change_hook{win::HookForFocusedWindowChanged(ServiceManager::OnWindowChangeHook)} {
   connect(m_game_selector.get(), &GameSelector::gameChanged, this, [this]() {
     m_game_profiles_handler->SetCurrentGame(m_game_selector->GetSelectedGame());
+    m_settings->SetSelectedGameName(m_game_selector->GetSelectedGameName());
   });
   connect(this, &ServiceManager::focusedWindowTitleChanged, this, [this]() {
+    const auto kFocusedGame{GetFocusedWindowGame()};
     m_game_selector->OnFocusedWindowChanged(GetFocusedWindowGame());
   });
 
   connect(m_game_selector.get(), &GameSelector::gameChanged, this, [this]() {
     m_gear_handler = MakeGearHandler(m_game_selector->GetSelectedGame());
+    PublishOverlayNotification(QObject::tr("Game changed to: %0").arg(m_game_selector->GetSelectedGameName()), 2000);
     emit gearHandlerChanged();
   });
 
@@ -63,7 +66,6 @@ void CALLBACK ServiceManager::OnWindowChangeHook(HWINEVENTHOOK hook, DWORD event
   }
 }
 void ServiceManager::OnFocusedWindowChanged(const QString& title) {
-  SPDLOG_DEBUG("Focused window changed to: <{}>", title);
   m_focused_window_title = title;
   emit focusedWindowTitleChanged();
 }
@@ -72,7 +74,10 @@ Game::Types ServiceManager::GetFocusedWindowGame() const {
   return GetFocusedGameFromWindowTitle(m_focused_window_title);
 }
 
-void ServiceManager::OnMainWindowLoaded() {}
+void ServiceManager::OnMainWindowLoaded() {
+  m_focused_window_title = win::GetFocusedWindowTitle();
+  emit focusedWindowTitleChanged();
+}
 
 void ServiceManager::PublishOverlayNotification(const QString& text, int duration_ms) {
   m_overlay_notification_text = text;

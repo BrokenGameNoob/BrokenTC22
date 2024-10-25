@@ -91,7 +91,7 @@ Item {
                     GroupedEditor {
                         targetElement: root.activeController
                         targetGroup: "sequential_gear"
-                        title: qsTr("SEQSUENTIAL GEAR")
+                        title: qsTr("SEQUENTIAL GEARS")
                         Layout.fillWidth: true
                     }
 
@@ -102,7 +102,7 @@ Item {
                     GroupedEditor {
                         targetElement: root.activeController
                         targetGroup: "gear"
-                        title: qsTr("DIRECT GEAR")
+                        title: qsTr("DIRECT GEARS")
                         Layout.fillWidth: true
                     }
                 }

@@ -7,6 +7,27 @@
 
 namespace win {
 
+inline QString GetFocusedWindowTitle() {
+  // Get the handle of the currently focused window
+  HWND hwnd = GetForegroundWindow();
+  if (hwnd == NULL) {
+    return QString();
+  }
+
+  // Get the length of the window title
+  int length = GetWindowTextLength(hwnd);
+  if (length == 0) {
+    return QString();
+  }
+
+  // Retrieve the window title
+  std::wstring title(length + 1, L'\0');
+  GetWindowText(hwnd, &title[0], length + 1);
+
+  // Convert std::wstring to QString and return
+  return QString::fromStdWString(title);
+}
+
 class WinHookOwner {
  public:
   WinHookOwner(HWINEVENTHOOK hook) : m_hook{hook} {}

@@ -27,6 +27,7 @@ class Constants : public QObject {
   QML_LITERAL_CONSTANT(QString, kIconReset, "qrc:/icons/icon_reset.svg");
   QML_LITERAL_CONSTANT(QString, kIconOk, "qrc:/icons/icon_ok.svg");
   QML_LITERAL_CONSTANT(QString, kIconCancel, "qrc:/icons/icon_cancel.svg");
+  QML_LITERAL_CONSTANT(QString, kIconCancelInverted, "qrc:/icons/icon_cancel_inverted.svg");
   QML_LITERAL_CONSTANT(QString, kIconFast, "qrc:/icons/icon_fast.svg");
   QML_LITERAL_CONSTANT(QString, kIconSlow, "qrc:/icons/icon_slow.svg");
 

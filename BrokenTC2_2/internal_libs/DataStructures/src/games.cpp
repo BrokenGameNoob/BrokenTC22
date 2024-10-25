@@ -36,6 +36,38 @@ QStringList GameSelector::GetAvailableGamesNames() {
   return out;
 }
 
+QString GameSelector::GetAutoModeStr() {
+  return QObject::tr("Auto");
+}
+
+QStringList GameSelector::GameSelectionModel() {
+  QStringList out{};
+  out += GetAutoModeStr();
+  out += GetAvailableGamesNames();
+  return out;
+}
+
+void GameSelector::SetSelectionModelSelectedGame(const QString& selection_model_name) {
+  if (selection_model_name == GetAutoModeStr()) {
+    m_auto_selection = true;
+    SPDLOG_DEBUG("Enabled auto mode");
+    emit selectionModelGameUpdated();
+    return;
+  }
+  m_auto_selection = false;
+  SPDLOG_DEBUG("Disabled auto mode");
+
+  SetSelectedGameFromName(selection_model_name);
+  emit selectionModelGameUpdated();
+}
+
+QString GameSelector::GetSelectionModelSelectedGame() {
+  if (m_auto_selection) {
+    return GetAutoModeStr();
+  }
+  return GetSelectedGameName();
+}
+
 Game::Types GameSelector::GetGameFromName(const QString& name) {
   for (const auto& [game, game_name] : GameSelector::kGameNames) {
     if (game_name == name) {
