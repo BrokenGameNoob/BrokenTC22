@@ -30,6 +30,9 @@ Window {
 
     property var overlayModel: ServiceManager.gameOverlay
 
+    readonly property color modeColor: ServiceManager.gearHandler.gearMode
+                                       === GearHandlerMode.CLUTCH_MODE ? overlayModel.ClutchColor : overlayModel.NoClutchColor
+
     onClosing: function (event) {
         if (!allowClose) {
             event.accepted = false // Prevent the window from closing
@@ -57,9 +60,37 @@ Window {
         }
     }
 
+    Rectangle {
+        color: QMLStyle.kBackgroundColor
+        anchors.fill: btc2LaunchedIcon
+        anchors.margins: -QMLStyle.kStandardMargin
+        opacity: 0.7
+        radius: width / 2
+        visible: btc2LaunchedIcon.visible
+    }
+
+    ColoredImage {
+        id: btc2LaunchedIcon
+        source: Constants.kIconUbiNope
+        width: 20
+        height: 20
+        sourceSize.width: width
+        sourceSize.height: height
+        anchors {
+            bottom: parent.bottom
+            left: parent.left
+            margins: QMLStyle.kStandardMargin
+            bottomMargin: 50
+        }
+        color: QMLStyle.kAccentColor
+        visible: !content.visible
+                 && ServiceManager.settings.LaunchedOverlayEnabled
+    }
+
     Item {
         id: content
         anchors.fill: parent
+        visible: ServiceManager.focusedGame != Game.NONE || root.editModeEnabled
 
         MouseArea {
             id: globalArea
@@ -161,6 +192,7 @@ Window {
             visible: overlayModel.GearEnabled || editModeEnabled
 
             text: ServiceManager.gearHandler.gearStr
+            color: overlayModel.GearChangeGearColorDependingOnMode ? modeColor : QMLStyle.kTextColor
 
             background: Rectangle {
                 color: overlayModel.GearBackgroundColor
@@ -325,6 +357,116 @@ Window {
             }
         }
 
+        Label {
+            id: debugLabel
+
+            readonly property real defaultX: QMLStyle.kStandardMargin
+            readonly property real defaultY: parent.height / 2. - height / 2.
+
+            readonly property real implicitX: overlayModel.DebugLabelX
+            readonly property real implicitY: overlayModel.DebugLabelY
+
+            x: implicitX === 0 ? defaultX : implicitX
+            y: implicitY === 0 ? defaultY : implicitY
+
+            font.pointSize: 30
+            font.bold: false
+
+            height: implicitHeight
+            width: shouldBeVisible
+                   || editModeEnabled ? implicitWidth + QMLStyle.kStandardMargin : 0
+
+            Behavior on width {
+                SmoothedAnimation {
+                    duration: 150
+                }
+            }
+
+            padding: Style.kStandardMargin
+            topPadding: Style.kStandardMargin / 2
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            clip: true
+
+            readonly property bool shouldBeVisible: true
+            visible: (overlayModel.DebugLabelEnabled && width > 0)
+                     || editModeEnabled
+
+            text: editModeEnabled ? qsTr("DEBUG text") : ServiceManager.focusedGame
+                                    + "  " + Game.NONE
+
+            background: Item {
+                Rectangle {
+                    anchors.fill: parent
+                    color: overlayModel.NotifBackgroundColor
+                    radius: width > height ? height / 2 : width / 2
+                    opacity: 1.
+                }
+
+                Rectangle {
+                    visible: editModeEnabled
+                    color: QMLStyle.kAccentColor
+                    width: 3
+                    opacity: 1.
+                    anchors {
+                        horizontalCenter: parent.left
+                        top: parent.top
+                        topMargin: -QMLStyle.kStandardMargin / 2.
+                        bottom: parent.bottom
+                        bottomMargin: -QMLStyle.kStandardMargin / 2.
+                    }
+                }
+            }
+
+            EnableDragForComponent {
+                id: dragdebugLabel
+                anchors.fill: parent
+                target: parent
+                minScale: root.minScale
+                maxScale: root.maxScale
+                onDropped: {
+                    overlayModel.DebugLabelX = debugLabel.x
+                    overlayModel.DebugLabelY = debugLabel.y
+                }
+            }
+
+            property bool inhibitScaleUpdate: false
+            Binding {
+                target: debugLabel
+                property: "scale"
+                value: overlayModel.DebugLabelScaling
+            }
+            onScaleChanged: {
+                inhibitScaleUpdate = true
+                overlayModel.DebugLabelScaling = scale
+                inhibitScaleUpdate = false
+            }
+        }
+
+        GameOverlayEditMenu {
+            globalArea: globalArea
+            editModeEnabled: root.editModeEnabled
+            targetEnableDragForComponent: dragdebugLabel
+            targetComponent: debugLabel
+            minScale: root.minScale
+            maxScale: root.maxScale
+
+            GroupedEditor {
+                id: debugEditor
+                targetElement: root.overlayModel
+                targetGroup: "debug"
+                title: qsTr("Debug")
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+
+            onResetWanted: {
+                confirmationPopup.openForElement(
+                            debugEditor.title,
+                            debugEditor.resetAllFieldsForGroupTitle)
+            }
+        }
+
         Item {
             id: clutchModeLabel
 
@@ -356,9 +498,8 @@ Window {
                 ColoredImage {
                     sourceSize.width: (gearLabel.height - QMLStyle.kStandardMargin) * scale
                     sourceSize.height: (gearLabel.height - QMLStyle.kStandardMargin) * scale
-                    source: ServiceManager.gearHandler.gearModeIconSource
-                    color: ServiceManager.gearHandler.gearMode
-                           === GearHandlerMode.CLUTCH_MODE ? overlayModel.ClutchColor : overlayModel.NoClutchColor
+                    source: ServiceManager.gearHandler.isActive ? ServiceManager.gearHandler.gearModeIconSource : Constants.kIconCancelInverted
+                    color: overlayModel.ModeIndicatorChangeGearColorDependingOnMode ? modeColor : QMLStyle.kTextColor
                 }
                 Text {
                     id: clutchModeText

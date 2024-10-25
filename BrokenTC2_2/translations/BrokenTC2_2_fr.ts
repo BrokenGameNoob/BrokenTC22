@@ -67,7 +67,7 @@
 <context>
     <name>GameOverlay</name>
     <message>
-        <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="+85"/>
+        <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="+116"/>
         <source>Place your elements where you want (drag &amp; drop)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -82,7 +82,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+110"/>
+        <location line="+111"/>
         <source>Gear indicator</source>
         <translation type="unfinished"></translation>
     </message>
@@ -97,7 +97,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+117"/>
+        <location line="+47"/>
+        <source>DEBUG text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+63"/>
+        <source>Debug</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+116"/>
         <source>Clutch mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -252,6 +262,11 @@
 Exit application.</source>
         <translation>Impossible de créer les dossiers &quot;Appdata&quot; nécessaires au bon fonctionnement de l&apos;application.\nL&apos;application va se fermer.</translation>
     </message>
+    <message>
+        <location filename="../src/system/services/service_manager.cpp" line="+49"/>
+        <source>Game changed to: %0</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsTab</name>
@@ -278,12 +293,12 @@ Exit application.</source>
     </message>
     <message>
         <location line="+22"/>
-        <source>SEQSUENTIAL GEAR</source>
+        <source>SEQUENTIAL GEARS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+11"/>
-        <source>DIRECT GEAR</source>
+        <source>DIRECT GEARS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -302,6 +317,14 @@ Exit application.</source>
         <location/>
         <source>SOFTWARE CONTROLS</source>
         <translation>LOGICIEL</translation>
+    </message>
+</context>
+<context>
+    <name>btc2::BaseGearHandler</name>
+    <message>
+        <location filename="../src/games/gear_handler.cpp" line="+56"/>
+        <source>Disabled</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

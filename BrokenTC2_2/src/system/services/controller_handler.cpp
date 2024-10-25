@@ -219,6 +219,8 @@ void ControllerHandler::OnButtonDown(int button) {
     ServiceManager::GetGearHandler().GearDown();
   } else if (button == m_active_profile->SwitchGearMode()) {
     ServiceManager::GetGearHandler().CycleMode();
+  } else if (button == m_active_profile->EnableDisableInputs()) {
+    ServiceManager::GetGearHandler().SetUserEnabled(!ServiceManager::GetGearHandler().IsUserEnabled());
   } else if (button == m_active_profile->GearReverse()) {
     ServiceManager::GetGearHandler().SetGear(-1);
   } else if (button == m_active_profile->Gear1()) {

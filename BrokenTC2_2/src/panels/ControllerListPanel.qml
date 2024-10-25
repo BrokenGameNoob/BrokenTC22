@@ -101,6 +101,7 @@ Item {
                 rightMargin: -2
             }
             height: content.height
+            width: content.height
 
             drag.target: held ? content : undefined
             drag.axis: Drag.YAxis

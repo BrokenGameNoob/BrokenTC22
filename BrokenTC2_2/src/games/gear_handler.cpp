@@ -52,6 +52,9 @@ void BaseGearHandler::CycleMode() {
 }
 
 QString BaseGearHandler::GetGearModeStr() {
+  if (!IsActive()) {
+    return tr("Disabled");
+  }
   return GetGearModeStr(GetGearMode());
 }
 
@@ -71,6 +74,42 @@ QString BaseGearHandler::GetGearModeIconSource() {
       break;
   }
   return Constants::kIconCancel;
+}
+
+void BaseGearHandler::GearUp() {
+  if (!IsActive()) {
+    return;
+  }
+  InternalGearUp();
+}
+
+void BaseGearHandler::GearDown() {
+  if (!IsActive()) {
+    return;
+  }
+  InternalGearDown();
+}
+
+bool BaseGearHandler::IsActive() const {
+  return IsUserEnabled() && IsSoftEnabled();
+}
+
+void BaseGearHandler::SetUserEnabled(bool enabled) {
+  m_user_enabled = enabled;
+  emit activeChanged();
+}
+
+bool BaseGearHandler::IsUserEnabled() const {
+  return m_user_enabled;
+}
+
+void BaseGearHandler::SetSoftEnabled(bool enabled) {
+  m_soft_enabled = enabled;
+  emit activeChanged();
+}
+
+bool BaseGearHandler::IsSoftEnabled() const {
+  return m_soft_enabled;
 }
 
 QString GearToString(BaseGearHandler::GearType gear) {

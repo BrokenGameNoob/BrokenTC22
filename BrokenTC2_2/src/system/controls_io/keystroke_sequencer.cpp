@@ -57,6 +57,12 @@ void KeySequencerThread::SetSequence(const KeySequence& seq) {
   m_current_element = {};
   m_seq_set_time = Now();
   m_last_loop_was_empty = false;
+
+  while (!m_pressed_keys.empty()) {
+    const auto kKey{*(m_pressed_keys.begin())};
+    win::SendKeyboardEvent(kKey, false);
+    m_pressed_keys.erase(kKey);
+  }
 }
 
 inline void Sleep1Ms() {
@@ -110,6 +116,11 @@ void KeySequencerThread::Loop() {
     case KeySequenceElementKind::Key: {
       SPDLOG_INFO("[KEYSEQ] Key {} pressed? {}", kCurrentElement.GetKey(), kCurrentElement.GetKeyPressed());
       win::SendKeyboardEvent(kCurrentElement.GetKey(), kCurrentElement.GetKeyPressed());
+      if (kCurrentElement.GetKeyPressed()) {
+        m_pressed_keys.insert(kCurrentElement.GetKey());
+      } else {
+        m_pressed_keys.erase(kCurrentElement.GetKey());
+      }
     } break;
     case KeySequenceElementKind::Delay: {
       m_current_element = kCurrentElement;

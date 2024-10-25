@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <queue>
+#include <set>
 #include <vector>
 
 #include <Logger/logger.hpp>
@@ -130,6 +131,8 @@ class KeySequencerThread {
   std::optional<KeySequenceElement<KeyboardKeyType>> m_current_element{};
   TimePoint m_delay_start{};
   bool m_last_loop_was_empty{true};
+
+  std::set<KeyboardKeyType> m_pressed_keys{};
 
   utils::MovingAverage<double> m_avg_seq_time{10};
 };
