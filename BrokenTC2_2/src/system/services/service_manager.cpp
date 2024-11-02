@@ -9,6 +9,7 @@
 #include <Logger/logger.hpp>
 #include <Utils/json_utils.hpp>
 #include <games/gear_handler_factory.hpp>
+#include <system/services/model_registry.hpp>
 #include <utils/qt_utils.hpp>
 #include <utils/time.hpp>
 
@@ -33,7 +34,8 @@ ServiceManager::ServiceManager()
       m_game_selector{std::make_unique<GameSelector>()},
       m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)},
       m_game_overlay{std::make_unique<GameOverlayData>(path::GetOverlaySettingsPath(), nullptr)},
-      m_keyboard_profile{std::make_unique<KeyboardProfile>(path::GetKeyboardProfilePath(), nullptr)},
+      m_screen_overlay_selector{std::make_unique<ScreenOverlaySelector>(nullptr)},
+      m_keyboard_profile{ModelRegistry::GetKeyboardProfile()},
       m_window_change_hook{win::HookForFocusedWindowChanged(ServiceManager::OnWindowChangeHook)} {
   connect(m_game_selector.get(), &GameSelector::gameChanged, this, [this]() {
     m_game_profiles_handler->SetCurrentGame(m_game_selector->GetSelectedGame());
@@ -54,6 +56,13 @@ ServiceManager::ServiceManager()
     m_overlay_notification_text.clear();
     emit overlayNotificationUpdated();
   });
+
+  connect(m_screen_overlay_selector.get(), &ScreenOverlaySelector::selectedScreenChanged, this, [this]() {
+    m_settings->SetSelectedOverlayScreen(m_screen_overlay_selector->GetSelectedScreenName());
+  });
+  connect(m_settings.get(), &ApplicationSettings::dataChanged, this, [this]() {
+    m_screen_overlay_selector->SetSelectedScreenName(m_settings->SelectedOverlayScreen());
+  });
 }
 
 void CALLBACK ServiceManager::OnWindowChangeHook(HWINEVENTHOOK hook, DWORD event, HWND hwnd, LONG idObject,
@@ -67,11 +76,22 @@ void CALLBACK ServiceManager::OnWindowChangeHook(HWINEVENTHOOK hook, DWORD event
 }
 void ServiceManager::OnFocusedWindowChanged(const QString& title) {
   m_focused_window_title = title;
+
+  const auto kFocusedGame{GetFocusedGameFromWindowTitle(m_focused_window_title)};
+  m_game_focused = kFocusedGame;
+  if (m_game_focused != Game::Types::NONE) {
+    m_latest_known_game_focused = m_game_focused;
+  } else if (title.contains("Form1") ||
+             title.contains("The Crew 2 - Competizione")) { /* Window title of Competizione HUD */
+    /*If Competizione HUD took foreground instead of the game, retrieve the last known game.*/
+    m_game_focused = m_latest_known_game_focused;
+  }
+
   emit focusedWindowTitleChanged();
 }
 
 Game::Types ServiceManager::GetFocusedWindowGame() const {
-  return GetFocusedGameFromWindowTitle(m_focused_window_title);
+  return m_game_focused;
 }
 
 void ServiceManager::OnMainWindowLoaded() {

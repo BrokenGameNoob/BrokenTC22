@@ -29,6 +29,17 @@ Item {
 
             GroupedEditor {
                 targetElement: ServiceManager.gameProfilesHandler.gameProfile
+                targetGroup: "behavior"
+                title: qsTr("BEHAVIOR")
+                Layout.fillWidth: true
+            }
+
+            Item {
+                height: Style.kStandardMargin * 3
+            }
+
+            GroupedEditor {
+                targetElement: ServiceManager.gameProfilesHandler.gameProfile
                 targetGroup: "gear"
                 title: qsTr("GENERAL CONTROLS")
                 Layout.fillWidth: true

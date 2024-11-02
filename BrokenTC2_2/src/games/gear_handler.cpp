@@ -20,10 +20,11 @@ GearType BaseGearHandler::GetGear() const {
   return m_gear;
 }
 void BaseGearHandler::SetGear(GearType gear) {
-  gear = std::clamp(gear, GetMinGear(), GetMaxGear());
-  if (gear == m_gear) {
+  if (!IsActive()) {
     return;
   }
+
+  gear = std::clamp(gear, GetMinGear(), GetMaxGear());
   const auto kOldGear{m_gear};
   m_gear = gear;
   OnGearSet(kOldGear, m_gear);

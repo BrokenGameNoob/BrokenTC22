@@ -18,7 +18,8 @@ namespace btc2 {
 
 namespace def {
 constexpr auto kControllerButton{-1};
-}
+constexpr auto kDefaultKey{-1};
+}  // namespace def
 
 #define DS_ELEM_ACCESSOR_DECL(                                                                                 \
     type, name, default_value, editor_group, editor_type, editor_title, game_compatibility, display_condition) \
@@ -305,6 +306,7 @@ class DataEditor {
     SWITCH,
     SEPARATOR,
     COLOR,
+    SCREEN_SELECTOR,
   };
   Q_ENUM(EditorType)
 

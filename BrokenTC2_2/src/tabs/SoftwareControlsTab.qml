@@ -184,6 +184,17 @@ Item {
                         title: qsTr("SOFTWARE CONTROLS")
                         Layout.fillWidth: true
                     }
+
+                    Item {
+                        height: Style.kStandardMargin * 3
+                    }
+
+                    GroupedEditor {
+                        targetElement: ServiceManager.keyboardHandler.profile
+                        targetGroup: "sequential_gear"
+                        title: qsTr("SEQUENTIAL GEARS")
+                        Layout.fillWidth: true
+                    }
                 }
             }
         }

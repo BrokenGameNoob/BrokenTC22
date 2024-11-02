@@ -40,7 +40,7 @@ class KeyboardHandler : public QObject {
   Q_INVOKABLE static QString GetKeyName(int key);
 
  private:
-  std::unique_ptr<KeyboardProfile> m_active_keyboard_profile{nullptr};
+  std::shared_ptr<KeyboardProfile> m_active_keyboard_profile{nullptr};
 
   bool m_is_in_enter_keybind_mode{false};
 };
