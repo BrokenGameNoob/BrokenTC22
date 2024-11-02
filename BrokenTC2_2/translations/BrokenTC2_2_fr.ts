@@ -67,7 +67,7 @@
 <context>
     <name>GameOverlay</name>
     <message>
-        <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="+116"/>
+        <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="+115"/>
         <source>Place your elements where you want (drag &amp; drop)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -82,7 +82,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+164"/>
+        <location line="+94"/>
+        <source>Soft running indicator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+133"/>
         <source>Gear indicator</source>
         <translation type="unfinished"></translation>
     </message>
@@ -97,12 +102,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
-        <source>DEBUG text</source>
+        <location line="+16"/>
+        <source>VISIBLE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+94"/>
+        <location line="+0"/>
+        <source>NOT VISIBLE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+95"/>
         <source>Debug</source>
         <translation type="unfinished"></translation>
     </message>

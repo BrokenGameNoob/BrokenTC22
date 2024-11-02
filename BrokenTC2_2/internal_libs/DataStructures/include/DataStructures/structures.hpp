@@ -24,14 +24,6 @@ class DummyForceAutoMocProcess0 : public QObject {
        true)                                                                                                      \
   FUNC(int32_t, OpenedTab, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::NONE, false)                          \
   FUNC(QString, SelectedGameName, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::NONE, false)                   \
-  FUNC(bool,                                                                                                      \
-       LaunchedOverlayEnabled,                                                                                    \
-       true,                                                                                                      \
-       "overlay",                                                                                                 \
-       DataEditor::SWITCH,                                                                                        \
-       QObject::tr("Enable BTC2 launched overlay"),                                                               \
-       Game::ALL,                                                                                                 \
-       false)                                                                                                     \
   FUNC(QString,                                                                                                   \
        SelectedOverlayScreen,                                                                                     \
        DS_DEFAULT,                                                                                                \
@@ -290,6 +282,17 @@ DS_DECLARE_STRUCT(GameProfileTheCrew, GameProfileTheCrew_STRUCT_ELEMENTS_LIST);
 constexpr auto kDefaultOverlayBackgroundColor{"#50000000"};
 
 #define GameOverlay_STRUCT_ELEMENTS_LIST(FUNC)                                                                         \
+  FUNC(double, SoftRunningIndicatorX, DS_DEFAULT, "soft_running", DataEditor::NO_EDITOR, "", Game::NONE, false)        \
+  FUNC(double, SoftRunningIndicatorY, DS_DEFAULT, "soft_running", DataEditor::NO_EDITOR, "", Game::NONE, false)        \
+  FUNC(double, SoftRunningIndicatorScaling, 1., "soft_running", DataEditor::NO_EDITOR, "", Game::NONE, false)          \
+  FUNC(bool,                                                                                                           \
+       SoftRunningIndicatorEnabled,                                                                                    \
+       true,                                                                                                           \
+       "soft_running",                                                                                                 \
+       DataEditor::SWITCH,                                                                                             \
+       QObject::tr("Enable"),                                                                                          \
+       Game::ALL,                                                                                                      \
+       true)                                                                                                           \
   FUNC(double, GearX, DS_DEFAULT, "gear", DataEditor::NO_EDITOR, "", Game::NONE, false)                                \
   FUNC(double, GearY, DS_DEFAULT, "gear", DataEditor::NO_EDITOR, "", Game::NONE, false)                                \
   FUNC(double, GearScaling, 1., "gear", DataEditor::NO_EDITOR, "", Game::NONE, false)                                  \

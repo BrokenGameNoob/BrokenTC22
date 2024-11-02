@@ -77,13 +77,12 @@ Window {
     }
 
     SoftRunningIcon {
-        id: btc2LaunchedIcon
-        anchors {
-            bottom: parent.bottom
-            left: parent.left
-            margins: QMLStyle.kStandardMargin
-            bottomMargin: 50
-        }
+        id: independantBtc2LaunchedIcon
+        x: btc2LaunchedIcon.x
+        y: btc2LaunchedIcon.y
+        scale: btc2LaunchedIcon.scale
+        visible: !btc2LaunchedIcon.visible && !content.visible
+                 && overlayModel.SoftRunningIndicatorEnabled
     }
 
     Item {
@@ -167,6 +166,69 @@ Window {
             gearEditor.resetAllFieldsForGroupTitle()
             notifEditor.resetAllFieldsForGroupTitle()
             clutchModeEditor.resetAllFieldsForGroupTitle()
+            softRunningEditor.resetAllFieldsForGroupTitle()
+        }
+
+        SoftRunningIcon {
+            id: btc2LaunchedIcon
+            visible: editModeEnabled
+
+            readonly property real defaultX: parent.width - width - QMLStyle.kStandardMargin
+            readonly property real defaultY: parent.height - height - 50
+
+            readonly property real implicitX: overlayModel.SoftRunningIndicatorX
+            readonly property real implicitY: overlayModel.SoftRunningIndicatorY
+
+            x: implicitX === 0 ? defaultX : implicitX
+            y: implicitY === 0 ? defaultY : implicitY
+
+            EnableDragForComponent {
+                id: dragBtc2LaunchedIcon
+                anchors.fill: parent
+                target: parent
+                minScale: root.minScale
+                maxScale: root.maxScale
+                onDropped: {
+                    overlayModel.SoftRunningIndicatorX = btc2LaunchedIcon.x
+                    overlayModel.SoftRunningIndicatorY = btc2LaunchedIcon.y
+                }
+            }
+
+            property bool inhibitScaleUpdate: false
+            Binding {
+                target: btc2LaunchedIcon
+                property: "scale"
+                value: overlayModel.SoftRunningIndicatorScaling
+            }
+            onScaleChanged: {
+                inhibitScaleUpdate = true
+                overlayModel.SoftRunningIndicatorScaling = scale
+                inhibitScaleUpdate = false
+            }
+        }
+
+        GameOverlayEditMenu {
+            globalArea: globalArea
+            editModeEnabled: root.editModeEnabled
+            targetEnableDragForComponent: dragBtc2LaunchedIcon
+            targetComponent: btc2LaunchedIcon
+            minScale: root.minScale
+            maxScale: root.maxScale
+
+            GroupedEditor {
+                id: softRunningEditor
+                targetElement: root.overlayModel
+                targetGroup: "soft_running"
+                title: qsTr("Soft running indicator")
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+
+            onResetWanted: {
+                confirmationPopup.openForElement(
+                            softRunningEditor.title,
+                            softRunningEditor.resetAllFieldsForGroupTitle)
+            }
         }
 
         Item {
@@ -413,7 +475,9 @@ Window {
         Label {
             id: debugLabel
 
-            text: editModeEnabled ? qsTr("DEBUG text") : (ServiceManager.settings.SelectedOverlayScreen)
+            // text: editModeEnabled ? qsTr("DEBUG text") : (ServiceManager.settings.SelectedOverlayScreen)
+            text: btc2LaunchedIcon.visible ? qsTr("VISIBLE") : qsTr(
+                                                 "NOT VISIBLE")
 
             readonly property real defaultX: QMLStyle.kStandardMargin
             readonly property real defaultY: parent.height / 2. - height / 2.
