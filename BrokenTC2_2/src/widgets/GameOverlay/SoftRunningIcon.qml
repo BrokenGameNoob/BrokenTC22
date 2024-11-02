@@ -26,7 +26,5 @@ Item {
         sourceSize.width: width
         sourceSize.height: height
         color: QMLStyle.kAccentColor
-        visible: !content.visible
-                 && ServiceManager.settings.LaunchedOverlayEnabled
     }
 }
