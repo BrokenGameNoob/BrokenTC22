@@ -13,6 +13,7 @@
 #include <system/services/controller_handler.hpp>
 #include <system/services/game_profiles_handler.hpp>
 #include <system/services/keyboard_handler.hpp>
+#include <system/services/screen_overlay_selector.hpp>
 
 namespace btc2 {
 
@@ -101,6 +102,15 @@ class ServiceManager : public QObject {
 
   Q_INVOKABLE void PublishOverlayNotification(const QString& text, int duration_ms);
 
+  /* Screen related */
+  ScreenOverlaySelector* GetRawScreenOverlaySelector() {
+    return m_screen_overlay_selector.get();
+  }
+
+  Q_INVOKABLE static QStringList GetAvailableScreens() {
+    return ScreenOverlaySelector::GetAvailableScreens();
+  }
+
   /* Input related */
   ControllerHandler* GetRawControllerHandler() {
     return m_controller_handler.get();
@@ -146,10 +156,14 @@ class ServiceManager : public QObject {
   QString m_overlay_notification_text{};
   QTimer m_overlay_notification_timer{};
 
-  std::unique_ptr<KeyboardProfile> m_keyboard_profile{nullptr};
+  std::unique_ptr<ScreenOverlaySelector> m_screen_overlay_selector{nullptr};
+
+  std::shared_ptr<KeyboardProfile> m_keyboard_profile{nullptr};
 
   win::WinHookOwner m_window_change_hook;
   QString m_focused_window_title;
+  Game::Types m_game_focused{Game::NONE};
+  Game::Types m_latest_known_game_focused{Game::NONE};
 
   double m_sdl_axis_threshold{0.5};
 };

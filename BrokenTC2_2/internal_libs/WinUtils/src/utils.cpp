@@ -447,4 +447,21 @@ QString VkCodeToStr(int32_t keyCode) {
   return QString{buffer[0]};
 }
 
+bool IsNumLockEnabled() {
+  // Get the state of the Num Lock key
+  return (GetKeyState(VK_NUMLOCK) & 0x0001) != 0;
+}
+
+void SetNumLock(bool enable) {
+  // Check the current state of Num Lock
+  const bool kNumLockEnabled{IsNumLockEnabled()};
+
+  // If the current state is different from the desired state, simulate a key press
+  if (kNumLockEnabled != enable) {
+    // Simulate a key press
+    keybd_event(VK_NUMLOCK, 0x45, KEYEVENTF_EXTENDEDKEY | 0, 0);
+    keybd_event(VK_NUMLOCK, 0x45, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, 0);
+  }
+}
+
 }  // namespace win

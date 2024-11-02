@@ -14,6 +14,14 @@ class DummyForceAutoMocProcess0 : public QObject {
 
 #define ApplicationSettings_STRUCT_ELEMENTS_LIST(FUNC)                                                            \
   FUNC(bool, OverlayEnabled, true, "overlay", DataEditor::SWITCH, QObject::tr("Enable overlay"), Game::ALL, true) \
+  FUNC(bool,                                                                                                      \
+       OverlayAlwaysVisible,                                                                                      \
+       false,                                                                                                     \
+       "overlay",                                                                                                 \
+       DataEditor::SWITCH,                                                                                        \
+       QObject::tr("Make overlay always visible"),                                                                \
+       Game::ALL,                                                                                                 \
+       true)                                                                                                      \
   FUNC(int32_t, OpenedTab, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::NONE, false)                          \
   FUNC(QString, SelectedGameName, DS_DEFAULT, "", DataEditor::NO_EDITOR, "", Game::NONE, false)                   \
   FUNC(bool,                                                                                                      \
@@ -22,6 +30,14 @@ class DummyForceAutoMocProcess0 : public QObject {
        "overlay",                                                                                                 \
        DataEditor::SWITCH,                                                                                        \
        QObject::tr("Enable BTC2 launched overlay"),                                                               \
+       Game::ALL,                                                                                                 \
+       false)                                                                                                     \
+  FUNC(QString,                                                                                                   \
+       SelectedOverlayScreen,                                                                                     \
+       DS_DEFAULT,                                                                                                \
+       "overlay",                                                                                                 \
+       DataEditor::SCREEN_SELECTOR,                                                                               \
+       QObject::tr("Overlay screen"),                                                                             \
        Game::ALL,                                                                                                 \
        false)
 
@@ -32,10 +48,34 @@ DS_DECLARE_STRUCT(ApplicationSettings, ApplicationSettings_STRUCT_ELEMENTS_LIST)
 #define KeyboardProfile_STRUCT_ELEMENTS_LIST(FUNC) \
   FUNC(int32_t,                                    \
        SwitchGearMode,                             \
-       DS_DEFAULT,                                 \
+       def::kDefaultKey,                           \
        "soft_controls",                            \
        DataEditor::KEYBOARD_KEY,                   \
        QObject::tr("Switch gear mode"),            \
+       Game::ALL,                                  \
+       true)                                       \
+  FUNC(int32_t,                                    \
+       EnableDisableInputs,                        \
+       def::kDefaultKey,                           \
+       "soft_controls",                            \
+       DataEditor::KEYBOARD_KEY,                   \
+       QObject::tr("Enable / disable"),            \
+       Game::ALL,                                  \
+       true)                                       \
+  FUNC(int32_t,                                    \
+       GearUp,                                     \
+       def::kDefaultKey,                           \
+       "sequential_gear",                          \
+       DataEditor::KEYBOARD_KEY,                   \
+       QObject::tr("Gear up"),                     \
+       Game::ALL,                                  \
+       true)                                       \
+  FUNC(int32_t,                                    \
+       GearDown,                                   \
+       def::kDefaultKey,                           \
+       "sequential_gear",                          \
+       DataEditor::KEYBOARD_KEY,                   \
+       QObject::tr("Gear down"),                   \
        Game::ALL,                                  \
        true)
 
@@ -228,7 +268,22 @@ DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);
        QObject::tr("Gear 6"),                         \
        Game::ALL,                                     \
        true)                                          \
-  FUNC(int32_t, Gear7, def::kControllerButton, "gear", DataEditor::KEYBOARD_KEY, QObject::tr("Gear 7"), Game::ALL, true)
+  FUNC(int32_t,                                       \
+       Gear7,                                         \
+       def::kControllerButton,                        \
+       "gear",                                        \
+       DataEditor::KEYBOARD_KEY,                      \
+       QObject::tr("Gear 7"),                         \
+       Game::ALL,                                     \
+       true)                                          \
+  FUNC(bool,                                          \
+       UseSequentialAfterClutch,                      \
+       true,                                          \
+       "behavior",                                    \
+       DataEditor::SWITCH,                            \
+       QObject::tr("Use sequential after clutch"),    \
+       Game::ALL,                                     \
+       true)
 
 DS_DECLARE_STRUCT(GameProfileTheCrew, GameProfileTheCrew_STRUCT_ELEMENTS_LIST);
 
@@ -245,6 +300,14 @@ constexpr auto kDefaultOverlayBackgroundColor{"#50000000"};
        "gear",                                                                                                         \
        DataEditor::SWITCH,                                                                                             \
        QObject::tr("Change color"),                                                                                    \
+       Game::ALL,                                                                                                      \
+       true)                                                                                                           \
+  FUNC(bool,                                                                                                           \
+       GearIndicatorModeNotifEnabled,                                                                                  \
+       false,                                                                                                          \
+       "gear",                                                                                                         \
+       DataEditor::SWITCH,                                                                                             \
+       QObject::tr("Mode notifs"),                                                                                     \
        Game::ALL,                                                                                                      \
        true)                                                                                                           \
   FUNC(double, NotifX, DS_DEFAULT, "notif", DataEditor::NO_EDITOR, "", Game::NONE, false)                              \
@@ -283,6 +346,14 @@ constexpr auto kDefaultOverlayBackgroundColor{"#50000000"};
        "mode,gear",                                                                                                    \
        DataEditor::COLOR,                                                                                              \
        QObject::tr("No clutch color"),                                                                                 \
+       Game::ALL,                                                                                                      \
+       true)                                                                                                           \
+  FUNC(QString,                                                                                                        \
+       DisabledColor,                                                                                                  \
+       "#8f8f8f",                                                                                                      \
+       "mode,gear",                                                                                                    \
+       DataEditor::COLOR,                                                                                              \
+       QObject::tr("Disabled color"),                                                                                  \
        Game::ALL,                                                                                                      \
        true)                                                                                                           \
   FUNC(QString,                                                                                                        \

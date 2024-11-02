@@ -83,6 +83,8 @@ class BaseGearHandler : public QObject {
   bool m_user_enabled{true};
   bool m_soft_enabled{true};
 
+  bool m_use_seq_after_clutch{false};
+
  private:
   static constexpr auto GetGearModeStr(const GearHandlerMode::Type mode) {
     switch (mode) {

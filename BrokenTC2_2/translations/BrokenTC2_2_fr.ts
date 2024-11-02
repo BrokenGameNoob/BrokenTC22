@@ -82,7 +82,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+111"/>
+        <location line="+164"/>
         <source>Gear indicator</source>
         <translation type="unfinished"></translation>
     </message>
@@ -97,12 +97,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="+15"/>
         <source>DEBUG text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+63"/>
+        <location line="+94"/>
         <source>Debug</source>
         <translation type="unfinished"></translation>
     </message>
@@ -131,6 +131,11 @@
     <name>GameProfileTab</name>
     <message>
         <location filename="../src/tabs/GameProfileTab.qml" line="+33"/>
+        <source>BEHAVIOR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
         <source>GENERAL CONTROLS</source>
         <translation type="unfinished"></translation>
     </message>
@@ -147,19 +152,19 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="+432"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="+458"/>
         <location line="+149"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-390"/>
+        <location line="-414"/>
         <location line="+55"/>
         <source>NOT SET</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+220"/>
+        <location line="+244"/>
         <location line="+149"/>
         <source>Delete binding</source>
         <translation type="unfinished"></translation>
@@ -252,7 +257,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="+61"/>
+        <location filename="../src/main.cpp" line="+62"/>
         <source>Critical error</source>
         <translation>Erreur fatale</translation>
     </message>
@@ -263,7 +268,7 @@ Exit application.</source>
         <translation>Impossible de créer les dossiers &quot;Appdata&quot; nécessaires au bon fonctionnement de l&apos;application.\nL&apos;application va se fermer.</translation>
     </message>
     <message>
-        <location filename="../src/system/services/service_manager.cpp" line="+49"/>
+        <location filename="../src/system/services/service_manager.cpp" line="+51"/>
         <source>Game changed to: %0</source>
         <translation type="unfinished"></translation>
     </message>
@@ -293,11 +298,12 @@ Exit application.</source>
     </message>
     <message>
         <location line="+22"/>
+        <location line="+101"/>
         <source>SEQUENTIAL GEARS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="-90"/>
         <source>DIRECT GEARS</source>
         <translation type="unfinished"></translation>
     </message>
@@ -322,7 +328,7 @@ Exit application.</source>
 <context>
     <name>btc2::BaseGearHandler</name>
     <message>
-        <location filename="../src/games/gear_handler.cpp" line="+56"/>
+        <location filename="../src/games/gear_handler.cpp" line="+57"/>
         <source>Disabled</source>
         <translation type="unfinished"></translation>
     </message>

@@ -18,6 +18,7 @@
 #include <debug/qml_log.hpp>
 #include <games/easy_setup_interface.hpp>
 #include <system/controls_io/keystroke_sequencer.hpp>
+#include <system/services/screen_overlay_selector.hpp>
 #include <system/services/service_manager.hpp>
 #include <utils/shared_constants.hpp>
 #include <utils/style.hpp>
@@ -70,6 +71,7 @@ int SDL_main(int argc, char* argv[]) {
   btc2::ControllerHandler::Init();
   btc2::KeyboardHandler::Init();
   btc2::GameProfilesHandler::Init();
+  btc2::ScreenOverlaySelector::Init();
   CREGISTER_QML_UNCREATABLE_TYPE(btc2, Game, "Enum class");
   CREGISTER_QML_UNCREATABLE_TYPE(btc2, GearHandlerMode, "Enum class");
 
@@ -93,6 +95,9 @@ int SDL_main(int argc, char* argv[]) {
   } else {
     qWarning() << "Failed to install translator (" << QLocale() << ")";
   }
+
+  /* -- Pre conditions -- */
+  win::SetNumLock(true);
 
   /* -- Actual start -- */
   QQmlApplicationEngine engine;

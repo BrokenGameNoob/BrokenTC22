@@ -24,7 +24,8 @@ void GearHandlerTheCrew::InternalGearUp() {
   const auto kNextGear{GetGear() + 1};
   if (kGearMode == GearMode::CLUTCH_MODE && kNextGear <= GetMaxGearClutch()) {
     SetGear(kNextGear ? kNextGear : kNextGear + 1);
-  } else if (kGearMode == GearMode::SEQ_MODE || kNextGear > GetMaxGearClutch()) {
+  } else if (kGearMode == GearMode::SEQ_MODE ||
+             (kNextGear > GetMaxGearClutch() && m_game_profile->UseSequentialAfterClutch())) {
     if (!m_game_profile) {
       return;
     }
@@ -40,7 +41,8 @@ void GearHandlerTheCrew::InternalGearDown() {
   const auto kNextGear{GetGear() - 1};
   if (kGearMode == GearMode::CLUTCH_MODE && kNextGear <= GetMaxGearClutch()) {
     SetGear(kNextGear ? kNextGear : kNextGear - 1);
-  } else if (kGearMode == GearMode::SEQ_MODE || kNextGear > GetMaxGearClutch()) {
+  } else if (kGearMode == GearMode::SEQ_MODE ||
+             (kNextGear > GetMaxGearClutch() && m_game_profile->UseSequentialAfterClutch())) {
     SetGear(kNextGear);
     io::KeySequence ks{{m_game_profile->GearDown(), true}, {17}, {m_game_profile->GearDown(), false}};
     io::AsynchronousKeySeqThread(ks);

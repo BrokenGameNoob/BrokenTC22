@@ -36,6 +36,9 @@ bool SetCoreCountAffinity(int32_t coreCountToUse, bool throwOnFail = false, bool
 unsigned int ScancodeFromVirtualKey(unsigned int virtualkey, unsigned int alias = 0);
 QString VkCodeToStr(int32_t keyCode);
 
+bool IsNumLockEnabled();
+void SetNumLock(bool enable);
+
 }  // namespace win
 
 #endif  // WIN_WINUTILS_HPP

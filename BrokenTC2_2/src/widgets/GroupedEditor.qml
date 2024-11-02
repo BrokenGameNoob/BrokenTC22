@@ -120,6 +120,8 @@ Item {
                             return switchComponent
                         case DataEditor.COLOR:
                             return colorComponent
+                        case DataEditor.SCREEN_SELECTOR:
+                            return screenSelectorComponent
                         }
                         return unknownComponent
                     }
@@ -345,6 +347,30 @@ Item {
 
             function onColorSelected(color) {
                 setValue(color)
+            }
+        }
+    }
+
+    Component {
+        id: screenSelectorComponent
+        ComboBox {
+            anchors.centerIn: parent
+            width: parent.width
+            height: componentHeight
+
+            model: ServiceManager.GetAvailableScreens()
+
+            onActivated: {
+                setValue(currentText)
+            }
+
+            function indexOfScreen(screen) {
+                for (var i = 0; i < model.length; i++) {
+                    if (model[i] === screen) {
+                        return i
+                    }
+                }
+                return -1
             }
         }
     }
