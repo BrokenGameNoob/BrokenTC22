@@ -88,6 +88,8 @@ void ServiceManager::OnFocusedWindowChanged(const QString& title) {
   }
 
   emit focusedWindowTitleChanged();
+
+  GetGearHandler().SetSoftEnabled(m_game_focused == Game::Types::NONE ? false : true);
 }
 
 Game::Types ServiceManager::GetFocusedWindowGame() const {
