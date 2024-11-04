@@ -11,7 +11,7 @@ Item {
     id: root
 
     property bool iconOnTheRight: false
-    property real spacerWidth: Style.kStandardMargin / 2.
+    property real spacerWidth: Style.kStandardMargin / 2
 
     property string color: Style.kForeground
 
@@ -26,11 +26,11 @@ Item {
     implicitWidth: rowLayout.implicitWidth
     implicitHeight: rowLayout.implicitHeight
 
-    default property alias label: lbl
+    property alias label: lbl
 
     RowLayout {
         id: rowLayout
-        spacing: 5
+        spacing: 0
         anchors.centerIn: parent
 
         layoutDirection: iconOnTheRight ? Qt.RightToLeft : Qt.LeftToRight
@@ -49,7 +49,6 @@ Item {
             id: spacer
             Layout.preferredWidth: spacerWidth
         }
-
         Label {
             id: lbl
             //            color: root.color

@@ -12,16 +12,23 @@ Item {
     id: frame
     required property var targetElement
     required property string targetGroup
-    readonly property real componentHeight: 35
 
     property alias title: titleText.text
     property bool alignTitleLeft: true
+    property var conflictedPropertiesName: []
     clip: false
+
+    readonly property real componentHeight: 35
 
     readonly property real implicitHeight2: {
         col.implicitHeight + titleText.implicitHeight + Style.kStandardMargin
     }
     implicitHeight: implicitHeight2
+
+    /* WARNING: this will reset all the fields for the current group key. Not only the visible ones */
+    function resetAllFieldsForGroupTitle() {
+        targetElement.Reset(targetGroup)
+    }
 
     Text {
         id: titleText
@@ -112,6 +119,10 @@ Item {
                             return sliderComponent
                         case DataEditor.SWITCH:
                             return switchComponent
+                        case DataEditor.COLOR:
+                            return colorComponent
+                        case DataEditor.SCREEN_SELECTOR:
+                            return screenSelectorComponent
                         }
                         return unknownComponent
                     }
@@ -264,6 +275,23 @@ Item {
                 }
             }
 
+            ColoredImage {
+                anchors {
+                    left: parent.left
+                    leftMargin: Style.kStandardMargin
+                    verticalCenter: parent.verticalCenter
+                }
+                source: Constants.kIconCancel
+                height: keyboardButton.height / 2
+                width: height
+                sourceSize.width: width
+                sourceSize.height: height
+                color: QMLStyle.kErrorRed
+
+                //make the image visible only if "key" is found in root.conflictList
+                visible: frame.conflictedPropertiesName.indexOf(key) > -1
+            }
+
             Connections {
                 target: ServiceManager.keyboardHandler
                 function onKeyDown(key) {
@@ -317,6 +345,59 @@ Item {
                 scale: wantedHeight / height
             }
         }
+    }
+
+    Component {
+        id: colorComponent
+        Button {
+            height: componentHeight
+            contentItem: Rectangle {
+                color: customValue
+                width: parent.width * 0.9
+                height: parent.height * 0.9
+                anchors.centerIn: parent
+                radius: height / 2.
+            }
+
+            onClicked: {
+                colorPickPopup.selectColor(customValue, this.onColorSelected)
+            }
+
+            function onColorSelected(color) {
+                setValue(color)
+            }
+        }
+    }
+
+    Component {
+        id: screenSelectorComponent
+        ComboBox {
+            anchors.centerIn: parent
+            width: parent.width
+            height: componentHeight
+
+            model: ServiceManager.GetAvailableScreens()
+
+            onActivated: {
+                setValue(currentText)
+            }
+
+            function indexOfScreen(screen) {
+                for (var i = 0; i < model.length; i++) {
+                    if (model[i] === screen) {
+                        return i
+                    }
+                }
+                return -1
+            }
+        }
+    }
+
+    ColorPicker {
+        id: colorPickPopup
+
+        // title: qsTr("Select color")
+        // parentWindow: frame.parentWindow
     }
 
     ThemedPopup {

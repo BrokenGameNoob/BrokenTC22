@@ -57,6 +57,12 @@ void KeySequencerThread::SetSequence(const KeySequence& seq) {
   m_current_element = {};
   m_seq_set_time = Now();
   m_last_loop_was_empty = false;
+
+  while (!m_pressed_keys.empty()) {
+    const auto kKey{*(m_pressed_keys.begin())};
+    win::SendKeyboardEvent(kKey, false);
+    m_pressed_keys.erase(kKey);
+  }
 }
 
 inline void Sleep1Ms() {
@@ -72,7 +78,7 @@ void KeySequencerThread::Loop() {
     }
 
     const auto kDiffFromDelayStartMs{DiffMs(m_delay_start, Now())};
-    SPDLOG_DEBUG("[KEYSEQ] Current delay {}ms", kDiffFromDelayStartMs);
+    // SPDLOG_DEBUG("[KEYSEQ] Current delay {}ms", kDiffFromDelayStartMs);
     if (kDiffFromDelayStartMs < m_current_element->GetDelayMs()) {
       const auto kToSkip{static_cast<int>((m_current_element->GetDelayMs() - kDiffFromDelayStartMs) / 3.)};
       if (kToSkip) {
@@ -110,6 +116,11 @@ void KeySequencerThread::Loop() {
     case KeySequenceElementKind::Key: {
       SPDLOG_INFO("[KEYSEQ] Key {} pressed? {}", kCurrentElement.GetKey(), kCurrentElement.GetKeyPressed());
       win::SendKeyboardEvent(kCurrentElement.GetKey(), kCurrentElement.GetKeyPressed());
+      if (kCurrentElement.GetKeyPressed()) {
+        m_pressed_keys.insert(kCurrentElement.GetKey());
+      } else {
+        m_pressed_keys.erase(kCurrentElement.GetKey());
+      }
     } break;
     case KeySequenceElementKind::Delay: {
       m_current_element = kCurrentElement;

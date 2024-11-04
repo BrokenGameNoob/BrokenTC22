@@ -124,6 +124,7 @@ set(BTC2_SOURCES
     ${BTC2_SOURCES_DIR}/system/services/keyboard_handler.hpp ${BTC2_SOURCES_DIR}/system/services/keyboard_handler.cpp
     ${BTC2_SOURCES_DIR}/system/services/model_registry.hpp ${BTC2_SOURCES_DIR}/system/services/model_registry.cpp
     ${BTC2_SOURCES_DIR}/system/services/game_profiles_handler.hpp ${BTC2_SOURCES_DIR}/system/services/game_profiles_handler.cpp
+    ${BTC2_SOURCES_DIR}/system/services/screen_overlay_selector.hpp ${BTC2_SOURCES_DIR}/system/services/screen_overlay_selector.cpp
 
     # Controls
     ${BTC2_SOURCES_DIR}/system/controls_io/keystroke_sequencer.hpp ${BTC2_SOURCES_DIR}/system/controls_io/keystroke_sequencer.cpp
@@ -161,6 +162,10 @@ set(BTC2_QML_FILES
     ${BTC2_SOURCES_DIR}/widgets/GameOverlay/GameOverlay.qml
     ${BTC2_SOURCES_DIR}/widgets/GameOverlay/EnableDragForComponent.qml
     ${BTC2_SOURCES_DIR}/widgets/GameOverlay/GameOverlayEditMenu.qml
+    ${BTC2_SOURCES_DIR}/widgets/GameOverlay/SoftRunningIcon.qml
+    ${BTC2_SOURCES_DIR}/widgets/ColorPicker.qml
+    ${BTC2_SOURCES_DIR}/widgets/ButtonOk.qml
+    ${BTC2_SOURCES_DIR}/widgets/ButtonCancel.qml
 
     # Tabs
     ${BTC2_QML_DIR}/tabs/SettingsTab.qml

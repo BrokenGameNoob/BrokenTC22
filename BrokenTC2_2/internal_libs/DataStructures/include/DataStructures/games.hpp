@@ -4,6 +4,7 @@
 #include <qobjectdefs.h>
 #include <qtmetamacros.h>
 
+#include <Logger/logger.hpp>
 #include <Utils/macro_define.hpp>
 
 #include "qqml.h"
@@ -38,27 +39,37 @@ class GameSelector : public QObject {
 
   Q_PROPERTY(Game::Types selectedGame READ GetSelectedGame WRITE SetSelectedGame NOTIFY gameChanged)
   Q_PROPERTY(QString selectedGameName READ GetSelectedGameName NOTIFY gameChanged)
+  Q_PROPERTY(QString selectionModelSelectedGameName READ GetSelectedGameName NOTIFY selectionModelGameUpdated)
 
  signals:
   void gameChanged();
+  void selectionModelGameUpdated();
 
  public:
   GameSelector(QObject* parent = nullptr);
 
   void SetSelectedGame(Games game) {
+    const auto kOldGame{m_selected_game};
     m_selected_game = static_cast<Game::Types>(game.toInt());
-    emit gameChanged();
+    if (kOldGame != m_selected_game) {
+      SPDLOG_DEBUG("Game changed!");
+      emit gameChanged();
+    }
   }
   Q_INVOKABLE void SetSelectedGameFromName(const QString& name) {
-    m_selected_game = GetGameFromName(name);
-    emit gameChanged();
+    SetSelectedGame(GetGameFromName(name));
   }
 
   Game::Types GetSelectedGame() const {
     return m_selected_game;
   }
 
-  Q_INVOKABLE static QStringList GetAvailableGamesNames();
+  static QStringList GetAvailableGamesNames();
+  static QString GetAutoModeStr();
+  Q_INVOKABLE static QStringList GameSelectionModel(bool add_auto_option);
+  Q_INVOKABLE void SetSelectionModelSelectedGame(const QString& selection_model_name);
+  QString GetSelectionModelSelectedGame();
+
   Q_INVOKABLE static Game::Types GetGameFromName(const QString& name);
   Q_INVOKABLE static QString GetGameName(Game::Types game);
 
@@ -66,10 +77,16 @@ class GameSelector : public QObject {
     return kGameNames.at(m_selected_game);
   }
 
+ public slots:
+  void OnFocusedWindowChanged(Game::Types game);
+
  private:
   static const std::map<Games, QString> kGameNames;
 
-  Game::Types m_selected_game{Game::THE_CREW_2};
+  Game::Types m_selected_game{Game::NONE};
+  QString m_selection_model_selected_game_name;
+  bool m_auto_selection{true};
+  bool m_force_auto_selection{true};
 };
 
 }  // namespace btc2

@@ -29,6 +29,9 @@ Window {
     readonly property real maxScale: 2.5
 
     property var overlayModel: ServiceManager.gameOverlay
+    property string selectedOverlayScreen: ServiceManager.settings.SelectedOverlayScreen
+
+    readonly property color modeColor: ServiceManager.gearHandler.isActive ? (ServiceManager.gearHandler.gearMode === GearHandlerMode.CLUTCH_MODE ? overlayModel.ClutchColor : overlayModel.NoClutchColor) : overlayModel.DisabledColor
 
     onClosing: function (event) {
         if (!allowClose) {
@@ -43,9 +46,25 @@ Window {
         }
     }
 
+    onSelectedOverlayScreenChanged: {
+        refreshScreen()
+    }
+
     function leaveIfEditMode() {
         if (editModeEnabled) {
             leaveEditMode()
+        }
+    }
+
+    function refreshScreen() {
+        console.log("QML refreshScreen to " + root.selectedOverlayScreen)
+
+        for (var i = 0; i < Application.screens.length; i++) {
+            if (Application.screens[i].name === root.selectedOverlayScreen) {
+                root.screen = Application.screens[i]
+                console.log("QML Screen found: " + root.screen.name)
+                break
+            }
         }
     }
 
@@ -57,9 +76,20 @@ Window {
         }
     }
 
+    SoftRunningIcon {
+        id: independantBtc2LaunchedIcon
+        x: btc2LaunchedIcon.x
+        y: btc2LaunchedIcon.y
+        scale: btc2LaunchedIcon.scale
+        visible: !btc2LaunchedIcon.visible && !content.visible
+                 && overlayModel.SoftRunningIndicatorEnabled
+    }
+
     Item {
         id: content
         anchors.fill: parent
+        visible: ServiceManager.focusedGame != Game.NONE || root.editModeEnabled
+                 || ServiceManager.settings.OverlayAlwaysVisible
 
         MouseArea {
             id: globalArea
@@ -133,17 +163,75 @@ Window {
         }
 
         function resetAll() {
-            resetGearLabel()
-            resetNotifLabel()
+            gearEditor.resetAllFieldsForGroupTitle()
+            notifEditor.resetAllFieldsForGroupTitle()
+            clutchModeEditor.resetAllFieldsForGroupTitle()
+            softRunningEditor.resetAllFieldsForGroupTitle()
         }
 
-        function resetGearLabel() {
-            overlayModel.GearX = 0
-            overlayModel.GearY = 0
-            overlayModel.GearScaling = 1
+        SoftRunningIcon {
+            id: btc2LaunchedIcon
+            visible: editModeEnabled
+
+            readonly property real defaultX: parent.width - width - QMLStyle.kStandardMargin
+            readonly property real defaultY: parent.height - height - 50
+
+            readonly property real implicitX: overlayModel.SoftRunningIndicatorX
+            readonly property real implicitY: overlayModel.SoftRunningIndicatorY
+
+            x: implicitX === 0 ? defaultX : implicitX
+            y: implicitY === 0 ? defaultY : implicitY
+
+            EnableDragForComponent {
+                id: dragBtc2LaunchedIcon
+                anchors.fill: parent
+                target: parent
+                minScale: root.minScale
+                maxScale: root.maxScale
+                onDropped: {
+                    overlayModel.SoftRunningIndicatorX = btc2LaunchedIcon.x
+                    overlayModel.SoftRunningIndicatorY = btc2LaunchedIcon.y
+                }
+            }
+
+            property bool inhibitScaleUpdate: false
+            Binding {
+                target: btc2LaunchedIcon
+                property: "scale"
+                value: overlayModel.SoftRunningIndicatorScaling
+            }
+            onScaleChanged: {
+                inhibitScaleUpdate = true
+                overlayModel.SoftRunningIndicatorScaling = scale
+                inhibitScaleUpdate = false
+            }
         }
 
-        Label {
+        GameOverlayEditMenu {
+            globalArea: globalArea
+            editModeEnabled: root.editModeEnabled
+            targetEnableDragForComponent: dragBtc2LaunchedIcon
+            targetComponent: btc2LaunchedIcon
+            minScale: root.minScale
+            maxScale: root.maxScale
+
+            GroupedEditor {
+                id: softRunningEditor
+                targetElement: root.overlayModel
+                targetGroup: "soft_running"
+                title: qsTr("Soft running indicator")
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+
+            onResetWanted: {
+                confirmationPopup.openForElement(
+                            softRunningEditor.title,
+                            softRunningEditor.resetAllFieldsForGroupTitle)
+            }
+        }
+
+        Item {
             id: gearLabel
 
             readonly property real defaultX: QMLStyle.kStandardMargin
@@ -155,22 +243,76 @@ Window {
             x: implicitX === 0 ? defaultX : implicitX
             y: implicitY === 0 ? defaultY : implicitY
 
-            font.pointSize: 50
-            font.bold: true
+            height: gearLabelContent.implicitHeight
+            width: gearLabelContent.implicitWidth
 
-            width: implicitWidth + QMLStyle.kStandardMargin
-            padding: Style.kStandardMargin / 2
-            topPadding: Style.kStandardMargin / 2 - (0.12 * font.pixelSize)
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            visible: overlayModel.GearEnabled || editModeEnabled
-
-            text: ServiceManager.gearHandler.gearStr
-
-            background: Rectangle {
-                color: "black"
+            Rectangle {
+                color: overlayModel.GearBackgroundColor
                 radius: width > height ? height / 2 : width / 2
-                opacity: 0.3
+                opacity: 1
+                anchors {
+                    fill: parent
+                }
+            }
+
+            RowLayout {
+                id: gearLabelContent
+                anchors.centerIn: parent
+                spacing: 0
+                clip: true
+
+                Label {
+                    id: gearLabelActualText
+                    font.pointSize: 50
+                    font.bold: true
+
+                    Layout.preferredWidth: implicitWidth + QMLStyle.kStandardMargin
+                    padding: Style.kStandardMargin / 2
+                    topPadding: Style.kStandardMargin / 2 - (0.12 * font.pixelSize)
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    visible: overlayModel.GearEnabled || editModeEnabled
+
+                    text: ServiceManager.gearHandler.gearStr
+                    color: overlayModel.GearChangeGearColorDependingOnMode ? modeColor : QMLStyle.kTextColor
+                }
+
+                Text {
+                    id: gearLabelDisabledImage
+                    readonly property string implicitText: ServiceManager.gearHandler.gearModeStr.toUpperCase()
+                    Layout.alignment: Qt.AlignVCenter
+
+                    text: implicitText
+                    color: "white"
+                    font: QMLStyle.kFontH2Bold
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignLeft
+
+                    Layout.preferredWidth: text.length > 0
+                                           && overlayModel.GearIndicatorModeNotifEnabled ? implicitWidth + QMLStyle.kStandardMargin * 2 : 0
+                    visible: Layout.preferredWidth > 0
+
+                    Behavior on Layout.preferredWidth {
+                        NumberAnimation {
+                            duration: 150
+                            easing.type: Easing.InOutQuad
+                        }
+                    }
+
+                    onImplicitTextChanged: {
+                        gearLabelDisabledImage.text = implicitText
+                        resetGearLabelDisabledImageText.restart()
+                    }
+                    Timer {
+                        id: resetGearLabelDisabledImageText
+                        interval: 1000
+                        running: false
+                        repeat: false
+                        onTriggered: {
+                            gearLabelDisabledImage.text = ""
+                        }
+                    }
+                }
             }
 
             EnableDragForComponent {
@@ -216,15 +358,10 @@ Window {
             }
 
             onResetWanted: {
-                confirmationPopup.openForElement(gearEditor.title,
-                                                 content.resetGearLabel)
+                confirmationPopup.openForElement(
+                            gearEditor.title,
+                            gearEditor.resetAllFieldsForGroupTitle)
             }
-        }
-
-        function resetNotifLabel() {
-            overlayModel.NotifX = 0
-            overlayModel.NotifY = 0
-            overlayModel.NotifScaling = 1
         }
 
         Label {
@@ -243,25 +380,32 @@ Window {
             font.bold: false
 
             height: implicitHeight
+            width: shouldBeVisible
+                   || editModeEnabled ? implicitWidth + QMLStyle.kStandardMargin : 0
 
-            width: implicitWidth + QMLStyle.kStandardMargin
+            Behavior on width {
+                SmoothedAnimation {
+                    duration: 150
+                }
+            }
+
             padding: Style.kStandardMargin
             topPadding: Style.kStandardMargin / 2
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
+            clip: true
 
             readonly property bool shouldBeVisible: ServiceManager.overlayNotificationText.length > 0
-            visible: (overlayModel.NotifEnabled && shouldBeVisible)
-                     || editModeEnabled
+            visible: (overlayModel.NotifEnabled && width > 0) || editModeEnabled
 
             text: editModeEnabled ? qsTr("Notification text") : ServiceManager.overlayNotificationText
 
             background: Item {
                 Rectangle {
                     anchors.fill: parent
-                    color: "black"
+                    color: overlayModel.NotifBackgroundColor
                     radius: width > height ? height / 2 : width / 2
-                    opacity: 0.3
+                    opacity: 1.
                 }
 
                 Rectangle {
@@ -322,8 +466,236 @@ Window {
             }
 
             onResetWanted: {
-                confirmationPopup.openForElement(notifEditor.title,
-                                                 content.resetNotifLabel)
+                confirmationPopup.openForElement(
+                            notifEditor.title,
+                            notifEditor.resetAllFieldsForGroupTitle)
+            }
+        }
+
+        Label {
+            id: debugLabel
+
+            // text: editModeEnabled ? qsTr("DEBUG text") : (ServiceManager.settings.SelectedOverlayScreen)
+            text: btc2LaunchedIcon.visible ? qsTr("VISIBLE") : qsTr(
+                                                 "NOT VISIBLE")
+
+            readonly property real defaultX: QMLStyle.kStandardMargin
+            readonly property real defaultY: parent.height / 2. - height / 2.
+
+            readonly property real implicitX: overlayModel.DebugLabelX
+            readonly property real implicitY: overlayModel.DebugLabelY
+
+            x: implicitX === 0 ? defaultX : implicitX
+            y: implicitY === 0 ? defaultY : implicitY
+
+            font.pointSize: 30
+            font.bold: false
+
+            height: implicitHeight
+            width: shouldBeVisible
+                   || editModeEnabled ? implicitWidth + QMLStyle.kStandardMargin : 0
+
+            Behavior on width {
+                SmoothedAnimation {
+                    duration: 150
+                }
+            }
+
+            padding: Style.kStandardMargin
+            topPadding: Style.kStandardMargin / 2
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            clip: true
+
+            readonly property bool shouldBeVisible: true
+            visible: (overlayModel.DebugLabelEnabled && width > 0)
+                     || editModeEnabled
+
+            background: Item {
+                Rectangle {
+                    anchors.fill: parent
+                    color: overlayModel.NotifBackgroundColor
+                    radius: width > height ? height / 2 : width / 2
+                    opacity: 1.
+                }
+
+                Rectangle {
+                    visible: editModeEnabled
+                    color: QMLStyle.kAccentColor
+                    width: 3
+                    opacity: 1.
+                    anchors {
+                        horizontalCenter: parent.left
+                        top: parent.top
+                        topMargin: -QMLStyle.kStandardMargin / 2.
+                        bottom: parent.bottom
+                        bottomMargin: -QMLStyle.kStandardMargin / 2.
+                    }
+                }
+            }
+
+            EnableDragForComponent {
+                id: dragdebugLabel
+                anchors.fill: parent
+                target: parent
+                minScale: root.minScale
+                maxScale: root.maxScale
+                onDropped: {
+                    overlayModel.DebugLabelX = debugLabel.x
+                    overlayModel.DebugLabelY = debugLabel.y
+                }
+            }
+
+            property bool inhibitScaleUpdate: false
+            Binding {
+                target: debugLabel
+                property: "scale"
+                value: overlayModel.DebugLabelScaling
+            }
+            onScaleChanged: {
+                inhibitScaleUpdate = true
+                overlayModel.DebugLabelScaling = scale
+                inhibitScaleUpdate = false
+            }
+        }
+
+        GameOverlayEditMenu {
+            globalArea: globalArea
+            editModeEnabled: root.editModeEnabled
+            targetEnableDragForComponent: dragdebugLabel
+            targetComponent: debugLabel
+            minScale: root.minScale
+            maxScale: root.maxScale
+
+            GroupedEditor {
+                id: debugEditor
+                targetElement: root.overlayModel
+                targetGroup: "debug"
+                title: qsTr("Debug")
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+
+            onResetWanted: {
+                confirmationPopup.openForElement(
+                            debugEditor.title,
+                            debugEditor.resetAllFieldsForGroupTitle)
+            }
+        }
+
+        Item {
+            id: clutchModeLabel
+
+            readonly property real defaultX: QMLStyle.kStandardMargin + 200 //TODO:Adjust
+            readonly property real defaultY: parent.height - QMLStyle.kStandardMargin - height
+
+            readonly property real implicitX: overlayModel.ModeIndicatorX
+            readonly property real implicitY: overlayModel.ModeIndicatorY
+
+            x: implicitX === 0 ? defaultX : implicitX
+            y: implicitY === 0 ? defaultY : implicitY
+
+            visible: overlayModel.ModeIndicatorEnabled || editModeEnabled
+
+            width: clutchModeLabelContent.width + QMLStyle.kStandardMargin
+            height: clutchModeLabelContent.height + QMLStyle.kStandardMargin
+
+            Rectangle {
+                anchors.fill: parent
+                color: overlayModel.GearBackgroundColor
+                radius: width > height ? height / 2 : width / 2
+                opacity: 1
+            }
+
+            Row {
+                id: clutchModeLabelContent
+                anchors.centerIn: parent
+                spacing: 0
+                ColoredImage {
+                    sourceSize.width: (gearLabel.height - QMLStyle.kStandardMargin) * scale
+                    sourceSize.height: (gearLabel.height - QMLStyle.kStandardMargin) * scale
+                    source: ServiceManager.gearHandler.isActive ? ServiceManager.gearHandler.gearModeIconSource : Constants.kIconCancelInverted
+                    color: overlayModel.ModeIndicatorChangeGearColorDependingOnMode ? modeColor : QMLStyle.kTextColor
+                }
+                Text {
+                    id: clutchModeText
+                    readonly property string implicitText: ServiceManager.gearHandler.gearModeStr.toUpperCase()
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: implicitText
+                    color: "white"
+                    font: QMLStyle.kFontH2Bold
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+
+                    width: text.length > 0 ? implicitWidth : 0
+
+                    Behavior on width {
+                        SmoothedAnimation {
+                            duration: 150
+                        }
+                    }
+
+                    onImplicitTextChanged: {
+                        clutchModeText.text = implicitText
+                        resetClutchModeTextTimer.restart()
+                    }
+                    Timer {
+                        id: resetClutchModeTextTimer
+                        interval: 1500
+                        running: false
+                        repeat: false
+                        onTriggered: {
+                            clutchModeText.text = ""
+                        }
+                    }
+                }
+            }
+
+            EnableDragForComponent {
+                id: dragClutchModeLabel
+                anchors.fill: parent
+                target: parent
+                minScale: root.minScale
+                maxScale: root.maxScale
+                onDropped: {
+                    overlayModel.ModeIndicatorX = clutchModeLabel.x
+                    overlayModel.ModeIndicatorY = clutchModeLabel.y
+                }
+            }
+
+            property bool inhibitScaleUpdate: false
+            Binding {
+                target: clutchModeLabel
+                property: "scale"
+                value: overlayModel.ModeIndicatorScaling
+            }
+            onScaleChanged: {
+                inhibitScaleUpdate = true
+                overlayModel.ModeIndicatorScaling = scale
+                inhibitScaleUpdate = false
+            }
+        }
+        GameOverlayEditMenu {
+            globalArea: globalArea
+            editModeEnabled: root.editModeEnabled
+            targetEnableDragForComponent: dragClutchModeLabel
+            targetComponent: clutchModeLabel
+            minScale: root.minScale
+            maxScale: root.maxScale
+
+            GroupedEditor {
+                id: clutchModeEditor
+                targetElement: root.overlayModel
+                targetGroup: "mode"
+                title: qsTr("Clutch mode")
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+
+            onResetWanted: {
+                confirmationPopup.openForElement(
+                            clutchModeEditor.title,
+                            clutchModeEditor.resetAllFieldsForGroupTitle)
             }
         }
     }

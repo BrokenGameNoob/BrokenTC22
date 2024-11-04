@@ -9,6 +9,7 @@
 #include <Logger/logger.hpp>
 #include <Utils/json_utils.hpp>
 #include <games/gear_handler_factory.hpp>
+#include <system/services/model_registry.hpp>
 #include <utils/qt_utils.hpp>
 #include <utils/time.hpp>
 
@@ -32,15 +33,22 @@ ServiceManager::ServiceManager()
       m_keyboard_handler{std::make_unique<KeyboardHandler>()},
       m_game_selector{std::make_unique<GameSelector>()},
       m_gear_handler{std::make_unique<GearHandlerTheCrew>(nullptr)},
-      m_game_overlay{std::make_unique<GameOverlay>(path::GetOverlaySettingsPath(), nullptr)},
-      m_keyboard_profile{std::make_unique<KeyboardProfile>(path::GetKeyboardProfilePath(), nullptr)},
+      m_game_overlay{std::make_unique<GameOverlayData>(path::GetOverlaySettingsPath(), nullptr)},
+      m_screen_overlay_selector{std::make_unique<ScreenOverlaySelector>(nullptr)},
+      m_keyboard_profile{ModelRegistry::GetKeyboardProfile()},
       m_window_change_hook{win::HookForFocusedWindowChanged(ServiceManager::OnWindowChangeHook)} {
   connect(m_game_selector.get(), &GameSelector::gameChanged, this, [this]() {
     m_game_profiles_handler->SetCurrentGame(m_game_selector->GetSelectedGame());
+    m_settings->SetSelectedGameName(m_game_selector->GetSelectedGameName());
+  });
+  connect(this, &ServiceManager::focusedWindowTitleChanged, this, [this]() {
+    const auto kFocusedGame{GetFocusedWindowGame()};
+    m_game_selector->OnFocusedWindowChanged(GetFocusedWindowGame());
   });
 
   connect(m_game_selector.get(), &GameSelector::gameChanged, this, [this]() {
     m_gear_handler = MakeGearHandler(m_game_selector->GetSelectedGame());
+    PublishOverlayNotification(QObject::tr("Game changed to: %0").arg(m_game_selector->GetSelectedGameName()), 2000);
     emit gearHandlerChanged();
   });
 
@@ -48,6 +56,22 @@ ServiceManager::ServiceManager()
     m_overlay_notification_text.clear();
     emit overlayNotificationUpdated();
   });
+
+  connect(m_screen_overlay_selector.get(), &ScreenOverlaySelector::selectedScreenChanged, this, [this]() {
+    m_settings->SetSelectedOverlayScreen(m_screen_overlay_selector->GetSelectedScreenName());
+  });
+  connect(m_settings.get(), &ApplicationSettings::dataChanged, this, [this]() {
+    m_screen_overlay_selector->SetSelectedScreenName(m_settings->SelectedOverlayScreen());
+  });
+
+  connect(m_game_profiles_handler.get(), &GameProfilesHandler::currentGameChanged, this, [this]() {
+    UpdateKeyboardConflicts();
+  });
+  connect(m_game_profiles_handler.get(), &GameProfilesHandler::profileUpdated, this, [this]() {
+    UpdateKeyboardConflicts();
+  });
+  connect(m_keyboard_profile.get(), &KeyboardProfile::dataChanged, this, [this]() { UpdateKeyboardConflicts(); });
+  connect(this, &ServiceManager::conflictsUpdated, this, [this]() { UpdateGearHandlerSoftEnabling(); });
 }
 
 void CALLBACK ServiceManager::OnWindowChangeHook(HWINEVENTHOOK hook, DWORD event, HWND hwnd, LONG idObject,
@@ -60,16 +84,30 @@ void CALLBACK ServiceManager::OnWindowChangeHook(HWINEVENTHOOK hook, DWORD event
   }
 }
 void ServiceManager::OnFocusedWindowChanged(const QString& title) {
-  SPDLOG_DEBUG("Focused window changed to: <{}>", title);
   m_focused_window_title = title;
+
+  const auto kFocusedGame{GetFocusedGameFromWindowTitle(m_focused_window_title)};
+  m_game_focused = kFocusedGame;
+  if (m_game_focused != Game::Types::NONE) {
+    m_latest_known_game_focused = m_game_focused;
+  } else if (title.contains("Form1") ||
+             title.contains("The Crew 2 - Competizione")) { /* Window title of Competizione HUD */
+    /*If Competizione HUD took foreground instead of the game, retrieve the last known game.*/
+    m_game_focused = m_latest_known_game_focused;
+  }
+
   emit focusedWindowTitleChanged();
 }
 
 Game::Types ServiceManager::GetFocusedWindowGame() const {
-  return GetFocusedGameFromWindowTitle(m_focused_window_title);
+  return m_game_focused;
 }
 
-void ServiceManager::OnMainWindowLoaded() {}
+void ServiceManager::OnMainWindowLoaded() {
+  m_focused_window_title = win::GetFocusedWindowTitle();
+  emit focusedWindowTitleChanged();
+  UpdateKeyboardConflicts();
+}
 
 void ServiceManager::PublishOverlayNotification(const QString& text, int duration_ms) {
   m_overlay_notification_text = text;
@@ -92,6 +130,16 @@ void ServiceManager::test() {
   io::KeySequence ks{
       {1000}, {VK_NUMPAD1, true}, {50}, {VK_NUMPAD1, false}, {500}, {VK_NUMPAD3, true}, {50}, {VK_NUMPAD3, false}};
   io::AsynchronousKeySeqThread(ks);
+}
+
+void ServiceManager::UpdateGearHandlerSoftEnabling() {
+  const bool kRightGameFocused{m_game_focused == Game::Types::NONE};
+  GetGearHandler().SetSoftEnabled(kRightGameFocused && !AreThereKeyboardConflicts());
+}
+
+void ServiceManager::UpdateKeyboardConflicts() {
+  m_keyboard_conflicts = m_game_profiles_handler->UpdateConflicts(*m_keyboard_profile);
+  emit conflictsUpdated();
 }
 
 }  // namespace btc2

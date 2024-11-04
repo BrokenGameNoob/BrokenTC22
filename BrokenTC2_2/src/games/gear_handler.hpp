@@ -5,76 +5,92 @@
 #include <cstdint>
 #include <qqmlintegration.h>
 
-class Bidule : public QObject {
+namespace btc2 {
+
+class GearHandlerMode : public QObject {
   Q_OBJECT
  public:
-  Bidule():QObject{}{}
-  enum Types{
-    NONE = 1,
-    THE_CREW_2 = 2,
-    MOTORFIST = 4,
-    ALL = 8,
+  enum Type {
+    CLUTCH_MODE,
+    SEQ_MODE,
+    MAX_MODE_ENUM_VALUE,
   };
-  Q_ENUM(Types)
+  Q_ENUM(Type)
 };
-
-namespace btc2 {
 
 class BaseGearHandler : public QObject {
   Q_OBJECT
 
   Q_PROPERTY(int gear READ GetGear WRITE SetGear NOTIFY gearChanged FINAL)
   Q_PROPERTY(QString gearStr READ GetGearStr NOTIFY gearChanged FINAL)
-  Q_PROPERTY(GearMode gearMode READ GetGearMode WRITE SetGearMode NOTIFY gearModeChanged FINAL)
+  Q_PROPERTY(GearHandlerMode::Type gearMode READ GetGearMode WRITE SetGearMode NOTIFY gearModeChanged FINAL)
   Q_PROPERTY(QString gearModeStr READ GetGearModeStr NOTIFY gearModeChanged FINAL)
+  Q_PROPERTY(QString gearModeIconSource READ GetGearModeIconSource NOTIFY gearModeChanged FINAL)
+  Q_PROPERTY(bool isActive READ IsActive NOTIFY activeChanged FINAL)
 
  public:
   using GearType = int32_t;
-
-  enum GearMode : int32_t { CLUTCH_MODE, SEQ_MODE, kMaxEnumValue };
-  Q_ENUM(GearMode)
 
   static void Init();
 
  signals:
   void gearChanged();
   void gearModeChanged();
+  void activeChanged();
 
  public:
-  BaseGearHandler(QObject* parent) : QObject{parent} {}
+  BaseGearHandler(QObject* parent) : QObject{parent} {
+    connect(this, &BaseGearHandler::activeChanged, this, &BaseGearHandler::gearModeChanged);
+  };
 
   GearType GetGear() const;
   void SetGear(GearType gear);
 
-  GearMode GetGearMode() const;
-  void SetGearMode(GearMode mode);
+  GearHandlerMode::Type GetGearMode() const;
+  void SetGearMode(GearHandlerMode::Type mode);
   Q_INVOKABLE void CycleMode();
 
   Q_INVOKABLE QString GetGearModeStr();
   Q_INVOKABLE QString GetGearStr();
+  Q_INVOKABLE QString GetGearModeIconSource();
+
+  Q_INVOKABLE void GearUp();
+  Q_INVOKABLE void GearDown();
+
+  bool IsActive() const;
+  void SetUserEnabled(bool enabled);
+  bool IsUserEnabled() const;
+  void SetSoftEnabled(bool enabled);
+  bool IsSoftEnabled() const;
 
   /* To reimplement */
 
   Q_INVOKABLE virtual GearType GetMinGear() const = 0;
   Q_INVOKABLE virtual GearType GetMaxGear() const = 0;
-
-  Q_INVOKABLE virtual void GearUp() = 0;
-  Q_INVOKABLE virtual void GearDown() = 0;
+  Q_INVOKABLE virtual GearType GetMaxGearClutch() const = 0;
 
  protected:
   virtual void OnGearSet(GearType old_gear, GearType gear) {}
-  virtual void OnGearModeSet(GearMode old_mode, GearMode mode) {}
+  virtual void OnGearModeSet(GearHandlerMode::Type old_mode, GearHandlerMode::Type mode) {}
+
+  virtual void InternalGearUp() = 0;
+  virtual void InternalGearDown() = 0;
 
  private:
   GearType m_gear{};
-  GearMode m_mode{};
+  GearHandlerMode::Type m_mode{};
+
+  bool m_user_enabled{true};
+  bool m_soft_enabled{true};
+
+  bool m_use_seq_after_clutch{false};
 
  private:
-  static constexpr auto GetGearModeStr(const GearMode mode) {
+  static constexpr auto GetGearModeStr(const GearHandlerMode::Type mode) {
     switch (mode) {
-      case CLUTCH_MODE:
+      case GearHandlerMode::CLUTCH_MODE:
         return "Clutch";
-      case SEQ_MODE:
+      case GearHandlerMode::SEQ_MODE:
         return "Classic";
       default:
         break;
@@ -83,7 +99,7 @@ class BaseGearHandler : public QObject {
   }
 };
 
-inline std::ostream& operator<<(std::ostream& stream, const BaseGearHandler::GearMode& mode) {
+inline std::ostream& operator<<(std::ostream& stream, const GearHandlerMode::Type& mode) {
   return stream << QVariant{mode}.toString().toStdString();
 }
 

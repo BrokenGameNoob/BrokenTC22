@@ -18,10 +18,10 @@
 #include <debug/qml_log.hpp>
 #include <games/easy_setup_interface.hpp>
 #include <system/controls_io/keystroke_sequencer.hpp>
+#include <system/services/screen_overlay_selector.hpp>
 #include <system/services/service_manager.hpp>
 #include <utils/shared_constants.hpp>
 #include <utils/style.hpp>
-
 
 bool SetupFolders() {
   auto lambda_create_folder_if_not_exists = [](const QString& path) {
@@ -71,8 +71,10 @@ int SDL_main(int argc, char* argv[]) {
   btc2::ControllerHandler::Init();
   btc2::KeyboardHandler::Init();
   btc2::GameProfilesHandler::Init();
+  btc2::ScreenOverlaySelector::Init();
   CREGISTER_QML_UNCREATABLE_TYPE(btc2, Game, "Enum class");
-  qmlRegisterUncreatableType<Bidule>("btc2", 1, 0, "Bidule", "Enum class");
+  CREGISTER_QML_UNCREATABLE_TYPE(btc2, GearHandlerMode, "Enum class");
+  btc2::ConflictsResults::Init();
 
   /* -- Debug -- */
 #ifdef PRINT_RESOURCES
@@ -94,6 +96,9 @@ int SDL_main(int argc, char* argv[]) {
   } else {
     qWarning() << "Failed to install translator (" << QLocale() << ")";
   }
+
+  /* -- Pre conditions -- */
+  win::SetNumLock(true);
 
   /* -- Actual start -- */
   QQmlApplicationEngine engine;

@@ -2,6 +2,35 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
+    <name>ButtonCancel</name>
+    <message>
+        <location filename="../src/widgets/ButtonCancel.qml" line="+12"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ButtonOk</name>
+    <message>
+        <location filename="../src/widgets/ButtonOk.qml" line="+12"/>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ColorPicker</name>
+    <message>
+        <location filename="../src/widgets/ColorPicker.qml" line="+231"/>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ConfirmationDialog</name>
     <message>
         <location filename="../src/widgets/ConfirmationDialog.qml" line="+18"/>
@@ -38,7 +67,7 @@
 <context>
     <name>GameOverlay</name>
     <message>
-        <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="+85"/>
+        <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="+115"/>
         <source>Place your elements where you want (drag &amp; drop)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -53,12 +82,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+115"/>
+        <location line="+94"/>
+        <source>Soft running indicator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+133"/>
         <source>Gear indicator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+46"/>
         <source>Notification text</source>
         <translation type="unfinished"></translation>
     </message>
@@ -68,7 +102,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+16"/>
+        <source>VISIBLE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>NOT VISIBLE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+95"/>
+        <source>Debug</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+116"/>
+        <source>Clutch mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
         <source>Are you sure you want to reset</source>
         <translation type="unfinished"></translation>
     </message>
@@ -86,12 +140,22 @@
 <context>
     <name>GameProfileTab</name>
     <message>
-        <location filename="../src/tabs/GameProfileTab.qml" line="+33"/>
+        <location filename="../src/tabs/GameProfileTab.qml" line="+48"/>
+        <source>Game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+47"/>
+        <source>BEHAVIOR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
         <source>GENERAL CONTROLS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+12"/>
         <source>GROUND VEHICLE</source>
         <translation type="unfinished"></translation>
     </message>
@@ -103,19 +167,19 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="+395"/>
-        <location line="+149"/>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-361"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="+194"/>
         <location line="+55"/>
         <source>NOT SET</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+191"/>
+        <location line="+227"/>
+        <location line="+149"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-115"/>
         <location line="+149"/>
         <source>Delete binding</source>
         <translation type="unfinished"></translation>
@@ -218,6 +282,11 @@
 Exit application.</source>
         <translation>Impossible de créer les dossiers &quot;Appdata&quot; nécessaires au bon fonctionnement de l&apos;application.\nL&apos;application va se fermer.</translation>
     </message>
+    <message>
+        <location filename="../src/system/services/service_manager.cpp" line="+51"/>
+        <source>Game changed to: %0</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsTab</name>
@@ -226,6 +295,14 @@ Exit application.</source>
         <location/>
         <source>OVERLAY</source>
         <translation>OVERLAY</translation>
+    </message>
+</context>
+<context>
+    <name>SoftStatusBar</name>
+    <message>
+        <location filename="../src/SoftStatusBar.qml" line="+155"/>
+        <source>Keyboard conflicts</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -243,8 +320,17 @@ Exit application.</source>
         <translation>GÉNÉRAL</translation>
     </message>
     <message>
-        <location line="+11"/>
-        <location/>
+        <location line="+22"/>
+        <location line="+104"/>
+        <source>SEQUENTIAL GEARS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-93"/>
+        <source>DIRECT GEARS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>GEAR</source>
         <translation>VITESSES</translation>
     </message>
@@ -255,10 +341,19 @@ Exit application.</source>
         <translation>CLAVIER</translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="-70"/>
+        <location line="+103"/>
         <location/>
         <source>SOFTWARE CONTROLS</source>
         <translation>LOGICIEL</translation>
+    </message>
+</context>
+<context>
+    <name>btc2::BaseGearHandler</name>
+    <message>
+        <location filename="../src/games/gear_handler.cpp" line="+57"/>
+        <source>Disabled</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

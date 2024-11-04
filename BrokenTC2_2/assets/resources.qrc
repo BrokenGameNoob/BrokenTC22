@@ -15,5 +15,9 @@
         <file>icons/icon_reset.svg</file>
         <file>icons/icon_cancel.svg</file>
         <file>icons/icon_ok.svg</file>
+        <file>icons/icon_fast.svg</file>
+        <file>icons/icon_slow.svg</file>
+        <file>icons/icon_round.svg</file>
+        <file>icons/icon_cancel_inverted.svg</file>
     </qresource>
 </RCC>

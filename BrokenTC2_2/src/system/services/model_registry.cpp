@@ -13,6 +13,22 @@ void ModelRegistry::Init() {
   CREGISTER_QML_SINGLETON_I(btc2, ModelRegistry);
 }
 
+std::shared_ptr<KeyboardProfile> ModelRegistry::GetKeyboardProfile() {
+  const auto kKeyboardProfilePath{path::GetKeyboardProfilePath()};
+  auto& m_keyboard_profiles = I().m_keyboard_profiles;
+
+  if (auto iter{m_keyboard_profiles.find(kKeyboardProfilePath)};
+      iter != m_keyboard_profiles.end() && !iter->second.expired()) {
+    SPDLOG_DEBUG("[ModelRegistry] Returning existing keyboard profile for path <{}>", kKeyboardProfilePath);
+    return m_keyboard_profiles[kKeyboardProfilePath].lock();
+  }
+
+  SPDLOG_DEBUG("[ModelRegistry] NEW keyboard profile for path <{}>", kKeyboardProfilePath);
+  auto keyboard_profile{std::make_shared<KeyboardProfile>(kKeyboardProfilePath, nullptr)};
+  m_keyboard_profiles[kKeyboardProfilePath] = keyboard_profile;
+  return keyboard_profile;
+}
+
 std::shared_ptr<ControllerProfile> ModelRegistry::GetControllerProfileFromPath(const QString& path) {
   auto& m_controller_profiles = I().m_controller_profiles;
 

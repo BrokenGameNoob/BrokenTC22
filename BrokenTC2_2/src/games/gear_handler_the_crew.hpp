@@ -13,14 +13,15 @@ class GearHandlerTheCrew : public BaseGearHandler {
 
   virtual GearType GetMinGear() const override;
   virtual GearType GetMaxGear() const override;
-
-  virtual void GearUp() override;
-  virtual void GearDown() override;
+  virtual GearType GetMaxGearClutch() const override;
 
  protected:
+  virtual void InternalGearUp() override;
+  virtual void InternalGearDown() override;
+
   std::optional<int32_t> GetVkCodeForGear(GearType gear);
   void OnGearSet(GearType old_gear, GearType gear) override;
-  void OnGearModeSet(GearMode old_mode, GearMode mode) override;
+  void OnGearModeSet(GearHandlerMode::Type old_mode, GearHandlerMode::Type mode) override;
 
  private:
   std::shared_ptr<GameProfileTheCrew> m_game_profile;
