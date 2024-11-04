@@ -54,23 +54,6 @@ Item {
             Layout.preferredWidth: QMLStyle.kStandardMargin
         }
 
-        // Game selection combo
-        ComboBox {
-            id: gameCombobox
-
-            visible: false
-
-            editable: false
-            Layout.preferredWidth: visible ? 200 : 0
-            Layout.preferredHeight: implicitHeight * 0.7
-            model: ServiceManager.gameSelector.GameSelectionModel()
-
-            onActivated: {
-                ServiceManager.gameSelector.SetSelectionModelSelectedGame(
-                            currentText)
-            }
-        }
-
         // Controller selection combo
         ComboBox {
             id: controllerCombobox
