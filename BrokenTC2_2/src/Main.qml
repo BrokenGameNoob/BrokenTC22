@@ -30,7 +30,7 @@ ApplicationWindow {
     visible: true
 
     minimumHeight: 200 + (300 * ServiceManager.hasDebInfo)
-    minimumWidth: 700
+    minimumWidth: 800
 
     SplitView {
         id: splitView
