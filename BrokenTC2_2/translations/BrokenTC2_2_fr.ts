@@ -295,7 +295,7 @@ Exit application.</source>
 <context>
     <name>SoftStatusBar</name>
     <message>
-        <location filename="../src/SoftStatusBar.qml" line="+208"/>
+        <location filename="../src/SoftStatusBar.qml" line="+172"/>
         <source>Keyboard conflicts</source>
         <translation type="unfinished"></translation>
     </message>
