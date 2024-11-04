@@ -178,11 +178,14 @@ Item {
                         rightMargin: Style.kStandardMargin * 2
                     }
 
+                    property var conflictNamesList: ServiceManager.keyboardProfileConflicts
+
                     GroupedEditor {
                         targetElement: ServiceManager.keyboardHandler.profile
                         targetGroup: "soft_controls"
                         title: qsTr("SOFTWARE CONTROLS")
                         Layout.fillWidth: true
+                        conflictedPropertiesName: parent.conflictNamesList
                     }
 
                     Item {
@@ -194,6 +197,7 @@ Item {
                         targetGroup: "sequential_gear"
                         title: qsTr("SEQUENTIAL GEARS")
                         Layout.fillWidth: true
+                        conflictedPropertiesName: parent.conflictNamesList
                     }
                 }
             }

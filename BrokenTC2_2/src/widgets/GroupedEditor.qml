@@ -15,6 +15,7 @@ Item {
 
     property alias title: titleText.text
     property bool alignTitleLeft: true
+    property var conflictedPropertiesName: []
     clip: false
 
     readonly property real componentHeight: 35
@@ -272,6 +273,23 @@ Item {
                     right: keyboardButton.right
                     rightMargin: QMLStyle.kStandardMargin
                 }
+            }
+
+            ColoredImage {
+                anchors {
+                    left: parent.left
+                    leftMargin: Style.kStandardMargin
+                    verticalCenter: parent.verticalCenter
+                }
+                source: Constants.kIconCancel
+                height: keyboardButton.height / 2
+                width: height
+                sourceSize.width: width
+                sourceSize.height: height
+                color: QMLStyle.kErrorRed
+
+                //make the image visible only if "key" is found in root.conflictList
+                visible: frame.conflictedPropertiesName.indexOf(key) > -1
             }
 
             Connections {

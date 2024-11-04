@@ -191,16 +191,26 @@ Item {
         }
     }
 
-    //    Label {
-    //        anchors {
-    //            verticalCenter: parent.verticalCenter
-    //            right: gearLabel.left
-    //            rightMargin: Style.kStandardMargin
-    //        }
+    LabelledIcon {
+        id: keyboardConflictsLabel
+        anchors {
+            verticalCenter: parent.verticalCenter
+            right: modeButton.left
+            rightMargin: Style.kStandardMargin
+        }
+        font: QMLStyle.kFontH3Bold
+        iconSize: modeButton.height * 0.7
+        iconOnTheRight: true
+        iconColor: QMLStyle.kErrorRed
+        spacerWidth: QMLStyle.kStandardMargin
 
-    //        text: ServiceManager.gearHandler.gearModeStr
-    //    }
+        source: Constants.kIconCancel
+        text: qsTr("Keyboard conflicts")
+        visible: ServiceManager.hasKeyboardConflicts
+    }
+
     Button {
+        id: modeButton
         anchors {
             verticalCenter: parent.verticalCenter
             right: gearLabel.left

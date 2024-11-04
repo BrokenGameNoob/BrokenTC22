@@ -63,6 +63,15 @@ ServiceManager::ServiceManager()
   connect(m_settings.get(), &ApplicationSettings::dataChanged, this, [this]() {
     m_screen_overlay_selector->SetSelectedScreenName(m_settings->SelectedOverlayScreen());
   });
+
+  connect(m_game_profiles_handler.get(), &GameProfilesHandler::currentGameChanged, this, [this]() {
+    UpdateKeyboardConflicts();
+  });
+  connect(m_game_profiles_handler.get(), &GameProfilesHandler::profileUpdated, this, [this]() {
+    UpdateKeyboardConflicts();
+  });
+  connect(m_keyboard_profile.get(), &KeyboardProfile::dataChanged, this, [this]() { UpdateKeyboardConflicts(); });
+  connect(this, &ServiceManager::conflictsUpdated, this, [this]() { UpdateGearHandlerSoftEnabling(); });
 }
 
 void CALLBACK ServiceManager::OnWindowChangeHook(HWINEVENTHOOK hook, DWORD event, HWND hwnd, LONG idObject,
@@ -88,8 +97,6 @@ void ServiceManager::OnFocusedWindowChanged(const QString& title) {
   }
 
   emit focusedWindowTitleChanged();
-
-  GetGearHandler().SetSoftEnabled(m_game_focused == Game::Types::NONE ? false : true);
 }
 
 Game::Types ServiceManager::GetFocusedWindowGame() const {
@@ -99,6 +106,7 @@ Game::Types ServiceManager::GetFocusedWindowGame() const {
 void ServiceManager::OnMainWindowLoaded() {
   m_focused_window_title = win::GetFocusedWindowTitle();
   emit focusedWindowTitleChanged();
+  UpdateKeyboardConflicts();
 }
 
 void ServiceManager::PublishOverlayNotification(const QString& text, int duration_ms) {
@@ -122,6 +130,16 @@ void ServiceManager::test() {
   io::KeySequence ks{
       {1000}, {VK_NUMPAD1, true}, {50}, {VK_NUMPAD1, false}, {500}, {VK_NUMPAD3, true}, {50}, {VK_NUMPAD3, false}};
   io::AsynchronousKeySeqThread(ks);
+}
+
+void ServiceManager::UpdateGearHandlerSoftEnabling() {
+  const bool kRightGameFocused{m_game_focused == Game::Types::NONE};
+  GetGearHandler().SetSoftEnabled(kRightGameFocused && !AreThereKeyboardConflicts());
+}
+
+void ServiceManager::UpdateKeyboardConflicts() {
+  m_keyboard_conflicts = m_game_profiles_handler->UpdateConflicts(*m_keyboard_profile);
+  emit conflictsUpdated();
 }
 
 }  // namespace btc2

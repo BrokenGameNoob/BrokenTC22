@@ -12,6 +12,10 @@ import "../widgets"
 import btc2
 
 Item {
+    id: root
+    property var conflictList: ServiceManager.gameProfileConflicts
+    property bool hasConflicts: ServiceManager.hasKeyboardConflicts
+
     ScrollView {
         id: scrollViewRight
         anchors.fill: parent
@@ -32,6 +36,7 @@ Item {
                 targetGroup: "behavior"
                 title: qsTr("BEHAVIOR")
                 Layout.fillWidth: true
+                conflictedPropertiesName: root.conflictList
             }
 
             Item {
@@ -43,6 +48,7 @@ Item {
                 targetGroup: "gear"
                 title: qsTr("GENERAL CONTROLS")
                 Layout.fillWidth: true
+                conflictedPropertiesName: root.conflictList
             }
 
             Item {
@@ -54,6 +60,7 @@ Item {
                 targetGroup: "gear_seq"
                 title: qsTr("GROUND VEHICLE")
                 Layout.fillWidth: true
+                conflictedPropertiesName: root.conflictList
             }
         }
     }

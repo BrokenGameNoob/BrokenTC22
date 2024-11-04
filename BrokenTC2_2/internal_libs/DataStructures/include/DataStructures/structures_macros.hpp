@@ -73,6 +73,11 @@ constexpr auto kDefaultKey{-1};
   if (key == #name) {                                                                                          \
     return this->Set##name(val.value<type>());                                                                 \
   }
+#define DS_GET_FROM_KEY_ELEM_DECL(                                                                             \
+    type, name, default_value, editor_group, editor_type, editor_title, game_compatibility, display_condition) \
+  if (key == #name) {                                                                                          \
+    return QVariant::fromValue(this->name());                                                                  \
+  }
 #define DS_GET_TITLE_FOR_KEY_ELEM_DECL(                                                                        \
     type, name, default_value, editor_group, editor_type, editor_title, game_compatibility, display_condition) \
   if (key == #name) {                                                                                          \
@@ -87,6 +92,11 @@ constexpr auto kDefaultKey{-1};
     type, name, default_value, editor_group, editor_type, editor_title, game_compatibility, display_condition) \
   if (key == #name) {                                                                                          \
     return editor_type;                                                                                        \
+  }
+#define DS_GET_KEYS_FOR_EDITOR_TYPE_ELEM_DECL(                                                                 \
+    type, name, default_value, editor_group, editor_type, editor_title, game_compatibility, display_condition) \
+  if (editor_type == e_type) {                                                                                 \
+    keys.append(#name);                                                                                        \
   }
 
 #define DS_DECLARE_STATIC_INIT_FUNC(ClassName)                          \
@@ -128,6 +138,13 @@ constexpr auto kDefaultKey{-1};
     return DataEditor::NO_EDITOR;                                                  \
   }
 
+#define DS_DECLARE_STATIC_GET_KEYS_FOR_EDITOR_TYPE_FUNC(ClassName, ELEMENTS_LIST)      \
+  Q_INVOKABLE static QStringList GetKeysForEditorType(DataEditor::EditorType e_type) { \
+    QStringList keys{};                                                                \
+    ELEMENTS_LIST(DS_GET_KEYS_FOR_EDITOR_TYPE_ELEM_DECL);                              \
+    return keys;                                                                       \
+  }
+
 #define DS_DECLARE_STATIC_MATCH_GROUP_FROM_LIST(ClassName, ELEMENTS_LIST)                       \
   Q_INVOKABLE static bool GroupIsIn(const QString& group_name, const QString& group_list_str) { \
     const auto kSplitted{group_list_str.split(",")};                                            \
@@ -165,6 +182,12 @@ constexpr auto kDefaultKey{-1};
   Q_INVOKABLE bool SetFromKey(const QString& key, const QVariant& val) { \
     ELEMENTS_LIST(DS_SET_FROM_KEY_ELEM_DECL);                            \
     return false;                                                        \
+  }
+
+#define DS_DECLARE_MEMBER_GET_FROM_KEY_FUNC(ClassName, ELEMENTS_LIST) \
+  Q_INVOKABLE QVariant GetFromKey(const QString& key) const {         \
+    ELEMENTS_LIST(DS_GET_FROM_KEY_ELEM_DECL);                         \
+    return QVariant{};                                                \
   }
 
 #define DS_DECLARE_OSTREAM_OPERATOR(ClassName)                              \
@@ -225,9 +248,11 @@ constexpr auto kDefaultKey{-1};
     DS_DECLARE_STATIC_GET_GAME_COMPATIBILITY_FUNC(ClassName, ELEMENTS_LIST);                                  \
     DS_DECLARE_STATIC_IS_GAME_COMPATIBLE_FUNC(ClassName, ELEMENTS_LIST);                                      \
     DS_DECLARE_STATIC_GET_EDITOR_TYPE_FOR_KEY_FUNC(ClassName, ELEMENTS_LIST);                                 \
+    DS_DECLARE_STATIC_GET_KEYS_FOR_EDITOR_TYPE_FUNC(ClassName, ELEMENTS_LIST);                                \
     DS_DECLARE_STATIC_MATCH_GROUP_FROM_LIST(ClassName, ELEMENTS_LIST);                                        \
                                                                                                               \
     DS_DECLARE_MEMBER_SET_FROM_KEY_FUNC(ClassName, ELEMENTS_LIST);                                            \
+    DS_DECLARE_MEMBER_GET_FROM_KEY_FUNC(ClassName, ELEMENTS_LIST);                                            \
                                                                                                               \
     ELEMENTS_LIST(DS_ELEM_ACCESSOR_DECL);                                                                     \
                                                                                                               \
