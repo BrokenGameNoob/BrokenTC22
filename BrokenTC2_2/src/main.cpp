@@ -74,6 +74,7 @@ int SDL_main(int argc, char* argv[]) {
   btc2::ScreenOverlaySelector::Init();
   CREGISTER_QML_UNCREATABLE_TYPE(btc2, Game, "Enum class");
   CREGISTER_QML_UNCREATABLE_TYPE(btc2, GearHandlerMode, "Enum class");
+  btc2::ConflictsResults::Init();
 
   /* -- Debug -- */
 #ifdef PRINT_RESOURCES

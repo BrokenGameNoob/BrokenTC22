@@ -140,17 +140,17 @@
 <context>
     <name>GameProfileTab</name>
     <message>
-        <location filename="../src/tabs/GameProfileTab.qml" line="+33"/>
+        <location filename="../src/tabs/GameProfileTab.qml" line="+37"/>
         <source>BEHAVIOR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+12"/>
         <source>GENERAL CONTROLS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+12"/>
         <source>GROUND VEHICLE</source>
         <translation type="unfinished"></translation>
     </message>
@@ -162,19 +162,19 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="+458"/>
-        <location line="+149"/>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-414"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="+194"/>
         <location line="+55"/>
         <source>NOT SET</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+244"/>
+        <location line="+227"/>
+        <location line="+149"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-115"/>
         <location line="+149"/>
         <source>Delete binding</source>
         <translation type="unfinished"></translation>
@@ -293,6 +293,14 @@ Exit application.</source>
     </message>
 </context>
 <context>
+    <name>SoftStatusBar</name>
+    <message>
+        <location filename="../src/SoftStatusBar.qml" line="+208"/>
+        <source>Keyboard conflicts</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SoftwareControlsTab</name>
     <message>
         <location filename="../src/tabs/SoftwareControlsTab.qml" line="+40"/>
@@ -308,12 +316,12 @@ Exit application.</source>
     </message>
     <message>
         <location line="+22"/>
-        <location line="+101"/>
+        <location line="+104"/>
         <source>SEQUENTIAL GEARS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-90"/>
+        <location line="-93"/>
         <source>DIRECT GEARS</source>
         <translation type="unfinished"></translation>
     </message>
@@ -329,7 +337,7 @@ Exit application.</source>
     </message>
     <message>
         <location line="-70"/>
-        <location line="+101"/>
+        <location line="+103"/>
         <location/>
         <source>SOFTWARE CONTROLS</source>
         <translation>LOGICIEL</translation>

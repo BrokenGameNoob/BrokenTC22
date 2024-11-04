@@ -4,6 +4,7 @@
 
 #include <DataStructures/games.hpp>
 #include <DataStructures/structures.hpp>
+#include <DataStructures/structures_utils.hpp>
 
 namespace btc2 {
 
@@ -14,6 +15,7 @@ class GameProfilesHandler : public QObject {
 
  signals:
   void currentGameChanged();
+  void profileUpdated();
 
  public:
   static void Init();
@@ -34,6 +36,8 @@ class GameProfilesHandler : public QObject {
     m_current_game = game;
     emit currentGameChanged();
   }
+
+  ConflictsResults UpdateConflicts(const KeyboardProfile& keyboard_profile);
 
  private:
   std::shared_ptr<GameProfileTheCrew> m_the_crew2_profile{nullptr};
