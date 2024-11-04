@@ -140,7 +140,12 @@
 <context>
     <name>GameProfileTab</name>
     <message>
-        <location filename="../src/tabs/GameProfileTab.qml" line="+37"/>
+        <location filename="../src/tabs/GameProfileTab.qml" line="+48"/>
+        <source>Game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+47"/>
         <source>BEHAVIOR</source>
         <translation type="unfinished"></translation>
     </message>
@@ -295,7 +300,7 @@ Exit application.</source>
 <context>
     <name>SoftStatusBar</name>
     <message>
-        <location filename="../src/SoftStatusBar.qml" line="+172"/>
+        <location filename="../src/SoftStatusBar.qml" line="+155"/>
         <source>Keyboard conflicts</source>
         <translation type="unfinished"></translation>
     </message>

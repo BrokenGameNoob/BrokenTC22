@@ -66,7 +66,7 @@ class GameSelector : public QObject {
 
   static QStringList GetAvailableGamesNames();
   static QString GetAutoModeStr();
-  Q_INVOKABLE static QStringList GameSelectionModel();
+  Q_INVOKABLE static QStringList GameSelectionModel(bool add_auto_option);
   Q_INVOKABLE void SetSelectionModelSelectedGame(const QString& selection_model_name);
   QString GetSelectionModelSelectedGame();
 
@@ -86,6 +86,7 @@ class GameSelector : public QObject {
   Game::Types m_selected_game{Game::NONE};
   QString m_selection_model_selected_game_name;
   bool m_auto_selection{true};
+  bool m_force_auto_selection{true};
 };
 
 }  // namespace btc2

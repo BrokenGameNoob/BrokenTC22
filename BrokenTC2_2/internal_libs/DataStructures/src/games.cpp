@@ -40,22 +40,29 @@ QString GameSelector::GetAutoModeStr() {
   return QObject::tr("Auto");
 }
 
-QStringList GameSelector::GameSelectionModel() {
+QStringList GameSelector::GameSelectionModel(bool add_auto_option) {
   QStringList out{};
-  out += GetAutoModeStr();
+  if (add_auto_option) {
+    out += GetAutoModeStr();
+  }
   out += GetAvailableGamesNames();
   return out;
 }
 
 void GameSelector::SetSelectionModelSelectedGame(const QString& selection_model_name) {
-  if (selection_model_name == GetAutoModeStr()) {
+  if (m_force_auto_selection) {
     m_auto_selection = true;
-    SPDLOG_DEBUG("Enabled auto mode");
-    emit selectionModelGameUpdated();
-    return;
+    SPDLOG_DEBUG("Auto selection forced anyway");
+  } else {
+    if (selection_model_name == GetAutoModeStr()) {
+      m_auto_selection = true;
+      SPDLOG_DEBUG("Enabled auto mode");
+      emit selectionModelGameUpdated();
+      return;
+    }
+    m_auto_selection = false;
+    SPDLOG_DEBUG("Disabled auto mode");
   }
-  m_auto_selection = false;
-  SPDLOG_DEBUG("Disabled auto mode");
 
   SetSelectedGameFromName(selection_model_name);
   emit selectionModelGameUpdated();
