@@ -32,6 +32,18 @@ ApplicationWindow {
     minimumHeight: 200 + (300 * ServiceManager.hasDebInfo)
     minimumWidth: 800
 
+    Rectangle {
+        anchors.fill: parent
+        visible: ServiceManager.settings.BackgroundImage.length != 0
+        opacity: ServiceManager.settings.BackgroundImageOpacity
+        Image {
+            anchors.fill: parent
+            id: backgroundImage
+            source: ServiceManager.settings.BackgroundImage
+            fillMode: Image.PreserveAspectCrop
+        }
+    }
+
     SplitView {
         id: splitView
         anchors.fill: parent

@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
 
 import ".."
 import "../utils"
@@ -91,6 +92,7 @@ Item {
                     property string key: delegateItem.key
                     property var model: targetElement
                     property var customValue: model[key]
+                    property var itemTitle: delegateItem.title
 
                     function setValue(value) {
                         model[key] = value
@@ -123,6 +125,8 @@ Item {
                             return colorComponent
                         case DataEditor.SCREEN_SELECTOR:
                             return screenSelectorComponent
+                        case DataEditor.FILE_SELECTOR:
+                            return fileSelectorComponent
                         }
                         return unknownComponent
                     }
@@ -389,6 +393,61 @@ Item {
                     }
                 }
                 return -1
+            }
+        }
+    }
+
+    Component {
+        id: fileSelectorComponent
+        RowLayout {
+            id: fileSelector
+            anchors.centerIn: parent
+            height: componentHeight
+            spacing: 0
+            Button {
+                id: fileSelectorButton
+                readonly property string implicitText: customValue.length
+                                                       === 0 ? qsTr("NOT SET") : customValue
+                text: implicitText
+                font: QMLStyle.kFontH4Bold
+                Layout.preferredHeight: componentHeight
+                Layout.fillWidth: true
+
+                onClicked: {
+                    fileDialog.openCallback(fileSelector.onFileSelected)
+                }
+
+                ToolTip.text: fileSelectorButton.implicitText
+                ToolTip.visible: hovered
+                ToolTip.delay: 1000
+            }
+
+            function onFileSelected(file) {
+                setValue(file)
+            }
+
+            RoundButton {
+                id: cancelkeyboardBindingPopup
+                Layout.preferredHeight: componentHeight
+                Layout.preferredWidth: componentHeight
+
+                contentItem: Item {
+                    width: parent.width
+                    ColoredImage {
+                        source: Constants.kIconDelete
+                        sourceSize.width: parent.width
+                        sourceSize.height: parent.height
+                        color: QMLStyle.kCancelColor
+                    }
+                }
+
+                ToolTip.text: qsTr("Remove") + " " + itemTitle
+                ToolTip.visible: hovered
+                ToolTip.delay: 1000
+
+                onClicked: {
+                    setValue("")
+                }
             }
         }
     }
@@ -694,6 +753,28 @@ Item {
             } else {
                 ServiceManager.keyboardHandler.LeaveKeybindMode()
             }
+        }
+    }
+
+    FileDialog {
+        id: fileDialog
+        title: qsTr("Please select a file")
+        fileMode: FileDialog.OpenFile
+
+        property var onSelectedCallback: null
+
+        function openCallback(callback) {
+            fileDialog.onSelectedCallback = callback
+            console.log("Opening with: " + fileDialog.onSelectedCallback)
+            fileDialog.open()
+        }
+
+        onAccepted: {
+            console.log("You chose: " + fileDialog.selectedFile)
+            if (!fileDialog.onSelectedCallback) {
+                return
+            }
+            fileDialog.onSelectedCallback(fileDialog.selectedFile)
         }
     }
 }

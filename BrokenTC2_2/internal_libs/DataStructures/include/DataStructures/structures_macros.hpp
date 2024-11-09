@@ -332,6 +332,7 @@ class DataEditor {
     SEPARATOR,
     COLOR,
     SCREEN_SELECTOR,
+    FILE_SELECTOR,
   };
   Q_ENUM(EditorType)
 

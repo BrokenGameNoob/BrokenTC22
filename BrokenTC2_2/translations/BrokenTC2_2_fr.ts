@@ -167,13 +167,19 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="+194"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="+198"/>
         <location line="+55"/>
+        <location line="+157"/>
         <source>NOT SET</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+227"/>
+        <location line="+34"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+91"/>
         <location line="+149"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
@@ -192,6 +198,11 @@
     <message>
         <location line="+148"/>
         <source>Waiting for keyboard input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Please select a file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -291,10 +302,15 @@ Exit application.</source>
 <context>
     <name>SettingsTab</name>
     <message>
-        <location filename="../src/tabs/SettingsTab.qml" line="+18"/>
+        <location filename="../src/tabs/SettingsTab.qml" line="+36"/>
         <location/>
         <source>OVERLAY</source>
         <translation>OVERLAY</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>SOFTWARE</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

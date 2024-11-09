@@ -31,7 +31,23 @@ class DummyForceAutoMocProcess0 : public QObject {
        DataEditor::SCREEN_SELECTOR,                                                                               \
        QObject::tr("Overlay screen"),                                                                             \
        Game::ALL,                                                                                                 \
-       false)
+       false)                                                                                                     \
+  FUNC(QString,                                                                                                   \
+       BackgroundImage,                                                                                           \
+       DS_DEFAULT,                                                                                                \
+       "soft",                                                                                                    \
+       DataEditor::FILE_SELECTOR,                                                                                 \
+       QObject::tr("Background image"),                                                                           \
+       Game::ALL,                                                                                                 \
+       true)                                                                                                      \
+  FUNC(double,                                                                                                    \
+       BackgroundImageOpacity,                                                                                    \
+       1.,                                                                                                        \
+       "soft",                                                                                                    \
+       DataEditor::SLIDER,                                                                                        \
+       QObject::tr("Background image opacity"),                                                                   \
+       Game::ALL,                                                                                                 \
+       true)
 
 DS_DECLARE_STRUCT(ApplicationSettings, ApplicationSettings_STRUCT_ELEMENTS_LIST);
 

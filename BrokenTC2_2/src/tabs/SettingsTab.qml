@@ -12,18 +12,41 @@ import "../widgets"
 import btc2
 
 Item {
-    GroupedEditor {
-        targetElement: ServiceManager.settings
-        targetGroup: "overlay"
-        title: qsTr("OVERLAY")
 
-        anchors {
-            top: parent.top
-            topMargin: QMLStyle.kStandardMargin
-            left: parent.left
-            leftMargin: QMLStyle.kStandardMargin
-            right: parent.right
-            rightMargin: QMLStyle.kStandardMargin
+    ScrollView {
+        id: scrollViewRight
+        anchors.fill: parent
+
+        ColumnLayout {
+            id: columnRight
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                left: parent.left
+                leftMargin: Style.kStandardMargin * 2
+                right: parent.right
+                rightMargin: Style.kStandardMargin * 2
+            }
+
+            property var conflictNamesList: ServiceManager.keyboardProfileConflicts
+
+            GroupedEditor {
+                targetElement: ServiceManager.settings
+                targetGroup: "overlay"
+                title: qsTr("OVERLAY")
+                Layout.fillWidth: true
+            }
+
+            Item {
+                height: Style.kStandardMargin * 3
+            }
+
+            GroupedEditor {
+                targetElement: ServiceManager.settings
+                targetGroup: "soft"
+                title: qsTr("SOFTWARE")
+                Layout.fillWidth: true
+            }
         }
     }
 }
