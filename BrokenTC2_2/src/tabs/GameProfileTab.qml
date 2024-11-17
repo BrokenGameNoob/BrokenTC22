@@ -32,7 +32,8 @@ Item {
                 rightMargin: Style.kStandardMargin * 2
             }
             onWidthChanged: {
-                console.log("width changed: " + width)
+
+                // console.log("width changed: " + width)
             }
 
             Item {

@@ -34,6 +34,9 @@ class Constants : public QObject {
   QML_LITERAL_CONSTANT(QString, kIconBackArrow, "qrc:/icons/icon_back_arrow.svg");
   QML_LITERAL_CONSTANT(QString, kIconRound, "qrc:/icons/icon_round.svg");
 
+  QML_LITERAL_CONSTANT(QString, kRealIconTheCrew2, "qrc:/icons/real_icon_game_TheCrew2.svg");
+  QML_LITERAL_CONSTANT(QString, kRealIconTheCrewMotorfist, "qrc:/icons/real_icon_game_TheCrewMotorfest.svg");
+
  public:
   ~Constants() = default;
   static Constants& I() {

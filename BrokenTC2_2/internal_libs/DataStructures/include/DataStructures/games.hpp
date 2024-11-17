@@ -27,11 +27,6 @@ class Game : public QObject {
 Q_DECLARE_FLAGS(Games, Game::Types)
 Q_DECLARE_OPERATORS_FOR_FLAGS(Games)
 
-inline void RegisterGameEnum() {
-  // qmlRegisterUncreatableMetaObject(Game::staticMetaObject,"btc2", 1, 0, "Game", "Enum type");
-  qmlRegisterUncreatableType<Game>("btc2", 1, 0, "Game", "Enum type");
-}
-
 Game::Types GetFocusedGameFromWindowTitle(const QString& title);
 
 class GameSelector : public QObject {
@@ -88,5 +83,11 @@ class GameSelector : public QObject {
   bool m_auto_selection{true};
   bool m_force_auto_selection{true};
 };
+
+inline void RegisterGameEnum() {
+  // qmlRegisterUncreatableMetaObject(Game::staticMetaObject,"btc2", 1, 0, "Game", "Enum type");
+  qmlRegisterUncreatableType<Game>("btc2", 1, 0, "Game", "Enum type");
+  qmlRegisterUncreatableType<btc2::GameSelector>("btc2", 1, 0, "GameSelector", "Doesn't need it");
+}
 
 }  // namespace btc2

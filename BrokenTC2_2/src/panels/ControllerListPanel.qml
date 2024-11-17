@@ -17,58 +17,53 @@ Item {
     id: root
     signal leaveControllerListPanel
 
-    RoundButton {
-        id: controllerListLeaveButton
+    RowLayout {
+        id: titleRow
         anchors {
+            top: parent.top
             left: parent.left
-            leftMargin: Style.kStandardMargin
-            top: titleButton.top
-            topMargin: Style.kStandardMargin / 2
-            bottom: titleButton.bottom
-            bottomMargin: Style.kStandardMargin / 2
+            right: parent.right
         }
 
-        width: height
+        height: implicitHeight + QMLStyle.kStandardMargin
 
-        contentItem: Item {
-            width: parent.width * 0.8
-            height: parent.height * 0.8
-            ColoredImage {
-                source: Constants.kIconBackArrow
-                sourceSize.width: parent.width
-                sourceSize.height: parent.height
-                color: QMLStyle.kIconColor
+        RoundButton {
+            id: controllerListLeaveButton
+
+            Layout.preferredHeight: parent.height - QMLStyle.kStandardMargin
+            Layout.preferredWidth: Layout.preferredHeight
+
+            contentItem: Item {
+                width: parent.width * 0.8
+                height: parent.height * 0.8
+                ColoredImage {
+                    source: Constants.kIconBackArrow
+                    sourceSize.width: parent.width
+                    sourceSize.height: parent.height
+                    color: QMLStyle.kIconColor
+                }
+            }
+
+            onClicked: {
+                leaveControllerListPanel()
             }
         }
 
-        onClicked: {
-            leaveControllerListPanel()
-        }
-    }
-
-    TabButton {
-        id: titleButton
-        text: qsTr("Known controllers list")
-        icon.source: Constants.kIconControllerList
-        icon.width: Style.kStandardIconWidth
-        icon.height: Style.kStandardIconWidth
-
-        checkable: false
-
-        anchors {
-            top: parent.top
-            horizontalCenter: parent.horizontalCenter
-        }
-
-        onClicked: {
-            leaveControllerListPanel()
+        LabelledIcon {
+            id: titleButton
+            Layout.fillWidth: true
+            text: qsTr("Known controllers list")
+            source: Constants.kIconControllerList
+            iconWidth: Style.kStandardIconWidth
+            iconHeight: Style.kStandardIconWidth
+            Layout.preferredHeight: QMLStyle.kStandardTitleIconSize
         }
     }
 
     Rectangle {
         id: separatorH
         anchors {
-            top: titleButton.bottom
+            top: titleRow.bottom
             left: parent.left
             right: parent.right
         }

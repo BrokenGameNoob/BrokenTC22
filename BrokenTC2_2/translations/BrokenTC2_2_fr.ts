@@ -51,7 +51,7 @@
 <context>
     <name>ControllerListPanel</name>
     <message>
-        <location filename="../src/panels/ControllerListPanel.qml" line="+51"/>
+        <location filename="../src/panels/ControllerListPanel.qml" line="+55"/>
         <source>Known controllers list</source>
         <translation type="unfinished"></translation>
     </message>
@@ -59,8 +59,33 @@
 <context>
     <name>EasySetupPanel</name>
     <message>
-        <location filename="../src/panels/EasySetupPanel.qml" line="+54"/>
+        <location filename="../src/panels/EasySetupPanel.qml" line="+60"/>
         <source>Easy setup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+59"/>
+        <source>Press &quot;Next&quot; to start the setup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Auto set bindings &lt;strong&gt;in game&lt;/strong&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Finish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -140,7 +165,7 @@
 <context>
     <name>GameProfileTab</name>
     <message>
-        <location filename="../src/tabs/GameProfileTab.qml" line="+48"/>
+        <location filename="../src/tabs/GameProfileTab.qml" line="+49"/>
         <source>Game</source>
         <translation type="unfinished"></translation>
     </message>

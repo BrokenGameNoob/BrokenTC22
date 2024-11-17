@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="256"
+   height="256"
+   viewBox="0 0 67.733332 67.733334"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="real_icon_game_TheCrewMotorfest.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="4"
+     inkscape:cx="100.75"
+     inkscape:cy="91"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showguides="true" />
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="tiling"
+       id="path-effect1509"
+       is_visible="true"
+       lpeversion="1"
+       unit="px"
+       seed="1;1"
+       lpesatellites=""
+       num_rows="4"
+       num_cols="9"
+       gapx="36"
+       gapy="21"
+       offset="0"
+       offset_type="false"
+       scale="0"
+       rotate="0"
+       mirrorrowsx="false"
+       mirrorrowsy="false"
+       mirrorcolsx="false"
+       mirrorcolsy="false"
+       mirrortrans="false"
+       shrink_interp="false"
+       split_items="false"
+       link_styles="false"
+       interpolate_scalex="false"
+       interpolate_scaley="true"
+       interpolate_rotatex="false"
+       interpolate_rotatey="true"
+       random_scale="false"
+       random_rotate="false"
+       random_gap_y="false"
+       random_gap_x="false"
+       transformorigin="" />
+    <inkscape:path-effect
+       effect="offset"
+       id="path-effect1506"
+       is_visible="true"
+       lpeversion="1.2"
+       linejoin_type="miter"
+       unit="mm"
+       offset="-3.6"
+       miter_limit="4"
+       attempt_force_join="false"
+       update_on_knot_move="true" />
+    <inkscape:path-effect
+       effect="offset"
+       id="path-effect1500"
+       is_visible="true"
+       lpeversion="1.2"
+       linejoin_type="miter"
+       unit="px"
+       offset="-8"
+       miter_limit="4"
+       attempt_force_join="false"
+       update_on_knot_move="true" />
+    <inkscape:path-effect
+       effect="tiling"
+       id="path-effect1486"
+       is_visible="true"
+       lpeversion="1"
+       unit="px"
+       seed="1;1"
+       lpesatellites=""
+       num_rows="3"
+       num_cols="3"
+       gapx="8"
+       gapy="0"
+       offset="0"
+       offset_type="false"
+       scale="0"
+       rotate="0"
+       mirrorrowsx="false"
+       mirrorrowsy="false"
+       mirrorcolsx="false"
+       mirrorcolsy="false"
+       mirrortrans="false"
+       shrink_interp="false"
+       split_items="false"
+       link_styles="false"
+       interpolate_scalex="false"
+       interpolate_scaley="true"
+       interpolate_rotatex="false"
+       interpolate_rotatey="true"
+       random_scale="false"
+       random_rotate="false"
+       random_gap_y="false"
+       random_gap_x="false"
+       transformorigin="" />
+    <inkscape:path-effect
+       effect="mirror_symmetry"
+       start_point="33.842743,33.931452"
+       end_point="33.842743,40.939516"
+       center_point="33.842743,37.435484"
+       id="path-effect13841"
+       is_visible="true"
+       lpeversion="1.2"
+       lpesatellites=""
+       mode="free"
+       discard_orig_path="false"
+       fuse_paths="false"
+       oposite_fuse="false"
+       split_items="false"
+       split_open="false"
+       link_styles="false" />
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g462"
+       transform="matrix(0.26458333,0,0,0.26458333,-0.3223765,-0.26139431)">
+      <path
+         fill="#f9ea3a"
+         opacity="1"
+         stroke="none"
+         d="m 205.02229,115.96773 c -11.73538,17.15176 -23.31015,34.41671 -35.28113,51.40245 -5.15919,7.32045 -10.97387,14.20398 -16.80777,21.01443 -3.46672,4.04706 -7.92457,5.97154 -13.67344,5.74709 -11.2988,-0.44113 -22.62697,-0.12982 -34.69595,-0.12982 14.14918,-10.83516 22.74631,-25.44738 32.79383,-39.65784 0.33724,-0.95776 0.34209,-1.40903 0.34694,-1.86028 -0.44293,0.29923 -0.88585,0.59844 -1.32878,0.89766 -6.31688,6.60703 -12.45574,13.39838 -19.02538,19.7437 -3.30995,3.19695 -7.18638,5.96523 -11.1991,8.23287 -4.11249,2.32403 -7.225904,0.97038 -7.408224,-3.67302 -0.350174,-8.91869 -0.124733,-17.92658 0.749909,-26.81005 1.120555,-11.38113 3.117435,-22.67599 3.846245,-34.53035 -0.97771,1.3398 -1.99875,2.65033 -2.92668,4.02378 -15.74647,23.30668 -31.522516,46.59366 -47.161455,69.97232 -1.753659,2.62155 -3.508156,3.81297 -6.800248,3.75064 -11.972621,-0.22664 -23.952137,-0.0895 -36.374322,-0.0895 0.373154,-1.08164 0.474265,-1.89418 0.885868,-2.49347 23.838243,-34.70839 47.598055,-69.47163 71.655935,-104.027331 4.53981,-6.520783 10.184845,-12.289757 15.492813,-18.251679 3.357269,-3.770882 7.540629,-5.485954 12.849419,-5.33136 11.26672,0.328095 22.54964,0.100102 34.33954,0.100102 -14.62393,11.725277 -24.03509,26.967449 -34.57022,41.296258 0.30533,0.32415 0.61066,0.64831 0.91599,0.97247 0.88762,-0.89341 1.80208,-1.7619 2.65861,-2.68419 6.89592,-7.425263 13.35168,-15.329125 20.79821,-22.15223 6.55503,-6.006233 10.8335,-4.301842 10.84124,4.650627 0.0125,14.392573 -1.30057,28.804353 -2.4943,43.171393 -0.5041,6.06708 -2.1278,12.04114 -3.68467,18.57695 -0.73455,1.17136 -1.06075,1.81313 -1.26429,2.4917 -0.0191,0.0638 1.05419,0.56212 1.0826,0.51738 0.52214,-0.82256 0.96223,-1.69724 1.41969,-2.56087 5.38819,-7.55972 10.74233,-15.14399 16.17148,-22.67418 11.95366,-16.57963 23.92598,-33.145908 35.94766,-49.676197 1.36144,-1.872017 3.11118,-3.458259 4.64028,-5.212395 4.30191,-4.934951 9.42096,-7.192661 16.24025,-6.855308 10.59988,0.524384 21.24479,0.138584 32.56485,0.138584 -12.98557,10.307423 -21.57688,23.485645 -30.58377,36.654656 0.0103,0.34332 0.0303,0.31208 -0.29862,0.38928 -0.79042,1.04644 -1.25194,2.01568 -1.70065,2.97014 0.0128,-0.0148 0.0328,-0.0484 -0.31542,0.0387 -0.46092,0.72132 -0.57362,1.35551 -0.67338,1.97359 0.013,-0.0161 0.0451,-0.0422 -0.27568,-0.19926 -0.83237,0.29758 -1.34395,0.75226 -2.09824,1.43543 -1.68509,2.66041 -3.12747,5.09231 -4.82776,7.65694 -0.45012,0.45982 -0.64233,0.78692 -0.81784,1.09906 0.0167,-0.015 0.046,-0.0489 0.046,-0.0489 m -95.37892,-5.64271 c -0.68178,-0.27236 -1.36355,-0.54472 -2.04533,-0.81708 -0.0693,0.57135 -0.13851,1.14271 -0.20777,1.71406 0.66107,-0.10182 1.32215,-0.20365 2.2531,-0.89698 m 0.83621,-3.59754 c -0.33684,0.22411 -0.67369,0.44823 -1.01054,0.67234 0.44636,-0.0423 0.89272,-0.0846 1.01054,-0.67234 z"
+         id="path4" />
+      <path
+         fill="#f9ea3b"
+         opacity="1"
+         stroke="none"
+         d="m 206.05208,114.7849 c 1.44238,-2.43191 2.88476,-4.86381 4.91087,-7.49549 1.08182,-0.56888 1.5799,-0.93798 2.07799,-1.30708 0,10e-6 -0.0321,0.0261 0.2841,-0.073 0.44162,-0.71455 0.567,-1.33004 0.6924,-1.94554 0,0 -0.02,0.0336 0.35191,0.10495 0.79624,-0.98708 1.22055,-2.04548 1.64487,-3.10389 2e-5,0 -0.02,0.0312 -0.036,0.0403 1.30905,-0.94892 2.80412,-1.740705 3.93059,-2.892866 5.68303,-5.812797 10.91116,-12.128403 16.99832,-17.470672 5.38396,-4.725151 9.79019,-2.987862 9.91032,4.10614 0.20418,12.058311 -0.32867,24.184728 -1.46704,36.195788 -1.36171,14.36798 -3.96701,28.61473 -5.49771,42.97113 -1.1331,10.62742 0.45911,20.87777 8.50743,30.07101 -13.90925,0 -26.66168,0.0971 -39.40794,-0.13899 -1.38921,-0.0257 -3.08768,-1.72456 -4.05625,-3.06967 -5.73254,-7.96103 -7.32864,-17.12586 -6.2313,-26.57173 1.83888,-15.82904 4.26664,-31.58968 6.40211,-47.80832 -0.0445,-0.42923 -0.0737,-0.39524 0.23456,-0.41213 0.45576,-0.41124 0.60327,-0.80559 0.75078,-1.19993 z"
+         id="path6" />
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Calque 2" />
+</svg>
