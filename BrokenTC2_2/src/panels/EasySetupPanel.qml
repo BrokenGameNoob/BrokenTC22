@@ -18,7 +18,6 @@ Item {
     signal leaveEasySetupPanel
 
     property alias selectedGame: gameCombobox.selectedGame
-    property var easySetupModel: selectedGame === Game.THE_CREW_2 ? theCrew2 : null
 
     onVisibleChanged: {
         theCrew2.Cancel()
@@ -102,12 +101,14 @@ Item {
             Layout.alignment: Qt.AlignTop
         }
 
+        /* The Crew handling */
         Item {
             id: theCrewWidget
             Layout.fillWidth: true
             Layout.fillHeight: true
 
             visible: selectedGame === Game.THE_CREW_2
+                     || selectedGame === Game.THE_CREW_MOTORFIST
 
             ColumnLayout {
                 anchors.fill: parent
@@ -156,8 +157,131 @@ Item {
                     }
                 }
 
+                ColumnLayout {
+                    visible: theCrew2.state
+                             == EasySetupTheCrew.WORK_IN_PROGRESS_WAITING_GAME_CLOSING
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    spacing: QMLStyle.kStandardMargin
+
+                    Item {
+                        Layout.fillHeight: true
+                    }
+
+                    LoadingIcon {
+                        Layout.fillWidth: false
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.preferredHeight: QMLStyle.kStandardTitleIconSize * 2
+                        Layout.preferredWidth: Layout.preferredHeight
+                        backgroundColor: QMLStyle.kAccentColor
+                        foregroundColor: QMLStyle.kPrimaryColor
+                    }
+                    LoadingLabel {
+                        font: QMLStyle.kFontH3Bold
+                        implicitText: qsTr("Waiting for the game to close")
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        Layout.fillWidth: true
+                    }
+
+                    Item {
+                        Layout.fillHeight: true
+                    }
+                }
+
+                ColumnLayout {
+                    visible: theCrew2.state == EasySetupTheCrew.WORK_IN_PROGRESS_EDITING
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    spacing: QMLStyle.kStandardMargin
+
+                    Item {
+                        Layout.fillHeight: true
+                    }
+
+                    LoadingIcon {
+                        Layout.fillWidth: false
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.preferredHeight: QMLStyle.kStandardTitleIconSize * 2
+                        Layout.preferredWidth: Layout.preferredHeight
+                        backgroundColor: QMLStyle.kAccentColor
+                        foregroundColor: QMLStyle.kPrimaryColor
+                    }
+                    LoadingLabel {
+                        font: QMLStyle.kFontH3Bold
+                        implicitText: qsTr("Editing configuration files")
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        Layout.fillWidth: true
+                    }
+
+                    Item {
+                        Layout.fillHeight: true
+                    }
+                }
+
+                ColumnLayout {
+                    visible: theCrew2.state == EasySetupTheCrew.FINISHED
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    spacing: QMLStyle.kStandardMargin
+
+                    Item {
+                        Layout.fillHeight: true
+                    }
+
+                    LabelledIcon {
+                        id: tcSuccessLabel
+                        font: QMLStyle.kFontH3Bold
+                        Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.preferredWidth: implicitWidth
+                        states: [
+                            State {
+                                when: theCrew2.successState === EasySetupTheCrew.SUCCESS
+                                PropertyChanges {
+                                    tcSuccessLabel {
+                                        text: qsTr(
+                                                  "Easy setup ran successfully")
+                                        source: Constants.kIconOk
+                                        iconColor: QMLStyle.kOkColor
+                                    }
+                                }
+                            },
+                            State {
+                                when: theCrew2.successState === EasySetupTheCrew.FAILURE
+                                PropertyChanges {
+                                    tcSuccessLabel {
+                                        text: qsTr("Failed to run easy setup")
+                                        source: Constants.kIconCancel
+                                        iconColor: QMLStyle.kCancelColor
+                                    }
+                                }
+                            },
+                            State {
+                                when: theCrew2.successState
+                                      === EasySetupTheCrew.UNKNOWN_SUCCESS_STATE
+                                PropertyChanges {
+                                    tcSuccessLabel {
+                                        text: qsTr("Unknown success state...")
+                                        source: Constants.kIconCancel
+                                        iconColor: QMLStyle.kCancelColor
+                                    }
+                                }
+                            }
+                        ]
+                    }
+
+                    Item {
+                        Layout.fillHeight: true
+                    }
+                }
+
                 RowLayout {
                     id: tcControlRow
+                    enabled: theCrew2.state
+                             !== EasySetupTheCrew.WORK_IN_PROGRESS_WAITING_GAME_CLOSING
+                             && theCrew2.state !== EasySetupTheCrew.WORK_IN_PROGRESS_EDITING
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignBottom
                     Item {
@@ -184,6 +308,7 @@ Item {
     /* Setup models */
     EasySetupTheCrew {
         id: theCrew2
-        game: Game.THE_CREW_2
+        game: root.selectedGame === Game.THE_CREW_2
+              || root.selectedGame === Game.THE_CREW_MOTORFIST ? root.selectedGame : Game.THE_CREW_2
     }
 }

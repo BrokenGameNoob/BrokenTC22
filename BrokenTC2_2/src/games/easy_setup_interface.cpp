@@ -33,6 +33,17 @@ EasySetupTheCrew::State EasySetupTheCrew::GetState() const {
   return m_state;
 }
 
+void EasySetupTheCrew::SetSuccessState(SuccessState success_state) {
+  if (m_success_state == success_state) {
+    return;
+  }
+  m_success_state = success_state;
+  emit successStateChanged();
+}
+EasySetupTheCrew::SuccessState EasySetupTheCrew::GetSuccessState() const {
+  return m_success_state;
+}
+
 void EasySetupTheCrew::SetAutoSetGameBindings(bool auto_set_game_bindings) {
   if (m_auto_set_game_bindings == auto_set_game_bindings) {
     return;

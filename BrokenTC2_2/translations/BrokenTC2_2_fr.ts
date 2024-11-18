@@ -59,12 +59,12 @@
 <context>
     <name>EasySetupPanel</name>
     <message>
-        <location filename="../src/panels/EasySetupPanel.qml" line="+60"/>
+        <location filename="../src/panels/EasySetupPanel.qml" line="+59"/>
         <source>Easy setup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+59"/>
+        <location line="+61"/>
         <source>Press &quot;Next&quot; to start the setup</source>
         <translation type="unfinished"></translation>
     </message>
@@ -74,7 +74,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+31"/>
+        <source>Waiting for the game to close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Editing configuration files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Easy setup ran successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Failed to run easy setup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Unknown success state...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
         <source>Previous</source>
         <translation type="unfinished"></translation>
     </message>

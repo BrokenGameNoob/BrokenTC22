@@ -166,6 +166,7 @@ set(BTC2_QML_FILES
     ${BTC2_SOURCES_DIR}/widgets/ColorPicker.qml
     ${BTC2_SOURCES_DIR}/widgets/ButtonOk.qml
     ${BTC2_SOURCES_DIR}/widgets/ButtonCancel.qml
+    ${BTC2_SOURCES_DIR}/widgets/LoadingLabel.qml
 
     # Tabs
     ${BTC2_QML_DIR}/tabs/SettingsTab.qml

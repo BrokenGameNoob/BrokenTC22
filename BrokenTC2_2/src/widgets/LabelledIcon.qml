@@ -51,7 +51,6 @@ Item {
         }
         Label {
             id: lbl
-            //            color: root.color
             verticalAlignment: Text.AlignVCenter
         }
     }

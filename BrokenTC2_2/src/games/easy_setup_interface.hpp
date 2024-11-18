@@ -12,11 +12,13 @@ class EasySetupTheCrew : public QObject {
   Q_PROPERTY(Game::Types game READ GetGame WRITE SetGame NOTIFY gameChanged)
   Q_PROPERTY(State state READ GetState WRITE SetState NOTIFY stateChanged)
   Q_PROPERTY(bool autoSetGameBindings READ GetAutoSetGameBindings WRITE SetAutoSetGameBindings NOTIFY optionChanged)
+  Q_PROPERTY(SuccessState successState READ GetSuccessState WRITE SetSuccessState NOTIFY successStateChanged)
 
  signals:
   void gameChanged();
   void stateChanged();
   void optionChanged();
+  void successStateChanged();
 
   void cancelled();
   void started();
@@ -45,6 +47,9 @@ class EasySetupTheCrew : public QObject {
   void SetState(State state);
   State GetState() const;
 
+  void SetSuccessState(SuccessState success_state);
+  SuccessState GetSuccessState() const;
+
   void SetAutoSetGameBindings(bool auto_set_game_bindings);
   bool GetAutoSetGameBindings() const;
 
@@ -62,6 +67,7 @@ class EasySetupTheCrew : public QObject {
  private:
   Game::Types m_game{Game::NONE};
   State m_state{HOME};
+  SuccessState m_success_state{UNKNOWN_SUCCESS_STATE};
 
   bool m_auto_set_game_bindings{true};
 
