@@ -17,58 +17,381 @@ Item {
     id: root
     signal leaveEasySetupPanel
 
-    readonly property var selectedGame: ServiceManager.gameSelector.selectedGame
-    property var easySetupModel: selectedGame === Game.THE_CREW_2 ? theCrew2 : null
+    property alias selectedGame: gameCombobox.selectedGame
 
-    RoundButton {
-        id: controllerListLeaveButton
+    onVisibleChanged: {
+        theCrew2.Cancel()
+    }
+
+    RowLayout {
+        id: titleRow
         anchors {
+            top: parent.top
             left: parent.left
-            leftMargin: Style.kStandardMargin
-            top: titleButton.top
-            topMargin: Style.kStandardMargin / 2
-            bottom: titleButton.bottom
-            bottomMargin: Style.kStandardMargin / 2
+            right: parent.right
         }
 
-        width: height
+        height: implicitHeight + QMLStyle.kStandardMargin
 
-        contentItem: Item {
-            width: parent.width * 0.8
-            height: parent.height * 0.8
-            ColoredImage {
-                source: Constants.kIconBackArrow
-                sourceSize.width: parent.width
-                sourceSize.height: parent.height
-                color: QMLStyle.kIconColor
+        RoundButton {
+            Layout.preferredHeight: parent.height - QMLStyle.kStandardMargin
+            Layout.preferredWidth: Layout.preferredHeight
+
+            contentItem: Item {
+                width: parent.width * 0.8
+                height: parent.height * 0.8
+                ColoredImage {
+                    source: Constants.kIconBackArrow
+                    sourceSize.width: parent.width
+                    sourceSize.height: parent.height
+                    color: QMLStyle.kIconColor
+                }
+            }
+
+            onClicked: {
+                leaveEasySetupPanel()
             }
         }
 
-        onClicked: {
-            leaveEasySetupPanel()
+        LabelledIcon {
+            id: titleButton
+            Layout.fillWidth: true
+            text: qsTr("Easy setup")
+            source: Constants.kIconSetup
+            iconWidth: Style.kStandardIconWidth
+            iconHeight: Style.kStandardIconWidth
+            Layout.preferredHeight: QMLStyle.kStandardTitleIconSize
         }
     }
 
-    TabButton {
-        id: titleButton
-        text: qsTr("Easy setup")
-        icon.source: Constants.kIconSetup
-        icon.width: Style.kStandardIconWidth
-        icon.height: Style.kStandardIconWidth
-
-        checkable: false
-
+    Rectangle {
+        id: separatorH
         anchors {
-            top: parent.top
-            horizontalCenter: parent.horizontalCenter
+            top: titleRow.bottom
+            left: parent.left
+            right: parent.right
+        }
+        color: QMLStyle.kBorderColor
+        opacity: 0.5
+        height: 1
+    }
+
+    ColumnLayout {
+        anchors {
+            top: separatorH.bottom
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+            margins: QMLStyle.kStandardMargin
         }
 
-        onClicked: {
-            leaveEasySetupPanel()
+        ComboBox {
+            id: gameCombobox
+            Layout.fillWidth: true
+            Layout.preferredHeight: gameCombobox.implicitHeight * 0.7
+
+            visible: theCrew2.state === EasySetupTheCrew.HOME
+                     || root.selectedGame === Game.NONE
+            editable: false
+
+            model: ServiceManager.gameSelector.GameSelectionModel(false)
+
+            readonly property var selectedGame: ServiceManager.gameSelector.GetGameFromName(
+                                                    currentText)
+            Layout.alignment: Qt.AlignTop
+        }
+
+        /* The Crew handling */
+        Item {
+            id: theCrewWidget
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            visible: selectedGame === Game.THE_CREW_2
+                     || selectedGame === Game.THE_CREW_MOTORFIST
+
+            ColumnLayout {
+                anchors.fill: parent
+                spacing: 0
+                Label {
+                    id: tcHomeLabel
+                    visible: theCrew2.state === EasySetupTheCrew.HOME
+                    font: QMLStyle.kFontH3Bold
+                    text: qsTr("Press \"Next\" to start the setup")
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                }
+
+                Image {
+                    visible: tcHomeLabel.visible
+                    fillMode: Image.PreserveAspectFit
+                    source: theCrew2.game == Game.THE_CREW_2 ? Constants.kRealIconTheCrew2 : Constants.kRealIconTheCrewMotorfist
+                    sourceSize.width: width
+                    sourceSize.height: height
+                    Layout.preferredHeight: parent.height * 0.6
+                    Layout.preferredWidth: parent.width * 0.6
+                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                }
+
+                ColumnLayout {
+                    visible: theCrew2.state == EasySetupTheCrew.OPTIONS
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    spacing: QMLStyle.kStandardMargin
+
+                    RowLayout {
+                        Item {
+                            Layout.fillWidth: true
+                        }
+                        Switch {
+                            Layout.fillHeight: true
+                            Layout.alignment: Qt.AlignHCenter
+                            text: qsTr("Auto set bindings <strong>in game</strong>")
+                            checked: theCrew2.autoSetGameBindings
+                            onCheckedChanged: theCrew2.autoSetGameBindings = checked
+                        }
+                        Item {
+                            Layout.fillWidth: true
+                        }
+                    }
+                }
+
+                ColumnLayout {
+                    visible: theCrew2.state
+                             == EasySetupTheCrew.WORK_IN_PROGRESS_WAITING_GAME_CLOSING
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    spacing: QMLStyle.kStandardMargin
+
+                    Item {
+                        Layout.fillHeight: true
+                    }
+
+                    LoadingIcon {
+                        Layout.fillWidth: false
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.preferredHeight: QMLStyle.kStandardTitleIconSize * 2
+                        Layout.preferredWidth: Layout.preferredHeight
+                        backgroundColor: QMLStyle.kAccentColor
+                        foregroundColor: QMLStyle.kPrimaryColor
+                    }
+                    LoadingLabel {
+                        font: QMLStyle.kFontH3Bold
+                        implicitText: qsTr("Waiting for the game to close")
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        Layout.fillWidth: true
+                    }
+
+                    Item {
+                        Layout.fillHeight: true
+                    }
+                }
+                ColumnLayout {
+                    visible: theCrew2.state == EasySetupTheCrew.WORK_IN_PROGRESS_EDITING
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    spacing: QMLStyle.kStandardMargin
+
+                    Item {
+                        Layout.fillHeight: true
+                    }
+
+                    LoadingIcon {
+                        Layout.fillWidth: false
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.preferredHeight: QMLStyle.kStandardTitleIconSize * 2
+                        Layout.preferredWidth: Layout.preferredHeight
+                        backgroundColor: QMLStyle.kAccentColor
+                        foregroundColor: QMLStyle.kPrimaryColor
+                    }
+                    LoadingLabel {
+                        font: QMLStyle.kFontH3Bold
+                        implicitText: qsTr("Editing configuration files")
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        Layout.fillWidth: true
+                    }
+
+                    Item {
+                        Layout.fillHeight: true
+                    }
+                }
+
+                ColumnLayout {
+                    visible: theCrew2.state == EasySetupTheCrew.FINISHED
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    spacing: QMLStyle.kStandardMargin
+
+                    Item {
+                        Layout.fillHeight: true
+                    }
+
+                    RowLayout {
+                        Layout.alignment: Qt.AlignVCenter
+                        width: parent.width - QMLStyle.kStandardMargin * 2
+                        Layout.fillHeight: true
+                        spacing: 0
+
+                        states: [
+                            State {
+                                when: theCrew2.successState === EasySetupTheCrew.SUCCESS
+                                PropertyChanges {
+                                    tcSuccessLabel {
+                                        text: qsTr(
+                                                  "Easy setup ran successfully")
+                                    }
+                                    tcSuccessIcon {
+                                        source: Constants.kIconOk
+                                        color: QMLStyle.kOkColor
+                                    }
+                                }
+                            },
+                            State {
+                                when: theCrew2.successState === EasySetupTheCrew.FAILURE
+                                PropertyChanges {
+                                    tcSuccessLabel {
+                                        text: qsTr("Failed to run easy setup")
+                                    }
+                                    tcSuccessIcon {
+                                        source: Constants.kIconCancel
+                                        color: QMLStyle.kCancelColor
+                                    }
+                                }
+                            },
+                            State {
+                                when: theCrew2.successState
+                                      === EasySetupTheCrew.FAILED_TO_CLOSE_GAME
+                                PropertyChanges {
+                                    tcSuccessLabel {
+                                        text: qsTr("Failed to close the game... You can close the game manually and try again.")
+                                    }
+                                    tcSuccessIcon {
+                                        source: Constants.kIconCancel
+                                        color: QMLStyle.kCancelColor
+                                    }
+                                }
+                            },
+                            State {
+                                when: theCrew2.successState
+                                      === EasySetupTheCrew.FAILED_TO_FIND_CONFIG_FILE
+                                PropertyChanges {
+                                    tcSuccessLabel {
+                                        text: qsTr("Could not find controller configuration file. You need to change at least on button on the controller in the game.\
+Try to invert gear up & down. Then try to run the easy setup again.")
+                                    }
+                                    tcSuccessIcon {
+                                        source: Constants.kIconCancel
+                                        color: QMLStyle.kCancelColor
+                                    }
+                                }
+                            },
+                            State {
+                                when: theCrew2.successState
+                                      === EasySetupTheCrew.FAILED_TO_FIND_KEYBOARD_CONFIG_FILE
+                                PropertyChanges {
+                                    tcSuccessLabel {
+                                        text: qsTr("Failed to run easy setup")
+                                    }
+                                    tcSuccessIcon {
+                                        source: Constants.kIconCancel
+                                        color: QMLStyle.kCancelColor
+                                    }
+                                }
+                            },
+                            State {
+                                when: theCrew2.successState
+                                      === EasySetupTheCrew.UNKNOWN_SUCCESS_STATE
+                                PropertyChanges {
+                                    tcSuccessLabel {
+                                        text: qsTr("Unknown success state...")
+                                              + " " + theCrew2.successState
+                                    }
+                                    tcSuccessIcon {
+                                        source: Constants.kIconCancel
+                                        color: QMLStyle.kCancelColor
+                                    }
+                                }
+                            }
+                        ]
+
+                        Item {
+                            Layout.fillWidth: true
+                        }
+
+                        ColoredImage {
+                            id: tcSuccessIcon
+                            source: Constants.kIconCancel
+                            color: QMLStyle.kCancelColor
+                            Layout.preferredHeight: QMLStyle.kStandardTitleIconSize
+                            Layout.preferredWidth: Layout.preferredHeight
+                            sourceSize.width: Layout.preferredWidth
+                            sourceSize.height: Layout.preferredHeight
+                        }
+
+                        Item {
+                            Layout.preferredWidth: QMLStyle.kStandardMargin
+                        }
+
+                        Label {
+                            id: tcSuccessLabel
+                            font: QMLStyle.kFontH3Bold
+                            text: qsTr("Undefined")
+                            wrapMode: Text.WordWrap
+                            horizontalAlignment: Text.AlignHCenter
+                        }
+
+                        Item {
+                            Layout.fillWidth: true
+                        }
+                    }
+
+                    Item {
+                        Layout.fillHeight: true
+                    }
+                }
+
+                RowLayout {
+                    id: tcControlRow
+                    enabled: theCrew2.state
+                             !== EasySetupTheCrew.WORK_IN_PROGRESS_WAITING_GAME_CLOSING
+                             && theCrew2.state !== EasySetupTheCrew.WORK_IN_PROGRESS_EDITING
+                    Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignBottom
+                    Item {
+                        Layout.fillWidth: true
+                    }
+                    Button {
+                        visible: theCrew2.state == (EasySetupTheCrew.OPTIONS + 1)
+                        text: qsTr("Previous")
+                        icon.source: Constants.kIconBackArrow
+                        onClicked: theCrew2.Previous()
+                    }
+                    Button {
+                        visible: true
+                        text: theCrew2.state == EasySetupTheCrew.FINISHED ? qsTr("Finish") : qsTr(
+                                                                                "Next")
+                        icon.source: Constants.kIconForwardArrow
+                        onClicked: theCrew2.Next()
+                    }
+                }
+            }
         }
     }
 
-    EasySetupInterface {
+    /* Setup models */
+    EasySetupTheCrew {
         id: theCrew2
+        game: root.selectedGame === Game.THE_CREW_2
+              || root.selectedGame === Game.THE_CREW_MOTORFIST ? root.selectedGame : Game.THE_CREW_2
+
+        onFinished: {
+            if (ServiceManager.settings.LaunchStartProcedure) {
+                root.leaveEasySetupPanel()
+            }
+        }
     }
 }

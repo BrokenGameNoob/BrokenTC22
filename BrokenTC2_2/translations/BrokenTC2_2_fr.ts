@@ -51,7 +51,7 @@
 <context>
     <name>ControllerListPanel</name>
     <message>
-        <location filename="../src/panels/ControllerListPanel.qml" line="+51"/>
+        <location filename="../src/panels/ControllerListPanel.qml" line="+55"/>
         <source>Known controllers list</source>
         <translation type="unfinished"></translation>
     </message>
@@ -59,8 +59,74 @@
 <context>
     <name>EasySetupPanel</name>
     <message>
-        <location filename="../src/panels/EasySetupPanel.qml" line="+54"/>
+        <location filename="../src/panels/EasySetupPanel.qml" line="+59"/>
         <source>Easy setup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+61"/>
+        <source>Press &quot;Next&quot; to start the setup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Auto set bindings &lt;strong&gt;in game&lt;/strong&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Waiting for the game to close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Editing configuration files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Easy setup ran successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location line="+40"/>
+        <source>Failed to run easy setup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-27"/>
+        <source>Failed to close the game... You can close the game manually and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Could not find controller configuration file. You need to change at least on button on the controller in the game.Try to invert gear up &amp; down. Then try to run the easy setup again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>Unknown success state...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Undefined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>Previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Finish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -140,7 +206,7 @@
 <context>
     <name>GameProfileTab</name>
     <message>
-        <location filename="../src/tabs/GameProfileTab.qml" line="+48"/>
+        <location filename="../src/tabs/GameProfileTab.qml" line="+49"/>
         <source>Game</source>
         <translation type="unfinished"></translation>
     </message>
@@ -229,10 +295,21 @@
         <translation type="vanished">Activités</translation>
     </message>
     <message>
-        <location filename="../src/Main.qml" line="+27"/>
+        <location filename="../src/Main.qml" line="+28"/>
         <location/>
         <source>BrokenTC2</source>
         <translation></translation>
+    </message>
+    <message>
+        <location line="+217"/>
+        <source>Welcome to BrokenTC2!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+54"/>
+        <source>Please follow the setup to get started.
+If you are doubting about an option, just leave the default value!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Game configuration</source>
@@ -316,7 +393,7 @@ Exit application.</source>
 <context>
     <name>SoftStatusBar</name>
     <message>
-        <location filename="../src/SoftStatusBar.qml" line="+155"/>
+        <location filename="../src/SoftStatusBar.qml" line="+158"/>
         <source>Keyboard conflicts</source>
         <translation type="unfinished"></translation>
     </message>

@@ -78,6 +78,9 @@ class ServiceManager : public QObject {
   ApplicationSettings* GetRawSettings() {
     return m_settings.get();
   }
+  static ApplicationSettings& GetSettings() {
+    return *(I().m_settings);
+  }
 
   /* Games related */
   auto& GetGameSelector() {

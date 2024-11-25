@@ -8,9 +8,13 @@
 
 namespace btc2 {
 
-const std::map<Games, QString> GameSelector::kGameNames{{Game::NONE, QObject::tr("Unkown")},
-                                                        {Game::THE_CREW_2, "The Crew 2"},
-                                                        {Game::THE_CREW_MOTORFIST, "The Crew Motorfist"}};
+const GameInfo& GetGameInfo(Game::Types game) {
+  const auto& infos{GetGameInfoList()};
+  if (infos.contains(game)) {
+    return infos.at(game);
+  }
+  return infos.at(Game::NONE);
+}
 
 Game::Types GetFocusedGameFromWindowTitle(const QString& title) {
   if (title.contains("TheCrew2", Qt::CaseInsensitive)) {
@@ -27,11 +31,11 @@ GameSelector::GameSelector(QObject* parent) : QObject{parent} {
 
 QStringList GameSelector::GetAvailableGamesNames() {
   QStringList out{};
-  for (const auto& [game, name] : kGameNames) {
+  for (const auto& [game, info] : GetGameInfoList()) {
     if (game == Game::NONE) {
       continue;
     }
-    out.append(name);
+    out.append(info.kGameName);
   }
   return out;
 }
@@ -76,20 +80,16 @@ QString GameSelector::GetSelectionModelSelectedGame() {
 }
 
 Game::Types GameSelector::GetGameFromName(const QString& name) {
-  for (const auto& [game, game_name] : GameSelector::kGameNames) {
-    if (game_name == name) {
-      return static_cast<Game::Types>(game.toInt());
+  for (const auto& [game, info] : GetGameInfoList()) {
+    if (info.kGameName == name) {
+      return game;
     }
   }
   return Game::NONE;
 }
 
 QString GameSelector::GetGameName(Game::Types game) {
-  if (kGameNames.find(game) == kGameNames.end()) {
-    SPDLOG_ERROR("Game not found: <{}>", static_cast<int>(game));
-    return kGameNames.at(Game::NONE);
-  }
-  return kGameNames.at(game);
+  return GetGameInfo(game).kGameName;
 }
 
 void GameSelector::OnFocusedWindowChanged(Game::Types game) {
