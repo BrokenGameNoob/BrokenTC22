@@ -25,7 +25,14 @@ class EasySetupTheCrew : public QObject {
   void finished();
 
  public:
-  enum SuccessState { UNKNOWN_SUCCESS_STATE, SUCCESS, FAILURE };
+  enum SuccessState {
+    UNKNOWN_SUCCESS_STATE,
+    SUCCESS,
+    FAILURE,
+    FAILED_TO_CLOSE_GAME,
+    FAILED_TO_FIND_CONFIG_FILE,
+    FAILED_TO_FIND_KEYBOARD_CONFIG_FILE
+  };
   Q_ENUM(SuccessState)
 
   enum State {
@@ -64,9 +71,16 @@ class EasySetupTheCrew : public QObject {
   void InternalReset();
   void OnStateSet(State state);
 
+  void RunHome();
+  void RunOptions();
+  void RunWorkInProgressWaitingGameClosing();
+  void RunWorkInProgressEditing();
+  void RunFinished();
+
  private:
   Game::Types m_game{Game::NONE};
   State m_state{HOME};
+  bool m_state_first_iteration{};
   SuccessState m_success_state{UNKNOWN_SUCCESS_STATE};
 
   bool m_auto_set_game_bindings{true};

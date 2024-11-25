@@ -26,12 +26,18 @@ Item {
     implicitWidth: rowLayout.implicitWidth
     implicitHeight: rowLayout.implicitHeight
 
+    property bool fillParent: false
+
     property alias label: lbl
 
     RowLayout {
         id: rowLayout
         spacing: 0
         anchors.centerIn: parent
+        anchors {
+            centerIn: root.fillParent ? undefined : parent
+            fill: root.fillParent ? parent : undefined
+        }
 
         layoutDirection: iconOnTheRight ? Qt.RightToLeft : Qt.LeftToRight
 

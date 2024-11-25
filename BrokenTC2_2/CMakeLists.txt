@@ -29,7 +29,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" "${CMAKE_ROOT}/Modules")
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Xml)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
@@ -134,6 +134,7 @@ set(BTC2_SOURCES
     ${BTC2_SOURCES_DIR}/games/gear_handler.hpp ${BTC2_SOURCES_DIR}/games/gear_handler.cpp
     ${BTC2_SOURCES_DIR}/games/gear_handler_the_crew.hpp ${BTC2_SOURCES_DIR}/games/gear_handler_the_crew.cpp
     ${BTC2_SOURCES_DIR}/games/easy_setup_interface.hpp ${BTC2_SOURCES_DIR}/games/easy_setup_interface.cpp
+    ${BTC2_SOURCES_DIR}/games/config_editor.hpp ${BTC2_SOURCES_DIR}/games/config_editor.cpp
 
     ${BTC2_RESOURCES}
 )
@@ -223,6 +224,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
   Qt6::Quick
   Qt6::QuickControls2
   Qt6::Concurrent
+  Qt6::Xml
 )
 
 if(CUSTOM_BUILD_TRANSLATIONS)

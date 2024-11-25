@@ -23,6 +23,9 @@ Item {
     function deactivateEasySetupPanel() {
         easySetupButton.checked = false
     }
+    function openEasySetupPanel() {
+        easySetupButton.checked = true
+    }
 
     property alias overlayButtonChecked: overlayButton.checked
 

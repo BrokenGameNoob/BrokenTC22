@@ -12,6 +12,12 @@
 namespace btc2 {
 Q_NAMESPACE
 
+struct GameInfo {
+  const QString kGameName{};
+  const QString kFolderInDocuments{};
+  const QString kProcessName{};
+};
+
 class Game : public QObject {
   Q_OBJECT
  public:
@@ -26,6 +32,15 @@ class Game : public QObject {
 
 Q_DECLARE_FLAGS(Games, Game::Types)
 Q_DECLARE_OPERATORS_FOR_FLAGS(Games)
+
+static const auto& GetGameInfoList() {
+  static const std::map<Game::Types, GameInfo> kGamesInfo{
+      {Game::Types::NONE, {"Unknown", "", ""}},
+      {Game::Types::THE_CREW_2, {"The Crew 2", "The Crew 2", "TheCrew2.exe"}},
+      {Game::Types::THE_CREW_MOTORFIST, {"The Crew Motorfist", "TheCrewMotorfest", "TheCrewMotorfest.exe"}}};
+  return kGamesInfo;
+}
+const GameInfo& GetGameInfo(Game::Types game);
 
 Game::Types GetFocusedGameFromWindowTitle(const QString& title);
 
@@ -69,15 +84,13 @@ class GameSelector : public QObject {
   Q_INVOKABLE static QString GetGameName(Game::Types game);
 
   QString GetSelectedGameName() const {
-    return kGameNames.at(m_selected_game);
+    return GetGameName(m_selected_game);
   }
 
  public slots:
   void OnFocusedWindowChanged(Game::Types game);
 
  private:
-  static const std::map<Games, QString> kGameNames;
-
   Game::Types m_selected_game{Game::NONE};
   QString m_selection_model_selected_game_name;
   bool m_auto_selection{true};

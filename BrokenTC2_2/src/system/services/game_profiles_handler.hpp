@@ -32,6 +32,18 @@ class GameProfilesHandler : public QObject {
     return m_the_crew_motorfist_profile;
   }
 
+  std::shared_ptr<GameProfileTheCrew> GeTheCrewProfile(Game::Types game) {
+    switch (game) {
+      case Game::THE_CREW_2:
+        return m_the_crew2_profile;
+      case Game::THE_CREW_MOTORFIST:
+        return m_the_crew_motorfist_profile;
+      default:
+        return nullptr;
+    }
+    return nullptr;
+  }
+
   void SetCurrentGame(Game::Types game) {
     m_current_game = game;
     emit currentGameChanged();

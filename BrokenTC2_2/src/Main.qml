@@ -8,6 +8,7 @@ import "./tabs"
 import "./debug"
 import "./utils"
 import "./panels"
+import "./widgets"
 import "."
 
 import btc2
@@ -156,6 +157,11 @@ ApplicationWindow {
             console.error("Error loading overlay window component",
                           overlayComponent.errorString())
         }
+
+        if (ServiceManager.settings.LaunchStartProcedure) {
+            statusBar.openEasySetupPanel()
+            introductionPopup.open()
+        }
     }
 
     Connections {
@@ -169,6 +175,158 @@ ApplicationWindow {
         if (overlayWindow !== null) {
             overlayWindow.allowClose = true
             overlayWindow.close()
+        }
+    }
+
+    ThemedPopup {
+        id: introductionPopup
+
+        width: Overlay.overlay.width / 1.5
+        height: Overlay.overlay.height / 1.5
+
+        ColumnLayout {
+            anchors.fill: parent
+            spacing: QMLStyle.kStandardMargin
+
+            Item {
+                Layout.minimumHeight: QMLStyle.kStandardMargin
+                Layout.fillHeight: true
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: QMLStyle.kStandardMargin
+                Item {
+                    Layout.fillWidth: true
+                }
+
+                ColoredImage {
+                    id: popupIcon
+                    Layout.preferredWidth: QMLStyle.kStandardTitleIconSize
+                    Layout.preferredHeight: QMLStyle.kStandardTitleIconSize
+                    source: Constants.kIconUbiNope
+                    color: "black"
+                    readonly property real animationDuration: 300
+                    SequentialAnimation on color {
+                        loops: Animation.Infinite
+                        ColorAnimation {
+                            to: "red"
+                            duration: popupIcon.animationDuration
+                        }
+                        ColorAnimation {
+                            to: "green"
+                            duration: popupIcon.animationDuration
+                        }
+                        ColorAnimation {
+                            to: "blue"
+                            duration: popupIcon.animationDuration
+                        }
+                        ColorAnimation {
+                            to: "yellow"
+                            duration: popupIcon.animationDuration
+                        }
+                        ColorAnimation {
+                            to: "purple"
+                            duration: popupIcon.animationDuration
+                        }
+                        ColorAnimation {
+                            to: "cyan"
+                            duration: popupIcon.animationDuration
+                        }
+                        ColorAnimation {
+                            to: "magenta"
+                            duration: popupIcon.animationDuration
+                        }
+                    }
+                }
+
+                Text {
+                    font: QMLStyle.kFontH2Bold
+                    text: qsTr("Welcome to BrokenTC2!")
+                    horizontalAlignment: Text.AlignHCenter
+                    color: QMLStyle.kTextColor
+                }
+
+                ColoredImage {
+                    Layout.preferredWidth: QMLStyle.kStandardTitleIconSize
+                    Layout.preferredHeight: QMLStyle.kStandardTitleIconSize
+                    source: Constants.kIconUbiNope
+                    color: "white"
+                    SequentialAnimation on color {
+                        loops: Animation.Infinite
+                        ColorAnimation {
+                            to: "red"
+                            duration: popupIcon.animationDuration * 1.6
+                        }
+                        ColorAnimation {
+                            to: "green"
+                            duration: popupIcon.animationDuration * 1.6
+                        }
+                        ColorAnimation {
+                            to: "blue"
+                            duration: popupIcon.animationDuration * 1.6
+                        }
+                        ColorAnimation {
+                            to: "yellow"
+                            duration: popupIcon.animationDuration * 1.6
+                        }
+                        ColorAnimation {
+                            to: "purple"
+                            duration: popupIcon.animationDuration * 1.6
+                        }
+                        ColorAnimation {
+                            to: "cyan"
+                            duration: popupIcon.animationDuration * 1.6
+                        }
+                        ColorAnimation {
+                            to: "magenta"
+                            duration: popupIcon.animationDuration * 1.6
+                        }
+                    }
+                }
+
+                Item {
+                    Layout.fillWidth: true
+                }
+            }
+
+            Item {
+                Layout.preferredHeight: QMLStyle.kStandardMargin * 2
+            }
+            Text {
+                Layout.fillWidth: true
+                font: QMLStyle.kFontH3
+                text: qsTr("Please follow the setup to get started.\nIf you are doubting about an option, just leave the default value!")
+                horizontalAlignment: Text.AlignHCenter
+                color: QMLStyle.kTextColor
+                wrapMode: Text.WordWrap
+            }
+
+            ColoredImage {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                source: Constants.kIconFast
+                color: QMLStyle.kTextColor
+                fillMode: Image.PreserveAspectFit
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: 0
+                Item {
+                    Layout.fillWidth: true
+                }
+
+                ButtonOk {
+                    onClicked: {
+                        introductionPopup.close()
+                    }
+                }
+
+                Item {
+                    Layout.preferredWidth: QMLStyle.kStandardMargin
+                }
+            }
         }
     }
 }

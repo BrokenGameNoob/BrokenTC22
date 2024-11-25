@@ -10,6 +10,10 @@ import btc2
 
 Popup {
     id: frame
+    width: Math.min(Overlay.overlay.width / 2., 600)
+    height: Math.min(Overlay.overlay.height / 30., 300)
+    anchors.centerIn: Overlay.overlay
+    modal: true
 
     property color backgroundColor: QMLStyle.kBackgroundColor
     property color borderColor: QMLStyle.kAccentColor

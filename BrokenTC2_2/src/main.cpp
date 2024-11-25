@@ -85,6 +85,14 @@ int SDL_main(int argc, char* argv[]) {
   }
 #endif
 
+  /* -- First time launch -- */
+  if (btc2::ServiceManager::GetSettings().FirstLaunch()) {
+    btc2::ServiceManager::GetSettings().SetFirstLaunch(false);
+    btc2::ServiceManager::GetSettings().SetLaunchStartProcedure(true);
+  } else {
+    btc2::ServiceManager::GetSettings().SetLaunchStartProcedure(false);
+  }
+
   /* -- Loading translations -- */
   using namespace Qt::Literals::StringLiterals;
   QTranslator translator;

@@ -13,6 +13,15 @@ class DummyForceAutoMocProcess0 : public QObject {
 // TODO: Add the display_condition in the code. It's not implemented yet.
 
 #define ApplicationSettings_STRUCT_ELEMENTS_LIST(FUNC)                                                            \
+  FUNC(bool, FirstLaunch, true, "", DataEditor::NO_EDITOR, "", Game::NONE, true) /* Reset instantly to false */   \
+  FUNC(bool,                                                                                                      \
+       LaunchStartProcedure,                                                                                      \
+       false,                                                                                                     \
+       "",                                                                                                        \
+       DataEditor::NO_EDITOR,                                                                                     \
+       "",                                                                                                        \
+       Game::NONE,                                                                                                \
+       true) /*Set to one when First launch is true for the first time. */                                        \
   FUNC(bool, OverlayEnabled, true, "overlay", DataEditor::SWITCH, QObject::tr("Enable overlay"), Game::ALL, true) \
   FUNC(bool,                                                                                                      \
        OverlayAlwaysVisible,                                                                                      \

@@ -69,7 +69,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+30"/>
+        <location line="+31"/>
         <source>Auto set bindings &lt;strong&gt;in game&lt;/strong&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -79,7 +79,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="+30"/>
         <source>Editing configuration files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -89,17 +89,33 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+13"/>
+        <location line="+40"/>
         <source>Failed to run easy setup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="-27"/>
+        <source>Failed to close the game... You can close the game manually and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Could not find controller configuration file. You need to change at least on button on the controller in the game.Try to invert gear up &amp; down. Then try to run the easy setup again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
         <source>Unknown success state...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+32"/>
+        <source>Undefined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
         <source>Previous</source>
         <translation type="unfinished"></translation>
     </message>
@@ -279,10 +295,21 @@
         <translation type="vanished">Activités</translation>
     </message>
     <message>
-        <location filename="../src/Main.qml" line="+27"/>
+        <location filename="../src/Main.qml" line="+28"/>
         <location/>
         <source>BrokenTC2</source>
         <translation></translation>
+    </message>
+    <message>
+        <location line="+217"/>
+        <source>Welcome to BrokenTC2!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+54"/>
+        <source>Please follow the setup to get started.
+If you are doubting about an option, just leave the default value!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Game configuration</source>
@@ -366,7 +393,7 @@ Exit application.</source>
 <context>
     <name>SoftStatusBar</name>
     <message>
-        <location filename="../src/SoftStatusBar.qml" line="+155"/>
+        <location filename="../src/SoftStatusBar.qml" line="+158"/>
         <source>Keyboard conflicts</source>
         <translation type="unfinished"></translation>
     </message>
