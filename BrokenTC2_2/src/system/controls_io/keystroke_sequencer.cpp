@@ -88,7 +88,7 @@ void KeySequencerThread::Loop() {
       }
       return;
     } else {
-      SPDLOG_INFO("[KEYSEQ] Delays of {}ms done", m_current_element->GetDelayMs());
+      if (kCompleteKeySequencerLogging) SPDLOG_INFO("[KEYSEQ] Delays of {}ms done", m_current_element->GetDelayMs());
       m_current_element = {};
     }
   }
@@ -114,7 +114,8 @@ void KeySequencerThread::Loop() {
 
   switch (kCurrentElement.GetKind()) {
     case KeySequenceElementKind::Key: {
-      SPDLOG_INFO("[KEYSEQ] Key {} pressed? {}", kCurrentElement.GetKey(), kCurrentElement.GetKeyPressed());
+      if (kCompleteKeySequencerLogging)
+        SPDLOG_INFO("[KEYSEQ] Key {} pressed? {}", kCurrentElement.GetKey(), kCurrentElement.GetKeyPressed());
       win::SendKeyboardEvent(kCurrentElement.GetKey(), kCurrentElement.GetKeyPressed());
       if (kCurrentElement.GetKeyPressed()) {
         m_pressed_keys.insert(kCurrentElement.GetKey());

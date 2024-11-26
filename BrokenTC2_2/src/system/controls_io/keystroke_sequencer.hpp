@@ -10,6 +10,8 @@
 
 namespace btc2::io {
 
+constexpr bool kCompleteKeySequencerLogging{false};
+
 using KeyboardKeyType = int32_t;
 using DelayMsType = int32_t;
 
@@ -25,10 +27,10 @@ class KeySequenceElement {
 
  public:
   KeySequenceElement(T key, bool key_pressed) : m_kind{Kind::Key}, m_key{key}, m_key_pressed{key_pressed} {
-    SPDLOG_DEBUG("Built key ({}) pressed: {}", m_key, m_key_pressed);
+    if (kCompleteKeySequencerLogging) SPDLOG_DEBUG("Built key ({}) pressed: {}", m_key, m_key_pressed);
   }
   KeySequenceElement(DelayMsType delay) : m_kind{Kind::Delay}, m_delay_ms{delay} {
-    SPDLOG_DEBUG("Built delay ({}ms)", m_delay_ms);
+    if (kCompleteKeySequencerLogging) SPDLOG_DEBUG("Built delay ({}ms)", m_delay_ms);
   }
   KeySequenceElement() = default;
 
