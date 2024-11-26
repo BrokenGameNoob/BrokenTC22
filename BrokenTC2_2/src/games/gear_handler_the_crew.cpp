@@ -95,7 +95,7 @@ void GearHandlerTheCrew::OnGearSet(GearType old_gear, GearType gear) {
 
   io::KeySequence ks{{m_game_profile->Clutch(), true},
                      {kGearKeyOpt.value(), true},
-                     {17},
+                     {m_game_profile->KeyPressDelay()},
                      {kGearKeyOpt.value(), false},
                      {m_game_profile->Clutch(), false}};
   io::AsynchronousKeySeqThread(ks);

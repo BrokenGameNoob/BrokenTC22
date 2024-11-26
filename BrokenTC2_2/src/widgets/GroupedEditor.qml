@@ -1,4 +1,4 @@
-import QtQuick 2.15
+import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
@@ -127,6 +127,8 @@ Item {
                             return screenSelectorComponent
                         case DataEditor.FILE_SELECTOR:
                             return fileSelectorComponent
+                        case DataEditor.INT_EDITOR:
+                            return intEditorComponent
                         }
                         return unknownComponent
                     }
@@ -447,6 +449,49 @@ Item {
 
                 onClicked: {
                     setValue("")
+                }
+            }
+        }
+    }
+
+    Component {
+        id: intEditorComponent
+        Item {
+            anchors.centerIn: parent
+            height: componentHeight
+            SpinBox {
+                id: intSpinBox
+                anchors.fill: parent
+                anchors.topMargin: 0.1 * parent.height
+                anchors.bottomMargin: 0.1 * parent.height
+                value: customValue
+                editable: true
+                from: 0
+                to: 999999
+                onValueChanged: {
+                    setValue(value)
+                }
+
+                contentItem: TextInput {
+                    anchors {
+                        top: parent.top
+                        bottom: parent.bottom
+                    }
+
+                    z: 2
+                    text: intSpinBox.displayText
+                    clip: width < implicitWidth
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+
+                    font: intSpinBox.font
+                    color: intSpinBox.palette.text
+                    selectionColor: intSpinBox.palette.highlight
+                    selectedTextColor: intSpinBox.palette.highlightedText
+
+                    readOnly: !intSpinBox.editable
+                    validator: intSpinBox.validator
+                    inputMethodHints: intSpinBox.inputMethodHints
                 }
             }
         }

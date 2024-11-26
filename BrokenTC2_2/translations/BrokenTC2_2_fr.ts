@@ -233,7 +233,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="+198"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="+200"/>
         <location line="+55"/>
         <location line="+157"/>
         <source>NOT SET</source>
@@ -245,7 +245,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+91"/>
+        <location line="+134"/>
         <location line="+149"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
