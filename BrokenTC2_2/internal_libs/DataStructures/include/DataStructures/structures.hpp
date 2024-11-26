@@ -300,6 +300,14 @@ DS_DECLARE_STRUCT(ControllerProfile, ControllerProfile_STRUCT_ELEMENTS_LIST);
        DataEditor::SWITCH,                            \
        QObject::tr("Use sequential after clutch"),    \
        Game::ALL,                                     \
+       true)                                          \
+  FUNC(int32_t,                                       \
+       KeyPressDelay,                                 \
+       19,                                            \
+       "behavior",                                    \
+       DataEditor::INT_EDITOR,                        \
+       QObject::tr("Key press delay (ms)"),           \
+       Game::ALL,                                     \
        true)
 
 DS_DECLARE_STRUCT(GameProfileTheCrew, GameProfileTheCrew_STRUCT_ELEMENTS_LIST);
