@@ -72,6 +72,7 @@ ServiceManager::ServiceManager()
   });
   connect(m_keyboard_profile.get(), &KeyboardProfile::dataChanged, this, [this]() { UpdateKeyboardConflicts(); });
   connect(this, &ServiceManager::conflictsUpdated, this, [this]() { UpdateGearHandlerSoftEnabling(); });
+  connect(this, &ServiceManager::focusedWindowTitleChanged, this, [this]() { UpdateGearHandlerSoftEnabling(); });
 }
 
 void CALLBACK ServiceManager::OnWindowChangeHook(HWINEVENTHOOK hook, DWORD event, HWND hwnd, LONG idObject,
@@ -105,7 +106,7 @@ Game::Types ServiceManager::GetFocusedWindowGame() const {
 
 void ServiceManager::OnMainWindowLoaded() {
   m_focused_window_title = win::GetFocusedWindowTitle();
-  emit focusedWindowTitleChanged();
+  OnFocusedWindowChanged(m_focused_window_title);
   UpdateKeyboardConflicts();
 }
 
@@ -133,7 +134,7 @@ void ServiceManager::test() {
 }
 
 void ServiceManager::UpdateGearHandlerSoftEnabling() {
-  const bool kRightGameFocused{m_game_focused == Game::Types::NONE};
+  const bool kRightGameFocused{m_game_focused != Game::Types::NONE};
   GetGearHandler().SetSoftEnabled(kRightGameFocused && !AreThereKeyboardConflicts());
 }
 

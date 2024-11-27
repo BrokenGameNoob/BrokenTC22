@@ -81,7 +81,7 @@ class BaseGearHandler : public QObject {
   GearHandlerMode::Type m_mode{};
 
   bool m_user_enabled{true};
-  bool m_soft_enabled{true};
+  bool m_soft_enabled{false};
 
   bool m_use_seq_after_clutch{false};
 
