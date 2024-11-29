@@ -56,6 +56,15 @@ class DummyForceAutoMocProcess0 : public QObject {
        DataEditor::SLIDER,                                                                                        \
        QObject::tr("Background image opacity"),                                                                   \
        Game::ALL,                                                                                                 \
+       true)                                                                                                      \
+  /* --------------- TEXT TO SPEECH -------------------*/                                                         \
+  FUNC(QString,                                                                                                   \
+       TTSEngineName,                                                                                             \
+       DS_DEFAULT,                                                                                                \
+       "tts",                                                                                                     \
+       DataEditor::TTS_ENGINE_SELECTOR,                                                                           \
+       QObject::tr("Text to speech engine"),                                                                      \
+       Game::ALL,                                                                                                 \
        true)
 
 DS_DECLARE_STRUCT(ApplicationSettings, ApplicationSettings_STRUCT_ELEMENTS_LIST);
@@ -402,5 +411,9 @@ constexpr auto kDefaultOverlayBackgroundColor{"#50000000"};
        true)
 
 DS_DECLARE_STRUCT(GameOverlayData, GameOverlay_STRUCT_ELEMENTS_LIST);
+
+#define TextToSpeechConfig_STRUCT_ELEMENTS_LIST(FUNC)
+
+DS_DECLARE_STRUCT(TextToSpeechConfig, TextToSpeechConfig_STRUCT_ELEMENTS_LIST);
 
 }  // namespace btc2

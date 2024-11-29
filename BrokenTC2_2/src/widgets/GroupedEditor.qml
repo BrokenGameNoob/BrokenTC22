@@ -129,6 +129,8 @@ Item {
                             return fileSelectorComponent
                         case DataEditor.INT_EDITOR:
                             return intEditorComponent
+                        case DataEditor.TTS_ENGINE_SELECTOR:
+                            return ttsEngineSelectorComponent
                         }
                         return unknownComponent
                     }
@@ -494,6 +496,23 @@ Item {
                     inputMethodHints: intSpinBox.inputMethodHints
                 }
             }
+        }
+    }
+
+    Component {
+        id: ttsEngineSelectorComponent
+        ComboBox {
+            anchors.centerIn: parent
+            width: parent.width
+            height: componentHeight
+
+            model: ServiceManager.tts.GetAvailableEngines()
+
+            onActivated: {
+                setValue(currentText)
+            }
+
+            currentIndex: model.indexOf(customValue)
         }
     }
 

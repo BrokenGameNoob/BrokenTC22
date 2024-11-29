@@ -27,7 +27,7 @@ void ServiceManager::Init() {
 }
 
 ServiceManager::ServiceManager()
-    : m_settings{std::make_unique<ApplicationSettings>(path::GetApplicationSettingsPath(), nullptr)},
+    : m_settings{std::make_shared<ApplicationSettings>(path::GetApplicationSettingsPath(), nullptr)},
       m_game_profiles_handler{std::make_unique<GameProfilesHandler>()},
       m_controller_handler{std::make_unique<ControllerHandler>()},
       m_keyboard_handler{std::make_unique<KeyboardHandler>()},
@@ -36,7 +36,8 @@ ServiceManager::ServiceManager()
       m_game_overlay{std::make_unique<GameOverlayData>(path::GetOverlaySettingsPath(), nullptr)},
       m_screen_overlay_selector{std::make_unique<ScreenOverlaySelector>(nullptr)},
       m_keyboard_profile{ModelRegistry::GetKeyboardProfile()},
-      m_window_change_hook{win::HookForFocusedWindowChanged(ServiceManager::OnWindowChangeHook)} {
+      m_window_change_hook{win::HookForFocusedWindowChanged(ServiceManager::OnWindowChangeHook)},
+      m_text_to_speech_manager{std::make_unique<TextToSpeechManager>(m_settings)} {
   connect(m_game_selector.get(), &GameSelector::gameChanged, this, [this]() {
     m_game_profiles_handler->SetCurrentGame(m_game_selector->GetSelectedGame());
     m_settings->SetSelectedGameName(m_game_selector->GetSelectedGameName());

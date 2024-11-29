@@ -814,7 +814,11 @@ Exit application.</source>
 Le logiciel va se fermer.</translation>
     </message>
     <message>
+<<<<<<< HEAD
         <location filename="../src/system/services/service_manager.cpp" line="51"/>
+=======
+        <location filename="../src/system/services/service_manager.cpp" line="+52"/>
+>>>>>>> 414a04e (wip - tts integration)
         <source>Game changed to: %0</source>
         <translation>Jeu détecté: %0</translation>
     </message>
@@ -830,6 +834,11 @@ Le logiciel va se fermer.</translation>
         <location filename="../src/tabs/SettingsTab.qml" line="49"/>
         <source>SOFTWARE</source>
         <translation>LOGICIEL</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>VOICE ANNOUCEMENTS</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
