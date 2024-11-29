@@ -31,7 +31,9 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/mo
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Xml)
 
-qt_standard_project_setup(REQUIRES 6.5)
+qt_standard_project_setup(
+  I18N_TRANSLATED_LANGUAGES fr
+)
 
 ############################
 #
@@ -187,11 +189,11 @@ set(BTC2_QML_FILES
 ###############
 #   Translations
 ###############
-set(BTC2_TRANSLATIONS_FILES
-    translations/${CMAKE_PROJECT_NAME}_fr.ts
-)
+# set(BTC2_TRANSLATIONS_FILES
+#     ${CMAKE_SOURCE_DIR}/translations/${CMAKE_PROJECT_NAME}_fr.ts
+# )
 
-
+# set(BTC2_TRANSLATIONS_FILES_CACHED ${BTC2_TRANSLATIONS_FILES} CACHE STRING "Translation files for the project")
 
 ############################
 #
@@ -228,11 +230,11 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
 )
 
 if(CUSTOM_BUILD_TRANSLATIONS)
-  qt_add_translations(${CMAKE_PROJECT_NAME} TS_FILES ${BTC2_TRANSLATIONS_FILES})
-  set_source_files_properties(${BTC2_TRANSLATIONS_FILES}
-      PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/translations")
-  add_dependencies(${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}_lupdate)
-  add_dependencies(${CMAKE_PROJECT_NAME} update_translations)
+  qt_add_translations()
+  # set_source_files_properties(${BTC2_TRANSLATIONS_FILES}
+  #     PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/translations")
+  # add_dependencies(${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}_lupdate)
+  # add_dependencies(${CMAKE_PROJECT_NAME} update_translations)
 endif()
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

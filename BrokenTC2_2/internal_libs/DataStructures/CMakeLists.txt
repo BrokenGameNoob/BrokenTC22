@@ -118,4 +118,25 @@ target_compile_options(${LIB_NAME} PRIVATE
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
     -Wall -Wextra -Wpedantic>)
 
+###############
+#   Translations
+###############
+# set(LIB_TRANSLATIONS_FILES ${BTC2_TRANSLATIONS_FILES_CACHED})
+# message("LIB_TRANSLATIONS_FILES: ${BTC2_TRANSLATIONS_FILES_CACHED}")
+
+# qt_add_translations(${LIB_NAME} TS_FILES ${LIB_TRANSLATIONS_FILES})
+# set_source_files_properties(${LIB_TRANSLATIONS_FILES}
+#   PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/translations")
+
+# # qt_add_lupdate(${LIB_NAME}
+# #     TS_FILES ${LIB_TRANSLATIONS_FILES}
+# # )
+
+# # qt_add_lrelease(${LIB_NAME}
+# #     QM_FILES ${LIB_TRANSLATIONS_FILES}
+# # )
+
+# add_dependencies(${LIB_NAME} ${LIB_NAME}_lupdate)
+# add_dependencies(${LIB_NAME} update_translations)
+
 message("----- END <${RAW_LIB_NAME}> -----")
