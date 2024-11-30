@@ -38,7 +38,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/mo
 find_package(Qt6 6.8 REQUIRED COMPONENTS Core Widgets Quick QuickControls2 Xml LinguistTools Concurrent)
 
 qt_standard_project_setup(
-  I18N_TRANSLATED_LANGUAGES fr
+  I18N_TRANSLATED_LANGUAGES fr de ru
 )
 
 qt_policy(SET QTP0001 NEW)

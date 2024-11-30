@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr_FR" sourcelanguage="en_US">
+<TS version="2.1" language="de" sourcelanguage="en">
 <context>
     <name>ButtonCancel</name>
     <message>
         <location filename="../src/widgets/ButtonCancel.qml" line="12"/>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14,7 +14,7 @@
     <message>
         <location filename="../src/widgets/ButtonOk.qml" line="12"/>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -22,12 +22,12 @@
     <message>
         <location filename="../src/widgets/ColorPicker.qml" line="231"/>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/ColorPicker.qml" line="246"/>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -35,17 +35,17 @@
     <message>
         <location filename="../src/widgets/ConfirmationDialog.qml" line="18"/>
         <source>Confirmation needed</source>
-        <translation>Confirmation nécessaire</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/ConfirmationDialog.qml" line="19"/>
         <source>Yes</source>
-        <translation>Oui</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/ConfirmationDialog.qml" line="20"/>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -53,7 +53,7 @@
     <message>
         <location filename="../src/panels/ControllerListPanel.qml" line="55"/>
         <source>Known controllers list</source>
-        <translation>Liste des contrôleurs connus</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -61,73 +61,73 @@
     <message>
         <location filename="../src/panels/EasySetupPanel.qml" line="59"/>
         <source>Easy setup</source>
-        <translation>Auto configuration</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/panels/EasySetupPanel.qml" line="120"/>
         <source>Press &quot;Next&quot; to start the setup</source>
-        <translation>Cliquez sur &quot;Suivant&quot; pour lancer la configuration</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/panels/EasySetupPanel.qml" line="151"/>
         <source>Auto set bindings &lt;strong&gt;in game&lt;/strong&gt;</source>
-        <translation>Modifier les affectations du jeu (&lt;strong&gt;cela va modifier votre configuration en jeu !&lt;/strong&gt;)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/panels/EasySetupPanel.qml" line="182"/>
         <source>Waiting for the game to close</source>
-        <translation>En attente de la fermeture du jeu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/panels/EasySetupPanel.qml" line="212"/>
         <source>Editing configuration files</source>
-        <translation>Edition des fichiers de configuration</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/panels/EasySetupPanel.qml" line="244"/>
         <source>Easy setup ran successfully</source>
-        <translation>L&apos;auto-configuration s&apos;est achevée avec succès</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/panels/EasySetupPanel.qml" line="257"/>
         <location filename="../src/panels/EasySetupPanel.qml" line="297"/>
         <source>Failed to run easy setup</source>
-        <translation>Une erreur est survenue lors de l&apos;auto-configuration</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/panels/EasySetupPanel.qml" line="270"/>
         <source>Failed to close the game... You can close the game manually and try again.</source>
-        <translation>Impossible de fermer le jeu... Essayez de fermer le jeu manuellement puis de relancer l&apos;auto-configuration.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/panels/EasySetupPanel.qml" line="283"/>
         <source>Could not find controller configuration file. You need to change at least on button on the controller in the game.Try to invert gear up &amp; down. Then try to run the easy setup again.</source>
-        <translation>Impossible de trouver un fichier de configuration de contrôleur en jeu. Il est nécessaire de modifier au moins une touche sur votre contrôleur pour que ce fichier existe. Vous pouvez essayer d&apos;inverser dans le jeu la touches pour &quot;rapport supérieur&quot; et &quot;rapport inférieur&quot;. Essayez ensuite de relancer l&apos;auto-configuration.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/panels/EasySetupPanel.qml" line="310"/>
         <source>Unknown success state...</source>
-        <translation>Etat de réussite inconnu...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/panels/EasySetupPanel.qml" line="342"/>
         <source>Undefined</source>
-        <translation>Indéfini</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/panels/EasySetupPanel.qml" line="369"/>
         <source>Previous</source>
-        <translation>Précédent</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/panels/EasySetupPanel.qml" line="375"/>
         <source>Finish</source>
-        <translation>Terminé</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/panels/EasySetupPanel.qml" line="375"/>
         <source>Next</source>
-        <translation>Suivant</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -135,72 +135,72 @@
     <message>
         <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="115"/>
         <source>Place your elements where you want (drag &amp; drop)</source>
-        <translation>Placez les éléments où vous le souhaitez (glisser-déposer)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="115"/>
         <source>Press ESC to leave</source>
-        <translation>Appuyez sur &quot;Echap&quot; pour quitter</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="128"/>
         <source>Reset to default</source>
-        <translation>Réinitialiser</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="222"/>
         <source>Soft running indicator</source>
-        <translation>Icone du logiciel en arrière-plan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="355"/>
         <source>Gear indicator</source>
-        <translation>Indicator de rapport engagé</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="401"/>
         <source>Notification text</source>
-        <translation>Texte de notification</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="463"/>
         <source>Notifications</source>
-        <translation>Notifications</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="479"/>
         <source>VISIBLE</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="479"/>
         <source>NOT VISIBLE</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="574"/>
         <source>Debug</source>
-        <translation>Debug</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="690"/>
         <source>Clutch mode</source>
-        <translation>Mode de boîte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="706"/>
         <source>Are you sure you want to reset</source>
-        <translation>Êtes-vous sûrs de vouloir réinitialiser</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="706"/>
         <source>?</source>
-        <translation> ?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GameOverlay/GameOverlay.qml" line="711"/>
         <source>Are you sure you want to reset all elements?</source>
-        <translation>Êtes-vous sûr de vouloir réinitialiser l&apos;ensemble des éléments ?</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -208,22 +208,22 @@
     <message>
         <location filename="../src/tabs/GameProfileTab.qml" line="49"/>
         <source>Game</source>
-        <translation>Jeu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/tabs/GameProfileTab.qml" line="96"/>
         <source>BEHAVIOR</source>
-        <translation>COMPORTEMENT</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/tabs/GameProfileTab.qml" line="108"/>
         <source>GENERAL CONTROLS</source>
-        <translation>Contrôles généraux</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/tabs/GameProfileTab.qml" line="120"/>
         <source>GROUND VEHICLE</source>
-        <translation>VÉHICULES TERRESTRES</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -233,41 +233,39 @@
         <location filename="../src/widgets/GroupedEditor.qml" line="255"/>
         <location filename="../src/widgets/GroupedEditor.qml" line="412"/>
         <source>NOT SET</source>
-        <translation>VIDE</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GroupedEditor.qml" line="446"/>
         <source>Remove</source>
-        <translation>Supprimer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GroupedEditor.qml" line="580"/>
         <location filename="../src/widgets/GroupedEditor.qml" line="729"/>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GroupedEditor.qml" line="614"/>
         <location filename="../src/widgets/GroupedEditor.qml" line="763"/>
         <source>Delete binding</source>
-        <translation>Supprimer l&apos;affectation</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GroupedEditor.qml" line="633"/>
         <source>Waiting for controller input</source>
-        <translation>Appuyez sur un bouton du contrôleur 
-/
-Bougez un axe de contrôle</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GroupedEditor.qml" line="781"/>
         <source>Waiting for keyboard input</source>
-        <translation>Apuez sur une touche du clavier</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/widgets/GroupedEditor.qml" line="806"/>
         <source>Please select a file</source>
-        <translation>Sélectionnez un fichier</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -275,19 +273,18 @@ Bougez un axe de contrôle</translation>
     <message>
         <location filename="../src/Main.qml" line="28"/>
         <source>BrokenTC2</source>
-        <translation>BrokenTC2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Main.qml" line="245"/>
         <source>Welcome to BrokenTC2!</source>
-        <translation>Bienvenue dans BrokenTC2 !</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Main.qml" line="299"/>
         <source>Please follow the setup to get started.
 If you are doubting about an option, just leave the default value!</source>
-        <translation>Merci de suivre les isntructions de l&apos;utilitaire de configuration
-En cas de doute, laissez les valeurs par défaut !</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -295,17 +292,17 @@ En cas de doute, laissez les valeurs par défaut !</translation>
     <message>
         <location filename="../src/panels/MainPanel.qml" line="27"/>
         <source>Software controls</source>
-        <translation>Commandes BTC2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/panels/MainPanel.qml" line="33"/>
         <source>Game configuration</source>
-        <translation>Configuration du jeu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/panels/MainPanel.qml" line="39"/>
         <source>Settings</source>
-        <translation>Paramètres</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -313,447 +310,446 @@ En cas de doute, laissez les valeurs par défaut !</translation>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="278"/>
         <source>Left Mouse Button</source>
-        <translation>Clic gauche</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="280"/>
         <source>Right Mouse Button</source>
-        <translation>Clic droit</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="282"/>
         <source>Control-break Processing</source>
-        <translation>Annuler</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="284"/>
         <source>Middle Mouse Button</source>
-        <translation>Clic molette</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="286"/>
         <source>X1 Mouse Button</source>
-        <translation>Souris 1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="288"/>
         <source>X2 Mouse Button</source>
-        <translation>Souris 2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="290"/>
         <source>Backspace</source>
-        <translation>Effacer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="292"/>
         <source>Tab</source>
-        <translation>Tab</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="294"/>
         <source>Clear</source>
-        <translation>Effacer tout</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="296"/>
         <source>Enter</source>
-        <translation>Entrée</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="298"/>
         <source>Shift</source>
-        <translation>Maj</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="300"/>
         <source>Control</source>
-        <translation>Ctrl</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="302"/>
         <source>Alt</source>
-        <translation>Alt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="304"/>
         <source>Pause</source>
-        <translation>Pause</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="306"/>
         <source>Caps Lock</source>
-        <translation>Verr. Maj</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="308"/>
         <source>Escape</source>
-        <translation>Echap</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="310"/>
         <source>Space</source>
-        <translation>Espace</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="312"/>
         <source>Page Up</source>
-        <translation>Page supérieure</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="314"/>
         <source>Page Down</source>
-        <translation>Page inférieure</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="316"/>
         <source>End</source>
-        <translation>Fin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="318"/>
         <source>Home</source>
-        <translation>Début</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="320"/>
         <source>Left Arrow</source>
-        <translation>Flèche gauche</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="322"/>
         <source>Up Arrow</source>
-        <translation>Flèche haut</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="324"/>
         <source>Right Arrow</source>
-        <translation>Flèche droite</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="326"/>
         <source>Down Arrow</source>
-        <translation>Flèche bas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="328"/>
         <source>Select</source>
-        <translation>Sélectionner</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="330"/>
         <source>Print</source>
-        <translation>Imprimer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="332"/>
         <source>Execute</source>
-        <translation>Exécuter</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="334"/>
         <source>Print Screen</source>
-        <translation>Impr. Ecran</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="336"/>
         <source>Insert</source>
-        <translation>Insérer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="338"/>
         <source>Delete</source>
-        <translation>Suppr.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="340"/>
         <source>Help</source>
-        <translation>Aide</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="342"/>
         <source>Left Windows</source>
-        <translation>Win. gauche</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="344"/>
         <source>Right Windows</source>
-        <translation>Win. droit</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="346"/>
         <source>Applications</source>
-        <translation>Applications</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="348"/>
         <source>Sleep</source>
-        <translation>Dodo (jsp comment traduire)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="350"/>
         <source>Numpad 0</source>
-        <translation>Num. 0</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="352"/>
         <source>Numpad 1</source>
-        <translation>Num. 1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="354"/>
         <source>Numpad 2</source>
-        <translation>Num. 2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="356"/>
         <source>Numpad 3</source>
-        <translation>Num. 3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="358"/>
         <source>Numpad 4</source>
-        <translation>Num. 4</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="360"/>
         <source>Numpad 5</source>
-        <translation>Num. 5</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="362"/>
         <source>Numpad 6</source>
-        <translation>Num. 6</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="364"/>
         <source>Numpad 7</source>
-        <translation>Num. 7</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="366"/>
         <source>Numpad 8</source>
-        <translation>Num. 8</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="368"/>
         <source>Numpad 9</source>
-        <translation>Num. 9</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="370"/>
         <source>Multiply</source>
-        <translation>*</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="372"/>
         <source>Add</source>
-        <translation>+</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="374"/>
         <source>Separator</source>
-        <translation>Sep.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="376"/>
         <source>Subtract</source>
-        <translation>-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="378"/>
         <source>Decimal</source>
-        <translation>Dec.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="380"/>
         <source>Divide</source>
-        <translation>/</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="382"/>
         <source>F1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="384"/>
         <source>F2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="386"/>
         <source>F3</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="388"/>
         <source>F4</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="390"/>
         <source>F5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="392"/>
         <source>F6</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="394"/>
         <source>F7</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="396"/>
         <source>F8</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="398"/>
         <source>F9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="400"/>
         <source>F10</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="402"/>
         <source>F11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/WinUtils/src/utils.cpp" line="404"/>
         <source>F12</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="25"/>
         <source>Enable overlay</source>
-        <translation>Activer l&apos;ATH</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="31"/>
         <source>Make overlay always visible</source>
-        <translation>Forcer l&apos;affichage de l&apos;ATH</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="41"/>
         <source>Overlay screen</source>
-        <translation>Ecran de l&apos;ATH</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="49"/>
         <source>Background image</source>
-        <translation>Image d&apos;arrière-plan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="57"/>
         <source>Background image opacity</source>
-        <translation>Opacité de l&apos;image d&apos;arrière-plan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="71"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="191"/>
         <source>Switch gear mode</source>
-        <translation>Changer le mode de boîte de vitesse</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="79"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="199"/>
         <source>Enable / disable</source>
-        <translation>Activer / désactiver le logiciel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="87"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="111"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="213"/>
         <source>Gear up</source>
-        <translation>Rapport supérieur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="95"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="119"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="221"/>
         <source>Gear down</source>
-        <translation>Rapport inférieur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="104"/>
         <source>Profile name</source>
-        <translation>Nom du profil</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="105"/>
         <source>Axis deadzone</source>
-        <translation>Zone morte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="127"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="237"/>
         <source>Gear R</source>
-        <translation>Marche arrière</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="135"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="245"/>
         <source>Gear 1</source>
-        <translation>Vitesse 1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="143"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="253"/>
         <source>Gear 2</source>
-        <translation>Vitesse 2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="151"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="261"/>
         <source>Gear 3</source>
-        <translation>Vitesse 3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="159"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="269"/>
         <source>Gear 4</source>
-        <translation>Vitesse 4</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="167"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="277"/>
         <source>Gear 5</source>
-        <translation>Vitesse 5</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="175"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="285"/>
         <source>Gear 6</source>
-        <translation>Vitesse 6</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="183"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="293"/>
         <source>Gear 7</source>
-        <translation>Vitesse 7</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="229"/>
         <source>Clutch</source>
-        <translation>Embrayage</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="301"/>
         <source>Use sequential after clutch</source>
-        <translatorcomment>May be too long</translatorcomment>
-        <translation>Utiliser boîte séquentiel  lorsque clutch impossible</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="309"/>
         <source>Key press delay (ms)</source>
-        <translation>Durée d&apos;appui des touches</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="326"/>
@@ -762,61 +758,60 @@ En cas de doute, laissez les valeurs par défaut !</translation>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="364"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="368"/>
         <source>Enable</source>
-        <translation>Affiché</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="338"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="374"/>
         <source>Change color</source>
-        <translation>Couleur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="346"/>
         <source>Mode notifs</source>
-        <translation>Notif. changement mode</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="358"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="400"/>
         <source>Background</source>
-        <translation>Fond</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="378"/>
         <source>Clutch color</source>
-        <translation>Couleur clutch</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="384"/>
         <source>No clutch color</source>
-        <translation>Couleur séquentiel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="392"/>
         <source>Disabled color</source>
-        <translation>Couleur &quot;désactivé&quot;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../internal_libs/DataStructures/src/games.cpp" line="44"/>
         <source>Auto</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="62"/>
         <source>Critical error</source>
-        <translation>Erreur fatale</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="63"/>
         <source>Failed to setup application data folders.
 Exit application.</source>
-        <translation>Impossible de créer les dossiers nécessaires au stockage des données.
-Le logiciel va se fermer.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/system/services/service_manager.cpp" line="51"/>
         <source>Game changed to: %0</source>
-        <translation>Jeu détecté: %0</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -824,12 +819,12 @@ Le logiciel va se fermer.</translation>
     <message>
         <location filename="../src/tabs/SettingsTab.qml" line="38"/>
         <source>OVERLAY</source>
-        <translation>ATH (Affichage Tête Haute)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/tabs/SettingsTab.qml" line="49"/>
         <source>SOFTWARE</source>
-        <translation>LOGICIEL</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -837,7 +832,7 @@ Le logiciel va se fermer.</translation>
     <message>
         <location filename="../src/SoftStatusBar.qml" line="158"/>
         <source>Keyboard conflicts</source>
-        <translation>Conflits clavier</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -845,34 +840,34 @@ Le logiciel va se fermer.</translation>
     <message>
         <location filename="../src/tabs/SoftwareControlsTab.qml" line="40"/>
         <source>CONTROLLER</source>
-        <translation>CONTRÔLEUR</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/tabs/SoftwareControlsTab.qml" line="72"/>
         <source>GLOBAL</source>
-        <translation>GÉNÉRAL</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/tabs/SoftwareControlsTab.qml" line="83"/>
         <location filename="../src/tabs/SoftwareControlsTab.qml" line="186"/>
         <source>SOFTWARE CONTROLS</source>
-        <translation>LOGICIEL</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/tabs/SoftwareControlsTab.qml" line="94"/>
         <location filename="../src/tabs/SoftwareControlsTab.qml" line="198"/>
         <source>SEQUENTIAL GEARS</source>
-        <translation>VITESSES (SÉQUENTIELLES)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/tabs/SoftwareControlsTab.qml" line="105"/>
         <source>DIRECT GEARS</source>
-        <translation>VITESSES (DIRECTES)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/tabs/SoftwareControlsTab.qml" line="153"/>
         <source>KEYBOARD</source>
-        <translation>CLAVIER</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -880,7 +875,7 @@ Le logiciel va se fermer.</translation>
     <message>
         <location filename="../src/games/gear_handler.cpp" line="57"/>
         <source>Disabled</source>
-        <translation>Désactivé</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

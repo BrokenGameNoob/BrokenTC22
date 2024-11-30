@@ -102,7 +102,7 @@ int SDL_main(int argc, char* argv[]) {
     //    qInfo() << "Installed translator (" << QLocale() << ")";
     SPDLOG_INFO("Installed translator ({})", QLocale().nativeLanguageName());
   } else {
-    qWarning() << "Failed to install translator (" << QLocale() << ")";
+    SPDLOG_WARN("Failed to install translator ({})", QLocale().nativeLanguageName());
   }
 
   /* -- Pre conditions -- */

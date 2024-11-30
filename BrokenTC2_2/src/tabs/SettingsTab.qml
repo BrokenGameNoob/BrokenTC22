@@ -21,7 +21,9 @@ Item {
             id: columnRight
             anchors {
                 top: parent.top
+                topMargin: QMLStyle.kStandardMargin
                 bottom: parent.bottom
+                bottomMargin: QMLStyle.kStandardMargin
                 left: parent.left
                 leftMargin: Style.kStandardMargin * 2
                 right: parent.right
