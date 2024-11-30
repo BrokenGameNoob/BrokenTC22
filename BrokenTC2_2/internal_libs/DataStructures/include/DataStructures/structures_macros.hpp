@@ -334,6 +334,7 @@ class DataEditor {
     SCREEN_SELECTOR,
     FILE_SELECTOR,
     INT_EDITOR,
+    TTS_ENGINE_SELECTOR,
   };
   Q_ENUM(EditorType)
 

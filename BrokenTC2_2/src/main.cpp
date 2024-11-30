@@ -20,6 +20,7 @@
 #include <system/controls_io/keystroke_sequencer.hpp>
 #include <system/services/screen_overlay_selector.hpp>
 #include <system/services/service_manager.hpp>
+#include <system/services/text_to_speech_manager.hpp>
 #include <utils/shared_constants.hpp>
 #include <utils/style.hpp>
 
@@ -72,6 +73,7 @@ int SDL_main(int argc, char* argv[]) {
   btc2::KeyboardHandler::Init();
   btc2::GameProfilesHandler::Init();
   btc2::ScreenOverlaySelector::Init();
+  btc2::TextToSpeechManager::Init();
   CREGISTER_QML_UNCREATABLE_TYPE(btc2, Game, "Enum class");
   CREGISTER_QML_UNCREATABLE_TYPE(btc2, GearHandlerMode, "Enum class");
   btc2::ConflictsResults::Init();

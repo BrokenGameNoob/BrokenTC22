@@ -35,7 +35,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/mo
 #
 ############################
 
-find_package(Qt6 6.8 REQUIRED COMPONENTS Core Widgets Quick QuickControls2 Xml LinguistTools Concurrent)
+find_package(Qt6 6.8 REQUIRED COMPONENTS Core Widgets Quick QuickControls2 Xml LinguistTools Concurrent TextToSpeech)
 
 qt_standard_project_setup(
   I18N_TRANSLATED_LANGUAGES fr de ru
@@ -135,6 +135,7 @@ set(BTC2_SOURCES
     ${BTC2_SOURCES_DIR}/system/services/model_registry.hpp ${BTC2_SOURCES_DIR}/system/services/model_registry.cpp
     ${BTC2_SOURCES_DIR}/system/services/game_profiles_handler.hpp ${BTC2_SOURCES_DIR}/system/services/game_profiles_handler.cpp
     ${BTC2_SOURCES_DIR}/system/services/screen_overlay_selector.hpp ${BTC2_SOURCES_DIR}/system/services/screen_overlay_selector.cpp
+    ${BTC2_SOURCES_DIR}/system/services/text_to_speech_manager.hpp ${BTC2_SOURCES_DIR}/system/services/text_to_speech_manager.cpp
 
     # Controls
     ${BTC2_SOURCES_DIR}/system/controls_io/keystroke_sequencer.hpp ${BTC2_SOURCES_DIR}/system/controls_io/keystroke_sequencer.cpp
@@ -235,6 +236,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
   Qt6::QuickControls2
   Qt6::Concurrent
   Qt6::Xml
+  Qt6::TextToSpeech
 )
 
 if(CUSTOM_BUILD_TRANSLATIONS)

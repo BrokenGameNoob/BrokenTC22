@@ -96,8 +96,11 @@ bool BaseGearHandler::IsActive() const {
 }
 
 void BaseGearHandler::SetUserEnabled(bool enabled) {
+  const bool kOldActive{IsActive()};
   m_user_enabled = enabled;
-  emit activeChanged();
+  if (kOldActive != IsActive()) {
+    emit activeChanged();
+  }
 }
 
 bool BaseGearHandler::IsUserEnabled() const {
@@ -105,8 +108,11 @@ bool BaseGearHandler::IsUserEnabled() const {
 }
 
 void BaseGearHandler::SetSoftEnabled(bool enabled) {
+  const bool kOldActive{IsActive()};
   m_soft_enabled = enabled;
-  emit activeChanged();
+  if (kOldActive != IsActive()) {
+    emit activeChanged();
+  }
 }
 
 bool BaseGearHandler::IsSoftEnabled() const {

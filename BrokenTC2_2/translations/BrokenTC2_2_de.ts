@@ -229,41 +229,41 @@
 <context>
     <name>GroupedEditor</name>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="200"/>
-        <location filename="../src/widgets/GroupedEditor.qml" line="255"/>
-        <location filename="../src/widgets/GroupedEditor.qml" line="412"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="202"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="257"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="414"/>
         <source>NOT SET</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="446"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="448"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="580"/>
-        <location filename="../src/widgets/GroupedEditor.qml" line="729"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="599"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="748"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="614"/>
-        <location filename="../src/widgets/GroupedEditor.qml" line="763"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="633"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="782"/>
         <source>Delete binding</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="633"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="652"/>
         <source>Waiting for controller input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="781"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="800"/>
         <source>Waiting for keyboard input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="806"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="825"/>
         <source>Please select a file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -653,142 +653,157 @@ If you are doubting about an option, just leave the default value!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="71"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="191"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="61"/>
+        <source>Text to speech enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="62"/>
+        <source>Text to speech rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="63"/>
+        <source>Text to speech volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="75"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="195"/>
         <source>Switch gear mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="79"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="199"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="83"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="203"/>
         <source>Enable / disable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="87"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="111"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="213"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="91"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="115"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="217"/>
         <source>Gear up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="95"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="119"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="221"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="99"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="123"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="225"/>
         <source>Gear down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="104"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="108"/>
         <source>Profile name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="105"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="109"/>
         <source>Axis deadzone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="127"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="237"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="131"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="241"/>
         <source>Gear R</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="135"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="245"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="139"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="249"/>
         <source>Gear 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="143"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="253"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="147"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="257"/>
         <source>Gear 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="151"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="261"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="155"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="265"/>
         <source>Gear 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="159"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="269"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="163"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="273"/>
         <source>Gear 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="167"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="277"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="171"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="281"/>
         <source>Gear 5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="175"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="285"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="179"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="289"/>
         <source>Gear 6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="183"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="293"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="187"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="297"/>
         <source>Gear 7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="229"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="233"/>
         <source>Clutch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="301"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="305"/>
         <source>Use sequential after clutch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="309"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="313"/>
         <source>Key press delay (ms)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="326"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="332"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="352"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="364"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="330"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="336"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="356"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="368"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="372"/>
         <source>Enable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="338"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="374"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="342"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="378"/>
         <source>Change color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="346"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="350"/>
         <source>Mode notifs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="358"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="400"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="362"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="404"/>
         <source>Background</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="378"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="382"/>
         <source>Clutch color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="384"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="388"/>
         <source>No clutch color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="392"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="396"/>
         <source>Disabled color</source>
         <translation type="unfinished"></translation>
     </message>
@@ -798,19 +813,34 @@ If you are doubting about an option, just leave the default value!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="62"/>
+        <location filename="../src/main.cpp" line="63"/>
         <source>Critical error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="63"/>
+        <location filename="../src/main.cpp" line="64"/>
         <source>Failed to setup application data folders.
 Exit application.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/system/services/service_manager.cpp" line="51"/>
+        <location filename="../src/system/services/service_manager.cpp" line="52"/>
         <source>Game changed to: %0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/games/gear_handler_factory.cpp" line="31"/>
+        <source>%0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/games/gear_handler_factory.cpp" line="39"/>
+        <source>Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/games/gear_handler_factory.cpp" line="39"/>
+        <source>Disabled</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -824,6 +854,11 @@ Exit application.</source>
     <message>
         <location filename="../src/tabs/SettingsTab.qml" line="49"/>
         <source>SOFTWARE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tabs/SettingsTab.qml" line="60"/>
+        <source>VOICE ANNOUCEMENTS</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

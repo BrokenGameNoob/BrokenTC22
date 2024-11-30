@@ -49,6 +49,21 @@ Item {
                 title: qsTr("SOFTWARE")
                 Layout.fillWidth: true
             }
+
+            Item {
+                height: Style.kStandardMargin * 3
+            }
+
+            GroupedEditor {
+                targetElement: ServiceManager.settings
+                targetGroup: "tts"
+                title: qsTr("VOICE ANNOUCEMENTS")
+                Layout.fillWidth: true
+            }
+
+            Item {
+                height: Style.kStandardMargin * 3
+            }
         }
     }
 }

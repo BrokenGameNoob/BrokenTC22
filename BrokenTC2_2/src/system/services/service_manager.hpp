@@ -15,6 +15,7 @@
 #include <system/services/game_profiles_handler.hpp>
 #include <system/services/keyboard_handler.hpp>
 #include <system/services/screen_overlay_selector.hpp>
+#include <system/services/text_to_speech_manager.hpp>
 
 namespace btc2 {
 
@@ -44,6 +45,8 @@ class ServiceManager : public QObject {
 
   Q_PROPERTY(QString focusedWindowTitle READ GetFocusedWindowTitle NOTIFY focusedWindowTitleChanged FINAL)
   Q_PROPERTY(Game::Types focusedGame READ GetFocusedWindowGame NOTIFY focusedWindowTitleChanged FINAL)
+
+  Q_PROPERTY(TextToSpeechManager* tts READ GetRawTextToSpeechManager CONSTANT FINAL);
 
  signals:
   void gearHandlerChanged();
@@ -158,6 +161,11 @@ class ServiceManager : public QObject {
   }
   Game::Types GetFocusedWindowGame() const;
 
+  /* Text to speech related */
+  TextToSpeechManager* GetRawTextToSpeechManager() {
+    return m_text_to_speech_manager.get();
+  }
+
   /* Main */
   Q_INVOKABLE void OnMainWindowLoaded();
 
@@ -168,7 +176,7 @@ class ServiceManager : public QObject {
   void UpdateKeyboardConflicts();
 
  private:
-  std::unique_ptr<ApplicationSettings> m_settings{nullptr};
+  std::shared_ptr<ApplicationSettings> m_settings{nullptr};
 
   std::unique_ptr<GameProfilesHandler> m_game_profiles_handler{nullptr};
 
@@ -176,7 +184,7 @@ class ServiceManager : public QObject {
   std::unique_ptr<KeyboardHandler> m_keyboard_handler{nullptr};
 
   std::unique_ptr<GameSelector> m_game_selector{nullptr};
-  std::unique_ptr<BaseGearHandler> m_gear_handler{nullptr};
+  GearHandlerUniquePtr m_gear_handler{nullptr};
   std::unique_ptr<GameOverlayData> m_game_overlay{nullptr};
   QString m_overlay_notification_text{};
   QTimer m_overlay_notification_timer{};
@@ -190,6 +198,8 @@ class ServiceManager : public QObject {
   QString m_focused_window_title;
   Game::Types m_game_focused{Game::NONE};
   Game::Types m_latest_known_game_focused{Game::NONE};
+
+  std::shared_ptr<TextToSpeechManager> m_text_to_speech_manager{nullptr};
 
   double m_sdl_axis_threshold{0.5};
 };

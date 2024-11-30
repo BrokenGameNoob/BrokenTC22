@@ -229,43 +229,43 @@
 <context>
     <name>GroupedEditor</name>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="200"/>
-        <location filename="../src/widgets/GroupedEditor.qml" line="255"/>
-        <location filename="../src/widgets/GroupedEditor.qml" line="412"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="202"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="257"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="414"/>
         <source>NOT SET</source>
         <translation>VIDE</translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="446"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="448"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="580"/>
-        <location filename="../src/widgets/GroupedEditor.qml" line="729"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="599"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="748"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="614"/>
-        <location filename="../src/widgets/GroupedEditor.qml" line="763"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="633"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="782"/>
         <source>Delete binding</source>
         <translation>Supprimer l&apos;affectation</translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="633"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="652"/>
         <source>Waiting for controller input</source>
         <translation>Appuyez sur un bouton du contrôleur 
 /
 Bougez un axe de contrôle</translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="781"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="800"/>
         <source>Waiting for keyboard input</source>
         <translation>Apuez sur une touche du clavier</translation>
     </message>
     <message>
-        <location filename="../src/widgets/GroupedEditor.qml" line="806"/>
+        <location filename="../src/widgets/GroupedEditor.qml" line="825"/>
         <source>Please select a file</source>
         <translation>Sélectionnez un fichier</translation>
     </message>
@@ -656,143 +656,158 @@ En cas de doute, laissez les valeurs par défaut !</translation>
         <translation>Opacité de l&apos;image d&apos;arrière-plan</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="71"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="191"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="61"/>
+        <source>Text to speech enabled</source>
+        <translation>Activer / désactiver les annonces vocales</translation>
+    </message>
+    <message>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="62"/>
+        <source>Text to speech rate</source>
+        <translation>Vitesse de la voix des annonces</translation>
+    </message>
+    <message>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="63"/>
+        <source>Text to speech volume</source>
+        <translation>Volume de la voix des annonces</translation>
+    </message>
+    <message>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="75"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="195"/>
         <source>Switch gear mode</source>
         <translation>Changer le mode de boîte de vitesse</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="79"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="199"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="83"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="203"/>
         <source>Enable / disable</source>
         <translation>Activer / désactiver le logiciel</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="87"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="111"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="213"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="91"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="115"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="217"/>
         <source>Gear up</source>
         <translation>Rapport supérieur</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="95"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="119"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="221"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="99"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="123"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="225"/>
         <source>Gear down</source>
         <translation>Rapport inférieur</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="104"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="108"/>
         <source>Profile name</source>
         <translation>Nom du profil</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="105"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="109"/>
         <source>Axis deadzone</source>
         <translation>Zone morte</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="127"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="237"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="131"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="241"/>
         <source>Gear R</source>
         <translation>Marche arrière</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="135"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="245"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="139"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="249"/>
         <source>Gear 1</source>
         <translation>Vitesse 1</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="143"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="253"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="147"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="257"/>
         <source>Gear 2</source>
         <translation>Vitesse 2</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="151"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="261"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="155"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="265"/>
         <source>Gear 3</source>
         <translation>Vitesse 3</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="159"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="269"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="163"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="273"/>
         <source>Gear 4</source>
         <translation>Vitesse 4</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="167"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="277"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="171"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="281"/>
         <source>Gear 5</source>
         <translation>Vitesse 5</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="175"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="285"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="179"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="289"/>
         <source>Gear 6</source>
         <translation>Vitesse 6</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="183"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="293"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="187"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="297"/>
         <source>Gear 7</source>
         <translation>Vitesse 7</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="229"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="233"/>
         <source>Clutch</source>
         <translation>Embrayage</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="301"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="305"/>
         <source>Use sequential after clutch</source>
         <translatorcomment>May be too long</translatorcomment>
         <translation>Utiliser boîte séquentiel  lorsque clutch impossible</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="309"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="313"/>
         <source>Key press delay (ms)</source>
         <translation>Durée d&apos;appui des touches</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="326"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="332"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="352"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="364"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="330"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="336"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="356"/>
         <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="368"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="372"/>
         <source>Enable</source>
         <translation>Affiché</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="338"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="374"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="342"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="378"/>
         <source>Change color</source>
         <translation>Couleur</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="346"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="350"/>
         <source>Mode notifs</source>
         <translation>Notif. changement mode</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="358"/>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="400"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="362"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="404"/>
         <source>Background</source>
         <translation>Fond</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="378"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="382"/>
         <source>Clutch color</source>
         <translation>Couleur clutch</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="384"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="388"/>
         <source>No clutch color</source>
         <translation>Couleur séquentiel</translation>
     </message>
     <message>
-        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="392"/>
+        <location filename="../internal_libs/DataStructures/include/DataStructures/structures.hpp" line="396"/>
         <source>Disabled color</source>
         <translation>Couleur &quot;désactivé&quot;</translation>
     </message>
@@ -802,21 +817,40 @@ En cas de doute, laissez les valeurs par défaut !</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="62"/>
+        <location filename="../src/main.cpp" line="63"/>
         <source>Critical error</source>
         <translation>Erreur fatale</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="63"/>
+        <location filename="../src/main.cpp" line="64"/>
         <source>Failed to setup application data folders.
 Exit application.</source>
         <translation>Impossible de créer les dossiers nécessaires au stockage des données.
 Le logiciel va se fermer.</translation>
     </message>
     <message>
-        <location filename="../src/system/services/service_manager.cpp" line="51"/>
+        <location filename="../src/system/services/service_manager.cpp" line="52"/>
         <source>Game changed to: %0</source>
         <translation>Jeu détecté: %0</translation>
+    </message>
+    <message>
+        <source>Gear %0</source>
+        <translation type="vanished">Rapport %0</translation>
+    </message>
+    <message>
+        <location filename="../src/games/gear_handler_factory.cpp" line="31"/>
+        <source>%0</source>
+        <translation>%0</translation>
+    </message>
+    <message>
+        <location filename="../src/games/gear_handler_factory.cpp" line="39"/>
+        <source>Enabled</source>
+        <translation>Activé</translation>
+    </message>
+    <message>
+        <location filename="../src/games/gear_handler_factory.cpp" line="39"/>
+        <source>Disabled</source>
+        <translation>Désactivé</translation>
     </message>
 </context>
 <context>
@@ -830,6 +864,11 @@ Le logiciel va se fermer.</translation>
         <location filename="../src/tabs/SettingsTab.qml" line="49"/>
         <source>SOFTWARE</source>
         <translation>LOGICIEL</translation>
+    </message>
+    <message>
+        <location filename="../src/tabs/SettingsTab.qml" line="60"/>
+        <source>VOICE ANNOUCEMENTS</source>
+        <translation>ANNONCES VOCALES</translation>
     </message>
 </context>
 <context>
