@@ -29,9 +29,21 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" "${CMAKE_ROOT}/Modules")
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Xml)
+############################
+#
+#            Qt
+#
+############################
 
-qt_standard_project_setup(REQUIRES 6.5)
+find_package(Qt6 6.8 REQUIRED COMPONENTS Core Widgets Quick QuickControls2 Xml LinguistTools Concurrent)
+
+qt_standard_project_setup(
+  I18N_TRANSLATED_LANGUAGES fr de ru
+)
+
+qt_policy(SET QTP0001 NEW)
+qt_policy(SET QTP0004 OLD)
+cmake_policy(SET CMP0071 NEW)
 
 ############################
 #
@@ -49,8 +61,6 @@ qt_add_executable(${CMAKE_PROJECT_NAME}
 #       Dependencies
 #
 ############################
-
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets Quick QuickControls2 LinguistTools Concurrent)
 
 Include(FetchContent)
 FetchContent_Declare(
@@ -187,11 +197,11 @@ set(BTC2_QML_FILES
 ###############
 #   Translations
 ###############
-set(BTC2_TRANSLATIONS_FILES
-    translations/${CMAKE_PROJECT_NAME}_fr.ts
-)
+# set(BTC2_TRANSLATIONS_FILES
+#     ${CMAKE_SOURCE_DIR}/translations/${CMAKE_PROJECT_NAME}_fr.ts
+# )
 
-
+# set(BTC2_TRANSLATIONS_FILES_CACHED ${BTC2_TRANSLATIONS_FILES} CACHE STRING "Translation files for the project")
 
 ############################
 #
@@ -205,7 +215,7 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
     URI ${CMAKE_PROJECT_NAME}
     VERSION 1.0
     QML_FILES ${BTC2_QML_FILES}
-    RESOURCES
+      RESOURCES
         ${BTC2_QML_DIR}/utils/qmldir
 )
 
@@ -228,9 +238,13 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
 )
 
 if(CUSTOM_BUILD_TRANSLATIONS)
-  qt_add_translations(${CMAKE_PROJECT_NAME} TS_FILES ${BTC2_TRANSLATIONS_FILES})
-  set_source_files_properties(${BTC2_TRANSLATIONS_FILES}
-      PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/translations")
+  qt_add_translations(
+    TARGETS ${CMAKE_PROJECT_NAME} libDataStructures
+    TS_FILE_DIR ${CMAKE_SOURCE_DIR}/translations
+    IMMEDIATE_CALL
+  )
+  # set_source_files_properties(${BTC2_TRANSLATIONS_FILES}
+  #     PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/translations")
   add_dependencies(${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}_lupdate)
   add_dependencies(${CMAKE_PROJECT_NAME} update_translations)
 endif()

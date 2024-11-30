@@ -116,7 +116,7 @@ Item {
             }
 
             Item {
-                width: 250
+                width: 300
                 height: gearEditorColumnLeft.height
                 ScrollView {
                     id: gearScrollView
