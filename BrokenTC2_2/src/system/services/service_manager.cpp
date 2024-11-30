@@ -77,6 +77,8 @@ ServiceManager::ServiceManager()
   connect(m_keyboard_profile.get(), &KeyboardProfile::dataChanged, this, [this]() { UpdateKeyboardConflicts(); });
   connect(this, &ServiceManager::conflictsUpdated, this, [this]() { UpdateGearHandlerSoftEnabling(); });
   connect(this, &ServiceManager::focusedWindowTitleChanged, this, [this]() { UpdateGearHandlerSoftEnabling(); });
+
+  m_settings->dataChanged(); /* Force reload after connection */
 }
 
 void CALLBACK ServiceManager::OnWindowChangeHook(HWINEVENTHOOK hook, DWORD event, HWND hwnd, LONG idObject,
