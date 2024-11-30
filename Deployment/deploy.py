@@ -151,6 +151,8 @@ def main():
     uselessFileList = []
     uselessFileList.append(f"{CONFIG_outputDir}/opengl32sw.dll")
     uselessFileList.append(f"{CONFIG_outputDir}/D3Dcompiler_47.dll")
+    uselessFileList.append(f"{CONFIG_outputDir}/avcodec-61.dll")
+    uselessFileList.append(f"{CONFIG_outputDir}/avformat-61.dll")
 
     for uselessFilePath in uselessFileList:
         if (checkFile(uselessFilePath)):
