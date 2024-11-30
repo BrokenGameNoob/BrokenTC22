@@ -184,7 +184,7 @@ class ServiceManager : public QObject {
   std::unique_ptr<KeyboardHandler> m_keyboard_handler{nullptr};
 
   std::unique_ptr<GameSelector> m_game_selector{nullptr};
-  std::unique_ptr<BaseGearHandler> m_gear_handler{nullptr};
+  GearHandlerUniquePtr m_gear_handler{nullptr};
   std::unique_ptr<GameOverlayData> m_game_overlay{nullptr};
   QString m_overlay_notification_text{};
   QTimer m_overlay_notification_timer{};

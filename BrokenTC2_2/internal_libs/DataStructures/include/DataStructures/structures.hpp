@@ -58,14 +58,9 @@ class DummyForceAutoMocProcess0 : public QObject {
        Game::ALL,                                                                                                 \
        true)                                                                                                      \
   /* --------------- TEXT TO SPEECH -------------------*/                                                         \
-  FUNC(QString,                                                                                                   \
-       TTSEngineName,                                                                                             \
-       DS_DEFAULT,                                                                                                \
-       "tts",                                                                                                     \
-       DataEditor::TTS_ENGINE_SELECTOR,                                                                           \
-       QObject::tr("Text to speech engine"),                                                                      \
-       Game::ALL,                                                                                                 \
-       true)
+  FUNC(bool, TTSEnabled, true, "tts", DataEditor::SWITCH, QObject::tr("Text to speech enabled"), Game::ALL, true) \
+  FUNC(double, TTSRate, 0.7, "tts", DataEditor::SLIDER, QObject::tr("Text to speech rate"), Game::ALL, true)      \
+  FUNC(double, TTSVolume, 1, "tts", DataEditor::SLIDER, QObject::tr("Text to speech volume"), Game::ALL, true)
 
 DS_DECLARE_STRUCT(ApplicationSettings, ApplicationSettings_STRUCT_ELEMENTS_LIST);
 

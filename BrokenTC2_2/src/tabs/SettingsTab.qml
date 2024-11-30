@@ -60,6 +60,10 @@ Item {
                 title: qsTr("VOICE ANNOUCEMENTS")
                 Layout.fillWidth: true
             }
+
+            Item {
+                height: Style.kStandardMargin * 3
+            }
         }
     }
 }
