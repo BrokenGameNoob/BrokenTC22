@@ -129,7 +129,7 @@ def replace_in_template(input_template_path: str, output_path: str):
     tag_commit_list = get_tag_commit_list()
     version_list = find_versions(tag_commit_list)
     print(f"VersionList: {version_list}")
-    latest_ver_maj, latest_ver_min, latest_ver_patch = version_list[0].version_to_numeric(
+    latest_ver_maj, latest_ver_min, latest_ver_patch = version_list[-1].version_to_numeric(
     )
     current_tag = get_current_tag()
 
