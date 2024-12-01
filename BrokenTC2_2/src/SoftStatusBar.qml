@@ -27,7 +27,13 @@ Item {
         easySetupButton.checked = true
     }
 
+    readonly property bool activateHelpPanel: helpButton.checked
+    function deactivateHelpPanel() {
+        helpButton.checked = false
+    }
+
     property alias overlayButtonChecked: overlayButton.checked
+    property alias helpButtonChecked: helpButton.checked
 
     // Separator
     Rectangle {
@@ -161,6 +167,23 @@ Item {
 
         Item {
             Layout.preferredWidth: QMLStyle.kStandardMargin
+        }
+
+        RoundButton {
+            id: helpButton
+            checkable: true
+            checked: false
+            scale: 0.7
+            contentItem: Item {
+                width: QMLStyle.kStandardTitleIconSize * 0.8 * 0.5
+                height: QMLStyle.kStandardTitleIconSize * 0.8 * 0.5
+                ColoredImage {
+                    source: Constants.kIconHelp
+                    sourceSize.width: parent.width
+                    sourceSize.height: parent.height
+                    color: parent.parent.checked ? QMLStyle.kAccentColor : QMLStyle.kIconColor
+                }
+            }
         }
 
         Button {

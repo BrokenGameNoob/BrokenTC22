@@ -137,6 +137,10 @@ void ServiceManager::test() {
   m_text_to_speech_manager->Speak("Hello world!");
 }
 
+QString ServiceManager::GetLogFolder() {
+  return btc2::GetLogFolderPath();
+}
+
 void ServiceManager::UpdateGearHandlerSoftEnabling() {
   const bool kRightGameFocused{m_game_focused != Game::Types::NONE};
   GetGearHandler().SetSoftEnabled(kRightGameFocused && !AreThereKeyboardConflicts());

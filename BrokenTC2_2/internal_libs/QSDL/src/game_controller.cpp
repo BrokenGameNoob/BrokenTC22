@@ -38,11 +38,13 @@ GameController::~GameController() {
 }
 
 void GameController::ConnectController(int controller_id) {
+  SPDLOG_INFO("Connecting controller: {}", controller_id);
   if (m_controller_id >= 0)  // if the controller is already connected
   {
+    SPDLOG_INFO("Disconnecting controller before reocnnecting it: {}", m_controller_id);
     DisconnectController(false);  // disconnect it
   }
-  
+
   auto joystickCount{GetPluggedJoysticksCount()};
   if (controller_id >= joystickCount) {
     m_controller_id = -1;
@@ -53,6 +55,7 @@ void GameController::ConnectController(int controller_id) {
   } else {
     m_controller_id = controller_id;
     m_controller_instance = SDL_JoystickOpen(m_controller_id);
+    SPDLOG_INFO("Opened game controller device (id={})", m_controller_id);
     if (!m_controller_instance) {
       SPDLOG_ERROR("Unable to open game controller device (id=%0):\n{}", m_controller_id, SDL_GetError());
     }
@@ -61,6 +64,8 @@ void GameController::ConnectController(int controller_id) {
 
 void GameController::DisconnectController(bool unregister_event_handler) {
   if (m_controller_instance) {
+    SPDLOG_INFO(
+        "Disconnecting controller: <{}> (unregister_event_handler={})", m_controller_id, unregister_event_handler);
     SDL_JoystickClose(m_controller_instance);
     m_controller_instance = nullptr;
     m_controller_id = -1;

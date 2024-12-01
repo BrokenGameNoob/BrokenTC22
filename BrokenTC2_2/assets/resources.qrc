@@ -21,5 +21,9 @@
         <file>icons/icon_cancel_inverted.svg</file>
         <file>icons/real_icon_game_TheCrew2.svg</file>
         <file>icons/real_icon_game_TheCrewMotorfest.svg</file>
+        <file>icons/icon_help.svg</file>
+        <file>icons/real_icon_discord.svg</file>
+        <file>icons/icon_logs.svg</file>
+        <file>icons/real_icon_github.svg</file>
     </qresource>
 </RCC>

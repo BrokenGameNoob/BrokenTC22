@@ -57,8 +57,10 @@ ApplicationWindow {
 
             readonly property bool mainPanelFullDisplay: !statusBar.activateControllerListPanel
                                                          && !statusBar.activateEasySetupPanel
+                                                         && !statusBar.activateHelpPanel
             readonly property bool otherPanelsStillVisile: controllerListPanel.visible
                                                            || easySetupPanel.visible
+                                                           || helpPanel.visible
 
             MainPanel {
                 id: mainPanel
@@ -108,6 +110,22 @@ ApplicationWindow {
 
                 onLeaveEasySetupPanel: {
                     statusBar.deactivateEasySetupPanel()
+                }
+
+                anchors {
+                    top: parent.top
+                    right: parent.right
+                    bottom: statusBar.top
+                }
+            }
+
+            HelpPanel {
+                id: helpPanel
+                width: statusBar.activateHelpPanel ? parent.width - mainPanel.width : 0
+                visible: width > 0
+
+                onLeaveHelpPanel: {
+                    statusBar.deactivateHelpPanel()
                 }
 
                 anchors {

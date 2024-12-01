@@ -269,6 +269,29 @@
     </message>
 </context>
 <context>
+    <name>HelpPanel</name>
+    <message>
+        <location filename="../src/panels/HelpPanel.qml" line="53"/>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/panels/HelpPanel.qml" line="110"/>
+        <source>Open logs folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/panels/HelpPanel.qml" line="128"/>
+        <source>Join discord server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/panels/HelpPanel.qml" line="147"/>
+        <source>Open github page</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Main</name>
     <message>
         <location filename="../src/Main.qml" line="28"/>
@@ -276,12 +299,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Main.qml" line="245"/>
+        <location filename="../src/Main.qml" line="263"/>
         <source>Welcome to BrokenTC2!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Main.qml" line="299"/>
+        <location filename="../src/Main.qml" line="317"/>
         <source>Please follow the setup to get started.
 If you are doubting about an option, just leave the default value!</source>
         <translation type="unfinished"></translation>
@@ -865,7 +888,7 @@ Exit application.</source>
 <context>
     <name>SoftStatusBar</name>
     <message>
-        <location filename="../src/SoftStatusBar.qml" line="158"/>
+        <location filename="../src/SoftStatusBar.qml" line="164"/>
         <source>Keyboard conflicts</source>
         <translation type="unfinished"></translation>
     </message>

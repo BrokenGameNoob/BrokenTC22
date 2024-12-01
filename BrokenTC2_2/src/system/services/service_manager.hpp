@@ -85,6 +85,8 @@ class ServiceManager : public QObject {
     return *(I().m_settings);
   }
 
+  Q_INVOKABLE static QString GetLogFolder();
+
   /* Games related */
   auto& GetGameSelector() {
     return m_game_selector;

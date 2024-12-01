@@ -189,6 +189,7 @@ set(BTC2_QML_FILES
     ${BTC2_QML_DIR}/panels/MainPanel.qml
     ${BTC2_QML_DIR}/panels/ControllerListPanel.qml
     ${BTC2_QML_DIR}/panels/EasySetupPanel.qml
+    ${BTC2_QML_DIR}/panels/HelpPanel.qml
 
     # Debug
     ${BTC2_QML_DIR}/debug/DebugWindow.qml
