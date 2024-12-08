@@ -161,7 +161,7 @@ void ControllerHandler::ReorderFromList(QList<ControllerProfile*> new_profile_li
 }
 
 void ControllerHandler::OnControllerPluggedIn(int controller_id) {
-  SPDLOG_DEBUG("Controller plugged in: <{}>", controller_id);
+  SPDLOG_DEBUG("Controller plugged in: <{}> ({})", controller_id, SDL_JoystickNameForIndex(controller_id));
   auto plugged_in_profile{ModelRegistry::GetControllerProfile(SDL_JoystickNameForIndex(controller_id))};
   if (m_active_profile) {
     if (m_active_profile->PriorityIndex() >= plugged_in_profile->PriorityIndex()) {
